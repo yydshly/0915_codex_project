@@ -56,3 +56,7 @@ GitHub Pages 托管 HTML、CSS、JavaScript 等静态文件，不运行 Python�
 ## 008 · Defending Code
 
 2026-09-15 已部署并验证：[在线讲解页](https://yydshly.github.io/0915_codex_project/008-defending-code-harness/) · [完整总图](https://yydshly.github.io/0915_codex_project/008-defending-code-harness/map.html)。页面整理原库能力、定制方式、证据验证与后续复用价值，包含教学交互；不提供线上漏洞扫描服务。部署与验证记录见 [网页说明](../projects/008-defending-code-harness/notes/web.md)。
+
+## 009 · GSAP Skills
+
+2026-09-15 已发布并验证：[能力与意义、双图研究介绍](https://yydshly.github.io/0915_codex_project/009-gsap-skills/research.html) · [耳机网页案例](https://yydshly.github.io/0915_codex_project/009-gsap-skills/showcase/)。摘要聚焦原库的 AI 开发指导、经验复用与领域 Skill 定制参考，两张主图完整保留。详见[发布记录](../projects/009-gsap-skills/notes/publishing.md)。

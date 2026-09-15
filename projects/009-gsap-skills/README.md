@@ -36,7 +36,7 @@
 | 动画运行库 | GSAP 3.15.0；package.json 与 package-lock.json 锁定 |
 | 运行库许可证 | GSAP Standard License；不是技能文件的 MIT |
 | 技术栈 | 原生 HTML、CSS、JavaScript、SVG、Canvas |
-| 在线发布 | GitHub Pages 发布中；见 notes/publishing.md |
+| 在线发布 | 已部署至 GitHub Pages；[发布与验证记录](notes/publishing.md) |
 
 ## 页面入口
 

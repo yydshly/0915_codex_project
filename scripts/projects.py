@@ -55,7 +55,7 @@ def validate(data, directory):
         if (relative.is_absolute() or "\\" in data["cover"]
                 or not cover.is_relative_to(directory.resolve()) or not cover.is_file()
                 or cover.suffix.lower() not in {".png", ".jpg", ".jpeg", ".webp", ".gif", ".svg"}):
-                raise ValueError(f"{directory.name}: cover 必须指向项目内已有的图片文件")
+            raise ValueError(f"{directory.name}: cover 必须指向项目内已有的图片文件")
     if "guides" in data:
         if not isinstance(data["guides"], list) or not data["guides"]:
             raise ValueError(f"{directory.name}: guides 必须是非空图片列表")
