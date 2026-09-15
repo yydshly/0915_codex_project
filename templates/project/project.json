@@ -1,0 +1,11 @@
+{
+  "id": "{{ID}}",
+  "slug": "{{SLUG}}",
+  "title": "{{TITLE}}",
+  "summary": "{{SUMMARY}}",
+  "upstream": "{{UPSTREAM}}",
+  "status": "待研究",
+  "tags": [],
+  "cover": "",
+  "demo_url": ""
+}
