@@ -2,7 +2,7 @@
 
 **能力与原理摘要：**单张物体图片经预训练图像扩散模型生成多视图和表面法线，再由 ISOMER 算法重建、细化与上色，输出带顶点颜色的 GLB 网格。适合快速制作资产初稿，隐藏区域来自推测，不能当作精确测量。
 
-[返回总索引](../../README.md) · [关联原库 AiuniAI/Unique3D](https://github.com/AiuniAI/Unique3D) · [完整理解](notes/research.md) · [网页源码](app/index.html)
+[返回总索引](../../README.md) · [关联原库 AiuniAI/Unique3D](https://github.com/AiuniAI/Unique3D) · [完整理解](notes/research.md) · [网页源码](app/index.html) · [在线阅读](https://yydshly.github.io/0915_codex_project/001-unique3d/)
 
 ## 架构与效果引导图
 
@@ -20,7 +20,7 @@
 | 上游代码许可 | MIT；模型、数据与第三方素材许可独立 |
 | 本次范围 | 阅读与源码分析、静态研究网页、引导图 |
 | 推理验证 | 未安装上游环境、未加载权重、未进行本机生成或性能测试 |
-| 发布状态 | 引导图已确认，正在发布至 GitHub Pages |
+| 发布状态 | 已发布至 GitHub Pages，2026-09-15 线上验证通过 |
 
 ## 网页内容
 
@@ -38,7 +38,7 @@ python scripts/check_web.py
 python -m http.server 8155 --bind 127.0.0.1 --directory web
 ```
 
-访问 `http://127.0.0.1:8155/001-unique3d/`。统一发布目录为 `web/`，Pages 工作流随本次提交启用。预期路径为仓库 Pages 的 `/001-unique3d/`，线上验证成功后再填写 `demo_url`。
+访问 `http://127.0.0.1:8155/001-unique3d/`。统一发布目录为 `web/`，Pages 工作流随本次提交启用。正式路径为仓库 Pages 的 `/001-unique3d/`；线上验证通过后已填写 `demo_url`。
 
 ## 下一步
 

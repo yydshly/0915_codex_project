@@ -10,13 +10,13 @@ https://yydshly.github.io/0915_codex_project/001-project-slug/
 https://yydshly.github.io/0915_codex_project/002-project-slug/
 ```
 
-这些地址说明发布路径约定。首项研究页面位于 `/001-unique3d/`；引导图已获用户确认，正在发布。
+这些地址说明发布路径约定。首项研究页面位于 `/001-unique3d/`；引导图已获用户确认，并于 2026-09-15 发布成功。
 
 源码保留在各研究子项目中；发布时汇总需要公开的静态内容：
 
 ```text
 web/
-  index.html                 # 将来添加的站点导航首页
+  index.html                 # 自动生成的站点导航首页
   001-project-slug/           # 第一个应用构建后的静态文件
     index.html
   002-project-slug/           # 第二个应用构建后的静态文件
@@ -32,17 +32,17 @@ web/
 5. 在仓库 Settings → Pages 选择 GitHub Actions，按官方文档添加构建、上传 Pages 产物和部署流程；上传目录设为 `web/`。
 6. 验证线上地址、图片和刷新行为，随后填写对应 `project.json` 的 `demo_url` 并同步首页。
 
-## 已准备的发布流程
+## 已启用的发布流程
 
 Unique3D 使用原生 HTML / CSS / JavaScript，无前端依赖安装。
 
 1. `python scripts/projects.py check` 检查研究元数据与首页索引。
 2. `python scripts/build_web.py` 汇总各子项目 `app/` 及元数据指定的封面，生成站点首页。
 3. `python scripts/check_web.py` 检查静态页面本地链接、锚点、图片说明与描述。
-4. `.github/workflows/pages.yml` 构建并发布 `web/`。首次需把仓库 Pages 源设置为 GitHub Actions。
+4. `.github/workflows/pages.yml` 构建并发布 `web/`。仓库 Pages 源已设置为 GitHub Actions。
 5. 线上核对主页、`/001-unique3d/`、引导图及交互，再填写 `demo_url` 并同步索引。
 
-2026-09-15 用户已确认引导图并授权部署与提交。本次启用 GitHub Actions 发布源并提交发布流程。
+2026-09-15 用户已确认引导图并授权部署与提交。GitHub Actions 发布已成功，线上首页、研究页、引导图及交互验证通过。
 
 ## 运行范围
 

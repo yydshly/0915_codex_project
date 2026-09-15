@@ -11,7 +11,7 @@
 <!-- PROJECT_INDEX:START -->
 | 编号 | 项目 | 摘要 | 状态 | 上游 | 演示 |
 | --- | --- | --- | --- | --- | --- |
-| 001 | [Unique3D：从一张图片到三维网格](projects/001-unique3d/README.md) | 单张物体图片经预训练扩散模型生成多视图与法线，再由 ISOMER 重建、细化并上色，导出 GLB 网格；整理模型与算法分工、效果边界及三维技术路线对比。 | 已总结 | [GitHub](https://github.com/AiuniAI/Unique3D) | 暂未部署 |
+| 001 | [Unique3D：从一张图片到三维网格](projects/001-unique3d/README.md) | 单张物体图片经预训练扩散模型生成多视图与法线，再由 ISOMER 重建、细化并上色，导出 GLB 网格；整理模型与算法分工、效果边界及三维技术路线对比。 | 已总结 | [GitHub](https://github.com/AiuniAI/Unique3D) | [在线演示](https://yydshly.github.io/0915_codex_project/001-unique3d/) |
 <!-- PROJECT_INDEX:END -->
 
 ## 项目预览
@@ -23,7 +23,7 @@
 
 ![Unique3D：从一张图片到三维网格预览](projects/001-unique3d/assets/architecture-guide.png)
 
-[研究笔记](projects/001-unique3d/README.md) · [GitHub](https://github.com/AiuniAI/Unique3D) · 暂未部署
+[研究笔记](projects/001-unique3d/README.md) · [GitHub](https://github.com/AiuniAI/Unique3D) · [在线演示](https://yydshly.github.io/0915_codex_project/001-unique3d/)
 
 状态：已总结 · 标签：图生3D / 扩散模型 / 几何重建 / 研究网页
 <!-- PROJECT_CARDS:END -->
@@ -60,4 +60,4 @@ python scripts/projects.py new sample-project --title "示例项目" --upstream 
 
 每个子项目独立管理运行环境和依赖。记录上游仓库、许可证与研究使用的版本；引用或修改第三方代码时保留原有许可与署名。
 
-已收录 Unique3D 研究，完成能力摘要、实现原理、路线对比和网页。引导图已于 2026-09-15 获用户确认，正在提交并部署；线上验证成功前不填写演示地址。
+已收录 Unique3D 研究，完成能力摘要、实现原理、路线对比和网页。引导图已于 2026-09-15 获用户确认，网页已部署至 GitHub Pages，线上页面、图片与交互验证通过。
