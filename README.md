@@ -9,13 +9,23 @@
 按三位数字编号升序排列。编号分配后保持不变，不因完成、暂停或归档而重新编号。
 
 <!-- PROJECT_INDEX:START -->
-暂未收录项目。第一个研究项目将从 **001** 开始。
+| 编号 | 项目 | 摘要 | 状态 | 上游 | 演示 |
+| --- | --- | --- | --- | --- | --- |
+| 001 | [Unique3D：从一张图片到三维网格](projects/001-unique3d/README.md) | 单张物体图片经预训练扩散模型生成多视图与法线，再由 ISOMER 重建、细化并上色，导出 GLB 网格；整理模型与算法分工、效果边界及三维技术路线对比。 | 已总结 | [GitHub](https://github.com/AiuniAI/Unique3D) | 暂未部署 |
 <!-- PROJECT_INDEX:END -->
 
 ## 项目预览
 
 <!-- PROJECT_CARDS:START -->
-收录项目后，此处将展示每个项目的一句话摘要、预览图和研究入口。
+### 001 · Unique3D：从一张图片到三维网格
+
+单张物体图片经预训练扩散模型生成多视图与法线，再由 ISOMER 重建、细化并上色，导出 GLB 网格；整理模型与算法分工、效果边界及三维技术路线对比。
+
+![Unique3D：从一张图片到三维网格预览](projects/001-unique3d/assets/architecture-guide.png)
+
+[研究笔记](projects/001-unique3d/README.md) · [GitHub](https://github.com/AiuniAI/Unique3D) · 暂未部署
+
+状态：已总结 · 标签：图生3D / 扩散模型 / 几何重建 / 研究网页
 <!-- PROJECT_CARDS:END -->
 
 ## 新增研究项目
@@ -50,4 +60,4 @@ python scripts/projects.py new sample-project --title "示例项目" --upstream 
 
 每个子项目独立管理运行环境和依赖。记录上游仓库、许可证与研究使用的版本；引用或修改第三方代码时保留原有许可与署名。
 
-当前处于仓库初始化阶段，尚未收录实际项目或发布 Web 演示。
+已收录 Unique3D 研究，完成能力摘要、实现原理、路线对比和网页。引导图已于 2026-09-15 获用户确认，正在提交并部署；线上验证成功前不填写演示地址。

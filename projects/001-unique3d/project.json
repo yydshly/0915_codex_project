@@ -1,0 +1,16 @@
+{
+  "id": "001",
+  "slug": "unique3d",
+  "title": "Unique3D：从一张图片到三维网格",
+  "summary": "单张物体图片经预训练扩散模型生成多视图与法线，再由 ISOMER 重建、细化并上色，导出 GLB 网格；整理模型与算法分工、效果边界及三维技术路线对比。",
+  "upstream": "https://github.com/AiuniAI/Unique3D",
+  "status": "已总结",
+  "tags": [
+    "图生3D",
+    "扩散模型",
+    "几何重建",
+    "研究网页"
+  ],
+  "cover": "assets/architecture-guide.png",
+  "demo_url": ""
+}

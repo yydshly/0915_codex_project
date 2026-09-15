@@ -35,3 +35,8 @@ Thumbs.db
 Desktop.ini
 *.log
 *.tmp
+
+# Generated public site (rebuilt by GitHub Actions)
+web/index.html
+web/[0-9]*/
+web/.nojekyll
