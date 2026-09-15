@@ -1,0 +1,35 @@
+{
+  "upstream_revision": "bdc08bee5077462e1300431408c5237438a22d00",
+  "scope": "Recomputed from upstream JSON; original PDFs were not remeasured.",
+  "records": 41,
+  "pages_median": 34,
+  "pages_min": 7,
+  "pages_max": 425,
+  "orientations": {
+    "portrait": 35,
+    "landscape": 6
+  },
+  "bookmark_depth_counts": {
+    "0": 18,
+    "1": 5,
+    "2": 13,
+    "3": 4,
+    "4": 1
+  },
+  "with_bookmarks": 23,
+  "with_at_least_two_levels": 18,
+  "depth_mean_all": 1.146341463414634,
+  "depth_mean_bookmarked": 2.0434782608695654,
+  "color_metrics": "Upstream-reported only; color classification was not independently reproduced.",
+  "bounded_chart_probe": {
+    "data": {
+      "positive": 12,
+      "negative": -11
+    },
+    "hbar_negative_widths": [
+      "-301.5"
+    ],
+    "paired_bars_negative_dimensions": [],
+    "scope": "SVG string probe only; not an end-to-end PDF test."
+  }
+}

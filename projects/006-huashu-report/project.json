@@ -1,0 +1,17 @@
+{
+  "id": "006",
+  "slug": "huashu-report",
+  "title": "Huashu Report：专业报告格式整理与约束实现",
+  "summary": "从专业资料中梳理样式、字体、图片与图表编排、表格和分页等格式信息，形成约束与制作流程，实现相应展示效果；兼有内容组织规范，核心价值是经验整理与复用，底层技术增量有限。",
+  "upstream": "https://github.com/alchaincyf/huashu-report",
+  "status": "已总结",
+  "tags": [
+    "专业资料整理",
+    "格式约束",
+    "样式与字体",
+    "图表与表格",
+    "技术增量有限"
+  ],
+  "cover": "assets/method-map.svg",
+  "demo_url": ""
+}
