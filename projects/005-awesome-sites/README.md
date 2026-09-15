@@ -8,6 +8,8 @@
 
 ## 入口
 
+- [在线产品收集库](https://yydshly.github.io/0915_codex_project/005-awesome-sites/)
+
 - [本地展示](http://127.0.0.1:8775/005-awesome-sites/) · [静态页面](app/index.html)
 - [80 个案例数据](app/cases.json) · [完整参考笔记](notes/analysis.md)
 - [目录来源快照](notes/catalog-snapshot.json) · [验证记录](notes/evidence.json)
@@ -49,7 +51,7 @@ python -m http.server 8775 --bind 127.0.0.1 --directory web
 
 app/cases.json 是展示内容来源。src/expand_catalog.py 可从本轮 64 条目录整理记录补充数据，重复执行保留既有证据。src/fetch_previews.py 下载已核对的预览地址并复用现有文件。src/stage.py 准备相同内容的静态发布目录。
 
-通过研究仓库的 GitHub Pages 流程发布；在线入口确认可访问后写入项目元数据。
+2026-09-15 已通过 GitHub Pages 发布。线上标题、80 张案例卡片、案例数据和代表性预览图片可访问；与已有实践重合、参考价值及验证范围已写入网页。
 
 ## 检查与边界
 
