@@ -19,6 +19,7 @@ projects/
 | 编号 | 项目 | 能力与原理摘要 | 关联原库 |
 | --- | --- | --- | --- |
 | 001 | [Unique3D](001-unique3d/README.md) | 单图经扩散模型生成多视图与法线，再由 ISOMER 重建、细化并上色，导出 GLB 网格。 | [AiuniAI/Unique3D](https://github.com/AiuniAI/Unique3D) |
+| 002 | [Web Starter Kit：3D 人物与舞蹈演示、接入能力](002-web-game-starter/README.md) | 已有 3D 人物模型与舞蹈动作的接入、播放和演示。当前目标参考价值有限，核心在人物与动作资产。附架构引导图与远端研究页。 | [vibegameengine/web-starter-kit](https://github.com/vibegameengine/web-starter-kit) |
 
 - 子目录命名：三位数字编号 + 英文小写短横线名称。
 - 每个项目的 `project.json` 是首页摘要和链接的来源。

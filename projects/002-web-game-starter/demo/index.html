@@ -1,0 +1,46 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="亲手体验 web-starter-kit 的三维场景、骨骼动画、物理布娃娃、地形材质和游戏界面。">
+  <title>3D 游戏能力实验室 · 开源研究 002</title>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header class="topbar">
+    <a class="brand" href="#world"><span class="brand-mark">W<span>↗</span></span><span>开源研究<span class="brand-sub">INTERACTIVE LAB / 002</span></span></a>
+    <div class="top-title">3D 游戏能力实验室<span>web-starter-kit</span></div>
+    <a class="source-link" href="https://github.com/vibegameengine/web-starter-kit" target="_blank" rel="noopener noreferrer">上游仓库 <span>↗</span></a>
+  </header>
+  <main class="workspace">
+    <aside class="sidebar" aria-label="能力选择与说明">
+      <div class="intro"><span class="eyebrow">基础能力展示</span><h1>接入模型，<br>播放已有动作。</h1><p>模型与动作资产仍需自己制作或取得。</p></div>
+      <a class="courtyard-link" href="conclusion.html"><small>研究结论 · 建议先读</small><strong>核心在人物与动作资产 ↗</strong><span>能力架构图 · 对当前目标参考价值有限</span></a>
+      <nav id="experiments" aria-label="选择实验"></nav>
+      <a id="courtyard-link" class="courtyard-link" target="_blank" rel="noopener noreferrer"><small>新增 · 应用场景</small><strong>青屿庭院巡检 ↗</strong><span>把模型、光照与物理组合成一次实际体验</span></a>
+      <a id="mika-link" class="courtyard-link" target="_blank" rel="noopener noreferrer"><small>新增 · 原创人物</small><strong>Mika 舞蹈工坊 ↗</strong><span>纯代码制作人物、骨骼与舞蹈动作</span></a>
+      <div class="sidebar-note"><span class="small-dot"></span><p>六项实验来自上游。<br>庭院任务、Mika 与音乐同步为本项目新增。</p></div>
+    </aside>
+    <section class="main-panel" aria-labelledby="experiment-title">
+      <div class="research-banner"><strong>我们的结论：基础展示与播放，参考价值有限。</strong><p>实际人物模型与舞蹈动作仍需自己制作或取得并适配；原库没有替代核心资产制作和创作编辑器。</p><a href="conclusion.html">查看架构引导图与完整说明 ↗</a></div>
+      <div class="experiment-header"><div><span class="eyebrow" id="experiment-category">01 / 场景与特效</span><h2 id="experiment-title">完整 3D 场景</h2></div><div class="toolbar"><button id="reload" type="button" title="重新载入当前实验">↻ <span>重载</span></button><button id="fullscreen" type="button">⛶ <span>全屏体验</span></button><a id="open-original" target="_blank" rel="noopener noreferrer">原版 ↗</a></div></div>
+      <div class="stage" id="stage"><iframe id="demo-frame" title="完整 3D 场景交互演示" allow="autoplay; fullscreen" allowfullscreen></iframe><div class="stage-loading" id="stage-loading" role="status"><span class="spinner"></span><p>正在打开实验…</p><small>首次加载需要转换模型、处理贴图</small></div></div>
+      <div class="stage-caption"><span><i></i>上游实时演示</span><p id="interaction-hint">在画面中拖动鼠标旋转视角，滚轮缩放。</p><span id="experiment-count">01 / 06</span></div>
+      <div class="explanation"><section><span class="eyebrow">先试一下</span><p id="try-text"></p></section><section><span class="eyebrow">这项能力解决什么</span><p id="value-text"></p></section><section><span class="eyebrow">实现方式</span><p id="mechanism-text"></p><a id="code-link" target="_blank" rel="noopener noreferrer">查看对应源码 ↗</a></section></div>
+      <p class="footnote">这是可复用的游戏基础工程展示。具体玩法、关卡和任务规则仍需另外开发。若画面较小，使用“全屏体验”或“原版”。</p>
+      <section class="capability-overview" aria-label="完整能力与实际价值">
+        <span class="eyebrow">理解这套工程</span><h2>主要成本仍在人物与舞蹈资产。</h2>
+        <p>对我们当前的创作目标，这个库主要提供基础 3D 展示、模型接入和已有动作播放。工程辅助模块可以借鉴，但人物质量、动作质量和创作编辑能力仍需另行解决，因此参考价值有限。</p>
+        <details open><summary>除了眼前的画面，还提供什么？</summary><p>自动转换与压缩模型、动画、图片和音频；自动收集预载资源；复用几何与材质；缓存静态阴影；分层合成发光特效；按频道控制声音；独立实验页帮助开发和检查。</p></details>
+        <details><summary>哪些只是基础模块，还需继续开发？</summary><p>源码有寻路网格、角色局部动作调整和联网适配模块。当前展示未接入完整导航或多人玩法，也没有验证云联网。庭院向导沿预设路线移动。</p></details>
+        <details><summary>人物、舞蹈和音乐能自动生成吗？</summary><p>原库接入已有角色和动作素材。Mika 及两段舞蹈由本项目新增代码制作；音乐同步也是新增功能，按手工设置的节拍驱动已有动作。原库没有一键人物生成、自动编舞或音乐生成服务。</p></details>
+        <details open><summary>我们的取舍是什么？</summary><p>保留为工程参考，按需借鉴，不围绕此库继续投入。核心转向人物与舞蹈动作资产的制作、积累、适配，以及编辑和保存作品的能力。</p><a href="conclusion.html">查看完整结论与架构图 ↗</a></details>
+      </section>
+    </section>
+  </main>
+  <script src="runtime-config.js"></script>
+  <script type="module" src="showcase.js"></script>
+</body>
+</html>

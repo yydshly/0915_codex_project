@@ -1,0 +1,1838 @@
+diff --git a/docs/courtyard-inspection.md b/docs/courtyard-inspection.md
+new file mode 100644
+index 0000000..150af8f
+--- /dev/null
++++ b/docs/courtyard-inspection.md
+@@ -0,0 +1,40 @@
++# 青屿庭院：交互巡检展示
++
++## 产品设计与工程约定
++
++用户希望在一个实际相关的场景里看到 Web Starter Kit 的能力。选择园区设施巡检作为展示语境；这是本地模拟场景，全部设备状态来自页面操作，不连接真实传感器或控制设备。
++
++体验：在一座手工布置的庭院中，选择三个设施点，虚拟向导沿步道乘悬浮导览盘前往，到达后操作设备。雨水站启动循环喷流；光伏廊架开启夜间照明；设备试验台释放测试箱，展示 Rapier 刚体落地碰撞。三个步骤都完成后可以查看巡检完成状态及角色庆祝动画。测试箱不代表工程安全认证。
++
++构图：左侧雨水池为视觉中心，右后方光伏廊架提供高处轮廓，右前方是碰撞试验台。中央留出贯通步道，前景入口保持开阔；树木、长凳与矮墙手工定位。模型根缩放保持 1，重复构件使用实例化，外形采用组合结构与倒角。使用本库的 Water、Tany、影子缓存、资源优化和渲染准备流程；新增的设施造型、导航、任务逻辑和中文界面由本项目实现。
++
++## 状态与边界
++
++- 三站可以任意顺序选择，默认选择雨水站，但向导起始位于入口。选择站点更新目标，先经过中央步道，再到达站点停靠位置；移动中禁用该站操作。重复选择当前目标不会重新出发。切换目标替换当前导航。
++- 雨水循环和照明均可开关；首次开启记作已检查，后续关闭不会撤销巡检记录。
++- 碰撞试验最多保留一个测试箱；重复释放通过替换编号重建该箱，不累积刚体。
++- 完成状态由三个检查结果推导，不用计时器伪造。庆祝可以停止。
++- 重置恢复设备关闭、检查未完成、入口位置、白天和初始镜头。重置也取消庆祝与当前行程。
++- 明确标注模拟演示。设备读数采用离散的演示状态，不展示假装来自现场的实时数值。
++- 顶部提供日间/夜间与镜头复位；鼠标拖动旋转、滚轮缩放。侧栏按钮与场景标记等价，键盘可聚焦按钮；窄屏布局将任务放在画面下方。
++
++## 实现边界
++
++场景在 `scenes/courtyard`，设施实体、资源和纯任务系统在 `features/courtyard`；角色在场景层直接组合原有 Tany，避免修改共享角色。离散任务用 reducer，导航位置通过帧内引用更新，只在启程/到达时更新界面。新增 `/courtyard` 独立路由，原首页与六项实验保留。
++
++## 验收
++
++真实浏览器确认手工构图，随后加入向导；验证三个站点、行进禁用、开关、物理重放、完成与重置、日夜切换以及窄屏。最终运行 lint、test、build、knip，记录已有失败与本次失败的区别。截图验证集成效果，不据此声称物理精度或大型场景性能。
++
++系统设计完成后进入程序实现：设计、状态转移和界面边界已有明确约定。代码保存在本地功能分支；研究子项目导出补丁，保证忽略上游目录的情况下仍可重建。
++
++## 验证结果（2026-09-15）
++
++实际浏览器已验证：三站导航、到达前按钮禁用、水泵开启、照明切换至夜间、物理释放与落地后记录、重复释放、完成后的舞蹈与粒子、停止庆祝、重置。环绕镜头检查了庭院多个方向，窄屏检查发现边缘裁切后增加基于画面比例的镜头适配；按钮可通过侧栏操作，无需准确点击小型三维物件。布局检查不等于手机真机性能验证。
++
++lint、knip、包含类型检查的生产构建通过；23 个测试文件、195 项测试通过。新增状态测试覆盖未到达禁止操作、过期导航回调、物理落地确认、重置后过期碰撞回调、检查记录保持。构建仍有大于 500 KB 的包体提示，不据此声称首屏速度或大型场景性能。
++
++## 实现中发现的问题
++
++- 可移植到 KIT：RoundedBoxGeometry 是无索引几何，CylinderGeometry 是有索引几何。直接按材质合并二者会使 mergeGeometries 返回 null，随后渲染器报 boundingSphere 错误。合并前统一为无索引格式，并在合并失败时立即报出材质组名称，避免无效几何进入持续渲染。
++- 本次环境记录：一次大范围热更新后，Vite 对 `/courtyard` 的 HTTP 请求超过 5 秒未响应，浏览器预览也无法完成导航；重启本任务启动的开发服务后恢复。没有确定更底层原因，不应把浏览器连接超时直接归因于 GPU 或交互代码。
+diff --git a/docs/mika-dance-studio.md b/docs/mika-dance-studio.md
+new file mode 100644
+index 0000000..59be23c
+--- /dev/null
++++ b/docs/mika-dance-studio.md
+@@ -0,0 +1,58 @@
++# Mika 人物与舞蹈展示
++
++## 目标与设计
++
++制作原创街舞女孩 Mika，接近现有 Tany 展示中的卡通角色细节层次。全部几何、骨骼和舞蹈由本地代码创建，不调用外部生成服务、不借用 Tany 网格或 Mixamo 动作。外观选择深蓝分层短发、薄荷绿耳机和短夹克、奶油色上衣、深色工装裤及运动鞋。头身比约 1:3.5，保留完整五官、鞋带、衣缝、口袋和配饰。
++
++先由系统设计明确以下契约，再转入程序实现。用户已授权制作人物并跳舞；配色与编舞属于可逆的制作决定。
++
++## 架构与边界
++
++- `features/dancer/materials`：手工形状描述、曲面建模和共享材质；合并同材质几何并保留蒙皮属性。
++- `features/dancer/entities`：独立原创骨架、角色实体、动作驱动。
++- `features/dancer/systems`：纯数学的节拍和姿势数据；舞段循环连续，暂停保持时间，速度变化保持相位。
++- `scenes/dance-studio`：固定构图的摄影棚、灯光、观察相机。
++- `features/dancer/ui`：播放、暂停、动作选择、速度与观察视角。
++- 现有 character debug lab 增加 Mika 模式做独立人物检查；通过后接入 `/dance-studio`。
++
++角色朝 +Z，Y 向上，角色根缩放为 1。骨骼从静止姿态计算，每帧不累计旋转。膝肘保持单轴弯曲。人物由真正的 SkinnedMesh 和 Skeleton 驱动。头发采用实体曲面发束；衣服没有实时布料模拟。动作是人工编排的程序动画，不是动作捕捉。
++
++## 交互和异常
++
++默认展示并播放律动舞。切换动作使用短暂过渡；暂停冻结舞蹈和次级动作；速度控制限定 0.5–1.5。正面、侧面、背面和细节按钮仅控制专用相机，不修改角色尺度。页面提供加载和错误恢复状态。窄屏将面板放到场景下方；场景必须保持全身可见。
++
++## 视觉验证契约
++
++- 参考：外层 `assets/character-animation.png` 的 Tany 细节层次，参考而不复制。
++- 独立证明：现有 `/labs/character-debug-lab` 中的 Mika。
++- 集成证明：`/dance-studio`。
++- 覆盖：正面、侧面、背面、脸部特写；休息与舞蹈姿势；暂停、切换、速度和窄屏。
++- 工具：真实可见的浏览器，通过 CUA 操作和截图；沿用现有开发服务。
++- 证据：`wip/mika/` 中的截图和舞蹈多帧拼图。
++- 验收：脸部可辨、头发具有前后层次、服装有厚度与细节；四肢连接连续，无明显穿地或脱节；关键姿势轮廓清楚，循环无突变；人物不被面板遮挡。
++
++## 静态验证
++
++交付前运行 lint、test、build、knip；额外检查舞蹈循环边界与暂停时间。几何与动作的自然程度以浏览器检查为准，静态检查不代表艺术质量通过。
++
++## 2026-09-15 验证与制作记录
++
++- 浏览器独立人物检查通过：正面、侧面、背面和舞蹈。使用原有 character debug 页面，新增 Mika 选择，不替换 Tany。
++- 摄影棚检查通过：四个镜头、两段舞蹈、站姿、暂停和继续、0.5 和 1.5 倍速。暂停后对人物区域先后两次截图，字节完全相同。
++- 桌面 1280×800、窄屏 390×844 与实际侧栏宽度均检查；窄屏面板位于场景下方，人物没有被按钮遮挡。没有进行手机真机性能测试。
++- 24 个测试文件、199 项测试通过。新增测试检查两种舞蹈与站姿的循环闭合，并对整个舞段的左右腿检查几何末端是否到达脚踝目标，容差 2 毫米。这个结果验证数学目标，不声称所有变形顶点都有同样精度。
++- lint、knip、生产构建通过。构建仍有原工程的大分块提示，未改动全局分包策略。
++- 浏览器未记录本次功能的错误；底层 R3F 使用 Three.Clock 的弃用提示仍存在。
++- 视觉证据保存在 `wip/mika/`：lab-side、lab-back、detail、studio-side、studio-back、mobile、mobile-controls、motion-1 至 motion-4、contact-sheet。
++
++### 关键帧复现
++
++开发模式下 `/dance-studio?pose=0` 固定到指定秒数。分别使用 0、1.111111、2.222222、3.333333，固定 1280×800 画幅，等待加载完成后截图。`pose` 参数只用于开发验证；正常展示必须回到不带参数的 `/dance-studio`。检查时的浏览器截图接口生成了 819×635 的带边界图像，脚本裁切参数按这批实际图像设置，其他截图尺寸需要相应调整。
++
++`node scripts/mika-contact-sheet.mjs` 将保存的四张 motion 截图制作成检查拼图。截图由真实浏览器生成；此脚本仅拼图，不渲染 Three.js。
++
++### 产品实现经验
++
++初版内层上衣的深度超过外套前侧，侧视时出现不规则的奶油色斑块。修正了内层曲面的深度，并保留前襟的独立厚度。头部最初由重叠椭球形成下巴，侧光出现明显的接缝；改为一张连续的环形截面曲面。运动时袖子也使用连续截面与肘部渐变权重，避免两个球体交叠形成接缝。
++
++这些是本人物的制作记录。角色目前具有 17 根骨骼，头发与面部细节跟随头骨，手指为固定造型，没有手指独立动画或布料物理。舞蹈为原创程序编排，不具备动作捕捉的细微运动。
+diff --git a/docs/mika-music.md b/docs/mika-music.md
+new file mode 100644
+index 0000000..e231196
+--- /dev/null
++++ b/docs/mika-music.md
+@@ -0,0 +1,36 @@
++# Mika 音乐与舞蹈同步
++
++## 设计契约
++
++用户要求使用 MiniMax 生成音乐并搭配当前舞蹈。2026-09-15 核对官方文档：2026-08-20 起音乐付费 API 不向新用户开放，历史付费用户可以继续调用；网页 MiniMax Audio 仍提供创作入口。用户随后指定外部配置文件；使用该文件向官方接口发出一次 music-3.0 请求，收到 HTTP 410、业务码 2153，说明账号没有继续使用音乐 API 的资格。没有生成音频，也没有重试付费请求。网页已填写创作描述、纯音乐、单曲，等待用户登录。
++
++官方来源：https://platform.minimax.cn/docs/api-reference/music-generation
++
++`scripts/generate-mika-music.py --env-file <本地配置路径>` 提供独立调用工具，仅适用于有音乐 API 资格的账号。密钥不进入浏览器、构建产物或版本库；不会自动重试，网络结果不确定时应先核对服务端记录。成功时保存 MP3 和非敏感创作信息到 `public/music/`，然后可通过页面导入。当前没有生成产物。
++
++## 制作方向
++
++为 Mika 制作 108 BPM、4/4 拍、轻快 funk/pop 纯音乐。鼓点清晰、贝斯有弹性、少量合成器与吉他，开头尽快进入稳定节拍。BPM 提示属于创作要求，生成结果需要实际核对，不能假定生成模型严格执行。
++
++## 架构
++
++- 音频导入后只在本地创建对象 URL，不向外发送文件。
++- `MusicTransport` 持有音频元素，提供订阅状态及采样时钟；页面只处理界面更新。
++- 角色从音频的 currentTime 读取姿势时间：`max(0, currentTime - offset) * BPM / 108`。变速已经反映在音频时间里，角色不可重复乘播放速度。
++- 起拍前保持站姿。暂停、拖动进度、重播、变速均以同一音频时间为准。
++- 用户手工设置 BPM 与起拍偏移；本次不声称具备自动节拍检测或自动生成编舞。
++- 无音频时沿用原有舞蹈播放。导入后等待点击播放，浏览器拒绝播放时显示可操作错误。
++- 替换、卸载时暂停音频并撤销旧对象 URL。文件错误不能显示成 MiniMax 生成成功。
++- 音乐面板提供可编辑创作描述、复制描述、MiniMax 网页入口、导入音频、进度、音量、BPM 和起拍偏移。
++
++## 验证契约
++
++对 `/dance-studio` 检查空音频、有效本地音频、损坏文件、暂停和继续、拖动进度、两端速度、音量、卸载以及窄屏布局。验证素材明确标记为本地测试素材，交付前卸载；绝不将它冒充 MiniMax 生成音乐。纯函数测试验证起拍偏移和 BPM 转换。浏览器截图保存在 `wip/mika-music/`。
++
++## 本次验证
++
++- lint、生产构建、knip 通过；26 个测试文件、205 项测试通过。构建保留上游大分包提示。
++- 时钟测试覆盖第一拍之前、BPM 换算、跳转时间、非法元数据；播放器测试覆盖暂停、变速不重复计时、重播、替换资源释放、过期回调、错误文件与播放被拒绝。
++- 实际浏览器用上游 `city-loop.mp3` 验证导入（约 56 秒）、共同播放/暂停、回到开头、进度拖到末尾、0.5×/1.5×、静音及手工 BPM/偏移。该文件仅用于验证，未作为生成结果交付。
++- 损坏 WAV 显示明确错误，播放按钮不可用。检查桌面固定人物区域与手机窄屏控件，截图见 `wip/mika-music/`。
++- MiniMax 本次请求失败；配乐生成及对生成成品的实际听感、节拍校准仍待完成。
+diff --git a/scripts/generate-mika-music.py b/scripts/generate-mika-music.py
+new file mode 100644
+index 0000000..21c14bc
+--- /dev/null
++++ b/scripts/generate-mika-music.py
+@@ -0,0 +1,55 @@
++"""Generate one backing track locally. Never expose the API key to Vite."""
++import argparse
++import json
++from pathlib import Path
++import urllib.request
++import urllib.error
++from urllib.parse import urlsplit
++
++parser = argparse.ArgumentParser()
++parser.add_argument('--env-file', required=True)
++parser.add_argument('--model', default='music-3.0')
++args = parser.parse_args()
++folder = Path(__file__).resolve().parents[1] / 'public' / 'music'
++target = folder / 'mika-minimax.mp3'
++if target.exists():
++    raise SystemExit('Output already exists; refusing to generate a duplicate.')
++config = {}
++for line in Path(args.env_file).read_text(encoding='utf-8-sig').splitlines():
++    if '=' in line and not line.lstrip().startswith('#'):
++        key, value = line.split('=', 1)
++        config[key.strip()] = value.strip().strip('\"').strip("'")
++base = config.get('MINIMAX_API_BASE', 'https://api.minimax.cn').rstrip('/')
++parts = urlsplit(base)
++if parts.scheme != 'https' or parts.hostname not in {'api.minimax.cn', 'api.minimax.io', 'api.minimaxi.com'} or parts.query or parts.username:
++    raise SystemExit('Unsupported API origin; use an official MiniMax HTTPS endpoint.')
++url = base.removesuffix('/v1') + '/v1/music_generation'
++prompt = '轻快的 funk-pop 纯音乐，108 BPM，4/4 拍。清晰有力的底鼓和军鼓、弹性贝斯、切分节奏吉他、明亮而克制的合成器。适合俏皮卡通女孩跳街舞。开头尽快进入稳定节拍，每 8 拍形成一个短句，避免长前奏、变速和突然停顿。约 45 秒，无人声，无歌词。'
++payload = {'model': args.model, 'prompt': prompt, 'is_instrumental': True, 'stream': False, 'output_format': 'hex', 'audio_setting': {'sample_rate': 44100, 'bitrate': 256000, 'format': 'mp3'}}
++request = urllib.request.Request(url, json.dumps(payload).encode(), {'Authorization': 'Bearer ' + config['MINIMAX_API_KEY'], 'Content-Type': 'application/json'})
++try:
++    with urllib.request.urlopen(request, timeout=300) as response:
++        result = json.load(response)
++except urllib.error.HTTPError as error:
++    print('MiniMax HTTP status:', error.code)
++    try:
++        result = json.load(error)
++    except (ValueError, OSError):
++        raise SystemExit('Request failed without a readable API status.') from None
++except (urllib.error.URLError, TimeoutError):
++    raise SystemExit('Network request did not complete. No automatic retry was made.') from None
++status = result.get('base_resp', {})
++if status.get('status_code') != 0:
++    print('MiniMax API status:', status.get('status_code'))
++    message = str(status.get('status_msg', 'Unknown error')).replace(config['MINIMAX_API_KEY'], '[redacted]')
++    raise SystemExit(message[:300])
++audio = bytes.fromhex(result['data']['audio'])
++if len(audio) < 1000:
++    raise SystemExit('No usable audio returned.')
++folder.mkdir(parents=True, exist_ok=True)
++if target.exists():
++    raise SystemExit('Output already exists; refusing to overwrite.')
++target.write_bytes(audio)
++metadata = {'provider': 'MiniMax', 'model': args.model, 'prompt': prompt, 'requestedBpm': 108, 'extraInfo': result.get('extra_info', {})}
++(folder / 'mika-minimax.json').write_text(json.dumps(metadata, ensure_ascii=False, indent=2), encoding='utf-8')
++print(json.dumps({'file': str(target), 'bytes': len(audio), 'extraInfo': metadata['extraInfo']}, ensure_ascii=False))
+diff --git a/scripts/mika-contact-sheet.mjs b/scripts/mika-contact-sheet.mjs
+new file mode 100644
+index 0000000..7dfe6d1
+--- /dev/null
++++ b/scripts/mika-contact-sheet.mjs
+@@ -0,0 +1,14 @@
++import sharp from 'sharp'
++import { resolve } from 'node:path'
++
++const directory = resolve('wip/mika')
++const width = 360, height = 330
++const layers = []
++for (let index = 0; index < 4; index++) {
++  const image = await sharp(resolve(directory, `motion-${index + 1}.png`)).extract({ left: 100, top: 25, width: 370, height: 330 }).resize(width, height, { fit: 'contain', background: '#e5e6de' }).png().toBuffer()
++  layers.push({ input: image, left: index * width, top: 35 })
++}
++const caption = Buffer.from(`<svg width="1440" height="35"><rect width="1440" height="35" fill="#f7f7f0"/><g font-family="sans-serif" font-size="13" fill="#254c40"><text x="20" y="23">MIKA / 01 — 0.00 s</text><text x="380" y="23">02 — 1.11 s</text><text x="740" y="23">03 — 2.22 s</text><text x="1100" y="23">04 — 3.33 s</text></g></svg>`)
++layers.push({ input: caption, left: 0, top: 0 })
++await sharp({ create: { width: width * 4, height: height + 35, channels: 4, background: '#e5e6de' } }).composite(layers).png().toFile(resolve(directory, 'contact-sheet.png'))
++console.log(resolve(directory, 'contact-sheet.png'))
+diff --git a/src/app/router/AppRouter.tsx b/src/app/router/AppRouter.tsx
+index 3113e27..713a7ac 100644
+--- a/src/app/router/AppRouter.tsx
++++ b/src/app/router/AppRouter.tsx
+@@ -27,6 +27,8 @@ const UiKitGallery = __SHOWCASE_SURFACES__
+   : null
+ 
+ const PAGES_REDIRECT_KEY = 'web-starter-kit:pages-redirect'
++const CourtyardScreen = lazy(async () => ({ default: (await import('../../features/courtyard/ui/CourtyardScreen')).CourtyardScreen }))
++const DanceStudioScreen = lazy(async () => ({ default: (await import('../../features/dancer/ui/DanceStudioScreen')).DanceStudioScreen }))
+ const configuredBaseName = import.meta.env.BASE_URL.replace(/\/$/, '')
+ const APP_BASE_NAME = configuredBaseName && configuredBaseName !== '.' ? configuredBaseName : undefined
+ 
+@@ -47,6 +49,8 @@ export function AppRouter() {
+         <Routes>
+           {/* Main scene — the 3D starter/demo world. */}
+           <Route path="/" element={<GameScreen />} />
++          <Route path="/courtyard" element={<CourtyardScreen />} />
++          <Route path="/dance-studio" element={<DanceStudioScreen />} />
+ 
+           {UiKitGallery ? <Route path="/ui-kit/*" element={<UiKitGallery />} /> : null}
+ 
+diff --git a/src/features/character/ui/CharacterDebugScreen.tsx b/src/features/character/ui/CharacterDebugScreen.tsx
+index 9661137..7604d71 100644
+--- a/src/features/character/ui/CharacterDebugScreen.tsx
++++ b/src/features/character/ui/CharacterDebugScreen.tsx
+@@ -15,13 +15,17 @@ export function CharacterDebugScreen() {
+ 
+   // eslint-disable-next-line no-restricted-syntax -- which clip the character plays, chosen with a button. The scene has to be told.
+   const [animation, setAnimation] = useState<TanyAnimation>('bind')
++  // eslint-disable-next-line no-restricted-syntax -- Subject selection changes the inspected entity.
++  const [subject, setSubject] = useState<'tany' | 'mika'>('tany')
+ 
+   return (
+     <div className={styles.root}>
+-      <CharacterDebugScene animation={animation} onGreetingFinished={() => setAnimation('idle')} />
++      <CharacterDebugScene subject={subject} animation={animation} onGreetingFinished={() => setAnimation('idle')} />
+ 
+       <div className={styles.panel}>
+         <span className={styles.panelTitle}>Pose / Animation</span>
++        <button data-testid="subject-tany" className={subject === 'tany' ? styles.itemActive : styles.item} onClick={() => setSubject('tany')}>Tany · 原有角色</button>
++        <button data-testid="subject-mika" className={subject === 'mika' ? styles.itemActive : styles.item} onClick={() => setSubject('mika')}>Mika · 原创角色</button>
+         <button
+           type="button"
+           className={animation === 'bind' ? styles.itemActive : styles.item}
+@@ -31,8 +35,8 @@ export function CharacterDebugScreen() {
+         </button>
+         {[
+           ['idle', 'Idle'],
+-          ['dance', 'Macarena'],
+-          ['greeting', 'Greeting'],
++          ['dance', subject === 'mika' ? 'Groove · 轻快律动' : 'Macarena'],
++          ['greeting', subject === 'mika' ? 'Wave · 手臂波浪' : 'Greeting'],
+         ].map(([mode, label]) => (
+           <button
+             key={mode}
+diff --git a/src/features/courtyard/entities/CourtyardArchitecture.tsx b/src/features/courtyard/entities/CourtyardArchitecture.tsx
+new file mode 100644
+index 0000000..8a7dac2
+--- /dev/null
++++ b/src/features/courtyard/entities/CourtyardArchitecture.tsx
+@@ -0,0 +1,7 @@
++import { courtyardStaticMeshes } from '../materials/courtyardResources'
++
++export function CourtyardArchitecture() {
++  return <group dispose={null}>{courtyardStaticMeshes.map(({ tone, geometry, material }) => (
++    <mesh key={tone} geometry={geometry} material={material} castShadow receiveShadow />
++  ))}</group>
++}
+diff --git a/src/features/courtyard/entities/CourtyardEquipment.tsx b/src/features/courtyard/entities/CourtyardEquipment.tsx
+new file mode 100644
+index 0000000..63a3ffe
+--- /dev/null
++++ b/src/features/courtyard/entities/CourtyardEquipment.tsx
+@@ -0,0 +1,59 @@
++import { Instance, Instances } from '@react-three/drei'
++import { useFrame } from '@react-three/fiber'
++import { CuboidCollider, Physics, RigidBody } from '@react-three/rapier'
++import { useRef } from 'react'
++import { Group } from 'three'
++import { courtyardResources as resources } from '../materials/courtyardResources'
++
++const lamps: [number, number, number][] = [[-1, 1.1, 5.7], [1, 1.1, 3.5], [-8.7, 1.1, 1.4], [8.6, 1.1, 1.4], [2.1, 2.75, -2], [7.1, 2.75, -2]]
++
++export function CourtyardLights({ on }: { on: boolean }) {
++  return <group dispose={null}>
++    <Instances geometry={resources.lamp} material={on ? resources.lampOn : resources.lampOff}>
++      {lamps.map((point) => <Instance key={point.join(',')} position={point} />)}
++    </Instances>
++    <Instances geometry={resources.box} material={resources.dark} castShadow>
++      {lamps.slice(0, 4).map(([x, , z]) => <Instance key={`${x}-${z}`} position={[x, 0.5, z]} scale={[0.1, 1.05, 0.1]} />)}
++    </Instances>
++    <pointLight position={[0, 1.7, 4.6]} color="#ffd196" intensity={on ? 13 : 0} distance={8} decay={2} />
++    <pointLight position={[4.6, 2.5, -3.2]} color="#ffe3a8" intensity={on ? 24 : 0} distance={9} decay={2} />
++    <pointLight position={[-7, 1.8, 1]} color="#87ffdc" intensity={on ? 9 : 0} distance={7} decay={2} />
++  </group>
++}
++
++export function CirculationFlow({ active }: { active: boolean }) {
++  const stream = useRef<Group>(null)
++  useFrame(({ clock }) => {
++    if (!stream.current) return
++    const pulse = 0.94 + Math.sin(clock.elapsedTime * 4) * 0.06
++    stream.current.scale.x = pulse
++  })
++  return <group visible={active} dispose={null}>
++    <group ref={stream} position={[-4.8, 0, -3.36]}>
++      <mesh geometry={resources.box} material={resources.glow} position={[0, 0.85, 0]} scale={[0.85, 1, 0.055]} />
++    </group>
++    <mesh geometry={resources.ring} material={resources.glow} position={[-4.8, 0.31, -3.25]} rotation-x={Math.PI / 2} />
++  </group>
++}
++
++type DropProps = { drop: number; onLand: () => void }
++
++export function EquipmentDrop({ drop, onLand }: DropProps) {
++  const reported = useRef(0)
++  return <Physics gravity={[0, -9.81, 0]} timeStep={1 / 60}>
++    <RigidBody type="fixed" colliders={false}>
++      <CuboidCollider args={[1.925, 0.05, 1.425]} position={[5.8, 0.53, 4.3]} />
++      <CuboidCollider args={[11, 0.1, 8.5]} position={[0, -0.12, 0]} />
++    </RigidBody>
++    {drop > 0 ? <RigidBody key={drop} position={[5.8, 2.5, 4.3]} rotation={[0.12, 0.25, 0.18]}
++      colliders={false} restitution={0.4} friction={0.75} angularVelocity={[0.35, 0.15, 0.25]}
++      onCollisionEnter={() => { if (reported.current !== drop) { reported.current = drop; onLand() } }}>
++      <CuboidCollider args={[0.43, 0.43, 0.43]} />
++      <group dispose={null}>
++        <mesh geometry={resources.box} material={resources.crate} scale={[0.86, 0.86, 0.86]} castShadow />
++        <mesh geometry={resources.box} material={resources.dark} scale={[0.12, 0.89, 0.89]} />
++        <mesh geometry={resources.box} material={resources.dark} scale={[0.89, 0.12, 0.89]} />
++      </group>
++    </RigidBody> : null}
++  </Physics>
++}
+diff --git a/src/features/courtyard/materials/courtyardResources.ts b/src/features/courtyard/materials/courtyardResources.ts
+new file mode 100644
+index 0000000..4d887cf
+--- /dev/null
++++ b/src/features/courtyard/materials/courtyardResources.ts
+@@ -0,0 +1,114 @@
++import { ShaderWarmupRegistry } from '@vibegameengine/shader-warmup'
++import { CylinderGeometry, DodecahedronGeometry, Matrix4, MeshBasicMaterial, MeshStandardMaterial, Quaternion, TorusGeometry, Vector3 } from 'three'
++import { RoundedBoxGeometry } from 'three/examples/jsm/geometries/RoundedBoxGeometry.js'
++import { mergeGeometries } from 'three/examples/jsm/utils/BufferGeometryUtils.js'
++
++const shapes = {
++  box: new RoundedBoxGeometry(1, 1, 1, 2, 0.045),
++  leaf: new DodecahedronGeometry(1, 0),
++  column: new CylinderGeometry(0.5, 0.55, 1, 12),
++}
++const tones = {
++  stone: '#d9d4bd', edge: '#a8b5a0', earth: '#4c6559', path: '#ece5d1',
++  wood: '#ad7850', dark: '#314a48', solar: '#244858', leaf: '#57816b',
++  leafLight: '#78926c', waterbed: '#1c6469', copper: '#d68a4e',
++}
++type Tone = keyof typeof tones
++type Point = [number, number, number]
++type Piece = { shape?: keyof typeof shapes; tone: Tone; at: Point; size: Point; tilt?: number }
++
++const pieces: Piece[] = [
++  { tone: 'edge', at: [0, -0.55, 0], size: [22.4, 0.8, 17.4] },
++  { tone: 'earth', at: [0, -0.13, 0], size: [22, 0.16, 17] },
++  { tone: 'path', at: [0, 0.02, 2], size: [2.8, 0.22, 12.7] },
++  { tone: 'path', at: [0, 0.02, 1.4], size: [19, 0.22, 2.7] },
++  { tone: 'stone', at: [0, -0.21, 8.2], size: [4.8, 0.27, 1.4] },
++  { tone: 'stone', at: [0, -0.37, 8.9], size: [5.4, 0.24, 0.7] },
++  { tone: 'stone', at: [-4.8, 0, -2.2], size: [6.8, 0.28, 5.6] },
++  { tone: 'waterbed', at: [-4.8, 0.16, -2.2], size: [6.15, 0.12, 4.95] },
++  { tone: 'stone', at: [-4.8, 0.36, -4.95], size: [6.8, 0.54, 0.28] },
++  { tone: 'stone', at: [-4.8, 0.36, 0.55], size: [6.8, 0.54, 0.28] },
++  { tone: 'stone', at: [-8.08, 0.36, -2.2], size: [0.28, 0.54, 5.4] },
++  { tone: 'stone', at: [-1.52, 0.36, -2.2], size: [0.28, 0.54, 5.4] },
++  { tone: 'dark', at: [-4.8, 0.7, -3.8], size: [1.5, 1.1, 0.65] },
++  { tone: 'copper', at: [-4.8, 1.31, -3.8], size: [1.75, 0.16, 0.85] },
++  { tone: 'stone', at: [4.6, 0.15, -3.7], size: [6.4, 0.42, 4.7] },
++  { tone: 'wood', at: [1.9, 1.65, -5.5], size: [0.22, 3, 0.22] },
++  { tone: 'wood', at: [7.3, 1.65, -5.5], size: [0.22, 3, 0.22] },
++  { tone: 'wood', at: [1.9, 1.65, -1.9], size: [0.22, 3, 0.22] },
++  { tone: 'wood', at: [7.3, 1.65, -1.9], size: [0.22, 3, 0.22] },
++  { tone: 'wood', at: [4.6, 3.15, -3.7], size: [6.4, 0.22, 4.7] },
++  { tone: 'solar', at: [2.48, 3.39, -3.7], size: [1.96, 0.14, 4.25], tilt: -0.07 },
++  { tone: 'solar', at: [4.6, 3.39, -3.7], size: [1.96, 0.14, 4.25], tilt: -0.07 },
++  { tone: 'solar', at: [6.72, 3.39, -3.7], size: [1.96, 0.14, 4.25], tilt: -0.07 },
++  { tone: 'edge', at: [2.48, 3.49, -3.7], size: [0.035, 0.04, 4.2] },
++  { tone: 'edge', at: [4.6, 3.49, -3.7], size: [0.035, 0.04, 4.2] },
++  { tone: 'edge', at: [6.72, 3.49, -3.7], size: [0.035, 0.04, 4.2] },
++  { tone: 'wood', at: [4.6, 0.75, -5.12], size: [3.4, 0.16, 0.6] },
++  { tone: 'dark', at: [3.3, 0.45, -5.12], size: [0.18, 0.58, 0.48] },
++  { tone: 'dark', at: [5.9, 0.45, -5.12], size: [0.18, 0.58, 0.48] },
++  { tone: 'dark', at: [7.15, 0.87, -2.5], size: [0.6, 1.3, 0.6] },
++  { tone: 'copper', at: [7.15, 1.58, -2.5], size: [0.66, 0.1, 0.66] },
++  { tone: 'stone', at: [5.8, 0.24, 4.3], size: [4.5, 0.48, 3.5] },
++  { tone: 'dark', at: [5.8, 0.53, 4.3], size: [3.85, 0.1, 2.85] },
++  { tone: 'copper', at: [3.95, 0.62, 4.3], size: [0.1, 0.2, 2.8] },
++  { tone: 'copper', at: [7.65, 0.62, 4.3], size: [0.1, 0.2, 2.8] },
++  { tone: 'dark', at: [4.4, 2, 5.3], size: [0.17, 3.1, 0.17] },
++  { tone: 'dark', at: [7.2, 2, 5.3], size: [0.17, 3.1, 0.17] },
++  { tone: 'copper', at: [5.8, 3.54, 5.3], size: [3.1, 0.2, 0.3] },
++  { tone: 'stone', at: [-6.6, 0.35, 4.3], size: [4, 0.7, 2.4] },
++  { tone: 'earth', at: [-6.6, 0.76, 4.3], size: [3.65, 0.13, 2.05] },
++  { tone: 'wood', shape: 'column', at: [-6.9, 1.7, 4.3], size: [0.3, 2.3, 0.3] },
++  { tone: 'leaf', shape: 'leaf', at: [-7.2, 3.1, 4.3], size: [1.55, 1.75, 1.4] },
++  { tone: 'leafLight', shape: 'leaf', at: [-6.2, 3.5, 4.2], size: [1.18, 1.3, 1.1] },
++  { tone: 'wood', shape: 'column', at: [-9.1, 1.1, -5.7], size: [0.36, 2.5, 0.36] },
++  { tone: 'leaf', shape: 'leaf', at: [-9.25, 2.7, -5.7], size: [1.4, 1.7, 1.35] },
++  { tone: 'leafLight', shape: 'leaf', at: [-8.7, 3.6, -5.65], size: [1, 1.25, 1.05] },
++  { tone: 'wood', shape: 'column', at: [9.3, 1.2, -5.9], size: [0.36, 2.6, 0.36] },
++  { tone: 'leaf', shape: 'leaf', at: [9.2, 3, -5.9], size: [1.35, 1.9, 1.4] },
++  { tone: 'leafLight', shape: 'leaf', at: [9.6, 4, -5.9], size: [0.95, 1.1, 0.95] },
++  { tone: 'leafLight', shape: 'leaf', at: [-5.4, 1.1, 4.1], size: [0.55, 0.4, 0.75] },
++  { tone: 'leaf', shape: 'leaf', at: [-8, 1.07, 4.8], size: [0.65, 0.38, 0.65] },
++  { tone: 'wood', at: [-3.8, 0.57, 5.5], size: [0.65, 0.14, 2.7] },
++  { tone: 'dark', at: [-3.8, 0.25, 4.5], size: [0.55, 0.55, 0.15] },
++  { tone: 'dark', at: [-3.8, 0.25, 6.5], size: [0.55, 0.55, 0.15] },
++  { tone: 'stone', at: [-5.5, 0.5, -7.8], size: [10, 1, 0.3] },
++  { tone: 'stone', at: [5.5, 0.5, -7.8], size: [10, 1, 0.3] },
++  { tone: 'wood', at: [-9.6, 0.5, 0.5], size: [0.2, 1.15, 2.2] },
++]
++
++export const courtyardStaticMeshes = (Object.keys(tones) as Tone[]).map((tone) => {
++  const parts = pieces.filter((piece) => piece.tone === tone).map((piece) => {
++    const source = shapes[piece.shape ?? 'box']
++    const geometry = source.index ? source.toNonIndexed() : source.clone()
++    const rotation = new Quaternion().setFromAxisAngle(new Vector3(1, 0, 0), piece.tilt ?? 0)
++    geometry.applyMatrix4(new Matrix4().compose(new Vector3(...piece.at), rotation, new Vector3(...piece.size)))
++    return geometry
++  })
++  const geometry = mergeGeometries(parts)
++  if (!geometry) throw new Error(`Cannot merge courtyard material group: ${tone}`)
++  parts.forEach((part) => part.dispose())
++  const material = new MeshStandardMaterial({ color: tones[tone], roughness: tone === 'solar' ? 0.38 : 0.85, metalness: tone === 'solar' ? 0.25 : 0 })
++  ShaderWarmupRegistry.register(`courtyard-${tone}`, geometry, material)
++  return { tone, geometry, material }
++})
++
++export const courtyardResources = {
++  box: shapes.box,
++  disc: new CylinderGeometry(0.56, 0.63, 0.1, 40),
++  ring: new TorusGeometry(0.65, 0.035, 8, 56),
++  lamp: new CylinderGeometry(0.14, 0.14, 0.38, 12),
++  glow: new MeshBasicMaterial({ color: '#92ffdf', toneMapped: false }),
++  lampOn: new MeshBasicMaterial({ color: '#ffe0a0', toneMapped: false }),
++  lampOff: new MeshStandardMaterial({ color: '#c3c5a4' }),
++  dark: new MeshStandardMaterial({ color: '#284847', roughness: 0.6 }),
++  crate: new MeshStandardMaterial({ color: '#d79854', roughness: 0.7 }),
++}
++ShaderWarmupRegistry.register('courtyard-guide-disc', courtyardResources.disc, courtyardResources.dark)
++ShaderWarmupRegistry.register('courtyard-ring', courtyardResources.ring, courtyardResources.glow)
++ShaderWarmupRegistry.register('courtyard-crate', shapes.box, courtyardResources.crate)
++ShaderWarmupRegistry.register('courtyard-dark-box', shapes.box, courtyardResources.dark)
++ShaderWarmupRegistry.register('courtyard-dark-instanced', shapes.box, courtyardResources.dark, { drawMode: 'instanced' })
++ShaderWarmupRegistry.register('courtyard-flow', shapes.box, courtyardResources.glow)
++ShaderWarmupRegistry.register('courtyard-lamp-on', courtyardResources.lamp, courtyardResources.lampOn, { drawMode: 'instanced' })
++ShaderWarmupRegistry.register('courtyard-lamp-off', courtyardResources.lamp, courtyardResources.lampOff, { drawMode: 'instanced' })
+diff --git a/src/features/courtyard/systems/inspection.test.ts b/src/features/courtyard/systems/inspection.test.ts
+new file mode 100644
+index 0000000..65aa3d6
+--- /dev/null
++++ b/src/features/courtyard/systems/inspection.test.ts
+@@ -0,0 +1,32 @@
++import { describe, expect, it } from 'vitest'
++import { initialInspection, inspectionPath, inspectionReducer } from './inspection'
++
++describe('inspection state boundaries', () => {
++  it('requires arrival and ignores stale arrival events after a destination change', () => {
++    expect(inspectionReducer(initialInspection, { type: 'operate' })).toBe(initialInspection)
++    const waterTrip = inspectionReducer(initialInspection, { type: 'select', id: 'water' })
++    const energyTrip = inspectionReducer(waterTrip, { type: 'select', id: 'energy' })
++    expect(inspectionReducer(energyTrip, { type: 'arrive', trip: waterTrip.trip }).moving).toBe(true)
++    const arrived = inspectionReducer(energyTrip, { type: 'arrive', trip: energyTrip.trip })
++    expect(inspectionReducer(arrived, { type: 'operate' })).toMatchObject({ lights: true, night: true, checked: { energy: true } })
++  })
++  it('records physical contact rather than marking a release as complete', () => {
++    let state = inspectionReducer(initialInspection, { type: 'select', id: 'physics' })
++    state = inspectionReducer(state, { type: 'arrive', trip: state.trip })
++    state = inspectionReducer(state, { type: 'operate' })
++    expect(state.checked.physics).toBe(false)
++    expect(inspectionReducer(state, { type: 'operate' })).toBe(state)
++    const landed = inspectionReducer(state, { type: 'land', drop: state.drop, generation: state.generation })
++    expect(landed.checked.physics).toBe(true)
++    const reset = inspectionReducer(state, { type: 'reset' })
++    expect(inspectionReducer(reset, { type: 'land', drop: state.drop, generation: state.generation })).toBe(reset)
++  })
++  it('retains completed checks after switching a facility off and resets explicitly', () => {
++    let state = inspectionReducer(initialInspection, { type: 'select', id: 'water' })
++    state = inspectionReducer(state, { type: 'arrive', trip: state.trip })
++    state = inspectionReducer(inspectionReducer(state, { type: 'operate' }), { type: 'operate' })
++    expect(state).toMatchObject({ water: false, checked: { water: true } })
++    expect(inspectionReducer(state, { type: 'reset' }).checked).toEqual(initialInspection.checked)
++    expect(inspectionPath([-3, 0.23, 1.4], [3.1, 0.23, -0.65])).toEqual([[-3, 0.23, 1.4], [3.1, 0.23, 1.4], [3.1, 0.23, -0.65]])
++  })
++})
+diff --git a/src/features/courtyard/systems/inspection.ts b/src/features/courtyard/systems/inspection.ts
+new file mode 100644
+index 0000000..b1934b4
+--- /dev/null
++++ b/src/features/courtyard/systems/inspection.ts
+@@ -0,0 +1,52 @@
++export type StationId = 'water' | 'energy' | 'physics'
++type Point = [number, number, number]
++type Station = { id: StationId; number: string; title: string; subtitle: string; description: string; capability: string; location: Point; marker: Point }
++
++export const stations: Station[] = [
++  { id: 'water', number: '01', title: '雨水花园', subtitle: '启动循环 · 观察水流', description: '雨水收集池连接循环水泵。开启水泵，观察出水口、水面和设备状态如何一起响应。', capability: '水面着色器 / 动态效果 / 状态联动', location: [-3, 0.23, 1.4], marker: [-4.8, 1.8, -2.2] },
++  { id: 'energy', number: '02', title: '光伏廊架', subtitle: '开启照明 · 切换夜景', description: '廊架为庭院提供遮荫和照明。切换到夜间并打开庭院灯，观察同一空间在不同光照下的变化。', capability: '实时灯光 / 发光材质 / 阴影', location: [3.1, 0.23, -0.65], marker: [4.6, 4.3, -3.7] },
++  { id: 'physics', number: '03', title: '设备试验台', subtitle: '释放测试箱 · 观察碰撞', description: '将测试箱从吊架下释放，观察重力、翻转、碰撞与反弹。该体验用于展示物理交互。', capability: 'Rapier 刚体 / 重力 / 碰撞事件', location: [5.8, 0.23, 1.4], marker: [5.8, 4, 4.3] },
++]
++
++export type InspectionState = {
++  selected: StationId; arrived: StationId | null; moving: boolean; trip: number;
++  water: boolean; lights: boolean; night: boolean; checked: Record<StationId, boolean>;
++  drop: number; falling: boolean; celebrating: boolean; generation: number; camera: number;
++}
++export const initialInspection: InspectionState = {
++  selected: 'water', arrived: null, moving: false, trip: 0, water: false, lights: false, night: false,
++  checked: { water: false, energy: false, physics: false }, drop: 0, falling: false,
++  celebrating: false, generation: 0, camera: 0,
++}
++export type InspectionAction =
++  | { type: 'select'; id: StationId }
++  | { type: 'arrive'; trip: number }
++  | { type: 'land'; drop: number; generation: number }
++  | { type: 'operate' | 'night' | 'reset' | 'camera' | 'celebrate' }
++
++export function inspectionReducer(state: InspectionState, action: InspectionAction): InspectionState {
++  switch (action.type) {
++    case 'select':
++      if (state.selected === action.id && (state.moving || state.arrived === action.id)) return state
++      return { ...state, selected: action.id, moving: true, arrived: null, trip: state.trip + 1, celebrating: false }
++    case 'arrive':
++      return state.moving && action.trip === state.trip ? { ...state, arrived: state.selected, moving: false } : state
++    case 'operate': {
++      if (state.moving || state.arrived !== state.selected) return state
++      if (state.selected === 'water') return { ...state, water: !state.water, checked: { ...state.checked, water: true } }
++      if (state.selected === 'energy') return { ...state, lights: !state.lights, night: state.lights ? state.night : true, checked: { ...state.checked, energy: true } }
++      return state.falling ? state : { ...state, drop: state.drop + 1, falling: true }
++    }
++    case 'land':
++      return state.falling && action.drop === state.drop && action.generation === state.generation
++        ? { ...state, falling: false, checked: { ...state.checked, physics: true } } : state
++    case 'night': return { ...state, night: !state.night }
++    case 'camera': return { ...state, camera: state.camera + 1 }
++    case 'celebrate': return Object.values(state.checked).every(Boolean) && !state.moving ? { ...state, celebrating: !state.celebrating } : state
++    case 'reset': return { ...initialInspection, generation: state.generation + 1, camera: state.camera + 1, trip: state.trip + 1 }
++  }
++}
++
++export function inspectionPath(from: Point, destination: Point): Point[] {
++  return [[from[0], 0.23, 1.4], [destination[0], 0.23, 1.4], [...destination]]
++}
+diff --git a/src/features/courtyard/ui/CourtyardScreen.module.css b/src/features/courtyard/ui/CourtyardScreen.module.css
+new file mode 100644
+index 0000000..8087ea6
+--- /dev/null
++++ b/src/features/courtyard/ui/CourtyardScreen.module.css
+@@ -0,0 +1,55 @@
++.screen { height: 100svh; min-height: 600px; display: flex; flex-direction: column; color: #263c34; background: #edf0e6; font-family: 'Segoe UI','Microsoft YaHei',sans-serif; }
++.header { display: flex; align-items: center; justify-content: space-between; gap: 20px; padding: 18px 28px; background: #f6f6ef; border-bottom: 1px solid #dbe0d3; }
++.brand { display: flex; align-items: center; gap: 13px; }
++.logo { display: grid; place-items: center; width: 40px; height: 40px; background: #294e43; color: #e2eacf; font-size: 23px; border-radius: 12px 3px 12px 3px; }
++.brand h1 { margin: 0; font-size: 19px; font-weight: 650; letter-spacing: 3px; }
++.eyebrow { display: block; font-size: 9px; letter-spacing: 2px; margin-top: 5px; color: #7d897d; }
++.topActions { display: flex; align-items: center; gap: 8px; }
++.button { border: 1px solid #cdd5c7; border-radius: 7px; padding: 8px 11px; background: transparent; color: #395547; cursor: pointer; font-size: 12px; }
++.button:hover { background: #e0e8d9; }
++.screen button:focus-visible { outline: 2px solid #bd773b !important; outline-offset: 3px; }
++.layout { flex: 1; min-height: 0; display: grid; grid-template-columns: minmax(0,1fr) 310px; }
++.viewport { position: relative; min-width: 0; overflow: hidden; }
++.scene { width: 100%; height: 100%; }
++.sceneHeading { position: absolute; top: 26px; left: 28px; pointer-events: none; }
++.sceneHeading p { font-size: 10px; letter-spacing: 3px; margin: 0 0 9px; opacity: .65; }
++.sceneHeading h2 { font-size: 25px; font-weight: 450; margin: 0; letter-spacing: 2px; }
++.sceneHeading span { display: block; font-size: 12px; opacity: .65; margin-top: 9px; }
++.night .sceneHeading { color: #e5f0df; }
++.hint { position: absolute; bottom: 22px; left: 50%; transform: translateX(-50%); padding: 10px 16px; border-radius: 30px; font-size: 11px; color: #455b50; background: #f8faf0e8; white-space: nowrap; box-shadow: 0 3px 20px #20352b15; pointer-events: none; }
++.panel { padding: 26px 23px 18px; background: #f7f7ef; border-left: 1px solid #dbe0d3; overflow: auto; }
++.sectionLabel { margin: 0; font-size: 10px; letter-spacing: 2px; color: #7c8b7b; }
++.progressTitle { display: flex; align-items: end; justify-content: space-between; margin: 10px 0 15px; }
++.progressTitle h2 { margin: 0; font-size: 19px; font-weight: 550; }
++.progressTitle strong { font-size: 25px; font-weight: 450; }
++.progressTitle small { color: #92a18d; font-size: 12px; }
++.progress { display: flex; gap: 4px; margin-bottom: 22px; }
++.progress i { height: 4px; border-radius: 5px; background: #dce3d4; flex: 1; }
++.progress i[data-done='true'] { background: #487961; }
++.stations { display: grid; gap: 8px; }
++.station { text-align: left; display: flex; gap: 12px; align-items: center; padding: 13px 11px; background: #fffefa; border: 1px solid #e0e4d8; border-radius: 9px; color: #294536; cursor: pointer; }
++.station[aria-pressed='true'] { border-color: #66896e; background: #e8eddf; }
++.stationNumber { font-size: 13px; color: #728c72; width: 22px; }
++.station strong { font-size: 13px; font-weight: 600; display: block; }
++.station small { font-size: 10px; color: #83907e; display: block; margin-top: 5px; }
++.detail { margin-top: 24px; padding-top: 21px; border-top: 1px solid #dde3d5; }
++.detail h3 { font-size: 16px; margin: 0 0 10px; font-weight: 550; }
++.description { font-size: 12px; line-height: 1.95; color: #6d7d6c; margin: 0 0 14px; }
++.status { display: flex; align-items: center; gap: 6px; font-size: 11px; color: #49745a; margin-bottom: 14px; }
++.status::before { content: ''; width: 5px; height: 5px; background: currentColor; border-radius: 50%; }
++.primary { width: 100%; background: #2b5645; color: #f3f6e9; border: 0; border-radius: 7px; padding: 12px; font-size: 12px; cursor: pointer; }
++.primary:hover { background: #3d7058; }
++.primary:disabled { background: #ccd6c6; color: #7f907a; cursor: wait; }
++.capability { margin-top: 17px; font-size: 10px; line-height: 1.8; color: #8d9986; }
++.capability b { display: block; font-size: 9px; letter-spacing: 1px; font-weight: 400; }
++.complete { border: 1px solid #cbd8bd; border-radius: 8px; padding: 14px; margin-top: 16px; background: #edf2e1; }
++.complete strong { font-size: 13px; }
++.complete p { font-size: 11px; line-height: 1.7; color: #71836a; }
++.footer { display: flex; justify-content: space-between; gap: 15px; padding: 12px 28px; background: #f7f7ef; border-top: 1px solid #dbe0d3; color: #81917b; font-size: 10px; }
++.marker { border: 1px solid #ffffffa8; background: #fbfff1ed; color: #365743; border-radius: 18px; padding: 8px 12px; white-space: nowrap; font: 11px 'Microsoft YaHei',sans-serif; cursor: pointer; box-shadow: 0 4px 20px #17362825; }
++.marker[aria-pressed='true'] { background: #2a5c46; color: #f9fff1; }
++.marker b { margin-right: 7px; font-size: 10px; opacity: .65; }
++.loading { height: 100%; display: grid; place-items: center; background: #c4d4ca; color: #405e4c; }
++.error { display: grid; align-content: center; justify-items: center; gap: 12px; height: 100%; padding: 30px; background: #e7eddf; }
++@media (max-width: 900px) { .layout { grid-template-columns: minmax(0,1fr) 270px; } .panel { padding: 22px 17px; } .sceneHeading { left: 20px; } .sceneHeading h2 { font-size: 20px; } }
++@media (max-width: 680px) { .screen { height: auto; min-height: 100svh; } .header { padding: 14px 16px; gap: 8px; } .brand h1 { font-size: 16px; } .eyebrow { font-size: 8px; letter-spacing: 1px; } .logo { width: 32px; height: 32px; } .topActions { flex-wrap: wrap; justify-content: end; max-width: 160px; } .button { font-size: 10px; padding: 6px 8px; } .layout { display: flex; flex-direction: column; } .viewport { height: 56svh; min-height: 370px; } .panel { border-left: 0; padding: 22px; overflow: visible; } .stations { grid-template-columns: repeat(3,minmax(0,1fr)); gap: 5px; } .station { padding: 10px 7px; gap: 6px; } .station small { display: none; } .station strong { font-size: 11px; } .stationNumber { width: auto; font-size: 10px; } .detail { margin-top: 18px; } .footer { padding: 13px 18px; flex-direction: column; gap: 6px; } .hint { font-size: 9px; bottom: 13px; } .sceneHeading { top: 18px; } .sceneHeading span { display: none; } }
+diff --git a/src/features/courtyard/ui/CourtyardScreen.tsx b/src/features/courtyard/ui/CourtyardScreen.tsx
+new file mode 100644
+index 0000000..ad47df4
+--- /dev/null
++++ b/src/features/courtyard/ui/CourtyardScreen.tsx
+@@ -0,0 +1,73 @@
++import { CourtyardScene } from '../../../scenes/courtyard/CourtyardScene'
++import { Component, Suspense, useEffect, useReducer, type ReactNode } from 'react'
++import { initialInspection, inspectionReducer, stations } from '../systems/inspection'
++import styles from './CourtyardScreen.module.css'
++
++export function CourtyardScreen() {
++  const [state, dispatch] = useReducer(inspectionReducer, initialInspection)
++  useEffect(() => { document.title = '青屿庭院 · 3D 交互巡检' }, [])
++  const current = stations.find((station) => station.id === state.selected)!
++  const completed = Object.values(state.checked).filter(Boolean).length
++  const ready = state.arrived === state.selected && !state.moving
++  const operating = state.selected === 'water' ? state.water : state.selected === 'energy' ? state.lights : state.falling
++  const actionLabel = !ready ? (state.moving ? '向导前往中…' : `前往${current.title} →`)
++    : state.selected === 'water' ? (state.water ? '关闭循环水泵' : '启动循环水泵')
++      : state.selected === 'energy' ? (state.lights ? '关闭庭院照明' : '开启照明 · 切换夜景')
++        : state.falling ? '测试箱下落中…' : state.drop ? '重新释放测试箱' : '释放测试箱'
++  const status = !ready ? (state.moving ? '向导正在沿步道前往设施' : '选择设施，开始一次巡检')
++    : state.selected === 'physics' ? (state.falling ? '等待测试箱碰撞' : state.checked.physics ? '已检测到落地碰撞' : '测试台就绪')
++      : operating ? '设备运行中' : '设备待机中'
++  return <main className={`${styles.screen} ${state.night ? styles.night : ''}`}>
++    <header className={styles.header}>
++      <div className={styles.brand}><div className={styles.logo}>青</div><div><h1>青屿庭院</h1><span className={styles.eyebrow}>QINGYU / INTERACTIVE COURTYARD</span></div></div>
++      <div className={styles.topActions}>
++        <button className={styles.button} aria-pressed={state.night} onClick={() => dispatch({ type: 'night' })}>{state.night ? '☾ 夜间' : '☀ 日间'}</button>
++        <button className={styles.button} onClick={() => dispatch({ type: 'camera' })}>复位视角</button>
++        <button className={styles.button} onClick={() => dispatch({ type: 'reset' })}>重新巡检</button>
++      </div>
++    </header>
++    <div className={styles.layout}>
++      <section className={styles.viewport} aria-label="可旋转的三维庭院">
++        <div className={styles.scene}>
++          <SceneErrorBoundary><Suspense fallback={<div className={styles.loading}>正在准备庭院模型与物理引擎…</div>}>
++            <CourtyardScene state={state} dispatch={dispatch} />
++          </Suspense></SceneErrorBoundary>
++        </div>
++        <div className={styles.sceneHeading}><p>一座庭院 · 三次交互</p><h2>让空间，回应你的操作。</h2><span>点击场景标记，跟随虚拟向导探索设施。</span></div>
++        <div className={styles.hint}>拖动旋转视角 · 滚轮缩放 · 点击标记前往</div>
++      </section>
++      <aside className={styles.panel} aria-label="巡检任务面板">
++        <p className={styles.sectionLabel}>TODAY'S WALKTHROUGH</p>
++        <div className={styles.progressTitle}><h2>庭院巡检</h2><strong>{completed}<small> / 3</small></strong></div>
++        <div className={styles.progress} aria-label={`已完成 ${completed} 项，共 3 项`}>{stations.map((station) => <i key={station.id} data-done={state.checked[station.id]} />)}</div>
++        <nav className={styles.stations} aria-label="选择巡检设施">{stations.map((station) => <button
++          key={station.id} className={styles.station} aria-pressed={state.selected === station.id}
++          onClick={() => dispatch({ type: 'select', id: station.id })}>
++          <span className={styles.stationNumber}>{state.checked[station.id] ? '✓' : station.number}</span>
++          <span><strong>{station.title}</strong><small>{station.subtitle}</small></span>
++        </button>)}</nav>
++        <section className={styles.detail}>
++          <h3>{current.title}</h3><p className={styles.description}>{current.description}</p>
++          <div className={styles.status} role="status">{status}</div>
++          <button className={styles.primary} disabled={state.moving || (state.selected === 'physics' && state.falling)}
++            onClick={() => dispatch(ready ? { type: 'operate' } : { type: 'select', id: state.selected })}>{actionLabel}</button>
++          <div className={styles.capability}><b>这一站用到的能力</b>{current.capability}</div>
++        </section>
++        {completed === 3 ? <section className={styles.complete} aria-label="巡检完成"><strong>✓ 本次巡检已完成</strong>
++          <p>水循环、庭院照明和落地碰撞均已体验。继续旋转场景，或让向导庆祝一下。</p>
++          <button className={styles.button} disabled={state.moving} onClick={() => dispatch({ type: 'celebrate' })}>{state.celebrating ? '停止庆祝' : '向导庆祝 ✧'}</button>
++        </section> : null}
++      </aside>
++    </div>
++    <footer className={styles.footer}><span>WEB STARTER KIT / 应用场景 01</span><span>交互模拟演示 · 未连接真实设备或传感器</span></footer>
++  </main>
++}
++
++class SceneErrorBoundary extends Component<{ children: ReactNode }, { failed: boolean }> {
++  state = { failed: false }
++  static getDerivedStateFromError() { return { failed: true } }
++  render() {
++    return this.state.failed ? <div className={styles.error}><strong>场景暂时未能加载</strong><span>请重新载入，恢复模型和图形上下文。</span>
++      <button className={styles.button} onClick={() => window.location.reload()}>重新载入</button></div> : this.props.children
++  }
++}
+diff --git a/src/features/dancer/components/MusicTransport.test.ts b/src/features/dancer/components/MusicTransport.test.ts
+new file mode 100644
+index 0000000..1473654
+--- /dev/null
++++ b/src/features/dancer/components/MusicTransport.test.ts
+@@ -0,0 +1,83 @@
++import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest'
++import { MusicTransport } from './MusicTransport'
++
++class AudioMock {
++  static instances: AudioMock[] = []
++  duration = 40
++  currentTime = 0
++  playbackRate = 1
++  volume = 1
++  ended = false
++  preload = ''
++  onloadedmetadata: (() => void) | null = null
++  ontimeupdate: (() => void) | null = null
++  onplay: (() => void) | null = null
++  onpause: (() => void) | null = null
++  onended: (() => void) | null = null
++  onerror: (() => void) | null = null
++  constructor() { AudioMock.instances.push(this) }
++  play = vi.fn(async () => { this.onplay?.() })
++  pause = vi.fn(() => { this.onpause?.() })
++  removeAttribute = vi.fn()
++  load = vi.fn()
++}
++const file = (name = 'test.mp3') => new File(['audio-fixture'], name)
++describe('music transport', () => {
++  beforeEach(() => {
++    AudioMock.instances = []
++    vi.stubGlobal('Audio', AudioMock)
++    vi.spyOn(URL, 'createObjectURL').mockReturnValue('blob:fixture')
++    vi.spyOn(URL, 'revokeObjectURL').mockImplementation(() => {})
++  })
++  afterEach(() => { vi.restoreAllMocks(); vi.unstubAllGlobals() })
++  it('uses audio time for pause, seek, speed and replay', async () => {
++    const player = new MusicTransport()
++    player.load(file())
++    const audio = AudioMock.instances[0]
++    audio.onloadedmetadata!()
++    await player.play()
++    expect(player.state.playing).toBe(true)
++    player.seek(15)
++    player.setSpeed(1.5)
++    expect(audio.playbackRate).toBe(1.5)
++    expect(player.read()?.time).toBe(15)
++    player.pause()
++    expect(player.state.playing).toBe(false)
++    player.seek(100)
++    expect(player.read()?.time).toBe(40)
++    audio.ended = true
++    audio.onended!()
++    await player.play()
++    expect(player.read()?.time).toBe(0)
++    player.dispose()
++  })
++  it('releases old media, ignores stale metadata and rejects invalid replacements', () => {
++    const player = new MusicTransport()
++    player.load(file())
++    const old = AudioMock.instances[0]
++    const staleMetadata = old.onloadedmetadata!
++    player.load(file('new.wav'))
++    staleMetadata()
++    expect(player.state.duration).toBe(0)
++    expect(old.pause).toHaveBeenCalled()
++    expect(URL.revokeObjectURL).toHaveBeenCalledWith('blob:fixture')
++    AudioMock.instances[1].onloadedmetadata!()
++    expect(player.load(file('bad.txt'))).toBe(false)
++    expect(player.state.name).toBe('new.wav')
++    expect(player.read()).not.toBeNull()
++    player.clear()
++    expect(player.read()).toBeNull()
++    expect(player.state.name).toBe('')
++  })
++  it('reports blocked playback without claiming to play', async () => {
++    const player = new MusicTransport()
++    player.load(file())
++    const audio = AudioMock.instances[0]
++    audio.onloadedmetadata!()
++    audio.play.mockRejectedValueOnce(new Error('NotAllowedError'))
++    expect(await player.play()).toBe(false)
++    expect(player.state.playing).toBe(false)
++    expect(player.state.error).not.toBe('')
++    player.dispose()
++  })
++})
+diff --git a/src/features/dancer/components/MusicTransport.ts b/src/features/dancer/components/MusicTransport.ts
+new file mode 100644
+index 0000000..79252eb
+--- /dev/null
++++ b/src/features/dancer/components/MusicTransport.ts
+@@ -0,0 +1,97 @@
++import type { MusicClock } from '../systems/musicTiming'
++
++export type MusicState = { name: string; playing: boolean; loading: boolean; time: number; duration: number; bpm: number; offset: number; volume: number; error: string }
++const empty: MusicState = { name: '', playing: false, loading: false, time: 0, duration: 0, bpm: 108, offset: 0, volume: 0.55, error: '' }
++
++export class MusicTransport implements MusicClock {
++  private audio: HTMLAudioElement | null = null
++  private url: string | null = null
++  private speed = 1
++  private listeners = new Set<(state: MusicState) => void>()
++  state = { ...empty }
++
++  subscribe(listener: (state: MusicState) => void) {
++    this.listeners.add(listener)
++    listener(this.state)
++    return () => { this.listeners.delete(listener) }
++  }
++  private update(change: Partial<MusicState>) {
++    this.state = { ...this.state, ...change }
++    for (const listener of this.listeners) listener(this.state)
++  }
++  load(file: File) {
++    if (file.size > 50 * 1024 * 1024 || file.size === 0 || !(/\.(mp3|wav|ogg|m4a|aac|flac)$/i.test(file.name))) {
++      this.update({ error: '请选择 50 MB 以内的 MP3、WAV、OGG、M4A、AAC 或 FLAC 音频。' })
++      return false
++    }
++    this.release()
++    const url = URL.createObjectURL(file)
++    const audio = new Audio(url)
++    this.audio = audio
++    this.url = url
++    audio.volume = this.state.volume
++    audio.playbackRate = this.speed
++    audio.preload = 'auto'
++    this.update({ name: file.name, playing: false, loading: true, duration: 0, time: 0, offset: 0, error: '' })
++    audio.onloadedmetadata = () => {
++      if (audio !== this.audio) return
++      if (!Number.isFinite(audio.duration) || audio.duration <= 0) this.update({ loading: false, error: '无法读取这段音频的时长，请换一个文件。' })
++      else this.update({ duration: audio.duration, loading: false })
++    }
++    audio.ontimeupdate = () => { if (audio === this.audio) this.update({ time: audio.currentTime }) }
++    audio.onplay = () => { if (audio === this.audio) this.update({ playing: true, error: '' }) }
++    audio.onpause = () => { if (audio === this.audio) this.update({ playing: false }) }
++    audio.onended = () => { if (audio === this.audio) this.update({ playing: false, time: audio.duration }) }
++    audio.onerror = () => { if (audio === this.audio) this.update({ loading: false, playing: false, error: '浏览器无法播放这个音频，请重新导入 MP3 或 WAV 文件。' }) }
++    return true
++  }
++  async play() {
++    const audio = this.audio
++    if (!audio || !this.state.duration || this.state.loading) return false
++    if (audio.ended) audio.currentTime = 0
++    try {
++      await audio.play()
++      return audio === this.audio
++    } catch {
++      if (audio === this.audio) this.update({ playing: false, error: '播放未能启动，请再次点击播放，或重新导入音频。' })
++      return false
++    }
++  }
++  pause() { this.audio?.pause() }
++  seek(time: number) {
++    if (!this.audio || !this.state.duration || !Number.isFinite(time)) return
++    this.audio.currentTime = Math.max(0, Math.min(this.state.duration, time))
++    this.update({ time: this.audio.currentTime })
++  }
++  setSpeed(speed: number) {
++    if (!Number.isFinite(speed)) return
++    this.speed = Math.max(0.5, Math.min(1.5, speed))
++    if (this.audio) this.audio.playbackRate = this.speed
++  }
++  configure(change: Partial<Pick<MusicState, 'bpm' | 'offset' | 'volume'>>) {
++    const bpm = Math.max(40, Math.min(220, change.bpm ?? this.state.bpm))
++    const offset = Math.max(0, Math.min(this.state.duration, change.offset ?? this.state.offset))
++    const volume = Math.max(0, Math.min(1, change.volume ?? this.state.volume))
++    if (![bpm, offset, volume].every(Number.isFinite)) return
++    if (this.audio) this.audio.volume = volume
++    this.update({ bpm, offset, volume })
++  }
++  read() {
++    if (!this.audio || !this.state.duration) return null
++    return { time: this.audio.currentTime, bpm: this.state.bpm, offset: this.state.offset }
++  }
++  clear() { this.release(); this.update({ ...empty, bpm: this.state.bpm, volume: this.state.volume }) }
++  private release() {
++    const audio = this.audio
++    this.audio = null
++    if (audio) {
++      audio.onplay = audio.onpause = audio.onended = audio.ontimeupdate = audio.onerror = audio.onloadedmetadata = null
++      audio.pause()
++      audio.removeAttribute('src')
++      audio.load()
++    }
++    if (this.url) URL.revokeObjectURL(this.url)
++    this.url = null
++  }
++  dispose() { this.release(); this.listeners.clear() }
++}
+diff --git a/src/features/dancer/entities/Mika.tsx b/src/features/dancer/entities/Mika.tsx
+new file mode 100644
+index 0000000..2fb8526
+--- /dev/null
++++ b/src/features/dancer/entities/Mika.tsx
+@@ -0,0 +1,51 @@
++import { useEffect, useMemo, useRef } from 'react'
++import { useFrame } from '@react-three/fiber'
++import { Euler, Quaternion, Vector3 } from 'three'
++import { createMikaRig, joint } from './mikaSkeleton'
++import { dancePose, solveLeg, type Dance } from '../systems/choreography'
++import { musicPoseTime, type MusicClock } from '../systems/musicTiming'
++
++export function Mika({ dance = 'groove', playing = true, speed = 1, sampleTime, musicClock }: { dance?: Dance; playing?: boolean; speed?: number; sampleTime?: number; musicClock?: MusicClock }) {
++  const rig = useMemo(() => createMikaRig(), [])
++  const time = useRef(0)
++  const orientation = useMemo(() => new Quaternion(), [])
++  const euler = useMemo(() => new Euler(), [])
++  const target = useMemo(() => new Vector3(), [])
++  const first = useRef(true)
++  const previousDance = useRef(dance)
++  useEffect(() => () => { rig.skeleton.dispose() }, [rig])
++  useFrame((_, delta) => {
++    const music = musicClock?.read()
++    const synced = music ? musicPoseTime(music) : null
++    if (!synced && !playing && !first.current && sampleTime === undefined && previousDance.current === dance) return
++    previousDance.current = dance
++    const elapsed = Math.min(delta, 0.05)
++    if (!synced && playing && sampleTime === undefined) time.current += elapsed * speed
++    const pose = dancePose(sampleTime ?? synced?.time ?? time.current, synced && !synced.started ? 'idle' : dance)
++    const blend = first.current || sampleTime !== undefined || synced ? 1 : 1 - Math.exp(-elapsed * 13)
++    first.current = false
++    const bones = rig.bones
++    const rotate = (id: number, x: number, y: number, z: number, order: 'XYZ' | 'ZXY' = 'XYZ') => {
++      orientation.setFromEuler(euler.set(x, y, z, order))
++      bones[id].quaternion.slerp(orientation, blend)
++    }
++    bones[0].position.lerp(target.set(...pose.hips), blend)
++    rotate(joint.chest, ...pose.chest)
++    rotate(joint.head, ...pose.head)
++    rotate(joint.leftArm, ...pose.left)
++    rotate(joint.rightArm, ...pose.right)
++    rotate(joint.leftForearm, pose.leftElbow, 0, 0)
++    rotate(joint.rightForearm, pose.rightElbow, 0, 0)
++    rotate(joint.leftHand, 0, 0, pose.wrist)
++    rotate(joint.rightHand, 0, 0, -pose.wrist)
++    for (const [thigh, sign, foot] of [[joint.leftThigh, 1, pose.leftFoot], [joint.rightThigh, -1, pose.rightFoot]] as const) {
++      const hip = bones[0].position
++      const leg = solveLeg([hip.x + sign * 0.17, hip.y, hip.z], foot)
++      rotate(thigh, leg.x, 0, leg.z, 'ZXY')
++      rotate(thigh + 1, leg.knee, 0, 0)
++      orientation.copy(bones[thigh].quaternion).multiply(bones[thigh + 1].quaternion).invert()
++      bones[thigh + 2].quaternion.copy(orientation)
++    }
++  })
++  return <primitive object={rig.root} dispose={null} />
++}
+diff --git a/src/features/dancer/entities/mikaSkeleton.ts b/src/features/dancer/entities/mikaSkeleton.ts
+new file mode 100644
+index 0000000..659a15d
+--- /dev/null
++++ b/src/features/dancer/entities/mikaSkeleton.ts
+@@ -0,0 +1,53 @@
++import { Bone, Group, Skeleton, SkinnedMesh } from 'three'
++import { mikaSurfaces, mikaMaterials } from '../materials/mikaResources'
++
++export const joint = {
++  hips: 0, spine: 1, chest: 2, neck: 3, head: 4,
++  leftArm: 5, leftForearm: 6, leftHand: 7,
++  rightArm: 8, rightForearm: 9, rightHand: 10,
++  leftThigh: 11, leftShin: 12, leftFoot: 13,
++  rightThigh: 14, rightShin: 15, rightFoot: 16,
++} as const
++
++export function createMikaRig() {
++  const root = new Group()
++  root.name = 'Mika'
++  const bones: Bone[] = []
++  function add(name: keyof typeof joint, parent: number | null, x: number, y: number, z = 0) {
++    const bone = new Bone()
++    bone.name = name
++    bone.position.set(x, y, z)
++    if (parent === null) root.add(bone)
++    else bones[parent].add(bone)
++    bones.push(bone)
++  }
++  add('hips', null, 0, 1.1)
++  add('spine', 0, 0, 0.2)
++  add('chest', 1, 0, 0.3)
++  add('neck', 2, 0, 0.2)
++  add('head', 3, 0, 0.3)
++  add('leftArm', 2, 0.34, 0.04)
++  add('leftForearm', 5, 0, -0.34)
++  add('leftHand', 6, 0, -0.30)
++  add('rightArm', 2, -0.34, 0.04)
++  add('rightForearm', 8, 0, -0.34)
++  add('rightHand', 9, 0, -0.30)
++  add('leftThigh', 0, 0.17, 0)
++  add('leftShin', 11, 0, -0.50)
++  add('leftFoot', 12, 0, -0.46)
++  add('rightThigh', 0, -0.17, 0)
++  add('rightShin', 14, 0, -0.50)
++  add('rightFoot', 15, 0, -0.46)
++  root.updateMatrixWorld(true)
++  const skeleton = new Skeleton(bones)
++  for (const { color, geometry } of mikaSurfaces) {
++    const mesh = new SkinnedMesh(geometry, mikaMaterials[color])
++    mesh.name = `Mika_${color}`
++    mesh.castShadow = true
++    mesh.receiveShadow = false
++    mesh.frustumCulled = false
++    root.add(mesh)
++    mesh.bind(skeleton)
++  }
++  return { root, bones, skeleton }
++}
+diff --git a/src/features/dancer/materials/mikaFace.ts b/src/features/dancer/materials/mikaFace.ts
+new file mode 100644
+index 0000000..cfef8f9
+--- /dev/null
++++ b/src/features/dancer/materials/mikaFace.ts
+@@ -0,0 +1,51 @@
++import { TorusGeometry } from 'three'
++import { hairLock, ringSurface, type Point, type Sculpt } from './sculpt'
++
++export function sculptFace(s: Sculpt) {
++  const head = 4
++  s.add(ringSurface([[1.79, 0, 0, 0.045], [1.81, 0.09, 0.085, 0.045], [1.85, 0.16, 0.15, 0.035], [1.90, 0.225, 0.213, 0.028], [1.97, 0.278, 0.261, 0.022], [2.05, 0.318, 0.285, 0.005], [2.15, 0.335, 0.282, 0], [2.25, 0.33, 0.265, -0.008], [2.36, 0.296, 0.23, -0.018], [2.46, 0.223, 0.172, -0.028], [2.53, 0.12, 0.09, -0.035], [2.55, 0, 0, -0.035]], 64), 'skin', head)
++  s.oval('skin', head, [0, 2.057, 0.276], [0.046, 0.060, 0.065])
++  s.oval('blush', head, [0, 2.028, 0.318], [0.031, 0.017, 0.009])
++  for (const side of [-1, 1]) {
++    s.oval('skin', head, [side * 0.331, 2.115, -0.008], [0.065, 0.11, 0.065])
++    s.oval('blush', head, [side * 0.367, 2.12, 0.025], [0.017, 0.058, 0.025])
++    s.oval('blush', head, [side * 0.21, 2.02, 0.225], [0.067, 0.027, 0.014], [0, side * 0.32, -side * 0.13])
++    s.oval('ink', head, [side * 0.137, 2.155, 0.251], [0.105, 0.119, 0.035], [0, side * 0.22, -side * 0.1])
++    s.oval('cream', head, [side * 0.137, 2.15, 0.266], [0.091, 0.104, 0.03], [0, side * 0.22, -side * 0.1])
++    s.oval('iris', head, [side * 0.126, 2.147, 0.291], [0.057, 0.081, 0.015])
++    s.oval('ink', head, [side * 0.123, 2.153, 0.305], [0.029, 0.057, 0.009])
++    s.oval('white', head, [side * 0.123 - 0.019, 2.184, 0.314], [0.019, 0.022, 0.006])
++    s.oval('white', head, [side * 0.123 + 0.016, 2.12, 0.313], [0.008, 0.01, 0.006])
++    s.line('hair', head, [[side * 0.055, 2.294, 0.261], [side * 0.128, 2.313, 0.263], [side * 0.213, 2.281, 0.224]], 0.012)
++    s.line('ink', head, [[side * 0.214, 2.209, 0.26], [side * 0.236, 2.225, 0.249], [side * 0.246, 2.249, 0.233]], 0.011)
++  }
++  s.line('blush', head, [[-0.058, 1.974, 0.276], [0, 1.956, 0.299], [0.058, 1.974, 0.276]], 0.013)
++  s.line('ink', head, [[-0.043, 1.975, 0.286], [0, 1.969, 0.304], [0.043, 1.975, 0.286]], 0.004)
++  s.oval('cream', head, [0, 1.972, 0.304], [0.024, 0.008, 0.004])
++
++  s.oval('hair', head, [0, 2.252, -0.099], [0.367, 0.388, 0.265])
++  const locks: [Point[], number, number][] = [
++    [[[-0.04, 2.61, 0.04], [-0.24, 2.51, 0.17], [-0.31, 2.30, 0.14], [-0.30, 1.98, 0.075]], 0.11, 0.065],
++    [[[0.05, 2.60, 0.06], [0.24, 2.51, 0.17], [0.32, 2.28, 0.13], [0.31, 1.98, 0.02]], 0.11, 0.067],
++    [[[-0.08, 2.605, 0.1], [-0.15, 2.5, 0.255], [-0.22, 2.36, 0.278], [-0.265, 2.19, 0.225]], 0.086, 0.044],
++    [[[0.015, 2.62, 0.11], [-0.05, 2.5, 0.30], [-0.104, 2.40, 0.302], [-0.152, 2.30, 0.285]], 0.080, 0.046],
++    [[[0.075, 2.61, 0.1], [0.142, 2.49, 0.287], [0.20, 2.40, 0.275], [0.26, 2.30, 0.22]], 0.094, 0.05],
++    [[[0.005, 2.625, 0.1], [0.05, 2.53, 0.294], [0.10, 2.45, 0.317], [0.16, 2.40, 0.30]], 0.060, 0.043],
++    [[[-0.25, 2.47, -0.19], [-0.34, 2.24, -0.17], [-0.34, 2.02, -0.16], [-0.39, 1.87, -0.12]], 0.095, 0.052],
++    [[[0.25, 2.47, -0.19], [0.34, 2.24, -0.17], [0.34, 2.02, -0.16], [0.39, 1.87, -0.12]], 0.095, 0.052],
++    [[[-0.14, 2.56, -0.25], [-0.20, 2.29, -0.32], [-0.20, 2.03, -0.28], [-0.23, 1.86, -0.22]], 0.11, 0.058],
++    [[[0.14, 2.56, -0.25], [0.20, 2.29, -0.32], [0.20, 2.03, -0.28], [0.23, 1.86, -0.22]], 0.11, 0.058],
++    [[[0, 2.59, -0.23], [0, 2.30, -0.37], [0, 2.03, -0.31], [0, 1.85, -0.23]], 0.12, 0.056],
++  ]
++  locks.forEach(([path, width, depth], index) => s.add(hairLock(path, width, depth), index % 3 === 0 ? 'hairLight' : 'hair', head))
++  s.add(hairLock([[0.015, 2.59, -0.03], [0.09, 2.73, 0.005], [0.2, 2.73, 0.05], [0.25, 2.67, 0.08]], 0.053, 0.024), 'hair', head)
++  s.line('mint', head, [[-0.377, 2.15, -0.04], [-0.39, 2.39, -0.075], [-0.23, 2.64, -0.08], [0, 2.68, -0.085], [0.23, 2.64, -0.08], [0.39, 2.39, -0.075], [0.377, 2.15, -0.04]], 0.035)
++  for (const side of [-1, 1]) {
++    s.oval('ink', head, [side * 0.379, 2.147, -0.047], [0.057, 0.136, 0.113])
++    s.oval('mint', head, [side * 0.418, 2.15, -0.047], [0.038, 0.112, 0.092])
++    s.oval('gold', head, [side * 0.449, 2.15, -0.047], [0.009, 0.046, 0.045])
++    s.add(new TorusGeometry(0.045, 0.009, 8, 24), 'gold', head, [side * 0.345, 1.998, 0.005])
++  }
++  s.box('gold', head, [-0.255, 2.366, 0.256], [0.075, 0.018, 0.025], [0, -0.45, -0.65])
++  s.box('mint', head, [-0.278, 2.341, 0.244], [0.075, 0.018, 0.025], [0, -0.45, -0.65])
++}
+diff --git a/src/features/dancer/materials/mikaOutfit.ts b/src/features/dancer/materials/mikaOutfit.ts
+new file mode 100644
+index 0000000..8806c13
+--- /dev/null
++++ b/src/features/dancer/materials/mikaOutfit.ts
+@@ -0,0 +1,52 @@
++import { MathUtils, type Vector3 } from 'three'
++import { ringSurface, type Sculpt } from './sculpt'
++
++export function sculptOutfit(s: Sculpt) {
++  const torso = (p: Vector3): [number, number, number] => [1, 2, MathUtils.smoothstep(p.y, 1.32, 1.56)]
++  s.add(ringSurface([[1.11, 0, 0, 0], [1.13, 0.22, 0.13, 0], [1.26, 0.205, 0.125, 0], [1.43, 0.23, 0.10, -0.02], [1.58, 0.26, 0.10, -0.02], [1.70, 0.12, 0.06, -0.02], [1.72, 0, 0, 0]]), 'cream', torso)
++  s.oval('skin', 3, [0, 1.785, 0], [0.1, 0.14, 0.095])
++  s.add(ringSurface([[1.28, 0, 0, -0.018], [1.30, 0.255, 0.145, -0.018], [1.38, 0.27, 0.158, -0.028], [1.56, 0.308, 0.165, -0.025], [1.65, 0.30, 0.148, -0.025], [1.74, 0.14, 0.095, -0.02], [1.75, 0, 0, -0.02]]), 'mint', torso)
++  s.box('cream', torso, [0, 1.478, 0.155], [0.155, 0.374, 0.046], [0, 0, 0], 0.14)
++  s.line('gold', torso, [[-0.094, 1.29, 0.163], [-0.095, 1.46, 0.186], [-0.1, 1.61, 0.166], [-0.1, 1.70, 0.106]], 0.009)
++  s.line('gold', torso, [[0.094, 1.29, 0.163], [0.095, 1.46, 0.186], [0.1, 1.61, 0.166], [0.1, 1.70, 0.106]], 0.009)
++  s.add(ringSurface([[1.29, 0.256, 0.15, -0.02], [1.32, 0.263, 0.152, -0.02], [1.35, 0.259, 0.149, -0.02]]), 'mintDark', torso)
++  s.line('mintDark', 2, [[-0.20, 1.66, 0.10], [-0.13, 1.77, 0.055], [0, 1.795, -0.09], [0.13, 1.77, 0.055], [0.20, 1.66, 0.10]], 0.044)
++  s.line('gold', 2, [[-0.084, 1.72, 0.118], [-0.071, 1.60, 0.202], [0, 1.55, 0.211], [0.071, 1.60, 0.202], [0.084, 1.72, 0.118]], 0.008)
++  s.box('gold', 2, [0, 1.546, 0.22], [0.035, 0.047, 0.014], [0, 0, 0.6])
++  s.box('ink', 2, [0.204, 1.572, 0.145], [0.086, 0.06, 0.018], [0, 0.4, 0])
++  s.line('cream', 2, [[0.185, 1.559, 0.159], [0.203, 1.588, 0.162], [0.225, 1.559, 0.145]], 0.006)
++  s.box('mintDark', 2, [0, 1.52, -0.19], [0.27, 0.21, 0.018])
++  s.line('cream', 2, [[-0.088, 1.46, -0.203], [-0.088, 1.58, -0.203], [0, 1.50, -0.203], [0.088, 1.58, -0.203], [0.088, 1.46, -0.203]], 0.013)
++  s.oval('pants', 0, [0, 1.115, -0.015], [0.272, 0.17, 0.175])
++  s.add(ringSurface([[1.17, 0.257, 0.16, 0], [1.21, 0.247, 0.15, 0], [1.23, 0.232, 0.141, 0]]), 'ink', 0)
++  s.box('gold', 0, [0, 1.207, 0.16], [0.075, 0.047, 0.019])
++  s.box('ink', 0, [0, 1.207, 0.172], [0.043, 0.025, 0.008])
++  for (const side of [-1, 1]) {
++    const arm = side > 0 ? 5 : 8, thigh = side > 0 ? 11 : 14
++    const sleeve = (p: Vector3): [number, number, number] => [arm, arm + 1, MathUtils.smoothstep(1.39 - p.y, 0, 0.18)]
++    s.add(ringSurface([[1.105, 0.096, 0.10, 0], [1.16, 0.111, 0.115, 0], [1.28, 0.122, 0.127, 0], [1.40, 0.143, 0.143, 0], [1.54, 0.151, 0.149, 0], [1.66, 0.128, 0.13, 0], [1.735, 0.065, 0.07, 0], [1.752, 0, 0, 0]]), 'mint', sleeve, [side * 0.34, 0, 0])
++    s.add(ringSurface([[1.087, 0.093, 0.095, 0], [1.106, 0.103, 0.105, 0], [1.151, 0.106, 0.107, 0]]), 'mintDark', arm + 1, [side * 0.34, 0, 0])
++    s.line('cream', sleeve, [[side * 0.443, 1.65, 0.057], [side * 0.475, 1.5, 0.037], [side * 0.441, 1.30, 0.044], [side * 0.425, 1.15, 0.037]], 0.014)
++    s.oval('skin', arm + 1, [side * 0.34, 1.04, 0], [0.072, 0.1, 0.062])
++    s.oval('skin', arm + 2, [side * 0.34, 0.966, 0.014], [0.072, 0.092, 0.043])
++    for (const [offset, length] of [[-0.045, 0.07], [-0.016, 0.095], [0.013, 0.098], [0.041, 0.079]]) {
++      s.line('skin', arm + 2, [[side * 0.34 + offset, 0.927, 0.013], [side * 0.34 + offset, 0.897, 0.018], [side * 0.34 + offset, 0.927 - length, 0.036]], 0.014)
++    }
++    s.line('skin', arm + 2, [[side * 0.29, 0.998, 0.035], [side * 0.26, 0.947, 0.065], [side * 0.273, 0.924, 0.08]], 0.021)
++    const leg = (p: Vector3): [number, number, number] => [thigh, thigh + 1, MathUtils.smoothstep(0.71 - p.y, 0, 0.21)]
++    s.add(ringSurface([[0.31, 0.081, 0.079, 0], [0.35, 0.105, 0.103, 0], [0.48, 0.13, 0.12, 0.014], [0.63, 0.139, 0.14, 0.018], [0.88, 0.154, 0.154, 0.012], [1.09, 0.146, 0.148, -0.015], [1.15, 0.10, 0.10, -0.025], [1.17, 0, 0, -0.025]]), 'pants', leg, [side * 0.17, 0, 0])
++    s.box('pants', thigh, [side * 0.285, 0.86, 0.092], [0.085, 0.22, 0.13], [0, side * 0.55, 0], 0.14)
++    s.box('ink', thigh, [side * 0.286, 0.932, 0.115], [0.09, 0.04, 0.145], [0, side * 0.55, 0])
++    s.line('mintDark', leg, [[side * 0.30, 1.03, 0.02], [side * 0.302, 0.75, 0.02], [side * 0.287, 0.52, 0.02], [side * 0.25, 0.35, 0.02]], 0.009)
++    s.add(ringSurface([[0.25, 0.079, 0.08, 0], [0.34, 0.088, 0.086, 0]]), 'ink', thigh + 1, [side * 0.17, 0, 0])
++    s.oval('cream', thigh + 2, [side * 0.17, 0.137, 0.070], [0.125, 0.134, 0.225])
++    s.box('cream', thigh + 2, [side * 0.17, 0.055, 0.076], [0.269, 0.108, 0.458], [0, 0, 0], 0.18)
++    s.box('mint', thigh + 2, [side * 0.17, 0.102, -0.09], [0.274, 0.059, 0.12], [0, 0, 0], 0.18)
++    s.oval('mintDark', thigh + 2, [side * 0.17, 0.235, -0.025], [0.08, 0.026, 0.09])
++    s.oval('ink', thigh + 2, [side * 0.17, 0.23, -0.025], [0.054, 0.021, 0.058])
++    s.box('mint', thigh + 2, [side * 0.276, 0.136, 0.043], [0.026, 0.074, 0.15], [0, 0, side * 0.16])
++    for (const [y, z] of [[0.245, 0.021], [0.231, 0.065], [0.212, 0.106]]) {
++      s.line('cream', thigh + 2, [[side * 0.17 - 0.064, y - 0.012, z], [side * 0.17, y, z + 0.016], [side * 0.17 + 0.064, y - 0.012, z]], 0.009)
++    }
++  }
++}
+diff --git a/src/features/dancer/materials/mikaResources.ts b/src/features/dancer/materials/mikaResources.ts
+new file mode 100644
+index 0000000..543c4c5
+--- /dev/null
++++ b/src/features/dancer/materials/mikaResources.ts
+@@ -0,0 +1,19 @@
++import { MeshStandardMaterial } from 'three'
++import { ShaderWarmupRegistry } from '@vibegameengine/shader-warmup'
++import { createSculpt, type Palette } from './sculpt'
++import { sculptFace } from './mikaFace'
++import { sculptOutfit } from './mikaOutfit'
++
++const tones: Record<Palette, string> = {
++  skin: '#eeb99a', blush: '#cf777a', hair: '#17243c', hairLight: '#2d4563',
++  ink: '#161c30', cream: '#fff0d7', mint: '#76d2b7', mintDark: '#318b7e',
++  pants: '#35394e', gold: '#eeb96a', iris: '#599caa', white: '#ffffff',
++}
++export const mikaMaterials = Object.fromEntries(Object.entries(tones).map(([name, color]) => [name,
++  new MeshStandardMaterial({ color, roughness: name === 'gold' ? 0.3 : name === 'hair' || name === 'hairLight' ? 0.42 : 0.72, metalness: name === 'gold' ? 0.55 : 0 }),
++])) as Record<Palette, MeshStandardMaterial>
++const sculpt = createSculpt()
++sculptOutfit(sculpt)
++sculptFace(sculpt)
++export const mikaSurfaces = sculpt.finish()
++for (const { color, geometry } of mikaSurfaces) ShaderWarmupRegistry.register(`mika-${color}`, geometry, mikaMaterials[color])
+diff --git a/src/features/dancer/materials/sculpt.ts b/src/features/dancer/materials/sculpt.ts
+new file mode 100644
+index 0000000..86ea3d3
+--- /dev/null
++++ b/src/features/dancer/materials/sculpt.ts
+@@ -0,0 +1,97 @@
++import { BufferGeometry, CatmullRomCurve3, Euler, Float32BufferAttribute, Matrix4, Quaternion, SphereGeometry, TubeGeometry, Uint16BufferAttribute, Vector3 } from 'three'
++import { RoundedBoxGeometry } from 'three/examples/jsm/geometries/RoundedBoxGeometry.js'
++import { mergeGeometries } from 'three/examples/jsm/utils/BufferGeometryUtils.js'
++
++export type Point = [number, number, number]
++export type Palette = 'skin' | 'blush' | 'hair' | 'hairLight' | 'ink' | 'cream' | 'mint' | 'mintDark' | 'pants' | 'gold' | 'iris' | 'white'
++type Weight = number | ((point: Vector3) => [number, number, number])
++export type Sculpt = ReturnType<typeof createSculpt>
++
++export function createSculpt() {
++  const groups = new Map<Palette, BufferGeometry[]>()
++  function add(geometry: BufferGeometry, color: Palette, bone: Weight, position: Point = [0, 0, 0], size: Point = [1, 1, 1], rotation: Point = [0, 0, 0]) {
++    const source = geometry.index ? geometry.toNonIndexed() : geometry.clone()
++    geometry.dispose()
++    source.applyMatrix4(new Matrix4().compose(new Vector3(...position), new Quaternion().setFromEuler(new Euler(...rotation)), new Vector3(...size)))
++    const vertices = source.getAttribute('position')
++    const indices: number[] = [], weights: number[] = []
++    const point = new Vector3()
++    for (let i = 0; i < vertices.count; i++) {
++      point.fromBufferAttribute(vertices, i)
++      const [first, second, blend] = typeof bone === 'number' ? [bone, bone, 0] : bone(point)
++      indices.push(first, second, 0, 0)
++      weights.push(1 - blend, blend, 0, 0)
++    }
++    source.setAttribute('skinIndex', new Uint16BufferAttribute(indices, 4))
++    source.setAttribute('skinWeight', new Float32BufferAttribute(weights, 4))
++    source.deleteAttribute('uv')
++    const parts = groups.get(color) ?? []
++    parts.push(source)
++    groups.set(color, parts)
++  }
++  return {
++    add,
++    oval(color: Palette, bone: Weight, position: Point, size: Point, rotation: Point = [0, 0, 0]) {
++      add(new SphereGeometry(1, 32, 24), color, bone, position, size, rotation)
++    },
++    box(color: Palette, bone: Weight, position: Point, size: Point, rotation: Point = [0, 0, 0], radius = 0.08) {
++      add(new RoundedBoxGeometry(1, 1, 1, 3, radius), color, bone, position, size, rotation)
++    },
++    line(color: Palette, bone: Weight, points: Point[], radius: number) {
++      add(new TubeGeometry(new CatmullRomCurve3(points.map(p => new Vector3(...p))), 24, radius, 8, false), color, bone)
++    },
++    finish() {
++      return [...groups].map(([color, parts]) => {
++        const geometry = mergeGeometries(parts)
++        if (!geometry) throw new Error(`Mika geometry could not merge: ${color}`)
++        for (const part of parts) part.dispose()
++        geometry.computeBoundingSphere()
++        return { color, geometry }
++      })
++    },
++  }
++}
++
++export function ringSurface(rings: [number, number, number, number][], segments = 40) {
++  const positions: number[] = [], indices: number[] = []
++  for (const [y, width, depth, z] of rings) {
++    for (let j = 0; j <= segments; j++) {
++      const angle = j / segments * Math.PI * 2
++      positions.push(width * Math.sin(angle), y, z + depth * Math.cos(angle))
++    }
++  }
++  for (let i = 0; i < rings.length - 1; i++) for (let j = 0; j < segments; j++) {
++    const a = i * (segments + 1) + j, b = a + segments + 1
++    indices.push(a, a + 1, b, b, a + 1, b + 1)
++  }
++  const result = new BufferGeometry()
++  result.setAttribute('position', new Float32BufferAttribute(positions, 3))
++  result.setIndex(indices)
++  result.computeVertexNormals()
++  return result
++}
++
++export function hairLock(points: Point[], width: number, depth: number) {
++  const curve = new CatmullRomCurve3(points.map(p => new Vector3(...p)))
++  const frames = curve.computeFrenetFrames(24, false)
++  const positions: number[] = [], indices: number[] = []
++  for (let i = 0; i <= 24; i++) {
++    const t = i / 24, center = curve.getPoint(t)
++    const taper = Math.max(0.008, Math.pow(Math.sin(Math.PI * (0.09 + 0.91 * t)), 0.65))
++    for (let j = 0; j <= 12; j++) {
++      const angle = j / 12 * Math.PI * 2
++      const p = center.clone().addScaledVector(frames.normals[i], Math.cos(angle) * width * taper)
++        .addScaledVector(frames.binormals[i], Math.sin(angle) * depth * taper)
++      positions.push(p.x, p.y, p.z)
++    }
++  }
++  for (let i = 0; i < 24; i++) for (let j = 0; j < 12; j++) {
++    const a = i * 13 + j, b = a + 13
++    indices.push(a, a + 1, b, a + 1, b + 1, b)
++  }
++  const result = new BufferGeometry()
++  result.setAttribute('position', new Float32BufferAttribute(positions, 3))
++  result.setIndex(indices)
++  result.computeVertexNormals()
++  return result
++}
+diff --git a/src/features/dancer/materials/studioResources.ts b/src/features/dancer/materials/studioResources.ts
+new file mode 100644
+index 0000000..241ef7c
+--- /dev/null
++++ b/src/features/dancer/materials/studioResources.ts
+@@ -0,0 +1,9 @@
++import { CylinderGeometry, MeshStandardMaterial, PlaneGeometry, TorusGeometry } from 'three'
++import { ShaderWarmupRegistry } from '@vibegameengine/shader-warmup'
++
++export const studioResources = {
++  floor: { geometry: new PlaneGeometry(100, 100), material: new MeshStandardMaterial({ color: '#e5e6de', roughness: 0.95 }) },
++  podium: { geometry: new CylinderGeometry(1.6, 1.63, 0.12, 96, 1), material: new MeshStandardMaterial({ color: '#eaf0e6', roughness: 0.8 }) },
++  rim: { geometry: new TorusGeometry(1.575, 0.016, 8, 96), material: new MeshStandardMaterial({ color: '#79a99a', roughness: 0.6, metalness: 0.25 }) },
++}
++for (const [key, { geometry, material }] of Object.entries(studioResources)) ShaderWarmupRegistry.register(`mika-studio-${key}`, geometry, material)
+diff --git a/src/features/dancer/systems/choreography.test.ts b/src/features/dancer/systems/choreography.test.ts
+new file mode 100644
+index 0000000..015f758
+--- /dev/null
++++ b/src/features/dancer/systems/choreography.test.ts
+@@ -0,0 +1,30 @@
++import { describe, expect, it } from 'vitest'
++import { Euler, Vector3 } from 'three'
++import { danceDuration, dancePose, solveLeg, type Dance } from './choreography'
++
++describe('Mika choreography', () => {
++  it.each<Dance>(['groove', 'wave', 'idle'])('%s closes its loop without a pose jump', dance => {
++    const start = dancePose(0, dance)
++    expect(dancePose(danceDuration, dance)).toEqual(start)
++    const before = Object.values(dancePose(danceDuration - 0.00001, dance)).flat()
++    const after = Object.values(dancePose(0.00001, dance)).flat()
++    expect(Math.max(...before.map((value, index) => Math.abs(value - after[index])))).toBeLessThan(0.001)
++  })
++
++  it('keeps both ankles on their floor targets across the complete dance', () => {
++    for (let frame = 0; frame <= 240; frame++) {
++      const pose = dancePose(frame / 240 * danceDuration, 'groove')
++      for (const [side, foot] of [[1, pose.leftFoot], [-1, pose.rightFoot]] as const) {
++        const hip: [number, number, number] = [pose.hips[0] + side * 0.17, pose.hips[1], pose.hips[2]]
++        const leg = solveLeg(hip, foot)
++        const thighRotation = new Euler(leg.x, 0, leg.z, 'ZXY')
++        const upper = new Vector3(0, -0.50, 0).applyEuler(thighRotation)
++        const lower = new Vector3(0, -0.46, 0).applyEuler(new Euler(leg.knee, 0, 0)).applyEuler(thighRotation)
++        const actual = new Vector3(...hip).add(upper).add(lower)
++        expect(actual.distanceTo(new Vector3(...foot))).toBeLessThan(0.002)
++        expect(leg.knee).toBeGreaterThan(0)
++        expect(leg.knee).toBeLessThan(Math.PI / 2)
++      }
++    }
++  })
++})
+diff --git a/src/features/dancer/systems/choreography.ts b/src/features/dancer/systems/choreography.ts
+new file mode 100644
+index 0000000..ff93286
+--- /dev/null
++++ b/src/features/dancer/systems/choreography.ts
+@@ -0,0 +1,61 @@
++export type Dance = 'groove' | 'wave' | 'idle'
++export type CameraView = 'front' | 'side' | 'back' | 'detail'
++export type DanceControls = { dance: Dance; playing: boolean; speed: number; view: CameraView; revision: number }
++export const defaultControls: DanceControls = { dance: 'groove', playing: true, speed: 1, view: 'front', revision: 0 }
++export const danceDuration = 8 * 60 / 108
++type Rotation = [number, number, number]
++type Arms = { left: Rotation; right: Rotation; leftElbow: number; rightElbow: number }
++
++const grooveKeys: Arms[] = [
++  { left: [-0.4, -0.12, 0.65], right: [-0.7, 0.1, -0.40], leftElbow: -1.05, rightElbow: -1.55 },
++  { left: [-0.75, -0.25, 0.34], right: [-0.25, 0.12, -0.70], leftElbow: -1.6, rightElbow: -0.9 },
++  { left: [-0.8, -0.15, 1.5], right: [-0.35, 0.15, -0.7], leftElbow: -0.35, rightElbow: -1.3 },
++  { left: [-0.4, -0.2, 0.8], right: [-0.7, 0.15, -1.5], leftElbow: -1.3, rightElbow: -0.35 },
++  { left: [-1.0, -0.1, 0.32], right: [-1.0, 0.1, -0.32], leftElbow: -1.0, rightElbow: -1.0 },
++  { left: [-0.3, -0.1, 1.25], right: [-0.3, 0.1, -1.25], leftElbow: -0.45, rightElbow: -0.45 },
++  { left: [-0.5, -0.1, 2.18], right: [-0.5, 0.1, -1.1], leftElbow: -0.5, rightElbow: -1.0 },
++  { left: [-0.5, -0.1, 1.1], right: [-0.5, 0.1, -2.18], leftElbow: -1.0, rightElbow: -0.5 },
++]
++const waveKeys: Arms[] = [
++  { left: [0, 0, 1.35], right: [0, 0, -0.65], leftElbow: -0.2, rightElbow: -1.3 },
++  { left: [-0.1, 0, 1.9], right: [-0.2, 0, -1.1], leftElbow: -0.85, rightElbow: -0.6 },
++  { left: [0, 0, 1.25], right: [0, 0, -1.75], leftElbow: -1.3, rightElbow: -0.2 },
++  { left: [-0.2, 0, 0.7], right: [-0.1, 0, -2.0], leftElbow: -0.6, rightElbow: -0.85 },
++]
++
++const smooth = (x: number) => x * x * (3 - 2 * x)
++const lerp = (a: number, b: number, t: number) => a + (b - a) * t
++function rotation(a: Rotation, b: Rotation, t: number): Rotation {
++  return [lerp(a[0], b[0], t), lerp(a[1], b[1], t), lerp(a[2], b[2], t)]
++}
++
++export function dancePose(seconds: number, dance: Dance) {
++  const beat = ((seconds % danceDuration) + danceDuration) % danceDuration / danceDuration * 8
++  const angle = beat * Math.PI
++  const sway = Math.sin(angle / 2)
++  const keys = dance === 'wave' ? waveKeys : grooveKeys
++  const position = beat / 8 * keys.length
++  const index = Math.floor(position), mix = smooth(position - index)
++  const from = keys[index % keys.length], to = keys[(index + 1) % keys.length]
++  const idle = dance === 'idle'
++  return {
++    hips: [idle ? 0 : 0.085 * sway, idle ? 1.08 + 0.005 * Math.sin(angle / 2) : 1.026 - 0.036 * Math.cos(angle * 2), idle ? 0 : 0.018 * Math.sin(angle)] as Rotation,
++    chest: [idle ? 0 : 0.05 * Math.cos(angle * 2), idle ? 0 : 0.12 * Math.sin(angle / 2 - 0.25), idle ? 0 : -0.075 * sway] as Rotation,
++    head: [0.035 * Math.sin(angle / 2), idle ? 0 : -0.10 * Math.sin(angle / 2 - 0.5), idle ? 0 : 0.06 * sway] as Rotation,
++    left: idle ? [0, 0, 0.12] as Rotation : rotation(from.left, to.left, mix),
++    right: idle ? [0, 0, -0.12] as Rotation : rotation(from.right, to.right, mix),
++    leftElbow: idle ? -0.10 : lerp(from.leftElbow, to.leftElbow, mix),
++    rightElbow: idle ? -0.10 : lerp(from.rightElbow, to.rightElbow, mix),
++    wrist: idle ? 0 : 0.16 * Math.sin(angle / 2),
++    leftFoot: [0.225, 0.14, idle ? 0 : 0.025 * (1 - Math.cos(angle / 2))] as Rotation,
++    rightFoot: [-0.225, 0.14, idle ? 0 : 0.025 * (1 + Math.cos(angle / 2))] as Rotation,
++  }
++}
++
++export function solveLeg(hip: Rotation, foot: Rotation) {
++  const dx = foot[0] - hip[0], dy = foot[1] - hip[1], dz = foot[2] - hip[2]
++  const distance = Math.min(0.959, Math.max(0.041, Math.hypot(dx, dy, dz)))
++  const alpha = Math.acos(Math.max(-1, Math.min(1, (0.5 ** 2 + distance ** 2 - 0.46 ** 2) / (distance))))
++  const knee = Math.PI - Math.acos(Math.max(-1, Math.min(1, (0.5 ** 2 + 0.46 ** 2 - distance ** 2) / (2 * 0.5 * 0.46))))
++  return { x: -Math.atan2(dz, Math.hypot(dx, dy)) - alpha, z: Math.atan2(dx, -dy), knee }
++}
+diff --git a/src/features/dancer/systems/musicTiming.test.ts b/src/features/dancer/systems/musicTiming.test.ts
+new file mode 100644
+index 0000000..33cdf83
+--- /dev/null
++++ b/src/features/dancer/systems/musicTiming.test.ts
+@@ -0,0 +1,23 @@
++import { describe, expect, it } from 'vitest'
++import { formatMusicTime, musicPoseTime } from './musicTiming'
++
++describe('music-driven dance clock', () => {
++  it('waits for the first beat, then maps eight beats to one dance phrase', () => {
++    expect(musicPoseTime({ time: 1, bpm: 120, offset: 2 })).toEqual({ time: 0, started: false })
++    expect(musicPoseTime({ time: 2, bpm: 120, offset: 2 })).toEqual({ time: 0, started: true })
++    expect(musicPoseTime({ time: 6, bpm: 120, offset: 2 }).time).toBeCloseTo(8 * 60 / 108)
++  })
++  it('maps seeks directly without accumulating frame deltas', () => {
++    const sample = { time: 20, bpm: 90, offset: 0.5 }
++    const before = musicPoseTime(sample)
++    musicPoseTime({ ...sample, time: 100 })
++    expect(musicPoseTime(sample)).toEqual(before)
++    expect(musicPoseTime({ ...sample, time: 0 }).started).toBe(false)
++  })
++  it('handles invalid metadata and unready duration labels', () => {
++    expect(musicPoseTime({ time: NaN, bpm: 108, offset: 0 }).started).toBe(false)
++    expect(musicPoseTime({ time: 10, bpm: 0, offset: 0 }).started).toBe(false)
++    expect(formatMusicTime(Infinity)).toBe('0:00')
++    expect(formatMusicTime(125.9)).toBe('2:05')
++  })
++})
+diff --git a/src/features/dancer/systems/musicTiming.ts b/src/features/dancer/systems/musicTiming.ts
+new file mode 100644
+index 0000000..90413fc
+--- /dev/null
++++ b/src/features/dancer/systems/musicTiming.ts
+@@ -0,0 +1,12 @@
++export type MusicSample = { time: number; bpm: number; offset: number }
++export type MusicClock = { read: () => MusicSample | null }
++
++export function musicPoseTime({ time, bpm, offset }: MusicSample) {
++  if (![time, bpm, offset].every(Number.isFinite) || bpm <= 0) return { time: 0, started: false }
++  return { time: Math.max(0, time - offset) * bpm / 108, started: time >= offset }
++}
++
++export function formatMusicTime(seconds: number) {
++  const value = Number.isFinite(seconds) ? Math.max(0, Math.floor(seconds)) : 0
++  return `${Math.floor(value / 60)}:${String(value % 60).padStart(2, '0')}`
++}
+diff --git a/src/features/dancer/ui/DanceStudioScreen.module.css b/src/features/dancer/ui/DanceStudioScreen.module.css
+new file mode 100644
+index 0000000..18d204d
+--- /dev/null
++++ b/src/features/dancer/ui/DanceStudioScreen.module.css
+@@ -0,0 +1,29 @@
++.page { position: fixed; inset: 0; overflow: auto; background: #f7f7f0; color: #243c35; font-family: 'Segoe UI', 'Microsoft YaHei', sans-serif; }
++.page * { box-sizing: border-box; }
++.header { max-width: 1600px; margin: auto; height: 92px; padding: 0 42px; display: flex; align-items: center; justify-content: space-between; border-bottom: 1px solid #dfe4da; }
++.brand { display: flex; align-items: center; gap: 13px; text-decoration: none; color: inherit; font-size: 11px; letter-spacing: 2px; font-weight: 700; }
++.brand small { display: block; letter-spacing: 3px; margin-top: 5px; font-size: 10px; font-weight: 400; }
++.monogram { display: grid; place-items: center; width: 43px; height: 43px; color: #f7f7f0; background: #254c40; border-radius: 50%; font-size: 32px; font-family: Georgia, serif; padding-bottom: 7px; letter-spacing: -3px; }
++.headerNote { font: 10px monospace; letter-spacing: 2px; color: #7b887d; }.headerNote b { color: #294c40; margin-left: 17px; }
++.layout { max-width: 1600px; margin: auto; display: grid; grid-template-columns: minmax(0, 1fr) 345px; padding: 24px 32px 16px; gap: 36px; }
++.stage { position: relative; min-height: 610px; height: min(740px, calc(100dvh - 165px)); background: #e5e6de; overflow: hidden; border-radius: 14px; }
++.stageLabel { z-index: 2; position: absolute; left: 26px; top: 24px; display: flex; align-items: center; gap: 9px; font: 9px monospace; letter-spacing: 1.5px; color: #617168; pointer-events: none; }
++.stageLabel > span:last-child { margin-left: 10px; opacity: .65; }.dot { width: 6px; height: 6px; background: #608b76; border-radius: 50%; }
++.watermark { z-index: 1; position: absolute; inset: 12% 0 auto; text-align: center; color: #cdd3c7; font-size: clamp(90px, 17vw, 255px); font-weight: 900; letter-spacing: -10px; line-height: 1; pointer-events: none; opacity: .42; }
++.canvas { position: absolute; inset: 0; z-index: 1; }.canvas canvas { touch-action: none; }
++.viewControls { position: absolute; z-index: 2; bottom: 70px; left: 50%; transform: translateX(-50%); display: flex; padding: 4px; gap: 3px; border: 1px solid #ffffffb0; background: #f6f8f1c9; border-radius: 100px; backdrop-filter: blur(8px); }
++.viewControls button { border: 0; padding: 9px 17px; background: transparent; color: #68796c; border-radius: 100px; white-space: nowrap; font-size: 11px; cursor: pointer; }.viewControls button[aria-pressed=true] { background: #254c40; color: #fff; }
++.stageBottom { position: absolute; bottom: 25px; left: 28px; right: 28px; z-index: 2; display: flex; justify-content: space-between; align-items: center; color: #7d8b80; font-size: 10px; letter-spacing: 1px; pointer-events: none; }.stageBottom b { color: #354e40; font-size: 14px; letter-spacing: 3px; margin-right: 8px; }
++.panel { align-self: center; padding: 4px 12px 8px 0; }.eyebrow { color: #789180; font: 9px monospace; letter-spacing: 2.6px; margin: 0 0 18px; }
++.intro h1 { font-size: 29px; font-weight: 600; letter-spacing: -1px; margin: 0; }.intro h1 span { display: block; font-size: 15px; font-weight: 400; margin: 12px 0 18px; letter-spacing: .5px; }.description { font-size: 12px; color: #829084; line-height: 1.9; }.tags { display: flex; gap: 7px; margin: 18px 0 27px; }.tags span { font-size: 9px; border: 1px solid #dce3d9; border-radius: 5px; padding: 5px 8px; color: #6e8475; }
++.motionHeader { display: flex; justify-content: space-between; align-items: center; padding: 0 0 12px; }.motionHeader h2 { font-size: 12px; font-weight: 500; margin: 0; }.motionHeader > span { font: 9px monospace; letter-spacing: 1px; color: #96a191; }
++.dances { display: flex; flex-direction: column; gap: 8px; }.dance { display: flex; align-items: center; gap: 15px; width: 100%; padding: 14px; border: 1px solid #e0e5db; border-radius: 9px; text-align: left; color: #516659; background: #fafaf5; cursor: pointer; transition: background .18s; }.dance[aria-pressed=true] { border-color: #94b19f; background: #eaf0e5; }.dance:hover { background: #eaf0e5; }.danceNumber { font: 11px monospace; color: #8eaa96; }.dance strong { display: block; font-size: 13px; font-weight: 600; }.dance small { display: block; font-size: 10px; color: #8c9a8e; margin-top: 5px; }.selected { margin-left: auto; font-size: 10px; color: #426e59; }
++.playback { display: flex; align-items: center; gap: 15px; margin: 23px 0 20px; }.play { border: 0; border-radius: 7px; display: flex; align-items: center; justify-content: center; gap: 12px; width: 108px; height: 43px; color: #f6f8f0; background: #254c40; font-size: 12px; cursor: pointer; }.play:hover { background: #376653; }.play > span { font-size: 18px; }.nowPlaying small { display: block; font-size: 9px; color: #89988b; }.nowPlaying strong { display: block; font-size: 11px; font-weight: 500; margin-top: 5px; }.equalizer { display: flex; align-items: center; height: 26px; gap: 3px; margin-left: auto; }.equalizer i { width: 3px; height: 8px; background: #83aa8f; border-radius: 2px; }.moving i { animation: pulse 850ms ease-in-out infinite alternate; }.moving i:nth-child(2) { animation-delay: -200ms; }.moving i:nth-child(3) { animation-delay: -500ms; }.moving i:nth-child(4) { animation-delay: -650ms; }@keyframes pulse { to { height: 24px; } }
++.speed { display: flex; flex-wrap: wrap; font-size: 10px; color: #7f9083; justify-content: space-between; }.speed output { font-family: monospace; color: #476b54; }.speed input { width: 100%; height: 3px; accent-color: #487c60; margin: 16px 0 10px; cursor: pointer; }
++.note { border-top: 1px solid #e0e5dc; padding-top: 17px; margin-top: 15px; }.note span { font-size: 10px; color: #6a8172; }.note p { font-size: 10px; line-height: 1.9; color: #94a092; margin: 7px 0 0; }.footer { display: flex; justify-content: space-between; gap: 12px; max-width: 1600px; padding: 2px 38px 19px; margin: auto; color: #94a091; font: 9px monospace; letter-spacing: 1px; }
++.loading { position: absolute; inset: 0; display: flex; gap: 15px; align-items: center; justify-content: center; color: #365745; background: #e5e6de; }.page button:focus-visible, .page a:focus-visible, .page input:focus-visible { outline: 3px solid #5d977b; outline-offset: 3px; }
++@media(max-width: 960px) { .header { padding: 0 22px; height: 74px; }.layout { grid-template-columns: 1fr; gap: 24px; padding: 18px; }.stage { min-height: 480px; height: 64dvh; max-height: 680px; }.panel { max-width: 600px; width: 100%; justify-self: center; padding: 6px 12px 18px; }.intro h1 { font-size: 27px; }.description br { display: none; }.tags { margin-bottom: 22px; }.footer { padding: 0 25px 20px; flex-wrap: wrap; }.headerNote { font-size: 8px; letter-spacing: 1px; }.stageBottom { left: 18px; right: 18px; font-size: 8px; }.stageLabel { left: 20px; font-size: 8px; }.watermark { font-size: 28vw; }.viewControls { bottom: 56px; }.viewControls button { padding: 9px 15px; } }
++@media(prefers-reduced-motion: reduce) { .moving i { animation: none; }.dance { transition: none; } }
++.canvas { bottom: 80px; }.viewControls { bottom: 18px; }.stageBottom { bottom: 65px; }.watermark { display: none; }
++.stage { position: sticky; top: 24px; }
++@media(max-width: 960px) { .stage { position: relative; top: auto; } }
+diff --git a/src/features/dancer/ui/DanceStudioScreen.tsx b/src/features/dancer/ui/DanceStudioScreen.tsx
+new file mode 100644
+index 0000000..418ea12
+--- /dev/null
++++ b/src/features/dancer/ui/DanceStudioScreen.tsx
+@@ -0,0 +1,76 @@
++import { Component, Suspense, useEffect, useMemo, useReducer, type ReactNode } from 'react'
++import { DanceStudioScene } from '../../../scenes/dance-studio/DanceStudioScene'
++import { defaultControls, type DanceControls, type CameraView, type Dance } from '../systems/choreography'
++import styles from './DanceStudioScreen.module.css'
++import { MusicTransport, type MusicState } from '../components/MusicTransport'
++import { MusicPanel } from './MusicPanel'
++
++const dances: { id: Dance; number: string; name: string; description: string }[] = [
++  { id: 'groove', number: '01', name: '轻快律动', description: '左右重心 · 踏拍 · 展臂' },
++  { id: 'wave', number: '02', name: '手臂波浪', description: '肩肘传递 · 上身律动' },
++  { id: 'idle', number: '03', name: '静态欣赏', description: '放松站姿 · 观察造型' },
++]
++
++export function DanceStudioScreen() {
++  const [controls, dispatch] = useReducer((state: DanceControls, update: Partial<DanceControls>) => ({ ...state, ...update }), defaultControls)
++  const transport = useMemo(() => new MusicTransport(), [])
++  const [music, setMusic] = useReducer((_: MusicState, value: MusicState) => value, transport.state)
++  useEffect(() => {
++    const unsubscribe = transport.subscribe(state => {
++      setMusic(state)
++      if (state.name) dispatch({ playing: state.playing })
++    })
++    return () => { unsubscribe(); transport.dispose() }
++  }, [transport])
++  function togglePlayback() {
++    if (music.name) { if (music.playing) transport.pause(); else void transport.play() }
++    else dispatch({ playing: !controls.playing })
++  }
++  useEffect(() => { document.title = 'MIKA · 原创人物与舞蹈' }, [])
++  const selected = dances.find(dance => dance.id === controls.dance)!
++  const sample = import.meta.env.DEV ? new URLSearchParams(window.location.search).get('pose') : null
++  const sampleTime = sample !== null && Number.isFinite(Number(sample)) ? Number(sample) : undefined
++  return <main className={styles.page}>
++    <header className={styles.header}>
++      <a href="/courtyard" className={styles.brand}><span className={styles.monogram}>m.</span><span>MOTION ATELIER<small>角色与动作工坊</small></span></a>
++      <span className={styles.headerNote}>CHARACTER STUDY <b>001</b></span>
++    </header>
++    <div className={styles.layout}>
++      <section className={styles.stage} aria-label="Mika 三维人物展示">
++        <div className={styles.stageLabel}><span className={styles.dot} /> ORIGINAL CHARACTER <span>/ 2026</span></div>
++        <div className={styles.watermark} aria-hidden="true">MIKA</div>
++        <div className={styles.canvas}><StudioErrorBoundary><Suspense fallback={<div className={styles.loading}>正在准备 Mika…</div>}>
++          <DanceStudioScene controls={controls} sampleTime={sampleTime} musicClock={transport} />
++        </Suspense></StudioErrorBoundary></div>
++        <div className={styles.viewControls} aria-label="观察视角">{([['front', '正面'], ['side', '侧面'], ['back', '背面'], ['detail', '细节']] as [CameraView, string][]).map(([view, label]) =>
++          <button key={view} aria-pressed={controls.view === view} onClick={() => dispatch({ view, revision: controls.revision + 1 })}>{label}</button>)}</div>
++        <div className={styles.stageBottom}><span><b>MIKA</b> / 薄荷律动</span><span>拖动旋转 · 滚轮缩放</span></div>
++      </section>
++      <aside className={styles.panel}>
++        <div className={styles.intro}><p className={styles.eyebrow}>MEET YOUR DANCER</p><h1>嗨，我是 Mika<span>让每一拍，都有表情。</span></h1>
++          <p className={styles.description}>薄荷绿夹克、深蓝短发，一点俏皮，<br />还有随时起舞的好心情。</p>
++          <div className={styles.tags}><span>原创人物</span><span>原创编舞</span><span>本地运行</span></div>
++        </div>
++        <div className={styles.motionHeader}><h2>选一支舞</h2><span>{music.name ? music.bpm : 108} BPM</span></div>
++        <div className={styles.dances}>{dances.map(dance => <button key={dance.id} className={styles.dance} aria-pressed={controls.dance === dance.id}
++          onClick={() => dispatch({ dance: dance.id, playing: music.name ? music.playing : true })}><span className={styles.danceNumber}>{dance.number}</span><span><strong>{dance.name}</strong><small>{dance.description}</small></span><span className={styles.selected}>{controls.dance === dance.id ? '●' : '↗'}</span></button>)}</div>
++        <div className={styles.playback}><button className={styles.play} onClick={togglePlayback} aria-label={controls.playing ? '暂停舞蹈' : '播放舞蹈'}><span>{controls.playing ? 'Ⅱ' : '▷'}</span>{controls.playing ? '暂停' : '播放'}</button>
++          <div className={styles.nowPlaying}><small>{controls.playing ? '正在播放' : '已暂停'}</small><strong>{selected.name}</strong></div>
++          <div className={`${styles.equalizer} ${controls.playing ? styles.moving : ''}`} aria-hidden="true"><i /><i /><i /><i /></div>
++        </div>
++        <label className={styles.speed}>播放速度 <output>{controls.speed.toFixed(2)}×</output><input aria-label="播放速度" type="range" min="0.5" max="1.5" step="0.25" value={controls.speed} onChange={event => { const speed = Number(event.target.value); transport.setSpeed(speed); dispatch({ speed }) }} /></label>
++        <MusicPanel transport={transport} state={music} onImport={() => dispatch({ playing: false })} onToggle={togglePlayback} />
++        <div className={styles.note}><span>一点制作细节</span><p>从曲面造型、骨骼蒙皮，到每一拍的关节姿势，均由本地代码制作。切换到「细节」，近距离看看她。</p></div>
++      </aside>
++    </div>
++    <footer className={styles.footer}><span>CHARACTER → MOTION → MUSIC</span><span>原创人物与编舞 · 导入音乐同步播放</span></footer>
++  </main>
++}
++
++class StudioErrorBoundary extends Component<{ children: ReactNode }, { failed: boolean }> {
++  state = { failed: false }
++  static getDerivedStateFromError() { return { failed: true } }
++  render() {
++    return this.state.failed ? <div className={styles.loading}>人物加载遇到问题。<button onClick={() => window.location.reload()}>重新加载</button></div> : this.props.children
++  }
++}
+diff --git a/src/features/dancer/ui/MusicPanel.module.css b/src/features/dancer/ui/MusicPanel.module.css
+new file mode 100644
+index 0000000..1c9e80a
+--- /dev/null
++++ b/src/features/dancer/ui/MusicPanel.module.css
+@@ -0,0 +1 @@
++.panel { border-top: 1px solid #dce4d8; margin-top: 24px; padding-top: 22px; color: #47634f; }.heading { display: flex; align-items: center; justify-content: space-between; gap: 10px; }.heading h2 { font-size: 13px; font-weight: 600; margin: 0 0 15px; }.heading > span { font: 8px monospace; letter-spacing: 1px; margin-bottom: 15px; color: #859786; }.label { display: flex; flex-wrap: wrap; justify-content: space-between; gap: 9px; font-size: 10px; }.label textarea { width: 100%; min-height: 130px; padding: 10px; border: 1px solid #d5dfd0; border-radius: 7px; background: #fafbf6; color: #49644f; font: inherit; font-size: 11px; line-height: 1.8; resize: vertical; }.actions { display: flex; gap: 9px; margin-top: 9px; }.actions button, .actions a, .import { padding: 10px 12px; border: 1px solid #b8cdb8; border-radius: 7px; color: #385b42; background: #eef4e9; font: inherit; font-size: 10px; cursor: pointer; text-decoration: none; }.hint { color: #7e907e; font-size: 10px; line-height: 1.85; margin: 10px 0; }.import { display: block; text-align: center; position: relative; overflow: hidden; }.import input { position: absolute; inset: 0; opacity: 0; width: 100%; cursor: pointer; }.import:focus-within { outline: 3px solid #5d977b; outline-offset: 2px; }.track { margin-top: 15px; background: #edf2e9; border-radius: 8px; padding: 12px; }.trackName { display: flex; align-items: center; justify-content: space-between; gap: 10px; }.trackName strong { overflow: hidden; white-space: nowrap; text-overflow: ellipsis; font-size: 11px; }.trackName button { flex-shrink: 0; border: 0; background: transparent; color: #718d70; font-size: 10px; cursor: pointer; }.label input[type=range] { width: 100%; margin: 0 0 12px; accent-color: #487c60; }.fields { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; margin: 8px 0; }.fields label { font-size: 10px; }.fields input { width: 100%; margin-top: 7px; padding: 8px; border: 1px solid #cad9c4; border-radius: 5px; color: #385a40; background: #fcfdf8; }.error { font-size: 11px; line-height: 1.7; color: #a34b39; background: #f7eee5; padding: 10px; border-radius: 6px; }
+diff --git a/src/features/dancer/ui/MusicPanel.tsx b/src/features/dancer/ui/MusicPanel.tsx
+new file mode 100644
+index 0000000..c7e1f7f
+--- /dev/null
++++ b/src/features/dancer/ui/MusicPanel.tsx
+@@ -0,0 +1,32 @@
++import { useReducer } from 'react'
++import type { MusicTransport, MusicState } from '../components/MusicTransport'
++import { formatMusicTime } from '../systems/musicTiming'
++import styles from './MusicPanel.module.css'
++
++const defaultPrompt = '轻快的 funk-pop 纯音乐，108 BPM，4/4 拍。清晰有力的底鼓和军鼓、弹性贝斯、切分节奏吉他、明亮而克制的合成器。适合俏皮卡通女孩跳街舞。开头尽快进入稳定节拍，每 8 拍形成一个短句，避免长前奏、变速和突然停顿。约 45 秒，无人声，无歌词。'
++
++export function MusicPanel({ transport, state, onImport, onToggle }: { transport: MusicTransport; state: MusicState; onImport: () => void; onToggle: () => void }) {
++  const [prompt, editPrompt] = useReducer((_: string, value: string) => value, defaultPrompt)
++  const [copyStatus, setCopyStatus] = useReducer((_: string, value: string) => value, '')
++  async function copyPrompt() {
++    try { await navigator.clipboard.writeText(prompt); setCopyStatus('描述已复制，粘贴到 MiniMax 的音乐描述中。') }
++    catch { setCopyStatus('未能复制，请选中上方描述手动复制。') }
++  }
++  return <section className={styles.panel} aria-label="音乐创作与同步">
++    <div className={styles.heading}><h2>给舞蹈配一首歌</h2><span>MINIMAX MUSIC</span></div>
++    <label className={styles.label}>音乐创作描述<textarea aria-label="音乐创作描述" value={prompt} maxLength={2000} onChange={event => { editPrompt(event.target.value); setCopyStatus('') }} /></label>
++    <div className={styles.actions}><button onClick={() => { void copyPrompt() }}>复制描述</button><a href="https://www.minimax.cn/audio/music" target="_blank" rel="noopener noreferrer">去 MiniMax 创作 ↗</a></div>
++    {copyStatus ? <p className={styles.hint} role="status">{copyStatus}</p> : null}
++    <p className={styles.hint}>在 MiniMax 网页生成并下载音乐，再导入这里。导入文件只在本机播放。</p>
++    <label className={styles.import}>＋ {state.name ? '更换音乐' : '导入生成的音乐'}<input aria-label="导入音乐文件" type="file" accept=".mp3,.wav,.ogg,.m4a,.aac,.flac,audio/*" onChange={event => { const file = event.target.files?.[0]; if (file && transport.load(file)) onImport(); event.target.value = '' }} /></label>
++    {state.name ? <div className={styles.track}>
++      <div className={styles.trackName}><strong title={state.name}>{state.name}</strong><button onClick={() => { transport.clear(); onImport() }}>卸载</button></div>
++      <div className={styles.actions}><button disabled={state.loading || !state.duration} onClick={onToggle}>{state.loading ? '正在读取音频…' : state.playing ? '暂停音乐与舞蹈' : '播放音乐与舞蹈'}</button><button disabled={!state.duration} onClick={() => transport.seek(0)}>回到开头</button></div>
++      <label className={styles.label}>音乐进度 <span>{formatMusicTime(state.time)} / {formatMusicTime(state.duration)}</span><input aria-label="音乐进度" type="range" min="0" max={state.duration || 1} step="0.05" value={state.time} disabled={!state.duration} onChange={event => transport.seek(Number(event.target.value))} /></label>
++      <div className={styles.fields}><label>音乐 BPM<input aria-label="音乐 BPM" type="number" min="40" max="220" value={state.bpm} onChange={event => transport.configure({ bpm: event.target.valueAsNumber })} /></label><label>第一拍 / 秒<input aria-label="第一拍位置" type="number" min="0" max={state.duration || 0} step="0.05" value={state.offset} onChange={event => transport.configure({ offset: event.target.valueAsNumber })} /></label></div>
++      <p className={styles.hint}>生成音乐的实际节拍可能有偏差；调整 BPM 和第一拍位置来对齐舞蹈。这里尚未自动检测节拍。</p>
++      <label className={styles.label}>音乐音量 <span>{Math.round(state.volume * 100)}%</span><input aria-label="音乐音量" type="range" min="0" max="1" step="0.05" value={state.volume} onChange={event => transport.configure({ volume: Number(event.target.value) })} /></label>
++    </div> : null}
++    {state.error ? <p className={styles.error} role="alert">{state.error}</p> : null}
++  </section>
++}
+diff --git a/src/scenes/character-debug-scene/CharacterDebugScene.tsx b/src/scenes/character-debug-scene/CharacterDebugScene.tsx
+index 31b02e5..8d299d0 100644
+--- a/src/scenes/character-debug-scene/CharacterDebugScene.tsx
++++ b/src/scenes/character-debug-scene/CharacterDebugScene.tsx
+@@ -3,8 +3,10 @@ import { Canvas } from '@react-three/fiber'
+ import { Suspense } from 'react'
+ 
+ import { Tany, type TanyAnimation } from '../../features/character/entities/Tany/Tany'
++import { Mika } from '../../features/dancer/entities/Mika'
+ 
+ interface CharacterDebugSceneProps {
++  subject?: 'tany' | 'mika'
+   /** Production Tany animation to inspect. */
+   animation?: TanyAnimation
+   onGreetingFinished?: () => void
+@@ -16,7 +18,7 @@ interface CharacterDebugSceneProps {
+  * HDRI so it works offline; DEV-only, mounted by CharacterDebugScreen behind the
+  * /character-debug route.
+  */
+-export function CharacterDebugScene({ animation = 'bind', onGreetingFinished }: CharacterDebugSceneProps) {
++export function CharacterDebugScene({ animation = 'bind', onGreetingFinished, subject = 'tany' }: CharacterDebugSceneProps) {
+   return (
+     <Canvas
+       shadows
+@@ -39,7 +41,8 @@ export function CharacterDebugScene({ animation = 'bind', onGreetingFinished }:
+       <directionalLight position={[-6, 5, -4]} intensity={0.5} color="#bcd2ec" />
+ 
+       <Suspense fallback={null}>
+-        <Tany animation={animation} onGreetingFinished={onGreetingFinished} position={[0, 0, 0]} />
++        {subject === 'mika' ? <Mika dance={animation === 'dance' ? 'groove' : animation === 'greeting' ? 'wave' : 'idle'} playing={animation !== 'bind'} />
++          : <Tany animation={animation} onGreetingFinished={onGreetingFinished} position={[0, 0, 0]} />}
+       </Suspense>
+ 
+       {/* Ground catcher for the shadow. */}
+diff --git a/src/scenes/courtyard/CourtyardScene.tsx b/src/scenes/courtyard/CourtyardScene.tsx
+new file mode 100644
+index 0000000..129a068
+--- /dev/null
++++ b/src/scenes/courtyard/CourtyardScene.tsx
+@@ -0,0 +1,75 @@
++import { Html, OrbitControls } from '@react-three/drei'
++import { Canvas, useThree } from '@react-three/fiber'
++import { Bloom, EffectComposer, N8AO, SMAA, ToneMapping } from '@react-three/postprocessing'
++import { ShaderWarmup } from '@vibegameengine/shader-warmup'
++import { ToneMappingMode } from 'postprocessing'
++import { PCFShadowMap, PerspectiveCamera, type Camera } from 'three'
++import { useCallback, useEffect, useRef, type Dispatch } from 'react'
++import type { OrbitControls as OrbitControlsImpl } from 'three-stdlib'
++
++import { useReportInitialRenderReady } from '../../features/bootstrap'
++import { CourtyardArchitecture } from '../../features/courtyard/entities/CourtyardArchitecture'
++import { CirculationFlow, CourtyardLights, EquipmentDrop } from '../../features/courtyard/entities/CourtyardEquipment'
++import { stations, type InspectionAction, type InspectionState } from '../../features/courtyard/systems/inspection'
++import { DanceFireworks } from '../../features/world/entities/DanceFireworks'
++import { Water } from '../../features/world/entities/Water'
++import { ShadowGroup } from '../../shared/lib/ShadowGroup'
++import { SunShadow } from '../../shared/lib/SunShadow'
++import { ShadowCompositor } from '../../shared/lib/shadows'
++import { InspectionGuide } from './InspectionGuide'
++import styles from '../../features/courtyard/ui/CourtyardScreen.module.css'
++
++type SceneProps = { state: InspectionState; dispatch: Dispatch<InspectionAction> }
++
++export function CourtyardScene({ state, dispatch }: SceneProps) {
++  useReportInitialRenderReady()
++  const onArrival = useCallback((trip: number) => dispatch({ type: 'arrive', trip }), [dispatch])
++  const background = state.night ? '#203c45' : '#c4d4ca'
++  return <Canvas shadows={{ type: PCFShadowMap }} dpr={1} maxFps={60}
++    camera={{ fov: 40, near: 0.1, far: 150, position: [19, 19, 25] }}
++    gl={{ antialias: false, powerPreference: 'high-performance' }}>
++    <color attach="background" args={[background]} />
++    <fog attach="fog" args={[background, 55, 105]} />
++    <hemisphereLight args={[state.night ? '#8fc8e7' : '#deeeef', '#928b67', state.night ? 0.45 : 1.25]} />
++    <SunShadow color={state.night ? '#a4cce5' : '#ffe7bf'} intensity={state.night ? 0.45 : 2.5} offset={[12, 22, 8]} radius={17} resolution={2048} />
++    <ShadowCompositor every={2} />
++    <ShaderWarmup />
++    <ShadowGroup kind="static"><CourtyardArchitecture /></ShadowGroup>
++    <Water level={0.28} size={[6.1, 4.9]} position={[-4.8, -2.2]} />
++    <CourtyardLights on={state.lights} />
++    <CirculationFlow active={state.water} />
++    <ShadowGroup kind="dynamic">
++      <InspectionGuide key={state.generation} state={state} onArrival={onArrival} />
++      <EquipmentDrop key={`equipment-${state.generation}`} drop={state.drop}
++        onLand={() => dispatch({ type: 'land', drop: state.drop, generation: state.generation })} />
++    </ShadowGroup>
++    <DanceFireworks active={state.celebrating} />
++    {stations.map((station) => <Html key={station.id} position={station.marker} center zIndexRange={[20, 0]}>
++      <button className={styles.marker} aria-label={`前往${station.title}`} aria-pressed={state.selected === station.id}
++        onClick={() => dispatch({ type: 'select', id: station.id })}>
++        <b>{state.checked[station.id] ? '✓' : station.number}</b>{station.title}
++      </button>
++    </Html>)}
++    <InspectionCamera revision={state.camera} />
++    <EffectComposer multisampling={0}>
++      <N8AO halfRes aoRadius={0.8} intensity={1.5} />
++      <Bloom intensity={0.3} luminanceThreshold={1} mipmapBlur />
++      <SMAA /><ToneMapping mode={ToneMappingMode.ACES_FILMIC} />
++    </EffectComposer>
++  </Canvas>
++}
++
++function InspectionCamera({ revision }: { revision: number }) {
++  const controls = useRef<OrbitControlsImpl>(null)
++  const { camera, size } = useThree()
++  useEffect(() => { controls.current?.reset() }, [revision])
++  useEffect(() => { fitCameraToViewport(camera, size.width / size.height) }, [camera, size.width, size.height, revision])
++  return <OrbitControls ref={controls} makeDefault target={[0, 0, 0]} minDistance={17} maxDistance={55} maxPolarAngle={1.3} enablePan={false} />
++}
++
++function fitCameraToViewport(camera: Camera, aspect: number) {
++  if (camera instanceof PerspectiveCamera) {
++    camera.zoom = Math.min(1, aspect / 1.15)
++    camera.updateProjectionMatrix()
++  }
++}
+diff --git a/src/scenes/courtyard/InspectionGuide.tsx b/src/scenes/courtyard/InspectionGuide.tsx
+new file mode 100644
+index 0000000..6917141
+--- /dev/null
++++ b/src/scenes/courtyard/InspectionGuide.tsx
+@@ -0,0 +1,47 @@
++import { useFrame } from '@react-three/fiber'
++import { useEffect, useRef } from 'react'
++import { Group, Vector3 } from 'three'
++import { Tany } from '../../features/character/entities/Tany/Tany'
++import { courtyardResources as resources } from '../../features/courtyard/materials/courtyardResources'
++import { inspectionPath, stations, type InspectionState } from '../../features/courtyard/systems/inspection'
++
++type GuideProps = { state: InspectionState; onArrival: (trip: number) => void }
++
++export function InspectionGuide({ state, onArrival }: GuideProps) {
++  const root = useRef<Group>(null)
++  const path = useRef<Vector3[]>([])
++  const activeTrip = useRef(state.trip)
++  const nextDirection = useRef(new Vector3())
++  const finished = useRef(true)
++  useEffect(() => {
++    if (!root.current || !state.moving) return
++    const destination = stations.find((station) => station.id === state.selected)!.location
++    path.current = inspectionPath(root.current.position.toArray(), destination).map((point) => new Vector3(...point))
++    activeTrip.current = state.trip
++    finished.current = false
++  }, [state.trip, state.moving, state.selected])
++  useFrame((_, delta) => {
++    if (!root.current || finished.current) return
++    const target = path.current[0]
++    if (!target) {
++      finished.current = true
++      onArrival(activeTrip.current)
++      root.current.rotation.y = 0.35
++      return
++    }
++    const direction = nextDirection.current.subVectors(target, root.current.position)
++    const step = Math.min(delta, 0.05) * 4.5
++    if (direction.length() <= step) {
++      root.current.position.copy(target)
++      path.current.shift()
++    } else {
++      root.current.position.addScaledVector(direction.normalize(), step)
++      root.current.rotation.y = Math.atan2(direction.x, direction.z)
++    }
++  })
++  return <group ref={root} position={[0, 0.23, 6.5]} dispose={null}>
++    <mesh geometry={resources.disc} material={resources.dark} castShadow />
++    <mesh geometry={resources.ring} material={resources.glow} rotation-x={Math.PI / 2} />
++    <Tany position={[0, 0.055, 0]} animation={state.celebrating ? 'dance' : 'idle'} />
++  </group>
++}
+diff --git a/src/scenes/dance-studio/DanceStudioScene.tsx b/src/scenes/dance-studio/DanceStudioScene.tsx
+new file mode 100644
+index 0000000..b102260
+--- /dev/null
++++ b/src/scenes/dance-studio/DanceStudioScene.tsx
+@@ -0,0 +1,63 @@
++import { OrbitControls } from '@react-three/drei'
++import { Canvas, useThree } from '@react-three/fiber'
++import { ShaderWarmup } from '@vibegameengine/shader-warmup'
++import { useEffect, useRef } from 'react'
++import { ACESFilmicToneMapping, PCFShadowMap, PerspectiveCamera, type Camera } from 'three'
++import type { OrbitControls as OrbitControlsImpl } from 'three-stdlib'
++import { Mika } from '../../features/dancer/entities/Mika'
++import { studioResources as resources } from '../../features/dancer/materials/studioResources'
++import { useReportInitialRenderReady } from '../../features/bootstrap'
++import type { DanceControls } from '../../features/dancer/systems/choreography'
++import type { MusicClock } from '../../features/dancer/systems/musicTiming'
++import { ShadowGroup } from '../../shared/lib/ShadowGroup'
++import { ShadowThrottle } from '../../shared/lib/ShadowThrottle'
++
++export function DanceStudioScene({ controls, sampleTime, musicClock }: { controls: DanceControls; sampleTime?: number; musicClock?: MusicClock }) {
++  useReportInitialRenderReady()
++  return <Canvas shadows={{ type: PCFShadowMap }} dpr={[1, 1.5]} maxFps={60}
++    camera={{ position: [0.4, 1.85, 6.1], fov: 32, near: 0.1, far: 100 }}
++    gl={{ antialias: true, toneMapping: ACESFilmicToneMapping, toneMappingExposure: 1 }}>
++    <color attach="background" args={['#e5e6de']} />
++    <fog attach="fog" args={['#e5e6de', 15, 35]} />
++    <hemisphereLight args={['#fff5e6', '#84968a', 1.4]} />
++    <directionalLight position={[-3, 6, 5]} intensity={2.2} color="#fff0d8" castShadow
++      shadow-mapSize={[2048, 2048]} shadow-camera-left={-4} shadow-camera-right={4} shadow-camera-top={5} shadow-camera-bottom={-3}
++      shadow-normalBias={0.025} shadow-bias={-0.0001} />
++    <directionalLight position={[4, 3, 1]} intensity={0.85} color="#c9eaff" />
++    <directionalLight position={[1, 4, -4]} intensity={1.8} color="#fff6d8" />
++    <ShadowGroup kind="static">
++      <mesh geometry={resources.floor.geometry} material={resources.floor.material} rotation-x={-Math.PI / 2} position-y={-0.125} receiveShadow />
++      <mesh geometry={resources.podium.geometry} material={resources.podium.material} position-y={-0.062} receiveShadow />
++      <mesh geometry={resources.rim.geometry} material={resources.rim.material} rotation-x={Math.PI / 2} position-y={-0.005} />
++    </ShadowGroup>
++    <ShadowGroup kind="dynamic"><Mika dance={controls.dance} playing={controls.playing} speed={controls.speed} sampleTime={sampleTime} musicClock={musicClock} /></ShadowGroup>
++    <StudioCamera controls={controls} />
++    <ShadowThrottle every={2} />
++    <ShaderWarmup />
++  </Canvas>
++}
++
++function StudioCamera({ controls }: { controls: DanceControls }) {
++  const orbit = useRef<OrbitControlsImpl>(null)
++  const { camera, size } = useThree()
++  useEffect(() => {
++    const target = orbit.current
++    if (!target) return
++    const close = controls.view === 'detail'
++    const views = { front: [0.4, 1.85, 6.1], side: [6.1, 1.8, 0.1], back: [0, 1.8, -6.1], detail: [0.15, 2.17, 2.25] } as const
++    const position = views[controls.view]
++    camera.position.set(position[0], position[1], position[2])
++    target.target.set(0, close ? 2.16 : 1.34, 0)
++    target.minDistance = close ? 1.3 : 3.2
++    fitStudioCamera(camera, close, size.width / size.height)
++    target.update()
++  }, [camera, size.width, size.height, controls.view, controls.revision])
++  return <OrbitControls ref={orbit} makeDefault target={[0, 1.34, 0]} minDistance={3.2} maxDistance={9} minPolarAngle={0.5} maxPolarAngle={1.7} enablePan={false} />
++}
++
++function fitStudioCamera(camera: Camera, close: boolean, aspect: number) {
++  if (camera instanceof PerspectiveCamera) {
++    camera.zoom = close ? 1 : Math.min(1, aspect / 0.82)
++    camera.updateProjectionMatrix()
++  }
++}

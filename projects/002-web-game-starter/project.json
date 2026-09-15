@@ -1,0 +1,11 @@
+{
+  "id": "002",
+  "slug": "web-game-starter",
+  "title": "Web Starter Kit：3D 人物与舞蹈演示、接入能力",
+  "summary": "提供 3D 人物模型与舞蹈动作的接入、播放和演示。模型与动作资产仍需自行制作或取得并适配；对当前创作目标参考价值有限，核心在人物与动作资产。",
+  "upstream": "https://github.com/vibegameengine/web-starter-kit",
+  "status": "已总结",
+  "tags": ["Three.js", "网页游戏", "交互实验", "角色动画", "物理模拟"],
+  "cover": "demo/capability-architecture.svg",
+  "demo_url": "https://yydshly.github.io/0915_codex_project/002-web-game-starter/"
+}

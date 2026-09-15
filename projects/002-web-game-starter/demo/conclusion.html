@@ -1,0 +1,18 @@
+<!doctype html>
+<html lang="zh-CN">
+<head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>研究结论 · 核心在人物与动作资产</title><link rel="icon" href="favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="style.css"></head>
+<body>
+  <header class="topbar"><a class="brand" href="index.html#world"><span class="brand-mark">W</span><span>开源研究<span class="brand-sub">WEB-STARTER-KIT / 002</span></span></a><a class="source-link" href="index.html#world">返回六项实验 ↗</a></header>
+  <main class="research-page">
+    <span class="eyebrow">研究结论 / 2026-09-15</span>
+    <p class="research-lead"><strong>能力摘要：3D 人物模型与舞蹈动作的演示、接入和播放。</strong></p>
+    <h1>核心在人物与舞蹈资产，<br>这个库提供基础接入与展示。</h1>
+    <p class="research-lead">对我们当前的“精致人物 + 舞蹈 + 内容创作工具”目标，<strong>参考价值有限，不作为核心技术方向继续投入。</strong>可以按需借鉴工程模块，但主要制作成本仍在资产与编辑能力上。</p>
+    <div class="research-points"><section><span>库已经提供</span><h2>接入、播放、展示</h2><p>加载已有 3D 模型，播放已有骨骼动作，组合灯光、物理、音频与界面。</p></section><section><span>核心仍需准备</span><h2>人物与舞蹈动作</h2><p>实际模型与动作需要自己制作，或购买、委托、取得授权素材并适配。库中的样例不等于通用创作能力。</p></section><section><span>产品仍需开发</span><h2>编辑、保存、导出</h2><p>角色参数、动作时间轴、编舞编辑、作品保存与导出，没有形成现成的创作产品。</p></section></div>
+    <figure class="research-figure"><img src="capability-architecture.svg" alt="架构引导图：自行制作或取得人物与舞蹈动作资产，适配骨架后交给 web-starter-kit 接入、播放与展示。底层基于 Three.js 等技术，主要价值为工程辅助，当前目标的核心仍在资产。"><figcaption>从上往下看：资产 → 适配 → 库的基础能力 → 展示结果。<a href="capability-architecture.svg" target="_blank" rel="noopener">打开完整架构图 ↗</a></figcaption></figure>
+    <section class="capability-overview"><span class="eyebrow">如何理解这份判断</span><h2>能播放得出来，不等于能创作得出来。</h2><p>人物是否精致，主要取决于造型、材质、贴图、骨骼和蒙皮质量；舞蹈是否自然，主要取决于动作数据、节奏、衔接与修整。灯光、渲染和骨架适配也会影响最终效果，基础框架不会自动补齐这些内容。</p><p>这个库还有资源压缩、加载管理、阴影与特效等工程工具。这些工具有用，但没有解决我们当前最主要的资产制作与创作体验问题，也没有证据表明能显著降低这部分成本。</p></section>
+    <section class="capability-overview"><h2>已有展示来自哪里？</h2><p><strong>原库：</strong>Tany 人物、Mixamo 动作与六项基础实验，展示已有素材的接入和使用。</p><p><strong>本项目新增：</strong>Mika 人物、两段程序编排的舞蹈、庭院任务及音乐同步。它们来自额外制作，不能算作原库自带的人物或舞蹈生成器。</p><p><strong>音乐：</strong>生成已暂停；当前只有导入与按手工节拍设置同步播放的能力。</p></section>
+    <section class="research-decision"><span class="eyebrow">后续取舍</span><h2>保留参考，把重点放回资产。</h2><p>优先研究高质量人物制作、舞蹈动作制作与积累、不同角色的骨架适配，以及让用户编辑和保存作品的体验。遇到资源压缩、阴影或加载问题时，再按需回看这个库。</p><small>结论针对我们的当前目标，不是对所有 3D 项目的普遍评价。技术事实依据固定版本 d5f62cb。</small></section>
+  </main>
+</body>
+</html>
