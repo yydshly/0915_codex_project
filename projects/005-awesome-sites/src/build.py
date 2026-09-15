@@ -1,6 +1,7 @@
 """Render the reviewed catalog to dependency-free static HTML."""
 import json
 import base64
+import hashlib
 from pathlib import Path
 from html import escape as e
 
@@ -41,7 +42,7 @@ for c in cases:
 <a class="preview" href="{e(c['url'])}" target="_blank" rel="noopener noreferrer" aria-label="访问 {e(c['name'])} 原作"><img src="images/{e(c['preview'])}" alt="{e(c['name'])}：Awesome Sites 提供的原作预览" width="800" height="500" loading="lazy"><span>展厅预览 · 非本地复现</span></a>
 <div class="case-body"><div class="meta"><span class="group">{e(c['group'])}</span><span class="evidence {c['evidence']}">{labels[c['evidence']]}</span></div><h3>{e(c['title'])}</h3><p class="english">{e(c['name'])}</p><p class="capability">{e(c['capability'])}</p><div class="value"><small>可以借鉴什么</small><p>{e(c['value'])}</p></div><p class="role">{e(c['role'])}</p><details><summary>展开参考点与验证记录</summary><dl>{detail}</dl></details></div><div class="card-footer"><a href="{e(c['url'])}" target="_blank" rel="noopener noreferrer">打开原作 ↗</a><a href="https://awesomesites.ai/" target="_blank" rel="noopener noreferrer">目录来源</a></div></article>''')
 filters = ''.join(f'<button type="button" data-filter="{g}" aria-pressed="{str(g == "全部").lower()}">{g} <span>{len(cases) if g == "全部" else sum(c["group"] == g for c in cases)}</span></button>' for g in ['全部', *groups])
-page = '''<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="description" content="以 3D 场景及相关交互产品为主的 80 个作品收集：原作预览、效果与交互参考，以及与已有研究的重合和边界。"><title>Awesome Sites：3D 相关产品收集库 · 005</title><link rel="stylesheet" href="style.css"><script src="app.js" defer></script></head><body>
+page = '''<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1"><meta name="description" content="以 3D 场景及相关交互产品为主的 80 个作品收集：原作预览、效果与交互参考，以及与已有研究的重合和边界。"><title>Awesome Sites：3D 相关产品收集库 · 005</title><link rel="stylesheet" href="style.css?v=__STYLE_VERSION__"><script src="app.js" defer></script></head><body>
 <header><a class="brand" href="../"><b>005</b> 网页案例研究</a><nav><a href="#conclusions">能力对照</a>　<a href="#method">证据与范围</a>　<a href="https://awesomesites.ai/" target="_blank" rel="noopener noreferrer">原展厅 ↗</a></nav></header>
 <main><section class="intro"><div><div class="eyebrow">AWESOME SITES / PRODUCT COLLECTION</div><h1>3D 相关产品<span>收集库</span></h1><p>以 3D 场景及相关交互产品为主，也收录二维工具、内容和音乐作品。这里保留 __TOTAL__ 个原作入口与效果参考；其中很多表现方式与我们已有实践重合，当前没有确认新增的可复用技术能力。</p></div><div class="stats"><div><strong>__TOTAL__</strong><span>已收录案例</span></div><div><strong>__VISITED__</strong><span>进入原站查看</span></div><div><strong>__ACTION__</strong><span>验证关键操作</span></div></div></section>
 <section class="effect-guide" aria-labelledby="effect-title"><div class="section-head"><h2 id="effect-title">先看网页效果</h2><p>6 个代表画面 · 点击截图打开原作</p></div><div class="effect-grid">__GUIDE__</div><p class="effect-credit">截图来自 Awesome Sites 原展厅，展示原作画面；完整案例与验证记录见下方。</p><a class="guide-more" href="#gallery-title">浏览全部 __TOTAL__ 个案例 ↓</a></section>
@@ -56,7 +57,7 @@ page = '''<!doctype html><html lang="zh-CN"><head><meta charset="utf-8"><meta na
 <tr><th>内容与叙事</th><td>Oath &amp; Relic / Night Parade</td><td>章节、角色、场景揭示与阅读节奏</td><td>内容质量、素材来源、交互细节</td></tr></tbody></table></div><p class="notice">后续使用方式：作为参考目录保留，不逐项复现。只有遇到明显优于现有成果的细节、尚未实现的能力，或有源码可提取的实现时，再单独深入。参考作品数量不等于新增创作能力。</p></section>
 <section class="section" id="method"><h2>证据与研究范围</h2><div class="method"><div><h3>目录已补齐，实测范围单独记录</h3><p>采集日期：2026-09-15。本轮重新展开原展厅一次「Load more」，页面共显示 __TOTAL__ 个案例且不再显示加载按钮。本页已收录这些案例的名称、原作链接、预览和中文参考点；全量收录不等于全量深度测评，也不代表此后不会新增作品。</p><p>首页默认随机排序。本页按主要参考用途分组，不等同于原站标签。新增 64 个案例未逐个进入原站测试，保留原有实测记录；缺少验证不等于缺少能力。</p><p><a href="cases.json" download>下载全部案例数据与证据记录</a> · <a href="catalog-snapshot.json" download>下载目录来源快照</a> · <a href="https://awesomesites.ai/" target="_blank" rel="noopener noreferrer">核对原始目录 ↗</a></p></div><div><h3>如何理解验证标记</h3><ul><li><b>关键操作已验证 · __ACTION__ 个：</b>海洋预设切换、地砖数量联动、书架索引展开、算法参数联动、纹理图层创建。</li><li><b>原站界面已查看 · __PAGE__ 个：</b>Forma 的页面、图层、工具与设备保存提示；没有完成编辑流程测试。</li><li><b>仅目录与预览 · __CATALOG__ 个：</b>按展厅信息归纳，未在本项目验证具体交互。Mini Moto 的历史研究单独链接。</li></ul><p>本项目未检查原作源码、生成提示词、制作成本或模型调用；“由 AI 制作”不等于“每次交互都调用 AI”。参考实现线索不等于获得新增技术模块。</p></div></div></section>
 </main><footer>005 · Awesome Sites 独立案例研究　｜　原作与预览图归原作者或相应权利人所有；本页仅作署名研究引用，未复制作品源码或重新托管作品。</footer></body></html>'''
-for token, value in {'__TOTAL__':total, '__VISITED__':action_count + page_count, '__ACTION__':action_count, '__PAGE__':page_count, '__CATALOG__':catalog_count, '__FILTERS__':filters, '__CARDS__':''.join(cards), '__GUIDE__':''.join(guide_cards)}.items():
+for token, value in {'__STYLE_VERSION__':hashlib.sha256((APP / 'style.css').read_bytes()).hexdigest()[:12], '__TOTAL__':total, '__VISITED__':action_count + page_count, '__ACTION__':action_count, '__PAGE__':page_count, '__CATALOG__':catalog_count, '__FILTERS__':filters, '__CARDS__':''.join(cards), '__GUIDE__':''.join(guide_cards)}.items():
     page = page.replace(token, str(value))
 (APP / 'index.html').write_text(page, encoding='utf-8')
 snapshot = ROOT / 'notes/catalog-snapshot.json'
