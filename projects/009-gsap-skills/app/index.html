@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>GSAP 动效实验室 · 009</title>
+  <meta name="description" content="GSAP 能力全览：27 个真实交互实验、8 类 AI 技能，以及开发工具和框架接入说明。体验滚动、文字、SVG、物理、缓动与布局动画。">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="style.css">
+  <script defer src="vendor/gsap.min.js"></script><script defer src="vendor/ScrollTrigger.min.js"></script>
+  <script defer src="vendor/SplitText.min.js"></script><script defer src="vendor/MotionPathPlugin.min.js"></script>
+  <script defer src="vendor/DrawSVGPlugin.min.js"></script><script defer src="vendor/Flip.min.js"></script>
+  <script defer src="vendor/Draggable.min.js"></script><script defer src="vendor/InertiaPlugin.min.js"></script>
+  <script defer src="vendor/ScrollToPlugin.min.js"></script><script defer src="vendor/ScrambleTextPlugin.min.js"></script>
+  <script defer src="vendor/MorphSVGPlugin.min.js"></script><script defer src="vendor/Observer.min.js"></script>
+  <script defer src="vendor/Physics2DPlugin.min.js"></script><script defer src="vendor/PhysicsPropsPlugin.min.js"></script>
+  <script defer src="vendor/CustomEase.min.js"></script><script defer src="vendor/CustomWiggle.min.js"></script>
+  <script defer src="vendor/CustomBounce.min.js"></script><script defer src="vendor/EasePack.min.js"></script><script defer src="vendor/TextPlugin.min.js"></script>
+  <script defer src="extra-demos.js"></script><script defer src="catalog.js"></script><script defer src="app.js"></script>
+</head>
+<body>
+  <header class="topbar"><a class="brand" href="./"><span class="logo">g.</span> MOTION LAB <span class="edition">/ 009</span></a><a class="source" href="https://github.com/greensock/gsap-skills" target="_blank" rel="noreferrer">查看原始仓库 ↗</a></header>
+  <main>
+    <section class="intro"><div><p class="eyebrow">GSAP × AGENT SKILLS / COMPLETE CAPABILITY MAP</p><h1>网页能怎么动？全都看看<span>。</span></h1><p class="lede">27 个交互实验，8 类技能指导。从一个文字，到一整页的运动。</p></div><div class="intro-note"><span>工具与指南，各司其职</span><p><strong>GSAP</strong> 负责播放动画<br><strong>gsap-skills</strong> 指导 AI 编写动画</p></div></section>
+    <nav class="view-nav" aria-label="选择展示内容"><a class="showcase-link" href="research.html">详细介绍 ↗</a><a class="showcase-link" href="showcase/">场景实战 ↗</a><button id="show-overview" class="active" aria-pressed="true">全部能力 <span>27</span></button><button id="show-lab" aria-pressed="false">交互实验</button><button id="show-guides" aria-pressed="false">技能与接入 <span>8 + 6</span></button></nav>
+    <section id="overview" aria-label="全部效果目录"></section>
+    <section id="guides" aria-label="技能、开发工具与框架接入" hidden></section>
+    <section class="workspace" aria-label="动画实验室" hidden>
+      <nav class="experiments" aria-label="选择动画实验"><p class="rail-heading">实验目录 <span>27</span></p><div id="experiment-list"></div><div class="rail-footer">真实运行 · 可反复体验<br><span>GSAP <span id="version">3.15.0</span></span></div></nav>
+      <div class="lab"><div class="lab-heading"><div><span id="experiment-number" class="eyebrow">EXPERIMENT 01</span><h2 id="experiment-title">时间线编排</h2></div><span id="engine" class="pill">Timeline</span></div>
+        <div id="stage" class="stage" aria-label="动画预览区"></div>
+        <div id="special-controls" class="special-controls"></div>
+        <div class="transport"><div class="buttons"><button id="play" class="primary" type="button">▶ 播放</button><button id="restart" type="button">↺ 重播</button><button id="reverse" type="button">反向</button></div><label class="speed-label">速度 <select id="speed"><option value="0.5">0.5×</option><option value="1" selected>1×</option><option value="2">2×</option></select></label></div>
+        <div id="scrub-wrap" class="scrub-wrap"><label for="progress">动画进度</label><input id="progress" type="range" min="0" max="1000" value="0"><output id="progress-label" for="progress">0%</output></div>
+        <p id="hint" class="hint"></p><div class="demo-pagination"><button id="prev-demo">← 上一个</button><span id="demo-count"></span><button id="next-demo">下一个 →</button></div>
+      </div>
+      <aside class="explanation"><p class="eyebrow">WHAT YOU'RE SEEING</p><h3>这个效果怎么来？</h3><p id="description"></p><div class="separator"></div><span class="small-label">适合用在</span><p id="use-case" class="use-case"></p><span class="small-label">SKILL 提供的指导</span><p id="skill-note"></p><a id="skill-link" class="text-link" target="_blank" rel="noreferrer" href="https://github.com/greensock/gsap-skills">阅读对应技能 ↗</a><details><summary>看看关键代码</summary><pre><code id="code"></code></pre></details></aside>
+    </section>
+    <section class="connection"><div><p class="eyebrow">HOW IT CONNECTS</p><h2>从一句话，到一个动画。</h2></div><div class="flow"><span>你描述效果</span><i>→</i><span>AI 读取技能指南</span><i>→</i><span>编写网页代码</span><i>→</i><strong>GSAP 播放动画</strong></div><p>这里展示的是根据技能指南编写的独立示例。技能包本身是一套说明文件，不是动画播放器，也不保证 AI 一次就能写对。</p></section>
+  </main><footer><span>开源研究手记 / GSAP Skills</span><span>27 个交互实验 · 8 类技能 · 原生 JavaScript</span><a href="https://gsap.com/docs/v3/" target="_blank" rel="noreferrer">GSAP 官方文档 ↗</a></footer>
+  <div id="error" role="alert" hidden>动画组件加载失败，请刷新页面重试。</div>
+  <noscript><p>请启用 JavaScript 后体验动画。</p></noscript>
+</body></html>

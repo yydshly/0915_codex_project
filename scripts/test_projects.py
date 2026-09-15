@@ -86,6 +86,23 @@ class ProjectTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "重复的项目编号"):
             projects.projects()
 
+    def test_multiple_guides_and_invalid_paths(self):
+        directory = self.create()
+        for name in ('first.svg', 'second.svg'):
+            (directory / 'assets' / name).write_text('<svg xmlns="http://www.w3.org/2000/svg"/>', encoding='utf-8')
+        self.update(directory, guides=[{'path': 'assets/first.svg', 'caption': '能力图'},
+                                       {'path': 'assets/second.svg', 'caption': '理解图'}])
+        content = projects.rendered_readme(projects.projects())
+        self.assertIn('assets/first.svg', content)
+        self.assertIn('assets/second.svg', content)
+        self.assertLess(content.index('assets/first.svg'), content.index('assets/second.svg'))
+        for guides in ([], [{'path': '../../README.md', 'caption': '无效'}],
+                       [{'path': 'assets/missing.svg', 'caption': '缺失'}],
+                       [{'path': 'assets/first.svg', 'caption': ''}]):
+            self.update(directory, guides=guides)
+            with self.assertRaisesRegex(ValueError, 'guides'):
+                projects.projects()
+
     def test_missing_and_escaping_cover_are_rejected(self):
         directory = self.create()
         for cover in ("assets/missing.png", "../../README.md"):

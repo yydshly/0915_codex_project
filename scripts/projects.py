@@ -14,6 +14,7 @@ ROOT = Path(__file__).resolve().parents[1]
 STATUSES = {"待研究", "研究中", "已复现", "已总结", "已归档"}
 SLUG = re.compile(r"[a-z0-9]+(?:-[a-z0-9]+)*")
 FIELDS = {"id", "slug", "title", "summary", "upstream", "status", "tags", "cover", "demo_url"}
+OPTIONAL_FIELDS = {"guides"}
 
 
 def https_url(value):
@@ -25,7 +26,7 @@ def https_url(value):
 
 
 def validate(data, directory):
-    if not isinstance(data, dict) or set(data) != FIELDS:
+    if not isinstance(data, dict) or not FIELDS.issubset(data) or set(data) - FIELDS - OPTIONAL_FIELDS:
         raise ValueError(f"{directory.name}: project.json 字段须与模板一致")
     for key in FIELDS - {"tags"}:
         if not isinstance(data[key], str):
@@ -54,7 +55,21 @@ def validate(data, directory):
         if (relative.is_absolute() or "\\" in data["cover"]
                 or not cover.is_relative_to(directory.resolve()) or not cover.is_file()
                 or cover.suffix.lower() not in {".png", ".jpg", ".jpeg", ".webp", ".gif", ".svg"}):
-            raise ValueError(f"{directory.name}: cover 必须指向项目内已有的图片文件")
+                raise ValueError(f"{directory.name}: cover 必须指向项目内已有的图片文件")
+    if "guides" in data:
+        if not isinstance(data["guides"], list) or not data["guides"]:
+            raise ValueError(f"{directory.name}: guides 必须是非空图片列表")
+        for guide in data["guides"]:
+            if (not isinstance(guide, dict) or set(guide) != {"path", "caption"}
+                    or any(not isinstance(guide[k], str) or not guide[k].strip()
+                           or any(ord(c) < 32 for c in guide[k]) for k in ("path", "caption"))):
+                raise ValueError(f"{directory.name}: guides 需要 path 与 caption")
+            relative = Path(guide["path"])
+            image = (directory / relative).resolve()
+            if (relative.is_absolute() or "\\" in guide["path"]
+                    or not image.is_relative_to(directory.resolve()) or not image.is_file()
+                    or image.suffix.lower() not in {".png", ".jpg", ".jpeg", ".webp", ".gif", ".svg"}):
+                raise ValueError(f"{directory.name}: guides 图片路径无效")
 
 
 def projects():
@@ -110,7 +125,11 @@ def sections(items):
         rows.append(f'| {item["id"]} | {research} | {plain(item["summary"])} | '
                     f'{item["status"]} | {upstream} | {demo} |')
         card = [f'### {item["id"]} · {plain(item["title"])}', "", plain(item["summary"]), ""]
-        if item["cover"]:
+        if item.get("guides"):
+            for guide in item["guides"]:
+                card += ["!" + link(guide["caption"], f'{folder}/{guide["path"]}'), "",
+                         plain(guide["caption"]), ""]
+        elif item["cover"]:
             card += ["!" + link(f'{item["title"]}预览', f'{folder}/{item["cover"]}'), ""]
         else:
             card += ["*截图待补充。*", ""]

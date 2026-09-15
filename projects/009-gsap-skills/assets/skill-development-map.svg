@@ -1,0 +1,141 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1600" height="1900" viewBox="0 0 1600 1900" role="img" aria-labelledby="title desc">
+<title id="title">GSAP Skill 能力与定制开发地图</title>
+<desc id="desc">上游已有八类指导能力；定制时填写任务、触发条件、决策规则、工程约束和验收指标，按需组织 SKILL.md、references、scripts、assets，通过基线、实现、测量与反馈改进。上游文字指导与建议新增的执行验证明确区分。</desc>
+<defs><marker id="arr" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10" fill="#346e61"/></marker></defs>
+<rect width="1600" height="1900" fill="#f4f4ed"/>
+<style>text{font-family:'Microsoft YaHei','PingFang SC','Noto Sans CJK SC',sans-serif;fill:#203b35}.muted{fill:#567068}.white{fill:white}.green{fill:#27735f}.orange{fill:#a3562d}</style>
+<text x="56" y="52" font-size="20" class="green" font-weight="600">009 / 从研究资料到可复用的 AI 开发指导</text>
+<text x="56" y="111" font-size="46" class="" font-weight="700">GSAP Skill：能力与定制开发地图</text>
+<text x="56" y="155" font-size="25" class="" font-weight="400">核心价值：把使用经验变成可复用的决策规则，让 AI 少遗漏、少误用，并用实测判断结果。</text>
+<rect x="56" y="181" width="1488" height="65" rx="14" fill="#203b35" stroke="#203b35"/>
+<text x="80" y="223" font-size="26" class="white" font-weight="600">Skill 提供指导 → AI 生成代码 → GSAP 执行动画；真正的优化还需要检查与测量。</text>
+<text x="56" y="299" font-size="28" class="" font-weight="700">01  上游已有：八类指导能力</text>
+<text x="970" y="299" font-size="22" class="green" font-weight="400">绿色区域 = 已有知识与示例</text>
+<rect x="56" y="323" width="354" height="132" rx="14" fill="#e1eee5" stroke="#d7e0d8"/>
+<text x="76" y="355" font-size="21" class="green" font-weight="600">gsap-core</text>
+<text x="76" y="393" font-size="24" class="" font-weight="600">基础动画与适配</text>
+<text x="76" y="431" font-size="19" class="" font-weight="400">属性、缓动、错峰、媒体条件</text>
+<rect x="434" y="323" width="354" height="132" rx="14" fill="#e1eee5" stroke="#d7e0d8"/>
+<text x="454" y="355" font-size="21" class="green" font-weight="600">gsap-timeline</text>
+<text x="454" y="393" font-size="24" class="" font-weight="600">编排动画节奏</text>
+<text x="454" y="431" font-size="19" class="" font-weight="400">顺序、重叠、标签、播放控制</text>
+<rect x="812" y="323" width="354" height="132" rx="14" fill="#e1eee5" stroke="#d7e0d8"/>
+<text x="832" y="355" font-size="21" class="green" font-weight="600">gsap-scrolltrigger</text>
+<text x="832" y="393" font-size="24" class="" font-weight="600">把滚动连接到内容</text>
+<text x="832" y="431" font-size="19" class="" font-weight="400">触发、固定、联动、刷新与清理</text>
+<rect x="1190" y="323" width="354" height="132" rx="14" fill="#e1eee5" stroke="#d7e0d8"/>
+<text x="1210" y="355" font-size="21" class="green" font-weight="600">gsap-plugins</text>
+<text x="1210" y="393" font-size="24" class="" font-weight="600">选择专用效果工具</text>
+<text x="1210" y="431" font-size="19" class="" font-weight="400">文字、SVG、拖拽、Flip、物理</text>
+<rect x="56" y="476" width="354" height="132" rx="14" fill="#e1eee5" stroke="#d7e0d8"/>
+<text x="76" y="508" font-size="21" class="green" font-weight="600">gsap-utils</text>
+<text x="76" y="546" font-size="24" class="" font-weight="600">处理动画输入与数值</text>
+<text x="76" y="584" font-size="19" class="" font-weight="400">映射、限幅、吸附、插值</text>
+<rect x="434" y="476" width="354" height="132" rx="14" fill="#e1eee5" stroke="#d7e0d8"/>
+<text x="454" y="508" font-size="21" class="green" font-weight="600">gsap-react</text>
+<text x="454" y="546" font-size="24" class="" font-weight="600">接入 React 生命周期</text>
+<text x="454" y="584" font-size="19" class="" font-weight="400">useGSAP、作用域、卸载清理</text>
+<rect x="812" y="476" width="354" height="132" rx="14" fill="#e1eee5" stroke="#d7e0d8"/>
+<text x="832" y="508" font-size="21" class="green" font-weight="600">gsap-frameworks</text>
+<text x="832" y="546" font-size="24" class="" font-weight="600">接入其他框架</text>
+<text x="832" y="584" font-size="19" class="" font-weight="400">Vue / Svelte 生命周期与加载</text>
+<rect x="1190" y="476" width="354" height="132" rx="14" fill="#e1eee5" stroke="#d7e0d8"/>
+<text x="1210" y="508" font-size="21" class="green" font-weight="600">gsap-performance</text>
+<text x="1210" y="546" font-size="24" class="" font-weight="600">减少不必要的工作</text>
+<text x="1210" y="584" font-size="19" class="" font-weight="400">变换属性、复用、批量读写</text>
+<text x="56" y="667" font-size="28" class="" font-weight="700">02  你来定制：先填写这五项</text>
+<text x="966" y="667" font-size="22" class="orange" font-weight="400">米色区域 = 建议新增的项目规则</text>
+<rect x="56" y="692" width="276" height="169" rx="14" fill="#fff0df" stroke="#e7d2b9"/>
+<text x="74" y="729" font-size="24" class="" font-weight="600">目标与范围</text>
+<text x="74" y="770" font-size="19" class="" font-weight="400">做哪类页面？</text>
+<text x="74" y="800" font-size="19" class="" font-weight="400">优化卡顿或开发质量？</text>
+<text x="74" y="830" font-size="19" class="" font-weight="400">明确不处理的任务</text>
+<rect x="359" y="692" width="276" height="169" rx="14" fill="#fff0df" stroke="#e7d2b9"/>
+<text x="377" y="729" font-size="24" class="" font-weight="600">触发与输入</text>
+<text x="377" y="770" font-size="19" class="" font-weight="400">何时加载此 Skill？</text>
+<text x="377" y="800" font-size="19" class="" font-weight="400">框架、GSAP 版本、设备</text>
+<text x="377" y="830" font-size="19" class="" font-weight="400">参考效果与现有代码</text>
+<rect x="662" y="692" width="276" height="169" rx="14" fill="#fff0df" stroke="#e7d2b9"/>
+<text x="680" y="729" font-size="24" class="" font-weight="600">选择与参数</text>
+<text x="680" y="770" font-size="19" class="" font-weight="400">何时用 CSS / GSAP？</text>
+<text x="680" y="800" font-size="19" class="" font-weight="400">哪些场景需要插件？</text>
+<text x="680" y="830" font-size="19" class="" font-weight="400">时长、距离按设计配置</text>
+<rect x="965" y="692" width="276" height="169" rx="14" fill="#fff0df" stroke="#e7d2b9"/>
+<text x="983" y="729" font-size="24" class="" font-weight="600">工程约束</text>
+<text x="983" y="770" font-size="19" class="" font-weight="400">高频更新复用动画</text>
+<text x="983" y="800" font-size="19" class="" font-weight="400">组件卸载与中断清理</text>
+<text x="983" y="830" font-size="19" class="" font-weight="400">保留功能与减少动效</text>
+<rect x="1268" y="692" width="276" height="169" rx="14" fill="#fff0df" stroke="#e7d2b9"/>
+<text x="1286" y="729" font-size="24" class="" font-weight="600">验收与停止</text>
+<text x="1286" y="770" font-size="19" class="" font-weight="400">怎样算优化成功？</text>
+<text x="1286" y="800" font-size="19" class="" font-weight="400">测试设备、指标、容差</text>
+<text x="1286" y="830" font-size="19" class="" font-weight="400">通过即停；失败再定位</text>
+<text x="56" y="897" font-size="23" class="orange" font-weight="600">写规则的方式：适用条件 + 建议动作 + 原因 + 检查方法。必需约束与可选建议分开写。</text>
+<text x="56" y="950" font-size="28" class="" font-weight="700">03  优化规则示例：让 AI 知道何时改、怎么验</text>
+<rect x="56" y="975" width="1488" height="246" rx="14" fill="#fff" stroke="#d7e0d8"/>
+<text x="80" y="1010" font-size="22" class="green" font-weight="600">识别情形</text>
+<text x="403" y="1010" font-size="22" class="green" font-weight="600">指导 AI 的动作</text>
+<text x="818" y="1010" font-size="22" class="green" font-weight="600">希望减少的问题</text>
+<text x="1240" y="1010" font-size="22" class="green" font-weight="600">验证证据</text>
+<text x="80" y="1052" font-size="20" class="" font-weight="400">只是移动位置</text>
+<text x="403" y="1052" font-size="20" class="" font-weight="400">优先 x / y，而非 left / top</text>
+<text x="818" y="1052" font-size="20" class="" font-weight="400">布局计算；需保持视觉一致</text>
+<text x="1240" y="1052" font-size="20" class="" font-weight="400">布局耗时与画面</text>
+<text x="80" y="1086" font-size="20" class="" font-weight="400">鼠标连续更新</text>
+<text x="403" y="1086" font-size="20" class="" font-weight="400">使用 quickTo 复用补间</text>
+<text x="818" y="1086" font-size="20" class="" font-weight="400">反复创建与解析动画</text>
+<text x="1240" y="1086" font-size="20" class="" font-weight="400">帧耗时与创建情况</text>
+<text x="80" y="1120" font-size="20" class="" font-weight="400">切换页面或组件</text>
+<text x="403" y="1120" font-size="20" class="" font-weight="400">清理补间、触发器与监听</text>
+<text x="818" y="1120" font-size="20" class="" font-weight="400">重复执行、残留状态</text>
+<text x="1240" y="1120" font-size="20" class="" font-weight="400">多次进入 / 退出</text>
+<text x="80" y="1154" font-size="20" class="" font-weight="400">内容很长或设备较弱</text>
+<text x="403" y="1154" font-size="20" class="" font-weight="400">减少同时运行；按需启停</text>
+<text x="818" y="1154" font-size="20" class="" font-weight="400">无效更新与持续资源消耗</text>
+<text x="1240" y="1154" font-size="20" class="" font-weight="400">帧耗时与内存变化</text>
+<text x="80" y="1188" font-size="20" class="" font-weight="400">偏好减少动态效果</text>
+<text x="403" y="1188" font-size="20" class="" font-weight="400">提供静态路径与状态反馈</text>
+<text x="818" y="1188" font-size="20" class="" font-weight="400">动态负担、功能依赖动画</text>
+<text x="1240" y="1188" font-size="20" class="" font-weight="400">关闭动效仍可操作</text>
+<text x="56" y="1280" font-size="28" class="" font-weight="700">04  如何落到自己的 Skill 文件</text>
+<rect x="56" y="1304" width="354" height="125" rx="14" fill="#fff" stroke="#d7e0d8"/>
+<text x="74" y="1340" font-size="22" class="" font-weight="600">SKILL.md · 必需</text>
+<text x="74" y="1378" font-size="19" class="" font-weight="400">name / description：何时使用</text>
+<text x="74" y="1408" font-size="18" class="muted" font-weight="400">正文：目标、核心规则、引用入口</text>
+<rect x="434" y="1304" width="354" height="125" rx="14" fill="#fff" stroke="#d7e0d8"/>
+<text x="452" y="1340" font-size="22" class="" font-weight="600">references/ · 按需</text>
+<text x="452" y="1378" font-size="19" class="" font-weight="400">场景案例、版本差异、规则细节</text>
+<text x="452" y="1408" font-size="18" class="muted" font-weight="400">只加载当前任务需要的资料</text>
+<rect x="812" y="1304" width="354" height="125" rx="14" fill="#fff" stroke="#d7e0d8"/>
+<text x="830" y="1340" font-size="22" class="" font-weight="600">scripts/ · 按需新增</text>
+<text x="830" y="1378" font-size="19" class="" font-weight="400">可重复的检查、测量与结果汇总</text>
+<text x="830" y="1408" font-size="18" class="muted" font-weight="400">脚本必须运行验证；不是文字承诺</text>
+<rect x="1190" y="1304" width="354" height="125" rx="14" fill="#fff" stroke="#d7e0d8"/>
+<text x="1208" y="1340" font-size="22" class="" font-weight="600">assets/ · 按需</text>
+<text x="1208" y="1378" font-size="19" class="" font-weight="400">可复用页面模板、样式与素材</text>
+<text x="1208" y="1408" font-size="18" class="muted" font-weight="400">放入产物使用，不作为指令加载</text>
+<text x="56" y="1486" font-size="28" class="" font-weight="700">05  建议建立的验证流程：让规范有结果依据</text>
+<rect x="56" y="1510" width="354" height="105" rx="14" fill="#e1eee5" stroke="#d7e0d8"/>
+<text x="78" y="1551" font-size="24" class="" font-weight="600">同条件基线</text>
+<text x="78" y="1587" font-size="20" class="" font-weight="400">记录设备、页面与指标</text>
+<path d="M411 1562H432" fill="none" stroke="#346e61" stroke-width="2.5" marker-end="url(#arr)"/>
+<rect x="434" y="1510" width="354" height="105" rx="14" fill="#e1eee5" stroke="#d7e0d8"/>
+<text x="456" y="1551" font-size="24" class="" font-weight="600">AI 实现 / 修改</text>
+<text x="456" y="1587" font-size="20" class="" font-weight="400">按相关规则完成代码</text>
+<path d="M789 1562H810" fill="none" stroke="#346e61" stroke-width="2.5" marker-end="url(#arr)"/>
+<rect x="812" y="1510" width="354" height="105" rx="14" fill="#e1eee5" stroke="#d7e0d8"/>
+<text x="834" y="1551" font-size="24" class="" font-weight="600">运行与测量</text>
+<text x="834" y="1587" font-size="20" class="" font-weight="400">看功能、帧耗时和清理</text>
+<path d="M1167 1562H1188" fill="none" stroke="#346e61" stroke-width="2.5" marker-end="url(#arr)"/>
+<rect x="1190" y="1510" width="354" height="105" rx="14" fill="#e1eee5" stroke="#d7e0d8"/>
+<text x="1212" y="1551" font-size="24" class="" font-weight="600">对比后决定</text>
+<text x="1212" y="1587" font-size="20" class="" font-weight="400">通过交付；退化修正</text>
+<path d="M1370 1616V1650H220V1618" fill="none" stroke="#346e61" stroke-width="2.5" marker-end="url(#arr)" stroke-dasharray="7 5"/>
+<rect x="543" y="1630" width="515" height="42" rx="14" fill="#f4f4ed" stroke="#f4f4ed"/>
+<text x="565" y="1659" font-size="22" class="green" font-weight="600">反复出现且可验证的问题 → 更新对应规则</text>
+<rect x="56" y="1700" width="1488" height="137" rx="14" fill="#203b35" stroke="#203b35"/>
+<text x="80" y="1739" font-size="25" class="white" font-weight="600">下一次定制的填写清单</text>
+<text x="80" y="1778" font-size="24" class="white" font-weight="400">页面类型 ____   技术栈 / 版本 ____   目标设备 ____   优化问题 ____   指标与容差 ____</text>
+<text x="80" y="1814" font-size="21" class="white" font-weight="400">先选任务与规则，再决定是否需要脚本和模板。保持 Skill 简洁，只加入能改变 AI 决策的信息。</text>
+<text x="56" y="1876" font-size="19" class="muted" font-weight="400">边界：上游是文字指导，不含自动调优保证；新增测量流程需自行实现。参考 gsap-skills 固定版本及 skill-creator 规范。</text>
+</svg>

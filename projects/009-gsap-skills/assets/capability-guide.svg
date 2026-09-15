@@ -1,0 +1,77 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1440" height="1330" viewBox="0 0 1440 1330" role="img" aria-labelledby="title desc">
+<title id="title">GSAP Skills：从 AI 使用指南到完整网页体验</title>
+<desc id="desc">gsap-skills 指导 AI 编写代码，GSAP 在浏览器执行动画。Product Design 提供设计，Canvas UI 提供可选特效。耳机案例串联入场、滚动讲解、细节、搭配和试听计划。27个实验、8类技能、6项接入资料的验证范围分别标注。</desc>
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 0L10 5L0 10" fill="#4b7168"/></marker></defs>
+<rect width="1440" height="1330" fill="#f4f4ed"/>
+<style>text{font-family:'Microsoft YaHei','PingFang SC','Noto Sans CJK SC',sans-serif;fill:#203b35}.muted{fill:#536b65}.white{fill:#fff}.accent{fill:#257460}</style>
+<text x="56" y="55" font-size="19" font-weight="600" class="accent">009 / 开源研究手记 · 能力与体验引导</text>
+<text x="56" y="112" font-size="43" font-weight="700" class="">GSAP Skills：从使用指南到网页体验</text>
+<text x="56" y="157" font-size="24" font-weight="400" class="">核心差异：GSAP 是动画引擎；gsap-skills 是教 AI 使用它的说明书。</text>
+<text x="56" y="221" font-size="25" font-weight="700" class="">01  能力架构</text>
+<text x="280" y="221" font-size="21" font-weight="400" class="muted">设计决定表达什么，代码把表达变成可运行的网页。</text>
+<rect x="56" y="250" width="400" height="137" rx="16" fill="#ffffff" stroke="#d8e1d9"/>
+<text x="80" y="286" font-size="23" font-weight="700" class="">设计层 / Product Design</text>
+<text x="80" y="323" font-size="21" font-weight="400" class="">依据产品目标组织内容与视觉</text>
+<text x="80" y="359" font-size="20" font-weight="400" class="muted">布局 · 配色 · 层次 · 操作路径</text>
+<rect x="505" y="250" width="879" height="137" rx="16" fill="#e0eee5" stroke="#d8e1d9"/>
+<text x="531" y="286" font-size="25" font-weight="700" class="">指导层 / gsap-skills</text>
+<text x="531" y="323" font-size="23" font-weight="400" class="">AI 读取技能文件 → 参考规则与示例 → 编写 GSAP 代码</text>
+<text x="531" y="359" font-size="20" font-weight="400" class="muted">提供插件用法、响应式与清理规范；本身不播放动画。</text>
+<path d="M256 387V424H650V444" fill="none" stroke="#4b7168" stroke-width="2.5" marker-end="url(#arrow)"/>
+<path d="M945 387V424H795V444" fill="none" stroke="#4b7168" stroke-width="2.5" marker-end="url(#arrow)"/>
+<rect x="468" y="448" width="504" height="76" rx="16" fill="#203b35" stroke="#203b35"/>
+<text x="506" y="495" font-size="23" font-weight="600" class="white">AI 编写网页内容、样式与交互代码</text>
+<path d="M720 524V552H256V579" fill="none" stroke="#4b7168" stroke-width="2.5" marker-end="url(#arrow)"/>
+<path d="M720 524V579" fill="none" stroke="#4b7168" stroke-width="2.5" marker-end="url(#arrow)"/>
+<path d="M720 552H1184V579" fill="none" stroke="#4b7168" stroke-width="2.5" marker-end="url(#arrow)"/>
+<rect x="56" y="584" width="400" height="134" rx="16" fill="#ffffff" stroke="#d8e1d9"/>
+<text x="79" y="622" font-size="22" font-weight="700" class="">HTML / CSS · 页面结构</text>
+<text x="79" y="660" font-size="20" font-weight="400" class="">标题、图片、版式和操作入口</text>
+<text x="79" y="693" font-size="19" font-weight="400" class="muted">承载产品内容与阅读顺序</text>
+<rect x="520" y="584" width="400" height="134" rx="16" fill="#e0eee5" stroke="#d8e1d9"/>
+<text x="543" y="622" font-size="22" font-weight="700" class="">GSAP · 动画运行引擎</text>
+<text x="543" y="660" font-size="20" font-weight="400" class="">随时间、滚动和输入改变属性</text>
+<text x="543" y="693" font-size="19" font-weight="400" class="muted">入场 · 缩放 · 转场 · 布局变化</text>
+<rect x="984" y="584" width="400" height="134" rx="16" fill="#ffffff" stroke="#d8e1d9"/>
+<text x="1007" y="622" font-size="22" font-weight="700" class="">Canvas UI · 可选视觉特效</text>
+<text x="1007" y="660" font-size="20" font-weight="400" class="">用 WebGL / WebGPU 绘制效果</text>
+<text x="1007" y="693" font-size="19" font-weight="400" class="muted">云雾 · 冰霜 · 水波 · 粒子</text>
+<text x="56" y="751" font-size="21" font-weight="400" class="muted">协作方式：GSAP 可连接特效参数来编排变化；耳机案例使用 GSAP，未接入 Canvas UI。</text>
+<text x="56" y="817" font-size="25" font-weight="700" class="">02  实际场景：MONO ONE 耳机新品发布页</text>
+<rect x="56" y="845" width="252" height="168" rx="16" fill="#ffffff" stroke="#d8e1d9"/>
+<text x="76" y="877" font-size="19" font-weight="600" class="accent">01</text>
+<text x="76" y="914" font-size="25" font-weight="700" class="">产品入场</text>
+<text x="76" y="950" font-size="21" font-weight="400" class="">引导注意力</text>
+<text x="76" y="986" font-size="18" font-weight="400" class="muted">Timeline / SplitText</text>
+<path d="M309 927H323" fill="none" stroke="#4b7168" stroke-width="2.5" marker-end="url(#arrow)"/>
+<rect x="325" y="845" width="252" height="168" rx="16" fill="#ffffff" stroke="#d8e1d9"/>
+<text x="345" y="877" font-size="19" font-weight="600" class="accent">02</text>
+<text x="345" y="914" font-size="25" font-weight="700" class="">滚动讲解</text>
+<text x="345" y="950" font-size="21" font-weight="400" class="">分步解释卖点</text>
+<text x="345" y="986" font-size="18" font-weight="400" class="muted">ScrollTrigger</text>
+<path d="M578 927H592" fill="none" stroke="#4b7168" stroke-width="2.5" marker-end="url(#arrow)"/>
+<rect x="594" y="845" width="252" height="168" rx="16" fill="#ffffff" stroke="#d8e1d9"/>
+<text x="614" y="877" font-size="19" font-weight="600" class="accent">03</text>
+<text x="614" y="914" font-size="25" font-weight="700" class="">细节放大</text>
+<text x="614" y="950" font-size="21" font-weight="400" class="">观察耳罩与头梁</text>
+<text x="614" y="986" font-size="18" font-weight="400" class="muted">图片位移与缩放</text>
+<path d="M847 927H861" fill="none" stroke="#4b7168" stroke-width="2.5" marker-end="url(#arrow)"/>
+<rect x="863" y="845" width="252" height="168" rx="16" fill="#ffffff" stroke="#d8e1d9"/>
+<text x="883" y="877" font-size="19" font-weight="600" class="accent">04</text>
+<text x="883" y="914" font-size="25" font-weight="700" class="">搭配选择</text>
+<text x="883" y="950" font-size="21" font-weight="400" class="">看清选择变化</text>
+<text x="883" y="986" font-size="18" font-weight="400" class="muted">Flip / 数值补间</text>
+<path d="M1116 927H1130" fill="none" stroke="#4b7168" stroke-width="2.5" marker-end="url(#arrow)"/>
+<rect x="1132" y="845" width="252" height="168" rx="16" fill="#ffffff" stroke="#d8e1d9"/>
+<text x="1152" y="877" font-size="19" font-weight="600" class="accent">05</text>
+<text x="1152" y="914" font-size="25" font-weight="700" class="">试听计划</text>
+<text x="1152" y="950" font-size="21" font-weight="400" class="">确认操作结果</text>
+<text x="1152" y="986" font-size="18" font-weight="400" class="muted">弹窗 / 状态过渡</text>
+<text x="56" y="1053" font-size="22" font-weight="600" class="accent">体验顺序：阅读详细介绍 → 打开场景实战 → 关闭动效作对比 → 回到实验室拆解效果</text>
+<rect x="56" y="1090" width="1328" height="181" rx="16" fill="#203b35" stroke="#203b35"/>
+<text x="82" y="1129" font-size="24" font-weight="600" class="white">03  已沉淀的成果与验证范围</text>
+<text x="82" y="1167" font-size="22" font-weight="400" class="white">27 个真实交互实验  /  8 类 AI 技能目录  /  6 项工具与外部接入资料  /  1 个完整产品页</text>
+<text x="82" y="1205" font-size="20" font-weight="400" class="white">已验证：主要浏览与选择流程。接入资料不等于运行验证；框架、设备与组合场景未穷举。</text>
+<text x="82" y="1242" font-size="20" font-weight="400" class="white">边界：技能不会新增动画引擎能力；开发效率、性能和业务收益尚未做对照评测。</text>
+<text x="56" y="1306" font-size="18" font-weight="400" class="muted">原库 github.com/greensock/gsap-skills · 独立研究架构示意，非运行截图 · 2026-09-15</text>
+</svg>

@@ -25,6 +25,8 @@ projects/
 | 006 | [Huashu Report：专业报告格式整理与约束实现](006-huashu-report/README.md) | 从专业资料中梳理样式、字体、图片与图表编排、表格和分页等格式信息，形成约束与制作流程，实现相应展示效果；兼有内容组织规范，核心价值是经验整理与复用，底层技术增量有限。 | [alchaincyf/huashu-report](https://github.com/alchaincyf/huashu-report) |
 | 008 | [Defending Code：AI 漏洞研究流程与复用思路](008-defending-code-harness/README.md) | 以 Claude 驱动源码分析、用例构造、隔离执行、独立复现与补丁验收，默认针对 C/C++ 内存漏洞；检查方法较常规，价值主要在流程自动化与证据管理，保留为后续项目开发参考。 | [defending-code-reference-harness](https://github.com/anthropics/defending-code-reference-harness) |
 
+已总结 [009 · GSAP Skills：AI 动画开发指导与领域化应用](009-gsap-skills/README.md)：将 GSAP 的 API 用法、动画范例与性能实践整理为 AI 可按需读取的技能，指导实现选择、适配与资源清理；价值在经验复用和减少遗漏，可作为定制领域 Skill 的参考，优化收益仍需实测。 附两张引导图和完整网页案例。
+
 已归档 [010 · Fonzi：通过 AI 对话提高求职沟通效率](010-fonzi/README.md)：把静态简历补充为具体、可判断和可匹配的信息，减少重复沟通；商业仍依赖客户与人才资源。仅保留产品思路，暂不深入研究。
 
 - 子目录命名：三位数字编号 + 英文小写短横线名称。

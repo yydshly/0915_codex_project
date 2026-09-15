@@ -1,0 +1,83 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1500" height="1530" viewBox="0 0 1500 1530" role="img" aria-labelledby="title desc">
+<title id="title">从通用 Skill 到具体领域：我们的理解过程</title>
+<desc id="desc">从区分 GSAP 与技能说明，到理解条件规则与效果决策，再由大模型结合领域目标筛选规则、选择方案和调整参数，最后通过运行验证沉淀经验。产品页、后台、阅读页说明同一原则可以有不同实现。</desc>
+<defs><marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto"><path d="M0 0L10 5L0 10" fill="#407665"/></marker></defs>
+<rect width="1500" height="1530" fill="#f5f4ed"/>
+<style>text{font-family:'Microsoft YaHei','PingFang SC','Noto Sans CJK SC',sans-serif;fill:#203b35}.muted{fill:#526d65}.white{fill:white}.green{fill:#27705b}.orange{fill:#9d542d}</style>
+<text x="52" y="48" font-size="19" font-weight="600" class="green">009 / 从“它能做什么”到“它如何指导 AI”</text>
+<text x="52" y="105" font-size="44" font-weight="700" class="">通用规则，如何落到具体领域？</text>
+<text x="52" y="150" font-size="25" font-weight="400" class="">大模型结合场景解释与应用规则，提出领域方案；方案是否合适，需要验证。</text>
+<text x="52" y="209" font-size="25" font-weight="700" class="">01  我们逐步厘清的四件事</text>
+<rect x="52" y="229" width="332" height="119" rx="15" fill="#fff" stroke="#d7dfd5"/>
+<text x="70" y="264" font-size="23" font-weight="600" class="">1. 工具与指南</text>
+<text x="70" y="298" font-size="20" font-weight="400" class="">GSAP 执行动画</text>
+<text x="70" y="329" font-size="20" font-weight="400" class="muted">Skill 指导 AI 写代码</text>
+<path d="M386 290H404" fill="none" stroke="#407665" stroke-width="2.5" marker-end="url(#arrow)"/>
+<rect x="406" y="229" width="332" height="119" rx="15" fill="#fff" stroke="#d7dfd5"/>
+<text x="424" y="264" font-size="23" font-weight="600" class="">2. 指导的方式</text>
+<text x="424" y="298" font-size="20" font-weight="400" class="">用条件、规则和示例</text>
+<text x="424" y="329" font-size="20" font-weight="400" class="muted">影响 AI 的实现选择</text>
+<path d="M740 290H758" fill="none" stroke="#407665" stroke-width="2.5" marker-end="url(#arrow)"/>
+<rect x="760" y="229" width="332" height="119" rx="15" fill="#fff" stroke="#d7dfd5"/>
+<text x="778" y="264" font-size="23" font-weight="600" class="">3. 规则的对象</text>
+<text x="778" y="298" font-size="20" font-weight="400" class="">按技术问题组织规则</text>
+<text x="778" y="329" font-size="20" font-weight="400" class="muted">不预先写死每一种网页</text>
+<path d="M1094 290H1112" fill="none" stroke="#407665" stroke-width="2.5" marker-end="url(#arrow)"/>
+<rect x="1114" y="229" width="332" height="119" rx="15" fill="#fff" stroke="#d7dfd5"/>
+<text x="1132" y="264" font-size="23" font-weight="600" class="">4. 领域化的角色</text>
+<text x="1132" y="298" font-size="20" font-weight="400" class="">大模型结合用户任务</text>
+<text x="1132" y="329" font-size="20" font-weight="400" class="muted">选择、组合并调整方案</text>
+<text x="52" y="405" font-size="25" font-weight="700" class="">02  真正的连接：通用知识 + 具体情境 → 大模型判断</text>
+<rect x="52" y="429" width="672" height="133" rx="15" fill="#e0eee4" stroke="#d7dfd5"/>
+<text x="76" y="464" font-size="24" font-weight="600" class="green">输入 A / 通用指导</text>
+<text x="76" y="502" font-size="22" font-weight="400" class="">Skill：条件规则、API 用法、范例、适配与清理</text>
+<text x="76" y="537" font-size="21" font-weight="400" class="muted">例如：高频更新复用动画；退出时清理资源。</text>
+<rect x="766" y="429" width="682" height="133" rx="15" fill="#fff0de" stroke="#e5d3ba"/>
+<text x="790" y="464" font-size="24" font-weight="600" class="orange">输入 B / 领域与项目情境</text>
+<text x="790" y="502" font-size="22" font-weight="400" class="">用户任务、页面内容、品牌风格、设备与现有技术栈</text>
+<text x="790" y="537" font-size="21" font-weight="400" class="muted">来自用户和项目资料；关键事实缺失时需要澄清。</text>
+<path d="M388 562V591H650V616" fill="none" stroke="#407665" stroke-width="2.5" marker-end="url(#arrow)"/>
+<path d="M1107 562V591H850V616" fill="none" stroke="#407665" stroke-width="2.5" marker-end="url(#arrow)"/>
+<rect x="205" y="620" width="1090" height="170" rx="15" fill="#203b35" stroke="#203b35"/>
+<text x="231" y="659" font-size="28" font-weight="600" class="white">大模型 / 将通用规则转成当前任务的实现方案</text>
+<text x="231" y="703" font-size="23" font-weight="400" class="white">识别用户任务 → 判断是否需要动效 → 筛选适用规则 → 组合工具 → 调整参数</text>
+<text x="231" y="740" font-size="22" font-weight="400" class="white">产品决策：为什么动、哪里动？      技术决策：如何实现、适配与清理？</text>
+<text x="231" y="772" font-size="20" font-weight="400" class="white">gsap-skills 主要指导 GSAP 技术实现；领域设计与跨工具选型需要额外判断。</text>
+<path d="M750 790V822H278V853" fill="none" stroke="#407665" stroke-width="2.5" marker-end="url(#arrow)"/>
+<path d="M750 790V853" fill="none" stroke="#407665" stroke-width="2.5" marker-end="url(#arrow)"/>
+<path d="M750 822H1222V853" fill="none" stroke="#407665" stroke-width="2.5" marker-end="url(#arrow)"/>
+<text x="52" y="836" font-size="20" font-weight="400" class=""></text>
+<rect x="52" y="858" width="452" height="205" rx="15" fill="#fff" stroke="#d7dfd5"/>
+<text x="72" y="895" font-size="24" font-weight="600" class="">产品介绍页 / 耳机案例</text>
+<text x="72" y="936" font-size="20" font-weight="400" class="">用户任务：了解卖点与细节</text>
+<text x="72" y="970" font-size="20" font-weight="400" class="">效果选择：分段讲解、局部放大</text>
+<text x="72" y="1004" font-size="20" font-weight="400" class="">实现选择：GSAP / ScrollTrigger</text>
+<text x="72" y="1038" font-size="20" font-weight="400" class="muted">参数适配：距离随内容和屏幕调整</text>
+<rect x="524" y="858" width="452" height="205" rx="15" fill="#fff" stroke="#d7dfd5"/>
+<text x="544" y="895" font-size="24" font-weight="600" class="">数据后台 / 应用示意</text>
+<text x="544" y="936" font-size="20" font-weight="400" class="">用户任务：快速操作与确认结果</text>
+<text x="544" y="970" font-size="20" font-weight="400" class="">效果选择：简短反馈、少干扰</text>
+<text x="544" y="1004" font-size="20" font-weight="400" class="">实现选择：CSS；复杂重排考虑 Flip</text>
+<text x="544" y="1038" font-size="20" font-weight="400" class="muted">参数适配：不阻碍连续操作</text>
+<rect x="996" y="858" width="452" height="205" rx="15" fill="#fff" stroke="#d7dfd5"/>
+<text x="1016" y="895" font-size="24" font-weight="600" class="">内容阅读页 / 应用示意</text>
+<text x="1016" y="936" font-size="20" font-weight="400" class="">用户任务：稳定、连续地阅读</text>
+<text x="1016" y="970" font-size="20" font-weight="400" class="">效果选择：正文保持稳定</text>
+<text x="1016" y="1004" font-size="20" font-weight="400" class="">实现选择：静态页面或轻量 CSS</text>
+<text x="1016" y="1038" font-size="20" font-weight="400" class="muted">参数适配：避免强制滚动与持续运动</text>
+<text x="52" y="1136" font-size="23" font-weight="600" class="green">同一原则：让变化帮助用户完成任务。具体领域可以得到不同效果，也可以决定不加动画。</text>
+<path d="M278 1064V1090H750V1106" fill="none" stroke="#407665" stroke-width="2.5" marker-end="url(#arrow)"/>
+<path d="M750 1064V1106" fill="none" stroke="#407665" stroke-width="2.5" marker-end="url(#arrow)"/>
+<path d="M1222 1064V1090H750" fill="none" stroke="#407665" stroke-width="2.5" marker-end="url(#arrow)"/>
+<rect x="205" y="1160" width="1090" height="88" rx="15" fill="#e0eee4" stroke="#d7dfd5"/>
+<text x="231" y="1196" font-size="25" font-weight="600" class="">03  生成代码并运行验证</text>
+<text x="231" y="1230" font-size="22" font-weight="400" class="">检查功能、可读性、减少动效、设备适配和性能；与目标或同条件基线对比。</text>
+<path d="M750 1248V1284" fill="none" stroke="#407665" stroke-width="2.5" marker-end="url(#arrow)"/>
+<rect x="205" y="1289" width="1090" height="92" rx="15" fill="#fff0de" stroke="#e5d3ba"/>
+<text x="231" y="1325" font-size="25" font-weight="600" class="">04  通过后交付；将反复验证的经验写回领域 Skill</text>
+<text x="231" y="1360" font-size="21" font-weight="400" class="">沉淀格式：适用条件 → 决策原则 → 可调参数 → 验收方法；不把单次偏好变成通用禁令。</text>
+<path d="M205 1335H25V494H50" fill="none" stroke="#407665" stroke-width="2.5" marker-end="url(#arrow)" stroke-dasharray="7 5"/>
+<rect x="52" y="1420" width="1396" height="60" rx="15" fill="#203b35" stroke="#203b35"/>
+<text x="76" y="1458" font-size="24" font-weight="600" class="white">核心理解：Skill 提供可复用原则；大模型负责情境判断；代码实现方案；测试提供结果依据。</text>
+<text x="52" y="1510" font-size="20" font-weight="400" class="muted">这是我们的理解与建议工作流，非上游自带的自动领域分类器；不会自动训练模型或自动改写 Skill。</text>
+</svg>

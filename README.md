@@ -18,6 +18,7 @@
 | 005 | [Awesome Sites：3D 相关产品收集库](projects/005-awesome-sites/README.md) | 收集 80 个以 3D 场景及相关交互产品为主的样例。很多表现方式与已有实践重合，主要保留效果、交互与实现线索参考；尚未确认新增可复用技术能力。 | 已总结 | [awesomesites\.ai](https://awesomesites.ai/) | [在线演示](https://yydshly.github.io/0915_codex_project/005-awesome-sites/) |
 | 006 | [Huashu Report：专业报告格式整理与约束实现](projects/006-huashu-report/README.md) | 从专业资料中梳理样式、字体、图片与图表编排、表格和分页等格式信息，形成约束与制作流程，实现相应展示效果；兼有内容组织规范，核心价值是经验整理与复用，底层技术增量有限。 | 已总结 | [huashu\-report](https://github.com/alchaincyf/huashu-report) | [在线演示](https://yydshly.github.io/0915_codex_project/006-huashu-report/) |
 | 008 | [Defending Code：AI 漏洞研究流程与复用思路](projects/008-defending-code-harness/README.md) | 以 Claude 驱动源码分析、用例构造、隔离执行、独立复现与补丁验收，默认针对 C/C\+\+ 内存漏洞；检查方法较常规，价值主要在流程自动化与证据管理，保留为后续项目开发参考。 | 已总结 | [defending\-code\-reference\-harness](https://github.com/anthropics/defending-code-reference-harness) | [在线演示](https://yydshly.github.io/0915_codex_project/008-defending-code-harness/) |
+| 009 | [GSAP Skills：AI 动画开发指导与领域化应用](projects/009-gsap-skills/README.md) | 将 GSAP 的 API 用法、动画范例与性能实践整理为 AI 可按需读取的技能，指导实现选择、适配与资源清理；价值在经验复用和减少遗漏，可作为定制领域 Skill 的参考，优化收益仍需实测。 | 已总结 | [gsap\-skills](https://github.com/greensock/gsap-skills) | 暂未部署 |
 | 010 | [Fonzi：通过 AI 对话提高求职沟通效率](projects/010-fonzi/README.md) | 通过 AI 追问把静态简历补充为具体、可判断和可匹配的人才信息，减少重复沟通；商业上仍依赖招聘客户与人才资源。保留产品思路，暂不深入研究。 | 已归档 | [talent\.fonzi\.ai](https://talent.fonzi.ai/) | 暂未部署 |
 <!-- PROJECT_INDEX:END -->
 
@@ -93,6 +94,22 @@
 [研究笔记](projects/008-defending-code-harness/README.md) · [defending\-code\-reference\-harness](https://github.com/anthropics/defending-code-reference-harness) · [在线演示](https://yydshly.github.io/0915_codex_project/008-defending-code-harness/)
 
 状态：已总结 · 标签：AI 安全检查 / 流程自动化 / 证据管理 / 后续开发参考
+
+### 009 · GSAP Skills：AI 动画开发指导与领域化应用
+
+将 GSAP 的 API 用法、动画范例与性能实践整理为 AI 可按需读取的技能，指导实现选择、适配与资源清理；价值在经验复用和减少遗漏，可作为定制领域 Skill 的参考，优化收益仍需实测。
+
+![图一：Skill 能力与定制开发地图——八类指导、项目规则、文件组织与验证流程。](projects/009-gsap-skills/assets/skill-development-map.svg)
+
+图一：Skill 能力与定制开发地图——八类指导、项目规则、文件组织与验证流程。
+
+![图二：从通用规则到具体领域——大模型结合情境形成方案，经验证后沉淀经验。](projects/009-gsap-skills/assets/understanding-journey.svg)
+
+图二：从通用规则到具体领域——大模型结合情境形成方案，经验证后沉淀经验。
+
+[研究笔记](projects/009-gsap-skills/README.md) · [gsap\-skills](https://github.com/greensock/gsap-skills) · 暂未部署
+
+状态：已总结 · 标签：GSAP / Agent Skills / 网页动画 / 交互实验
 
 ### 010 · Fonzi：通过 AI 对话提高求职沟通效率
 

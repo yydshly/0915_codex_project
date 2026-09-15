@@ -1,0 +1,26 @@
+{
+  "id": "009",
+  "slug": "gsap-skills",
+  "title": "GSAP Skills：AI 动画开发指导与领域化应用",
+  "summary": "将 GSAP 的 API 用法、动画范例与性能实践整理为 AI 可按需读取的技能，指导实现选择、适配与资源清理；价值在经验复用和减少遗漏，可作为定制领域 Skill 的参考，优化收益仍需实测。",
+  "upstream": "https://github.com/greensock/gsap-skills",
+  "status": "已总结",
+  "tags": [
+    "GSAP",
+    "Agent Skills",
+    "网页动画",
+    "交互实验"
+  ],
+  "cover": "assets/skill-development-map.svg",
+  "demo_url": "",
+  "guides": [
+    {
+      "path": "assets/skill-development-map.svg",
+      "caption": "图一：Skill 能力与定制开发地图——八类指导、项目规则、文件组织与验证流程。"
+    },
+    {
+      "path": "assets/understanding-journey.svg",
+      "caption": "图二：从通用规则到具体领域——大模型结合情境形成方案，经验证后沉淀经验。"
+    }
+  ]
+}
