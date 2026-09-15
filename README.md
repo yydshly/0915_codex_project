@@ -17,7 +17,7 @@
 | 004 | [AI 工具资料库：收集、分析与理解报告](projects/004-ai-tool-prompts/README.md) | 收集 Manus、Kiro、Cursor、Lovable 等 AI 工具的提示词、工具说明与配置资料，供研究者解析、分析并整理成产品理解报告；对我们的实际价值仍需后续研究与验证。 | 已总结 | [system\-prompts\-and\-models\-of\-ai\-tools](https://github.com/x1xhlol/system-prompts-and-models-of-ai-tools) | [在线演示](https://yydshly.github.io/0915_codex_project/004-ai-tool-prompts/) |
 | 005 | [Awesome Sites：3D 相关产品收集库](projects/005-awesome-sites/README.md) | 收集 80 个以 3D 场景及相关交互产品为主的样例。很多表现方式与已有实践重合，主要保留效果、交互与实现线索参考；尚未确认新增可复用技术能力。 | 已总结 | [awesomesites\.ai](https://awesomesites.ai/) | [在线演示](https://yydshly.github.io/0915_codex_project/005-awesome-sites/) |
 | 006 | [Huashu Report：专业报告格式整理与约束实现](projects/006-huashu-report/README.md) | 从专业资料中梳理样式、字体、图片与图表编排、表格和分页等格式信息，形成约束与制作流程，实现相应展示效果；兼有内容组织规范，核心价值是经验整理与复用，底层技术增量有限。 | 已总结 | [huashu\-report](https://github.com/alchaincyf/huashu-report) | [在线演示](https://yydshly.github.io/0915_codex_project/006-huashu-report/) |
-| 008 | [Defending Code：AI 漏洞研究流程与复用思路](projects/008-defending-code-harness/README.md) | 以 Claude 驱动源码分析、用例构造、隔离执行、独立复现与补丁验收，默认针对 C/C\+\+ 内存漏洞；检查方法较常规，价值主要在流程自动化与证据管理，保留为后续项目开发参考。 | 已总结 | [defending\-code\-reference\-harness](https://github.com/anthropics/defending-code-reference-harness) | 暂未部署 |
+| 008 | [Defending Code：AI 漏洞研究流程与复用思路](projects/008-defending-code-harness/README.md) | 以 Claude 驱动源码分析、用例构造、隔离执行、独立复现与补丁验收，默认针对 C/C\+\+ 内存漏洞；检查方法较常规，价值主要在流程自动化与证据管理，保留为后续项目开发参考。 | 已总结 | [defending\-code\-reference\-harness](https://github.com/anthropics/defending-code-reference-harness) | [在线演示](https://yydshly.github.io/0915_codex_project/008-defending-code-harness/) |
 <!-- PROJECT_INDEX:END -->
 
 ## 项目预览
@@ -89,7 +89,7 @@
 
 ![Defending Code：AI 漏洞研究流程与复用思路预览](projects/008-defending-code-harness/assets/overview-map.png)
 
-[研究笔记](projects/008-defending-code-harness/README.md) · [defending\-code\-reference\-harness](https://github.com/anthropics/defending-code-reference-harness) · 暂未部署
+[研究笔记](projects/008-defending-code-harness/README.md) · [defending\-code\-reference\-harness](https://github.com/anthropics/defending-code-reference-harness) · [在线演示](https://yydshly.github.io/0915_codex_project/008-defending-code-harness/)
 
 状态：已总结 · 标签：AI 安全检查 / 流程自动化 / 证据管理 / 后续开发参考
 <!-- PROJECT_CARDS:END -->

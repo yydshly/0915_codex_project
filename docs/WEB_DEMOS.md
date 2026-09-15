@@ -52,3 +52,7 @@ GitHub Pages 托管 HTML、CSS、JavaScript 等静态文件，不运行 Python�
 
 - [GitHub Pages 的站点类型与限制](https://docs.github.com/en/pages/getting-started-with-github-pages/what-is-github-pages)
 - [使用 GitHub Actions 发布 Pages](https://docs.github.com/en/pages/getting-started-with-github-pages/using-custom-workflows-with-github-pages)
+
+## 008 · Defending Code
+
+2026-09-15 已部署并验证：[在线讲解页](https://yydshly.github.io/0915_codex_project/008-defending-code-harness/) · [完整总图](https://yydshly.github.io/0915_codex_project/008-defending-code-harness/map.html)。页面整理原库能力、定制方式、证据验证与后续复用价值，包含教学交互；不提供线上漏洞扫描服务。部署与验证记录见 [网页说明](../projects/008-defending-code-harness/notes/web.md)。

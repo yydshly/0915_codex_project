@@ -18,7 +18,7 @@ python -m http.server 8808 --bind 127.0.0.1 --directory web
 
 然后访问 [本地预览](http://127.0.0.1:8808/008-defending-code-harness/)。地址仅在本机服务运行时有效。独立打开源 HTML 也可阅读，返回总索引应在汇总构建后的页面使用。
 
-当前没有新增公开部署；`demo_url` 保持为空。
+已部署到 GitHub Pages：[在线讲解页](https://yydshly.github.io/0915_codex_project/008-defending-code-harness/) · [可缩放总图](https://yydshly.github.io/0915_codex_project/008-defending-code-harness/map.html)。`demo_url` 已记录验证后的正式地址。
 
 ## 交互
 
@@ -44,6 +44,15 @@ python -m http.server 8808 --bind 127.0.0.1 --directory web
 - 桌面和手机宽度进行视觉检查；页面没有整体横向溢出，代码和表格使用局部滚动。
 - 浏览器未观察到错误或警告日志。
 
-范围说明：初次全站检查通过（65 个 HTML 页面、249 个本地引用）。最终重建时，同工作区并行新增的 009 项目尚有资源未就绪，导致全站检查提示该项目缺失文件；008 单页重新检查通过，没有修改其他项目来消除这些提示。
+发布检查：隔离发布版本的全站检查通过（66 个 HTML 页面、260 个本地引用）；索引脚本的 10 项测试通过。
 
 这是网页功能与版式验证，不是上游漏洞流水线的运行验证。算术模型、越权示例和优惠券方案均有显式教学或迁移建议标记。
+
+## 线上部署验证
+
+2026-09-15：[首次发布成功记录](https://github.com/yydshly/0915_codex_project/actions/runs/34967794239)。
+
+- 站点首页、008 讲解页、总图、SVG、PNG、JavaScript 和样式文件均返回 HTTP 200。
+- 线上索引已使用原库名 `defending-code-reference-harness`；讲解页展示能力与价值摘要。
+- 线上发现步骤可切换；65 项的教学计算为需要 260 字节、记录长度 4 字节。
+- 线上总图可打开并从 100% 放大到 150%。

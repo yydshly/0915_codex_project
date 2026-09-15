@@ -46,7 +46,7 @@
 - 六项适配要求、源码改动范围、可编辑复制的定制任务说明。
 - 配置字段、首次运行与已知问题校准方法。
 
-页面使用原生 HTML / CSS / JavaScript，无需安装前端依赖；已接入现有静态站构建。运行方式见 [网页说明](notes/web.md)。当前为本地预览，未新增公开部署链接。
+页面使用原生 HTML / CSS / JavaScript，无需安装前端依赖；已接入现有静态站构建。运行方式见 [网页说明](notes/web.md)。已部署到 GitHub Pages：[在线讲解页](https://yydshly.github.io/0915_codex_project/008-defending-code-harness/) · [可缩放总图](https://yydshly.github.io/0915_codex_project/008-defending-code-harness/map.html)。
 
 ## 先回答三个容易混淆的问题
 
