@@ -14,6 +14,7 @@
 | 001 | [Unique3D：从一张图片到三维网格](projects/001-unique3d/README.md) | 单张物体图片经预训练扩散模型生成多视图与法线，再由 ISOMER 重建、细化并上色，导出 GLB 网格；整理模型与算法分工、效果边界及三维技术路线对比。 | 已总结 | [GitHub](https://github.com/AiuniAI/Unique3D) | [在线演示](https://yydshly.github.io/0915_codex_project/001-unique3d/) |
 | 002 | [Web Starter Kit：3D 人物与舞蹈演示、接入能力](projects/002-web-game-starter/README.md) | 提供 3D 人物模型与舞蹈动作的接入、播放和演示。模型与动作资产仍需自行制作或取得并适配；对当前创作目标参考价值有限，核心在人物与动作资产。 | 已总结 | [GitHub](https://github.com/vibegameengine/web-starter-kit) | [在线演示](https://yydshly.github.io/0915_codex_project/002-web-game-starter/) |
 | 003 | [Fireworks：技术图生成库、输入与图型全览](projects/003-fireworks-tech-graph/README.md) | 技术图生成与导出库：接收用户或大模型整理的 JSON/SVG，绘制、检查并导出。盘点33个图型与领域条目、12种风格，明确输入要求、使用场景及能力边界。 | 已总结 | [GitHub](https://github.com/yizhiyanhua-ai/fireworks-tech-graph) | [在线演示](https://yydshly.github.io/0915_codex_project/003-fireworks-tech-graph/) |
+| 004 | [AI 工具资料库：收集、分析与理解报告](projects/004-ai-tool-prompts/README.md) | 收集 Manus、Kiro、Cursor、Lovable 等 AI 工具的提示词、工具说明与配置资料，供研究者解析、分析并整理成产品理解报告；对我们的实际价值仍需后续研究与验证。 | 已总结 | [GitHub](https://github.com/x1xhlol/system-prompts-and-models-of-ai-tools) | [在线演示](https://yydshly.github.io/0915_codex_project/004-ai-tool-prompts/) |
 <!-- PROJECT_INDEX:END -->
 
 ## 项目预览
@@ -48,6 +49,16 @@
 [研究笔记](projects/003-fireworks-tech-graph/README.md) · [GitHub](https://github.com/yizhiyanhua-ai/fireworks-tech-graph) · [在线演示](https://yydshly.github.io/0915_codex_project/003-fireworks-tech-graph/)
 
 状态：已总结 · 标签：技术绘图 / SVG / Agent Skill / Archify 对照 / Graphify 对照
+
+### 004 · AI 工具资料库：收集、分析与理解报告
+
+收集 Manus、Kiro、Cursor、Lovable 等 AI 工具的提示词、工具说明与配置资料，供研究者解析、分析并整理成产品理解报告；对我们的实际价值仍需后续研究与验证。
+
+![AI 工具资料库：收集、分析与理解报告预览](projects/004-ai-tool-prompts/assets/research-guide.png)
+
+[研究笔记](projects/004-ai-tool-prompts/README.md) · [GitHub](https://github.com/x1xhlol/system-prompts-and-models-of-ai-tools) · [在线演示](https://yydshly.github.io/0915_codex_project/004-ai-tool-prompts/)
+
+状态：已总结 · 标签：工具资料收集 / 产品理解报告 / 双库对比 / 价值待研究
 <!-- PROJECT_CARDS:END -->
 
 ## 新增研究项目

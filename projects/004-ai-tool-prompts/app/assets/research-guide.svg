@@ -1,0 +1,88 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="2000" height="1740" viewBox="0 0 2000 1740" role="img" aria-labelledby="title desc">
+<title id="title">从已有 AI 产品的资料，到理解报告</title>
+<desc id="desc">两个仓库收录产品提示词和工具资料；研究者收集资料、解析信息、分析理解，最后整理能力说明、双库对比、案例和证据。x1xhlol 的应用与 Agent 案例较突出，asgeirtj 的厂商产品与版本资料较突出。材料分析不等于产品实测。</desc>
+<rect x="0" y="0" width="2000" height="1740" rx="0" fill="#0d141c" stroke="none" stroke-width="2"/>
+<text x="70" y="43" font-family="Microsoft YaHei, sans-serif" font-size="25" font-weight="700" fill="#d0f778" dominant-baseline="text-before-edge">研究 004 / 架构引导图</text>
+<text x="70" y="93" font-family="Microsoft YaHei, sans-serif" font-size="58" font-weight="700" fill="#eef3f8" dominant-baseline="text-before-edge">从已有产品的资料，到理解报告</text>
+<text x="70" y="177" font-family="Microsoft YaHei, sans-serif" font-size="29" font-weight="400" fill="#b9c8d6" dominant-baseline="text-before-edge">依据提示词与工具材料，分析市场上已有 AI 产品的能力描述与工作方式。</text>
+<rect x="70" y="245" width="1860" height="124" rx="12" fill="#15222f" stroke="#354758" stroke-width="2"/>
+<text x="104" y="265" font-family="Microsoft YaHei, sans-serif" font-size="32" font-weight="700" fill="#eef3f8" dominant-baseline="text-before-edge">研究对象：市场上已有的 AI 产品</text>
+<text x="104" y="318" font-family="Microsoft YaHei, sans-serif" font-size="28" font-weight="400" fill="#b9c8d6" dominant-baseline="text-before-edge">Manus · Kiro · Cursor · Lovable · Claude · ChatGPT · Gemini · Grok …</text>
+<text x="1505" y="284" font-family="Microsoft YaHei, sans-serif" font-size="28" font-weight="400" fill="#91d5fa" dominant-baseline="text-before-edge">产品相关材料</text>
+<polyline points="1000,378 1000,415" fill="none" stroke="#d0f778" stroke-width="3"/>
+<polyline points="991,404 1000,415 1009,404" fill="none" stroke="#d0f778" stroke-width="3"/>
+<text x="70" y="418" font-family="Microsoft YaHei, sans-serif" font-size="28" font-weight="700" fill="#d0f778" dominant-baseline="text-before-edge">01  资料来源</text>
+<text x="335" y="418" font-family="Microsoft YaHei, sans-serif" font-size="27" font-weight="400" fill="#b9c8d6" dominant-baseline="text-before-edge">仓库负责收录与归档，供研究者查阅</text>
+<rect x="70" y="469" width="900" height="285" rx="12" fill="#15222f" stroke="#354758" stroke-width="2"/>
+<rect x="70" y="469" width="900" height="5" rx="0" fill="#d0f778" stroke="none" stroke-width="2"/>
+<rect x="1030" y="469" width="900" height="285" rx="12" fill="#15222f" stroke="#354758" stroke-width="2"/>
+<rect x="1030" y="469" width="900" height="5" rx="0" fill="#91d5fa" stroke="none" stroke-width="2"/>
+<text x="104" y="490" font-family="Microsoft YaHei, sans-serif" font-size="23" font-weight="700" fill="#d0f778" dominant-baseline="text-before-edge">本次研究</text>
+<text x="104" y="529" font-family="Microsoft YaHei, sans-serif" font-size="40" font-weight="700" fill="#eef3f8" dominant-baseline="text-before-edge">x1xhlol</text>
+<text x="104" y="584" font-family="Microsoft YaHei, sans-serif" font-size="23" font-weight="400" fill="#b9c8d6" dominant-baseline="text-before-edge">system-prompts-and-models-of-ai-tools</text>
+<text x="104" y="632" font-family="Microsoft YaHei, sans-serif" font-size="28" font-weight="700" fill="#d0f778" dominant-baseline="text-before-edge">偏向：应用与 Agent 产品的工作流程案例</text>
+<text x="104" y="688" font-family="Microsoft YaHei, sans-serif" font-size="26" font-weight="400" fill="#b9c8d6" dominant-baseline="text-before-edge">例如 Manus / Kiro / Cursor：任务、工具、交付</text>
+<text x="1064" y="490" font-family="Microsoft YaHei, sans-serif" font-size="23" font-weight="700" fill="#91d5fa" dominant-baseline="text-before-edge">对照已有研究</text>
+<text x="1064" y="529" font-family="Microsoft YaHei, sans-serif" font-size="40" font-weight="700" fill="#eef3f8" dominant-baseline="text-before-edge">asgeirtj</text>
+<text x="1064" y="584" font-family="Microsoft YaHei, sans-serif" font-size="23" font-weight="400" fill="#b9c8d6" dominant-baseline="text-before-edge">system_prompts_leaks</text>
+<text x="1064" y="632" font-family="Microsoft YaHei, sans-serif" font-size="28" font-weight="700" fill="#91d5fa" dominant-baseline="text-before-edge">偏向：厂商产品的版本、功能与模式档案</text>
+<text x="1064" y="688" font-family="Microsoft YaHei, sans-serif" font-size="26" font-weight="400" fill="#b9c8d6" dominant-baseline="text-before-edge">例如 Claude / ChatGPT / Gemini：版本与功能</text>
+<rect x="70" y="777" width="1860" height="92" rx="12" fill="#1b2c2a" stroke="none" stroke-width="2"/>
+<text x="104" y="791" font-family="Microsoft YaHei, sans-serif" font-size="28" font-weight="700" fill="#d0f778" dominant-baseline="text-before-edge">共同能力：收录提示词、工具说明及相关配置，提供可比较的研究材料。</text>
+<text x="104" y="830" font-family="Microsoft YaHei, sans-serif" font-size="26" font-weight="400" fill="#b9c8d6" dominant-baseline="text-before-edge">两库收录有交叉；差异主要在覆盖与组织方式，不是两套不同的分析技术。</text>
+<polyline points="1000,880 1000,919" fill="none" stroke="#d0f778" stroke-width="3"/>
+<polyline points="991,908 1000,919 1009,908" fill="none" stroke="#d0f778" stroke-width="3"/>
+<text x="70" y="925" font-family="Microsoft YaHei, sans-serif" font-size="28" font-weight="700" fill="#d0f778" dominant-baseline="text-before-edge">02  分析过程</text>
+<text x="335" y="925" font-family="Microsoft YaHei, sans-serif" font-size="27" font-weight="400" fill="#b9c8d6" dominant-baseline="text-before-edge">研究者 / 我们完成：从材料中提炼有依据的理解</text>
+<rect x="70" y="982" width="435" height="213" rx="12" fill="#15222f" stroke="#354758" stroke-width="2"/>
+<text x="95" y="1004" font-family="Microsoft YaHei, sans-serif" font-size="31" font-weight="700" fill="#d0f778" dominant-baseline="text-before-edge">1</text>
+<text x="143" y="1004" font-family="Microsoft YaHei, sans-serif" font-size="33" font-weight="700" fill="#eef3f8" dominant-baseline="text-before-edge">收集资料</text>
+<text x="95" y="1065" font-family="Microsoft YaHei, sans-serif" font-size="25" font-weight="400" fill="#b9c8d6" dominant-baseline="text-before-edge">选定产品与样本</text>
+<text x="95" y="1101" font-family="Microsoft YaHei, sans-serif" font-size="25" font-weight="400" fill="#b9c8d6" dominant-baseline="text-before-edge">保存来源、版本和文件</text>
+<text x="95" y="1137" font-family="Microsoft YaHei, sans-serif" font-size="25" font-weight="400" fill="#b9c8d6" dominant-baseline="text-before-edge">形成资料清单</text>
+<polyline points="512,1088 536,1088" fill="none" stroke="#91d5fa" stroke-width="3"/>
+<polyline points="525,1079 536,1088 525,1097" fill="none" stroke="#91d5fa" stroke-width="3"/>
+<rect x="545" y="982" width="435" height="213" rx="12" fill="#15222f" stroke="#354758" stroke-width="2"/>
+<text x="570" y="1004" font-family="Microsoft YaHei, sans-serif" font-size="31" font-weight="700" fill="#d0f778" dominant-baseline="text-before-edge">2</text>
+<text x="618" y="1004" font-family="Microsoft YaHei, sans-serif" font-size="33" font-weight="700" fill="#eef3f8" dominant-baseline="text-before-edge">解析信息</text>
+<text x="570" y="1065" font-family="Microsoft YaHei, sans-serif" font-size="25" font-weight="400" fill="#b9c8d6" dominant-baseline="text-before-edge">阅读文本，检查文件格式</text>
+<text x="570" y="1101" font-family="Microsoft YaHei, sans-serif" font-size="25" font-weight="400" fill="#b9c8d6" dominant-baseline="text-before-edge">识别角色、工具与流程</text>
+<text x="570" y="1137" font-family="Microsoft YaHei, sans-serif" font-size="25" font-weight="400" fill="#b9c8d6" dominant-baseline="text-before-edge">区分指令、接口与自述</text>
+<polyline points="987,1088 1011,1088" fill="none" stroke="#91d5fa" stroke-width="3"/>
+<polyline points="1000,1079 1011,1088 1000,1097" fill="none" stroke="#91d5fa" stroke-width="3"/>
+<rect x="1020" y="982" width="435" height="213" rx="12" fill="#15222f" stroke="#354758" stroke-width="2"/>
+<text x="1045" y="1004" font-family="Microsoft YaHei, sans-serif" font-size="31" font-weight="700" fill="#d0f778" dominant-baseline="text-before-edge">3</text>
+<text x="1093" y="1004" font-family="Microsoft YaHei, sans-serif" font-size="33" font-weight="700" fill="#eef3f8" dominant-baseline="text-before-edge">分析理解</text>
+<text x="1045" y="1065" font-family="Microsoft YaHei, sans-serif" font-size="25" font-weight="400" fill="#b9c8d6" dominant-baseline="text-before-edge">串起任务推进的方式</text>
+<text x="1045" y="1101" font-family="Microsoft YaHei, sans-serif" font-size="25" font-weight="400" fill="#b9c8d6" dominant-baseline="text-before-edge">比较不同产品的做法</text>
+<text x="1045" y="1137" font-family="Microsoft YaHei, sans-serif" font-size="25" font-weight="400" fill="#b9c8d6" dominant-baseline="text-before-edge">区分原文事实与推断</text>
+<polyline points="1462,1088 1486,1088" fill="none" stroke="#91d5fa" stroke-width="3"/>
+<polyline points="1475,1079 1486,1088 1475,1097" fill="none" stroke="#91d5fa" stroke-width="3"/>
+<rect x="1495" y="982" width="435" height="213" rx="12" fill="#15222f" stroke="#354758" stroke-width="2"/>
+<text x="1520" y="1004" font-family="Microsoft YaHei, sans-serif" font-size="31" font-weight="700" fill="#d0f778" dominant-baseline="text-before-edge">4</text>
+<text x="1568" y="1004" font-family="Microsoft YaHei, sans-serif" font-size="33" font-weight="700" fill="#eef3f8" dominant-baseline="text-before-edge">汇集报告</text>
+<text x="1520" y="1065" font-family="Microsoft YaHei, sans-serif" font-size="25" font-weight="400" fill="#b9c8d6" dominant-baseline="text-before-edge">整合能力与原理说明</text>
+<text x="1520" y="1101" font-family="Microsoft YaHei, sans-serif" font-size="25" font-weight="400" fill="#b9c8d6" dominant-baseline="text-before-edge">加入案例、对比与来源</text>
+<text x="1520" y="1137" font-family="Microsoft YaHei, sans-serif" font-size="25" font-weight="400" fill="#b9c8d6" dominant-baseline="text-before-edge">用网页和图示表达</text>
+<polyline points="1000,1208 1000,1248" fill="none" stroke="#d0f778" stroke-width="3"/>
+<polyline points="991,1237 1000,1248 1009,1237" fill="none" stroke="#d0f778" stroke-width="3"/>
+<rect x="70" y="1270" width="1860" height="229" rx="12" fill="#1a2921" stroke="#74974a" stroke-width="2"/>
+<text x="104" y="1293" font-family="Microsoft YaHei, sans-serif" font-size="34" font-weight="700" fill="#d0f778" dominant-baseline="text-before-edge">03  最终成果：有来源、有解释、有边界的理解报告</text>
+<text x="104" y="1360" font-family="Microsoft YaHei, sans-serif" font-size="29" font-weight="700" fill="#eef3f8" dominant-baseline="text-before-edge">能力与原理</text>
+<text x="104" y="1405" font-family="Microsoft YaHei, sans-serif" font-size="25" font-weight="400" fill="#b9c8d6" dominant-baseline="text-before-edge">材料描述了什么能力</text>
+<text x="104" y="1443" font-family="Microsoft YaHei, sans-serif" font-size="25" font-weight="400" fill="#b9c8d6" dominant-baseline="text-before-edge">任务是如何组织的</text>
+<text x="563" y="1360" font-family="Microsoft YaHei, sans-serif" font-size="29" font-weight="700" fill="#eef3f8" dominant-baseline="text-before-edge">产品与双库对比</text>
+<text x="563" y="1405" font-family="Microsoft YaHei, sans-serif" font-size="25" font-weight="400" fill="#b9c8d6" dominant-baseline="text-before-edge">共同点、差异与侧重点</text>
+<text x="563" y="1443" font-family="Microsoft YaHei, sans-serif" font-size="25" font-weight="400" fill="#b9c8d6" dominant-baseline="text-before-edge">哪些内容能够互相补充</text>
+<text x="1022" y="1360" font-family="Microsoft YaHei, sans-serif" font-size="29" font-weight="700" fill="#eef3f8" dominant-baseline="text-before-edge">具体案例与展示</text>
+<text x="1022" y="1405" font-family="Microsoft YaHei, sans-serif" font-size="25" font-weight="400" fill="#b9c8d6" dominant-baseline="text-before-edge">Manus 等工作流程解读</text>
+<text x="1022" y="1443" font-family="Microsoft YaHei, sans-serif" font-size="25" font-weight="400" fill="#b9c8d6" dominant-baseline="text-before-edge">中文网页、图示与教学案例</text>
+<text x="1481" y="1360" font-family="Microsoft YaHei, sans-serif" font-size="29" font-weight="700" fill="#eef3f8" dominant-baseline="text-before-edge">价值与证据</text>
+<text x="1481" y="1405" font-family="Microsoft YaHei, sans-serif" font-size="25" font-weight="400" fill="#b9c8d6" dominant-baseline="text-before-edge">值得借鉴的方法与用途</text>
+<text x="1481" y="1443" font-family="Microsoft YaHei, sans-serif" font-size="25" font-weight="400" fill="#b9c8d6" dominant-baseline="text-before-edge">来源、推断及未验证事项</text>
+<text x="70" y="1539" font-family="Microsoft YaHei, sans-serif" font-size="29" font-weight="700" fill="#d0f778" dominant-baseline="text-before-edge">如何理解它的价值？</text>
+<text x="420" y="1539" font-family="Microsoft YaHei, sans-serif" font-size="28" font-weight="400" fill="#eef3f8" dominant-baseline="text-before-edge">通过已有产品的设计样本，建立自己的理解，提炼可借鉴的工作方法。</text>
+<polyline points="70,1604 1930,1604" fill="none" stroke="#354758" stroke-width="3"/>
+<text x="70" y="1630" font-family="Microsoft YaHei, sans-serif" font-size="26" font-weight="400" fill="#b9c8d6" dominant-baseline="text-before-edge">结论边界：材料中的能力描述 ≠ 产品实测；真实效果需要另行接入模型与工具进行验证。</text>
+<text x="70" y="1687" font-family="Microsoft YaHei, sans-serif" font-size="21" font-weight="400" fill="#b9c8d6" dominant-baseline="text-before-edge">依据两个仓库的固定版本与 Manus / Kiro / Cursor 样本整理 · 中文分析与图示为本研究原创 · 2026-09-15</text>
+</svg>

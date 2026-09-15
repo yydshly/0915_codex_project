@@ -1,0 +1,16 @@
+{
+  "id": "004",
+  "slug": "ai-tool-prompts",
+  "title": "AI 工具资料库：收集、分析与理解报告",
+  "summary": "收集 Manus、Kiro、Cursor、Lovable 等 AI 工具的提示词、工具说明与配置资料，供研究者解析、分析并整理成产品理解报告；对我们的实际价值仍需后续研究与验证。",
+  "upstream": "https://github.com/x1xhlol/system-prompts-and-models-of-ai-tools",
+  "status": "已总结",
+  "tags": [
+    "工具资料收集",
+    "产品理解报告",
+    "双库对比",
+    "价值待研究"
+  ],
+  "cover": "assets/research-guide.png",
+  "demo_url": "https://yydshly.github.io/0915_codex_project/004-ai-tool-prompts/"
+}
