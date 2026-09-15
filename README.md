@@ -16,7 +16,7 @@
 | 003 | [Fireworks：技术图生成库、输入与图型全览](projects/003-fireworks-tech-graph/README.md) | 技术图生成与导出库：接收用户或大模型整理的 JSON/SVG，绘制、检查并导出。盘点33个图型与领域条目、12种风格，明确输入要求、使用场景及能力边界。 | 已总结 | [GitHub](https://github.com/yizhiyanhua-ai/fireworks-tech-graph) | [在线演示](https://yydshly.github.io/0915_codex_project/003-fireworks-tech-graph/) |
 | 004 | [AI 工具资料库：收集、分析与理解报告](projects/004-ai-tool-prompts/README.md) | 收集 Manus、Kiro、Cursor、Lovable 等 AI 工具的提示词、工具说明与配置资料，供研究者解析、分析并整理成产品理解报告；对我们的实际价值仍需后续研究与验证。 | 已总结 | [GitHub](https://github.com/x1xhlol/system-prompts-and-models-of-ai-tools) | [在线演示](https://yydshly.github.io/0915_codex_project/004-ai-tool-prompts/) |
 | 005 | [Awesome Sites：3D 相关产品收集库](projects/005-awesome-sites/README.md) | 收集 80 个以 3D 场景及相关交互产品为主的样例。很多表现方式与已有实践重合，主要保留效果、交互与实现线索参考；尚未确认新增可复用技术能力。 | 已总结 | [网站](https://awesomesites.ai/) | [在线演示](https://yydshly.github.io/0915_codex_project/005-awesome-sites/) |
-| 006 | [Huashu Report：专业报告格式整理与约束实现](projects/006-huashu-report/README.md) | 从专业资料中梳理样式、字体、图片与图表编排、表格和分页等格式信息，形成约束与制作流程，实现相应展示效果；兼有内容组织规范，核心价值是经验整理与复用，底层技术增量有限。 | 已总结 | [GitHub](https://github.com/alchaincyf/huashu-report) | 暂未部署 |
+| 006 | [Huashu Report：专业报告格式整理与约束实现](projects/006-huashu-report/README.md) | 从专业资料中梳理样式、字体、图片与图表编排、表格和分页等格式信息，形成约束与制作流程，实现相应展示效果；兼有内容组织规范，核心价值是经验整理与复用，底层技术增量有限。 | 已总结 | [GitHub](https://github.com/alchaincyf/huashu-report) | [在线演示](https://yydshly.github.io/0915_codex_project/006-huashu-report/) |
 <!-- PROJECT_INDEX:END -->
 
 ## 项目预览
@@ -78,7 +78,7 @@
 
 ![Huashu Report：专业报告格式整理与约束实现预览](projects/006-huashu-report/assets/method-map.svg)
 
-[研究笔记](projects/006-huashu-report/README.md) · [GitHub](https://github.com/alchaincyf/huashu-report) · 暂未部署
+[研究笔记](projects/006-huashu-report/README.md) · [GitHub](https://github.com/alchaincyf/huashu-report) · [在线演示](https://yydshly.github.io/0915_codex_project/006-huashu-report/)
 
 状态：已总结 · 标签：专业资料整理 / 格式约束 / 样式与字体 / 图表与表格 / 技术增量有限
 <!-- PROJECT_CARDS:END -->

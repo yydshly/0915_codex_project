@@ -4,7 +4,7 @@
 
 ![约束如何形成并落到报告](assets/method-map.svg)
 
-[返回总索引](../../README.md) · [上游仓库](https://github.com/alchaincyf/huashu-report)
+[返回总索引](../../README.md) · [上游仓库](https://github.com/alchaincyf/huashu-report) · [在线研究网页](https://yydshly.github.io/0915_codex_project/006-huashu-report/)
 
 ## 研究版本与范围
 
@@ -54,4 +54,4 @@ python scripts/check_web.py
 
 交互验证在内存中检查六种选择状态、图解数量、内容容器、固定版本链接和 SVG 数值；不等于浏览器视觉测试。基线探针需要已检出的上游仓库。
 
-总仓库构建器将 `app/` 汇总至 `web/006-huashu-report/`。通过现有 GitHub Pages 工作流发布；线上验证成功后在项目元数据中登记演示地址。
+总仓库构建器将 `app/` 汇总至 `web/006-huashu-report/`。已于 2026-09-15 通过 GitHub Pages 发布成功。线上首页摘要、研究页、图解与样式文件已验证；正文和资源内容与本次提交一致（忽略换行编码差异）。
