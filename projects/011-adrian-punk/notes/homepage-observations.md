@@ -4,7 +4,7 @@
 
 本文件为前轮观察记录，截图已归入本子项目 assets；本轮产品研究见 [产品思路](product-thinking.md)。
 
-来源：https://iamadrianpunk.com/#home  
+来源：https://iamadrianpunk.com/#home
 查看日期：2026-09-15。依据本次页面截图、可访问性树与实际操作；个人履历、粉丝数、项目描述均为站点自述。
 
 ## 核心判断

@@ -60,3 +60,7 @@ GitHub Pages 托管 HTML、CSS、JavaScript 等静态文件，不运行 Python�
 ## 009 · GSAP Skills
 
 2026-09-15 已发布并验证：[能力与意义、双图研究介绍](https://yydshly.github.io/0915_codex_project/009-gsap-skills/research.html) · [耳机网页案例](https://yydshly.github.io/0915_codex_project/009-gsap-skills/showcase/)。摘要聚焦原库的 AI 开发指导、经验复用与领域 Skill 定制参考，两张主图完整保留。详见[发布记录](../projects/009-gsap-skills/notes/publishing.md)。
+
+## 011 · Adrian.Punk
+
+2026-09-15 已部署并验证：[个人主页的五类内容与物件故事](https://yydshly.github.io/0915_codex_project/011-adrian-punk/) · [三个创意开场](https://yydshly.github.io/0915_codex_project/011-adrian-punk/openings.html)。引导图使用最初五个页面的汇总截图；摘要明确人物、经历、文章、产品、联系与唱片、放映机、轨道星球、磁带和电视机、书信的对应关系，强调先构造自己的故事，再设计物件交互与统一风格。详见[发布记录](../projects/011-adrian-punk/notes/publishing.md)。
