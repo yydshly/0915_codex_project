@@ -65,7 +65,7 @@
 
 收集 80 个以 3D 场景及相关交互产品为主的样例。很多表现方式与已有实践重合，主要保留效果、交互与实现线索参考；尚未确认新增可复用技术能力。
 
-![Awesome Sites：3D 相关产品收集库预览](projects/005-awesome-sites/assets/capability-map.svg)
+![Awesome Sites：3D 相关产品收集库预览](projects/005-awesome-sites/assets/effect-guide.svg)
 
 [研究笔记](projects/005-awesome-sites/README.md) · [网站](https://awesomesites.ai/) · [在线演示](https://yydshly.github.io/0915_codex_project/005-awesome-sites/)
 
