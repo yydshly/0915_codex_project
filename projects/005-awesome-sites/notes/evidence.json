@@ -1,0 +1,675 @@
+{
+  "observed_at": "2026-09-15",
+  "timezone": "Asia/Shanghai",
+  "source": "https://awesomesites.ai/",
+  "method": "浏览器可见 DOM、原站界面、局部操作与海洋原作截图；未读取源码或隐藏状态。",
+  "catalog": {
+    "default_sort": "Random",
+    "expanded_load_more_times": 1,
+    "visible_case_headings_after_expansion": 80,
+    "load_more_visible_after_expansion": false,
+    "initial_sample": 16,
+    "current_coverage": 80,
+    "added_this_round": 64,
+    "source_metadata_check": {
+      "fields": [
+        "name",
+        "url",
+        "preview"
+      ],
+      "algorithm": "FNV-1a 32-bit over sorted pipe-delimited records",
+      "characters": 7995,
+      "fingerprint": 3838042958,
+      "browser_matches_local": true
+    }
+  },
+  "observations": [
+    {
+      "id": "ocean",
+      "name": "Pelagic Ocean",
+      "url": "https://pelagic-ocean.lexn8.chatgpt.site/",
+      "evidence": "action",
+      "observed": "进入原站，切换 Daylight → Sunset；选中状态更新，并在截图中看到夕阳海面。",
+      "boundary": "不能据此推断有真实海洋数据、天气预测或工程仿真精度。"
+    },
+    {
+      "id": "garage",
+      "name": "Garage Mat Simulator",
+      "url": "https://garage-mat-simulator-jp.yasu770295.chatgpt.site/",
+      "evidence": "action",
+      "observed": "默认 3.2m × 6m，8 × 15 = 120 片；点击双车位后变为 6.4m × 6m，16 × 15 = 240 片。",
+      "boundary": "原站说明数量只含 40cm 方形地面砖，不含边角件；打印、报价和 Android AR 未实测。"
+    },
+    {
+      "id": "forest",
+      "name": "Verdant Forest",
+      "url": "https://verdant-forest.lexn8.chatgpt.site/",
+      "evidence": "catalog",
+      "observed": "读取展厅简介和预览图。",
+      "boundary": "尚未进入原站验证移动、编辑、性能或资产导出。"
+    },
+    {
+      "id": "diamond",
+      "name": "Diamond Light",
+      "url": "https://diamond-light.lexn8.chatgpt.site/",
+      "evidence": "catalog",
+      "observed": "读取展厅简介和预览图。",
+      "boundary": "没有验证商品配置、库存、价格或购买流程。"
+    },
+    {
+      "id": "sf",
+      "name": "San Francisco Love Letter",
+      "url": "https://san-francisco-field-map.yana-w.chatgpt.site/",
+      "evidence": "catalog",
+      "observed": "读取展厅简介和预览图。",
+      "boundary": "没有验证路线规划、实时交通或地点资料的新鲜度。"
+    },
+    {
+      "id": "books",
+      "name": "Booktower",
+      "url": "https://booktower.elithrar.chatgpt.site/",
+      "evidence": "action",
+      "observed": "原站首个书架显示 78 books；展开 Book index 后出现书名与作者列表。",
+      "boundary": "未验证图书新增、全文阅读、借阅或库存管理。"
+    },
+    {
+      "id": "padel",
+      "name": "Padel Motion Lab",
+      "url": "https://padel-motion-lab.ivo-martins639622.chatgpt.site/?lang=en",
+      "evidence": "catalog",
+      "observed": "读取展厅简介和预览图。",
+      "boundary": "未核验动作准确性、纠错能力或训练效果。"
+    },
+    {
+      "id": "complexity",
+      "name": "Time, Amplified",
+      "url": "https://time-amplified-lab.raffaelschaefer.chatgpt.site/",
+      "evidence": "action",
+      "observed": "选中指数增长并将 n 从 4 调至 10；线性显示 10，平方显示 100，指数显示约 1.0K，图表与柱体标签同步。",
+      "boundary": "是增长模型演示；不能把图中数值当作真实设备耗时或性能基准。"
+    },
+    {
+      "id": "poke",
+      "name": "POKE-8",
+      "url": "https://poke-8.violetpurpleish.chatgpt.site/",
+      "evidence": "catalog",
+      "observed": "读取展厅简介和预览图。",
+      "boundary": "未运行样例或验证指令兼容性、持久保存与调试功能。"
+    },
+    {
+      "id": "texture",
+      "name": "Mimihouse Seamless Texture Maker",
+      "url": "https://mimihouse-seamless-texture-maker.blond-seed-6660.chatgpt.site/",
+      "evidence": "action",
+      "observed": "点击 Add shape → Circle 后出现 Shape 1 图层、形状参数和可用的 Undo；输出尺寸菜单可见 256–4096 px。",
+      "boundary": "实际验证了创建图层；未上传个人图片，也未验证下载文件与平铺接缝质量。"
+    },
+    {
+      "id": "forma",
+      "name": "Forma Design Studio",
+      "url": "https://forma-design-studio.lexn8.chatgpt.site/",
+      "evidence": "page",
+      "observed": "默认项目显示 28 个图层、Exploration / Scratchpad 两页；界面标注 Saved on this device。",
+      "boundary": "只检查界面，未验证编辑与导出、保存恢复或多人协作；不能等同于成熟设计平台。"
+    },
+    {
+      "id": "drawing",
+      "name": "WebMCP Drawing Canvas",
+      "url": "https://webmcp-draw-canvas-judge.eductionalguide.chatgpt.site/",
+      "evidence": "catalog",
+      "observed": "读取展厅简介和预览图。",
+      "boundary": "未核验导出、持久化、多人协作或代理控制接口。"
+    },
+    {
+      "id": "doodle",
+      "name": "Doodle Character Lab",
+      "url": "https://doodle-character-lab.logicleaptech.chatgpt.site/",
+      "evidence": "catalog",
+      "observed": "读取展厅简介和预览图。",
+      "boundary": "不能凭“生成”二字判断运行时调用了 AI，也未核查导出与素材许可。"
+    },
+    {
+      "id": "halo",
+      "name": "Halo Desktop",
+      "url": "https://halo-desktop.lexn8.chatgpt.site/",
+      "evidence": "catalog",
+      "observed": "读取展厅简介和预览图。",
+      "boundary": "未验证 16 个应用的可用性、文件持久化或与真实系统的连接。"
+    },
+    {
+      "id": "slice",
+      "name": "Slice / Yard",
+      "url": "https://slice-yard.logicleaptech.chatgpt.site/",
+      "evidence": "catalog",
+      "observed": "读取展厅简介和预览图。",
+      "boundary": "未试玩关卡，也未验证物理准确性、难度设计与长期可玩性。"
+    },
+    {
+      "id": "rally",
+      "name": "Rally",
+      "url": "https://rally-fitness-challenges.kitatdkw.chatgpt.site/",
+      "evidence": "catalog",
+      "observed": "读取展厅简介和预览图。",
+      "boundary": "没有创建挑战或邀请他人；身份、多人同步、数据保存与隐私均未验证。"
+    },
+    {
+      "id": "afterlight",
+      "name": "Afterlight",
+      "url": "https://afterlight-tidal-garden.bpow.chatgpt.site/",
+      "evidence": "catalog",
+      "observed": "2026-09-15 重新展开原展厅目录，核对名称、简介、原作地址和预览图地址；本轮未进入该原作测试。",
+      "boundary": "多人状态同步、事件影响与长期保存未验证。"
+    },
+    {
+      "id": "anatomy-atlas",
+      "name": "Anatomy Atlas",
+      "url": "https://anatomy-atlas.brianp.chatgpt.site/",
+      "evidence": "catalog",
+      "observed": "2026-09-15 重新展开原展厅目录，核对名称、简介、原作地址和预览图地址；本轮未进入该原作测试。",
+      "boundary": "解剖准确性、标注依据与剖切交互未验证；仅作界面参考。"
+    },
+    {
+      "id": "astra-arcade",
+      "name": "Astra Arcade",
+      "url": "https://astra-arcade.antonioleivag.chatgpt.site/",
+      "evidence": "catalog",
+      "observed": "2026-09-15 重新展开原展厅目录，核对名称、简介、原作地址和预览图地址；本轮未进入该原作测试。",
+      "boundary": "六款游戏的规则、完成度、得分保存与输入兼容性未验证。"
+    },
+    {
+      "id": "aula-inteligente",
+      "name": "Aula Inteligente",
+      "url": "https://aula-inteligente.guillermo23.chatgpt.site/",
+      "evidence": "catalog",
+      "observed": "2026-09-15 重新展开原展厅目录，核对名称、简介、原作地址和预览图地址；本轮未进入该原作测试。",
+      "boundary": "科学模型、实验结论、课程完整性与学习效果未验证。"
+    },
+    {
+      "id": "baby-s-first-song",
+      "name": "Baby's First Song",
+      "url": "https://babys-first-song-jen.ciara-ai.chatgpt.site/",
+      "evidence": "catalog",
+      "observed": "2026-09-15 重新展开原展厅目录，核对名称、简介、原作地址和预览图地址；本轮未进入该原作测试。",
+      "boundary": "是否录音、音高识别准确性和教学效果未验证。"
+    },
+    {
+      "id": "carotid-web-explorer",
+      "name": "Carotid Web Explorer",
+      "url": "https://carotid-web-explorer.faisal1578.chatgpt.site/",
+      "evidence": "catalog",
+      "observed": "2026-09-15 重新展开原展厅目录，核对名称、简介、原作地址和预览图地址；本轮未进入该原作测试。",
+      "boundary": "未核验生理模型、数据来源与模拟精度；不用于医疗判断。"
+    },
+    {
+      "id": "chatgpt-work-guide",
+      "name": "ChatGPT Work Guide",
+      "url": "https://work-guide.openai.chatgpt.site/",
+      "evidence": "catalog",
+      "observed": "2026-09-15 重新展开原展厅目录，核对名称、简介、原作地址和预览图地址；本轮未进入该原作测试。",
+      "boundary": "本次只收录目录信息，未验证指南步骤或产品功能的适用条件。"
+    },
+    {
+      "id": "dailies",
+      "name": "Dailies",
+      "url": "https://dailies.jonabrams.chatgpt.site/",
+      "evidence": "catalog",
+      "observed": "2026-09-15 重新展开原展厅目录，核对名称、简介、原作地址和预览图地址；本轮未进入该原作测试。",
+      "boundary": "谜题生成、日期切换、解答正确性和进度保存未验证。"
+    },
+    {
+      "id": "daybreak-piano-film",
+      "name": "Daybreak Piano Film",
+      "url": "https://daybreak-piano-film.lexn8.chatgpt.site/",
+      "evidence": "catalog",
+      "observed": "2026-09-15 重新展开原展厅目录，核对名称、简介、原作地址和预览图地址；本轮未进入该原作测试。",
+      "boundary": "音符与动作同步精度、音乐生成方式、素材来源和视频导出未验证。"
+    },
+    {
+      "id": "digital-peony",
+      "name": "Digital Peony",
+      "url": "https://peony.lewis-o.chatgpt.site/",
+      "evidence": "catalog",
+      "observed": "2026-09-15 重新展开原展厅目录，核对名称、简介、原作地址和预览图地址；本轮未进入该原作测试。",
+      "boundary": "程序建模方式、交互参数、资产导出与渲染实现未核查。"
+    },
+    {
+      "id": "draw-to-race",
+      "name": "Draw to Race",
+      "url": "https://draw-to-race.alvaris924.chatgpt.site/",
+      "evidence": "catalog",
+      "observed": "2026-09-15 重新展开原展厅目录，核对名称、简介、原作地址和预览图地址；本轮未进入该原作测试。",
+      "boundary": "涂鸦到物体的转换、碰撞规则、自动生成方式未验证。"
+    },
+    {
+      "id": "fishvj-ritual-live",
+      "name": "Fishvj Ritual Live",
+      "url": "https://fishvj-ritual-live.og397.chatgpt.site/",
+      "evidence": "catalog",
+      "observed": "2026-09-15 重新展开原展厅目录，核对名称、简介、原作地址和预览图地址；本轮未进入该原作测试。",
+      "boundary": "音频驱动、实时输入、输出分辨率和录制能力未验证。"
+    },
+    {
+      "id": "fluid-playground",
+      "name": "Fluid Playground",
+      "url": "https://fluid-playground.lunar-labs-7954.chatgpt.site/",
+      "evidence": "catalog",
+      "observed": "2026-09-15 重新展开原展厅目录，核对名称、简介、原作地址和预览图地址；本轮未进入该原作测试。",
+      "boundary": "求解算法、是否为二维流体、物理精度和性能未核查。"
+    },
+    {
+      "id": "flyway-surfer",
+      "name": "Flyway Surfer",
+      "url": "https://flyway-surfer.lightningshiva1.chatgpt.site/",
+      "evidence": "catalog",
+      "observed": "2026-09-15 重新展开原展厅目录，核对名称、简介、原作地址和预览图地址；本轮未进入该原作测试。",
+      "boundary": "自动驾驶算法、避障质量、关卡与输入操作未实测。"
+    },
+    {
+      "id": "forestride",
+      "name": "ForestRide",
+      "url": "https://forestride.aracos.chatgpt.site/",
+      "evidence": "catalog",
+      "observed": "2026-09-15 重新展开原展厅目录，核对名称、简介、原作地址和预览图地址；本轮未进入该原作测试。",
+      "boundary": "道路生成、资源循环复用、驾驶规则和长时间稳定性未核查。"
+    },
+    {
+      "id": "generating-a-renaissance",
+      "name": "Generating a Renaissance",
+      "url": "https://generating-a-renaissance.thearchivr.chatgpt.site/",
+      "evidence": "catalog",
+      "observed": "2026-09-15 重新展开原展厅目录，核对名称、简介、原作地址和预览图地址；本轮未进入该原作测试。",
+      "boundary": "论述依据、互动实现和内容更新方式未核验。"
+    },
+    {
+      "id": "gogh-strike",
+      "name": "Gogh Strike",
+      "url": "https://gogh-strike.petergostev.chatgpt.site/",
+      "evidence": "catalog",
+      "observed": "2026-09-15 重新展开原展厅目录，核对名称、简介、原作地址和预览图地址；本轮未进入该原作测试。",
+      "boundary": "角色动作、战斗规则、物理系统和素材许可未验证。"
+    },
+    {
+      "id": "golf-impact-lab",
+      "name": "Golf Impact Lab",
+      "url": "https://golf-impact-lab.austen114662.chatgpt.site/",
+      "evidence": "catalog",
+      "observed": "2026-09-15 重新展开原展厅目录，核对名称、简介、原作地址和预览图地址；本轮未进入该原作测试。",
+      "boundary": "简介信息较少，具体控制、碰撞模型和教学准确性均待查看。"
+    },
+    {
+      "id": "gu-fa-bian-cheng",
+      "name": "Gu Fa Bian Cheng",
+      "url": "https://gu-fa-bian-cheng.noone183492761.chatgpt.site/",
+      "evidence": "catalog",
+      "observed": "2026-09-15 重新展开原展厅目录，核对名称、简介、原作地址和预览图地址；本轮未进入该原作测试。",
+      "boundary": "具体展品交互、素材来源和制作方式未核查。"
+    },
+    {
+      "id": "gurgaon-3d-atlas",
+      "name": "Gurgaon 3D Atlas",
+      "url": "https://gurgaon-3d-atlas.cratorlabs-2435.chatgpt.site/",
+      "evidence": "catalog",
+      "observed": "2026-09-15 重新展开原展厅目录，核对名称、简介、原作地址和预览图地址；本轮未进入该原作测试。",
+      "boundary": "地理准确性、模型来源、信息标注及路线功能未验证。"
+    },
+    {
+      "id": "heavy-rotation-weekly",
+      "name": "Heavy Rotation Weekly",
+      "url": "https://heavy-rotation-weekly.korevec.chatgpt.site/",
+      "evidence": "catalog",
+      "observed": "2026-09-15 重新展开原展厅目录，核对名称、简介、原作地址和预览图地址；本轮未进入该原作测试。",
+      "boundary": "音频许可、播放来源、频谱驱动方式和每周更新机制未核查。"
+    },
+    {
+      "id": "hyderabad-bus-atlas",
+      "name": "Hyderabad Bus Atlas",
+      "url": "https://hyderabad-bus-atlas.brown-song-1633.chatgpt.site/",
+      "evidence": "catalog",
+      "observed": "2026-09-15 重新展开原展厅目录，核对名称、简介、原作地址和预览图地址；本轮未进入该原作测试。",
+      "boundary": "线路数据来源、更新时间、换乘计算和定位功能未验证。"
+    },
+    {
+      "id": "india-infra-map",
+      "name": "India Infra Map",
+      "url": "https://india-infra-map.sunidhi-30.chatgpt.site/",
+      "evidence": "catalog",
+      "observed": "2026-09-15 重新展开原展厅目录，核对名称、简介、原作地址和预览图地址；本轮未进入该原作测试。",
+      "boundary": "预算口径、信息来源、更新日期和地图精度未核验。"
+    },
+    {
+      "id": "jelly-break",
+      "name": "Jelly Break",
+      "url": "https://pocket-goblin.maplewashere.chatgpt.site/",
+      "evidence": "catalog",
+      "observed": "2026-09-15 重新展开原展厅目录，核对名称、简介、原作地址和预览图地址；本轮未进入该原作测试。",
+      "boundary": "是否使用软体求解、输入反馈、音效和手机体验未验证。"
+    },
+    {
+      "id": "jelly-hockey",
+      "name": "Jelly Hockey",
+      "url": "https://jellyhockey.logicleaptech.chatgpt.site/",
+      "evidence": "catalog",
+      "observed": "2026-09-15 重新展开原展厅目录，核对名称、简介、原作地址和预览图地址；本轮未进入该原作测试。",
+      "boundary": "软体算法、对手策略、计分与游戏操作未实测。"
+    },
+    {
+      "id": "kokoro-japan-journeys",
+      "name": "Kokoro Japan Journeys",
+      "url": "https://kokoro-japan-journeys.sarveshwar1986.chatgpt.site/",
+      "evidence": "catalog",
+      "observed": "2026-09-15 重新展开原展厅目录，核对名称、简介、原作地址和预览图地址；本轮未进入该原作测试。",
+      "boundary": "没有验证预订、真实行程、价格或旅行资料的准确性。"
+    },
+    {
+      "id": "leon-lin",
+      "name": "Leon Lin",
+      "url": "https://leonxlnx-portfolio-2026.lexn8.chatgpt.site/",
+      "evidence": "catalog",
+      "observed": "2026-09-15 重新展开原展厅目录，核对名称、简介、原作地址和预览图地址；本轮未进入该原作测试。",
+      "boundary": "项目材料真实性、动态效果和联系方式功能未核查。"
+    },
+    {
+      "id": "living-operator",
+      "name": "Living Operator",
+      "url": "https://living-operator.lexn8.chatgpt.site/",
+      "evidence": "catalog",
+      "observed": "2026-09-15 重新展开原展厅目录，核对名称、简介、原作地址和预览图地址；本轮未进入该原作测试。",
+      "boundary": "未实际对话，模型调用、语音、动作驱动和会话保存未验证。"
+    },
+    {
+      "id": "make-the-logo-bigger",
+      "name": "Make The Logo Bigger",
+      "url": "https://make-the-logo-bigger.chasedimond903653.chatgpt.site/",
+      "evidence": "catalog",
+      "observed": "2026-09-15 重新展开原展厅目录，核对名称、简介、原作地址和预览图地址；本轮未进入该原作测试。",
+      "boundary": "审批规则、操作反馈、分数计算和重复可玩性未验证。"
+    },
+    {
+      "id": "mini-moto-park",
+      "name": "Mini Moto Park",
+      "url": "https://mini-moto-park.chipchaunceytheonlyone.chatgpt.site/",
+      "evidence": "catalog",
+      "observed": "2026-09-15 重新展开原展厅目录，核对名称、简介、原作地址和预览图地址；本轮未进入该原作测试。",
+      "boundary": "本次未重新测试；历史记录与当前版本可能不同，源码许可仍待核实。"
+    },
+    {
+      "id": "model-history-timeline",
+      "name": "Model History Timeline",
+      "url": "https://model-history-timeline.blueemi99.chatgpt.site/",
+      "evidence": "catalog",
+      "observed": "2026-09-15 重新展开原展厅目录，核对名称、简介、原作地址和预览图地址；本轮未进入该原作测试。",
+      "boundary": "未核对发布日期、型号覆盖与内容更新，不作为模型事实依据。"
+    },
+    {
+      "id": "monad-ink",
+      "name": "Monad Ink",
+      "url": "https://monad-ink.shadow654.chatgpt.site/",
+      "evidence": "catalog",
+      "observed": "2026-09-15 重新展开原展厅目录，核对名称、简介、原作地址和预览图地址；本轮未进入该原作测试。",
+      "boundary": "未运行网络或连接钱包；链上执行、成本与模型效果未验证。"
+    },
+    {
+      "id": "moonlit-forge-studio",
+      "name": "Moonlit Forge Studio",
+      "url": "https://moonlit-forge-studio.op7418.chatgpt.site/",
+      "evidence": "catalog",
+      "observed": "2026-09-15 重新展开原展厅目录，核对名称、简介、原作地址和预览图地址；本轮未进入该原作测试。",
+      "boundary": "目录信息不足，不能据名称认定有创作编辑器或生产能力。"
+    },
+    {
+      "id": "morph-jelly-studio",
+      "name": "Morph Jelly Studio",
+      "url": "https://morph-creature-lab.logicleaptech.chatgpt.site/",
+      "evidence": "catalog",
+      "observed": "2026-09-15 重新展开原展厅目录，核对名称、简介、原作地址和预览图地址；本轮未进入该原作测试。",
+      "boundary": "形变算法、可编辑范围、资产导出和生成方式未核查。"
+    },
+    {
+      "id": "murmuration",
+      "name": "Murmuration",
+      "url": "https://murmuration-sky.dtzy0808.chatgpt.site/",
+      "evidence": "catalog",
+      "observed": "2026-09-15 重新展开原展厅目录，核对名称、简介、原作地址和预览图地址；本轮未进入该原作测试。",
+      "boundary": "具体映射规则、合成方式、保存与音乐导出未验证。"
+    },
+    {
+      "id": "museum-of-mollick-s-wild-stuff",
+      "name": "Museum of Mollick's Wild Stuff",
+      "url": "https://mollick-wild-stuff-museum.biotichamster.chatgpt.site/",
+      "evidence": "catalog",
+      "observed": "2026-09-15 重新展开原展厅目录，核对名称、简介、原作地址和预览图地址；本轮未进入该原作测试。",
+      "boundary": "未逐条核对作者归属、来源准确性和原作可访问性。"
+    },
+    {
+      "id": "night-parade",
+      "name": "Night Parade",
+      "url": "https://yokaicabinet.com/",
+      "evidence": "catalog",
+      "observed": "2026-09-15 重新展开原展厅目录，核对名称、简介、原作地址和预览图地址；本轮未进入该原作测试。",
+      "boundary": "民俗信息、插画许可、动效和交互方式未核查。"
+    },
+    {
+      "id": "no-moat",
+      "name": "No Moat",
+      "url": "https://no-moat.petergyang.chatgpt.site/",
+      "evidence": "catalog",
+      "observed": "2026-09-15 重新展开原展厅目录，核对名称、简介、原作地址和预览图地址；本轮未进入该原作测试。",
+      "boundary": "平衡性、资源模型、存档和完整流程未实测；不作现实行业分析。"
+    },
+    {
+      "id": "oath-relic",
+      "name": "Oath & Relic",
+      "url": "https://oath-relic-living-journal.bradjr.chatgpt.site/",
+      "evidence": "catalog",
+      "observed": "2026-09-15 重新展开原展厅目录，核对名称、简介、原作地址和预览图地址；本轮未进入该原作测试。",
+      "boundary": "翻页实现、剧情分支、声音和素材制作方式未验证。"
+    },
+    {
+      "id": "one-small-win",
+      "name": "One Small Win",
+      "url": "https://one-small-win-now.martin4010.chatgpt.site/",
+      "evidence": "catalog",
+      "observed": "2026-09-15 重新展开原展厅目录，核对名称、简介、原作地址和预览图地址；本轮未进入该原作测试。",
+      "boundary": "推荐规则、是否调用模型、个性化效果与记录保存未验证。"
+    },
+    {
+      "id": "penalty-shootout-king-26",
+      "name": "Penalty Shootout King 26",
+      "url": "https://penalty-shootout-king-26.ameymuke252003.chatgpt.site/",
+      "evidence": "catalog",
+      "observed": "2026-09-15 重新展开原展厅目录，核对名称、简介、原作地址和预览图地址；本轮未进入该原作测试。",
+      "boundary": "自适应方法与实际学习行为未核查，不能据 AI 一词判断使用大模型。"
+    },
+    {
+      "id": "pocketcraft",
+      "name": "Pocketcraft",
+      "url": "https://pocketcraft.danielkaplan0.chatgpt.site/",
+      "evidence": "catalog",
+      "observed": "2026-09-15 重新展开原展厅目录，核对名称、简介、原作地址和预览图地址；本轮未进入该原作测试。",
+      "boundary": "触控手感、世界保存、建造规则与设备兼容性未验证。"
+    },
+    {
+      "id": "rill",
+      "name": "Rill",
+      "url": "https://rill.wojtekmaj.chatgpt.site/",
+      "evidence": "catalog",
+      "observed": "2026-09-15 重新展开原展厅目录，核对名称、简介、原作地址和预览图地址；本轮未进入该原作测试。",
+      "boundary": "水流是否响应地形、编辑范围和生态行为未验证。"
+    },
+    {
+      "id": "second-touch",
+      "name": "Second Touch",
+      "url": "https://second-touch-soccer.logicleaptech.chatgpt.site/",
+      "evidence": "catalog",
+      "observed": "2026-09-15 重新展开原展厅目录，核对名称、简介、原作地址和预览图地址；本轮未进入该原作测试。",
+      "boundary": "战术规则、对手行为、碰撞判定和动作合理性未验证。"
+    },
+    {
+      "id": "sketch-golf",
+      "name": "Sketch Golf",
+      "url": "https://sketch-golf.hogan94.chatgpt.site/",
+      "evidence": "catalog",
+      "observed": "2026-09-15 重新展开原展厅目录，核对名称、简介、原作地址和预览图地址；本轮未进入该原作测试。",
+      "boundary": "名称与简介不直观对应，按目录原意收录；具体模型、训练和绘画流程未核查。"
+    },
+    {
+      "id": "snowblox",
+      "name": "Snowblox",
+      "url": "https://bossdemo.daniel-green.chatgpt.site/",
+      "evidence": "catalog",
+      "observed": "2026-09-15 重新展开原展厅目录，核对名称、简介、原作地址和预览图地址；本轮未进入该原作测试。",
+      "boundary": "积雪移除方式、碰撞模型、任务完成条件与驾驶操作未验证。"
+    },
+    {
+      "id": "starlight-goose-garden",
+      "name": "Starlight Goose Garden",
+      "url": "https://starlight-goose-garden.maplewashere.chatgpt.site/",
+      "evidence": "catalog",
+      "observed": "2026-09-15 重新展开原展厅目录，核对名称、简介、原作地址和预览图地址；本轮未进入该原作测试。",
+      "boundary": "装饰保存、音乐系统、角色行为和交互链未验证。"
+    },
+    {
+      "id": "sticker-party",
+      "name": "Sticker Party",
+      "url": "https://sticker-party.jason1212.chatgpt.site/",
+      "evidence": "catalog",
+      "observed": "2026-09-15 重新展开原展厅目录，核对名称、简介、原作地址和预览图地址；本轮未进入该原作测试。",
+      "boundary": "贴纸许可、文字编辑、图片导出和保存恢复未验证。"
+    },
+    {
+      "id": "studio-in-bricks",
+      "name": "Studio In Bricks",
+      "url": "https://studio-in-bricks.rpn24.chatgpt.site/interior",
+      "evidence": "catalog",
+      "observed": "2026-09-15 重新展开原展厅目录，核对名称、简介、原作地址和预览图地址；本轮未进入该原作测试。",
+      "boundary": "尺寸准确性、模型生成方式、漫游与物件交互未核查。"
+    },
+    {
+      "id": "tahoe-camp",
+      "name": "Tahoe Camp",
+      "url": "https://tahoe-camp.thisiskevin.chatgpt.site/",
+      "evidence": "catalog",
+      "observed": "2026-09-15 重新展开原展厅目录，核对名称、简介、原作地址和预览图地址；本轮未进入该原作测试。",
+      "boundary": "营位是否实时、预约入口、数据来源与地图准确性未验证。"
+    },
+    {
+      "id": "terrene-atlas",
+      "name": "Terrene Atlas",
+      "url": "https://terrene-atlas.meetpandya.chatgpt.site/",
+      "evidence": "catalog",
+      "observed": "2026-09-15 重新展开原展厅目录，核对名称、简介、原作地址和预览图地址；本轮未进入该原作测试。",
+      "boundary": "地理数据、光照精度、旅程内容与导航交互未核查。"
+    },
+    {
+      "id": "the-closet-index",
+      "name": "The Closet Index",
+      "url": "https://the-closet-index.matijagrcic.chatgpt.site/",
+      "evidence": "catalog",
+      "observed": "2026-09-15 重新展开原展厅目录，核对名称、简介、原作地址和预览图地址；本轮未进入该原作测试。",
+      "boundary": "片库完整度、标签准确性、访谈出处与筛选效果未核验。"
+    },
+    {
+      "id": "the-light-between",
+      "name": "The Light Between",
+      "url": "https://the-light-between.blueemi99.chatgpt.site/",
+      "evidence": "catalog",
+      "observed": "2026-09-15 重新展开原展厅目录，核对名称、简介、原作地址和预览图地址；本轮未进入该原作测试。",
+      "boundary": "音乐生成方式、频谱驱动、时间同步和素材许可未核查。"
+    },
+    {
+      "id": "the-listening-caf",
+      "name": "The Listening Café",
+      "url": "https://listening-cafe-reverelia.momoyuyju.chatgpt.site/",
+      "evidence": "catalog",
+      "observed": "2026-09-15 重新展开原展厅目录，核对名称、简介、原作地址和预览图地址；本轮未进入该原作测试。",
+      "boundary": "制作流程、音频播放、上下层导航和保存状态未验证。"
+    },
+    {
+      "id": "tidetown",
+      "name": "Tidetown",
+      "url": "https://tidetown.logicleaptech.chatgpt.site/",
+      "evidence": "catalog",
+      "observed": "2026-09-15 重新展开原展厅目录，核对名称、简介、原作地址和预览图地址；本轮未进入该原作测试。",
+      "boundary": "邻接算法、可编辑范围、导出与场景保存未核查。"
+    },
+    {
+      "id": "tiny-planet-blob",
+      "name": "Tiny Planet Blob",
+      "url": "https://tiny-planet-blob.gabe880160.chatgpt.site/",
+      "evidence": "catalog",
+      "observed": "2026-09-15 重新展开原展厅目录，核对名称、简介、原作地址和预览图地址；本轮未进入该原作测试。",
+      "boundary": "球面重力、碰撞规则、角色动画与关卡流程未验证。"
+    },
+    {
+      "id": "topological-rubik-synchronizer",
+      "name": "Topological Rubik Synchronizer",
+      "url": "https://topological-rubik-synchronizer.ela-dev-27.chatgpt.site/",
+      "evidence": "catalog",
+      "observed": "2026-09-15 重新展开原展厅目录，核对名称、简介、原作地址和预览图地址；本轮未进入该原作测试。",
+      "boundary": "目录解释有限，拓扑含义、同步规则和算法正确性未验证。"
+    },
+    {
+      "id": "transformer-architecture",
+      "name": "Transformer Architecture",
+      "url": "https://transformer-architecture.petergostev.chatgpt.site/",
+      "evidence": "catalog",
+      "observed": "2026-09-15 重新展开原展厅目录，核对名称、简介、原作地址和预览图地址；本轮未进入该原作测试。",
+      "boundary": "架构版本、图示准确性、动态计算和技术论述未核验。"
+    },
+    {
+      "id": "vibe-code-kids",
+      "name": "Vibe Code Kids",
+      "url": "https://vibecodekids.com/",
+      "evidence": "catalog",
+      "observed": "2026-09-15 重新展开原展厅目录，核对名称、简介、原作地址和预览图地址；本轮未进入该原作测试。",
+      "boundary": "实际代码运行、课程质量、年龄适配和账号功能未核查。"
+    },
+    {
+      "id": "voxel-slot-car-racer",
+      "name": "Voxel Slot Car Racer",
+      "url": "https://voxel-slot-car-racer.equipai.chatgpt.site/",
+      "evidence": "catalog",
+      "observed": "2026-09-15 重新展开原展厅目录，核对名称、简介、原作地址和预览图地址；本轮未进入该原作测试。",
+      "boundary": "轨道约束、调校模型、编辑保存与比赛流程未验证。"
+    },
+    {
+      "id": "vt-code",
+      "name": "VT Code",
+      "url": "https://vtcode.vinhnx.chatgpt.site/",
+      "evidence": "catalog",
+      "observed": "2026-09-15 重新展开原展厅目录，核对名称、简介、原作地址和预览图地址；本轮未进入该原作测试。",
+      "boundary": "未配对外部工具，执行环境、WebMCP 接口及文件安全范围未验证。"
+    },
+    {
+      "id": "web-harmonium",
+      "name": "Web Harmonium",
+      "url": "https://web-harmonium.rajmayank-mrb.chatgpt.site/",
+      "evidence": "catalog",
+      "observed": "2026-09-15 重新展开原展厅目录，核对名称、简介、原作地址和预览图地址；本轮未进入该原作测试。",
+      "boundary": "音高准确性、记谱转换、乐谱导出与音频延迟未验证。"
+    },
+    {
+      "id": "world-shiritori",
+      "name": "World Shiritori",
+      "url": "https://world-shiritori.iori-2.chatgpt.site/",
+      "evidence": "catalog",
+      "observed": "2026-09-15 重新展开原展厅目录，核对名称、简介、原作地址和预览图地址；本轮未进入该原作测试。",
+      "boundary": "没有提交词语；实时同步、词汇校验、并发与内容管理未验证。"
+    },
+    {
+      "id": "zen-sandbox",
+      "name": "Zen Sandbox",
+      "url": "https://zen-sandbox.mweaver999.chatgpt.site/",
+      "evidence": "catalog",
+      "observed": "2026-09-15 重新展开原展厅目录，核对名称、简介、原作地址和预览图地址；本轮未进入该原作测试。",
+      "boundary": "沙面变形实现、工具种类、场景保存与触控效果未验证。"
+    }
+  ],
+  "limitations": [
+    "全量收录当前目录不等于全量实测",
+    "74 个案例只按目录和预览收录",
+    "原有 5 项关键操作与 1 个界面检查保留，本轮未新增原作实测",
+    "Mini Moto 关联昨天的历史记录，不计作本轮验证",
+    "未检查原作源码、生成流程、性能或商业收益"
+  ]
+}

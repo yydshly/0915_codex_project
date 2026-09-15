@@ -21,6 +21,7 @@ projects/
 | 001 | [Unique3D](001-unique3d/README.md) | 单图经扩散模型生成多视图与法线，再由 ISOMER 重建、细化并上色，导出 GLB 网格。 | [AiuniAI/Unique3D](https://github.com/AiuniAI/Unique3D) |
 | 002 | [Web Starter Kit：3D 人物与舞蹈演示、接入能力](002-web-game-starter/README.md) | 已有 3D 人物模型与舞蹈动作的接入、播放和演示。当前目标参考价值有限，核心在人物与动作资产。附架构引导图与远端研究页。 | [vibegameengine/web-starter-kit](https://github.com/vibegameengine/web-starter-kit) |
 | 004 | [AI 工具资料库：收集、分析与理解报告](004-ai-tool-prompts/README.md) | 收集 Manus、Kiro、Cursor、Lovable 等 AI 工具的提示词、工具说明与配置资料，供研究者解析、分析并整理成产品理解报告；对我们的实际价值仍需后续研究与验证。 | [x1xhlol/system-prompts-and-models-of-ai-tools](https://github.com/x1xhlol/system-prompts-and-models-of-ai-tools) |
+| 005 | [Awesome Sites：3D 相关产品收集库](005-awesome-sites/README.md) | 收集 80 个 3D 相关产品及交互样例；与已有实践较多重合，保留效果、交互与实现线索参考，技术增量目前有限。 | [Awesome Sites](https://awesomesites.ai/) |
 
 - 子目录命名：三位数字编号 + 英文小写短横线名称。
 - 每个项目的 `project.json` 是首页摘要和链接的来源。

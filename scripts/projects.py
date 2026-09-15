@@ -96,7 +96,7 @@ def sections(items):
     for item in items:
         folder = f'projects/{item["id"]}-{item["slug"]}'
         research = link(item["title"], f"{folder}/README.md")
-        upstream = link("GitHub", item["upstream"])
+        upstream = link("GitHub" if urlsplit(item["upstream"]).hostname == "github.com" else "网站", item["upstream"])
         demo = link("在线演示", item["demo_url"]) if item["demo_url"] else "暂未部署"
         rows.append(f'| {item["id"]} | {research} | {plain(item["summary"])} | '
                     f'{item["status"]} | {upstream} | {demo} |')

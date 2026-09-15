@@ -1,0 +1,17 @@
+{
+  "id": "005",
+  "slug": "awesome-sites",
+  "title": "Awesome Sites：3D 相关产品收集库",
+  "summary": "收集 80 个以 3D 场景及相关交互产品为主的样例。很多表现方式与已有实践重合，主要保留效果、交互与实现线索参考；尚未确认新增可复用技术能力。",
+  "upstream": "https://awesomesites.ai/",
+  "status": "已总结",
+  "tags": [
+    "3D 相关产品",
+    "案例收集",
+    "效果参考",
+    "交互参考",
+    "技术增量有限"
+  ],
+  "cover": "assets/capability-map.svg",
+  "demo_url": ""
+}
