@@ -1,0 +1,14 @@
+{
+  "date": "2026-09-15",
+  "svgFiles": 19,
+  "nativeHtml": 19,
+  "pngFiles": 19,
+  "programChecksPassed": 95,
+  "identicalChineseTopologies": 7,
+  "negativeCasesRejected": 3,
+  "historicalGifReferences": 12,
+  "inputAndOutputHashes": "passed",
+  "browserInteractionQA": "not performed",
+  "siteScreenshotQA": "not performed",
+  "limits": "Program checks are not a full visual or business-fact audit. Comparisons reuse prior fixed-version research."
+}

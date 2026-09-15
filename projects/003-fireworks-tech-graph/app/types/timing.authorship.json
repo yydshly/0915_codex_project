@@ -1,0 +1,7 @@
+{
+  "author": "本次 Agent",
+  "route": "Fireworks Skill 的 AI-authored SVG 路径",
+  "source": "diagram-layout-reference.md",
+  "purpose": "对象状态随时间如何变化？",
+  "limit": "由时间轴适配，纵轴为状态、横轴为时间；与消息时序图不同。时间为教学设定。"
+}

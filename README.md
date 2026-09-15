@@ -13,6 +13,7 @@
 | --- | --- | --- | --- | --- | --- |
 | 001 | [Unique3D：从一张图片到三维网格](projects/001-unique3d/README.md) | 单张物体图片经预训练扩散模型生成多视图与法线，再由 ISOMER 重建、细化并上色，导出 GLB 网格；整理模型与算法分工、效果边界及三维技术路线对比。 | 已总结 | [GitHub](https://github.com/AiuniAI/Unique3D) | [在线演示](https://yydshly.github.io/0915_codex_project/001-unique3d/) |
 | 002 | [Web Starter Kit：3D 人物与舞蹈演示、接入能力](projects/002-web-game-starter/README.md) | 提供 3D 人物模型与舞蹈动作的接入、播放和演示。模型与动作资产仍需自行制作或取得并适配；对当前创作目标参考价值有限，核心在人物与动作资产。 | 已总结 | [GitHub](https://github.com/vibegameengine/web-starter-kit) | [在线演示](https://yydshly.github.io/0915_codex_project/002-web-game-starter/) |
+| 003 | [Fireworks：技术图生成库、输入与图型全览](projects/003-fireworks-tech-graph/README.md) | 技术图生成与导出库：接收用户或大模型整理的 JSON/SVG，绘制、检查并导出。盘点33个图型与领域条目、12种风格，明确输入要求、使用场景及能力边界。 | 已总结 | [GitHub](https://github.com/yizhiyanhua-ai/fireworks-tech-graph) | [在线演示](https://yydshly.github.io/0915_codex_project/003-fireworks-tech-graph/) |
 <!-- PROJECT_INDEX:END -->
 
 ## 项目预览
@@ -37,6 +38,16 @@
 [研究笔记](projects/002-web-game-starter/README.md) · [GitHub](https://github.com/vibegameengine/web-starter-kit) · [在线演示](https://yydshly.github.io/0915_codex_project/002-web-game-starter/)
 
 状态：已总结 · 标签：Three\.js / 网页游戏 / 交互实验 / 角色动画 / 物理模拟
+
+### 003 · Fireworks：技术图生成库、输入与图型全览
+
+技术图生成与导出库：接收用户或大模型整理的 JSON/SVG，绘制、检查并导出。盘点33个图型与领域条目、12种风格，明确输入要求、使用场景及能力边界。
+
+![Fireworks：技术图生成库、输入与图型全览预览](projects/003-fireworks-tech-graph/app/capability-map/fireworks-capabilities.png)
+
+[研究笔记](projects/003-fireworks-tech-graph/README.md) · [GitHub](https://github.com/yizhiyanhua-ai/fireworks-tech-graph) · [在线演示](https://yydshly.github.io/0915_codex_project/003-fireworks-tech-graph/)
+
+状态：已总结 · 标签：技术绘图 / SVG / Agent Skill / Archify 对照 / Graphify 对照
 <!-- PROJECT_CARDS:END -->
 
 ## 新增研究项目

@@ -1,0 +1,221 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'; script-src 'unsafe-inline'; img-src data: blob:">
+  <title>agent-memory-types-style4</title>
+  <style>
+    :root { color-scheme: dark; --page:#0f0f1a; --panel:#0f172a; --border:#334155; --text:#e2e8f0; --muted:#94a3b8; --accent:#a855f7; }
+    html[data-theme="light"] { color-scheme:light; --page:#f8fafc; --panel:#fff; --border:#cbd5e1; --text:#0f172a; --muted:#475569; --accent:#7c3aed; }
+    * { box-sizing:border-box; }
+    html,body { width:100%; height:100%; margin:0; overflow:hidden; background:linear-gradient(135deg,var(--page),#1a1a2e); color:var(--text); font-family:'SF Mono','Fira Code',ui-monospace,monospace; }
+    body { display:grid; grid-template-rows:auto 1fr; }
+    .toolbar { display:flex; flex-wrap:wrap; align-items:center; gap:8px; padding:10px 14px; background:color-mix(in srgb,var(--panel) 92%,transparent); border-bottom:1px solid var(--border); z-index:2; }
+    .title { margin-right:auto; font-size:13px; font-weight:700; }
+    button,select { min-height:34px; padding:6px 10px; color:var(--text); background:var(--panel); border:1px solid var(--border); border-radius:8px; font:inherit; cursor:pointer; }
+    button:hover,button:focus-visible,select:focus-visible { border-color:var(--accent); outline:2px solid color-mix(in srgb,var(--accent) 35%,transparent); outline-offset:1px; }
+    #stage { position:relative; overflow:hidden; touch-action:none; cursor:grab; }
+    #stage.dragging { cursor:grabbing; }
+    #canvas { width:100%; height:100%; display:grid; place-items:center; transform-origin:0 0; will-change:transform; }
+    #canvas svg { max-width:calc(100vw - 40px); max-height:calc(100vh - 92px); width:auto; height:auto; filter:drop-shadow(0 22px 60px rgba(0,0,0,.28)); user-select:none; }
+    #status { min-width:76px; color:var(--muted); font-size:12px; text-align:center; }
+    .sr-only { position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0; }
+    @media (prefers-reduced-motion:reduce) { * { scroll-behavior:auto!important; transition:none!important; } }
+  </style>
+<meta name="description" content="Fireworks 原生离线图查看器；固定版本真实产物。"></head>
+<body>
+  <header class="toolbar" aria-label="Diagram controls">
+    <span class="title">agent-memory-types-style4</span>
+    <button type="button" data-action="zoom-out" aria-label="Zoom out">−</button>
+    <button type="button" data-action="reset" aria-label="Reset view">Reset</button>
+    <button type="button" data-action="zoom-in" aria-label="Zoom in">+</button>
+    <span id="status" aria-live="polite">100%</span>
+    <button type="button" data-action="theme" aria-label="Toggle theme">Theme</button>
+    <button type="button" data-action="copy" aria-label="Copy SVG source">Copy SVG</button>
+    <select id="scale" aria-label="Raster export scale"><option value="1">1×</option><option value="2" selected>2×</option><option value="3">3×</option><option value="4">4×</option></select>
+    <select id="format" aria-label="Export format"><option>SVG</option><option>PNG</option><option>JPEG</option><option>WebP</option></select>
+    <button type="button" data-action="download">Export</button>
+  </header>
+  <main id="stage" tabindex="0" aria-label="Interactive diagram. Drag to pan; use plus and minus to zoom.">
+    <div id="canvas"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 960 620" width="960" height="620" data-generator="fireworks-tech-graph" data-schema-version="1" data-text-metrics="heuristic-v1" data-style-id="4" data-visual-theme="Notion Clean" data-diagram-type="memory" data-motion-scene="memory-lifecycle" data-semantic-profile="generic" data-semantic-valid="true" data-quality-profile="showcase" data-max-bends-per-edge="2" data-max-total-bends="8" data-max-route-stretch="1.35" data-max-bridged-crossings="0" data-min-node-gap="40.0" data-min-container-gutter="20.0" data-min-label-clearance="4.0" data-min-segment-length="16.0" role="img" focusable="false">
+  <defs>
+    <marker id="arrowA" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#3b82f6" />
+    </marker>
+    <marker id="arrowB" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#3b82f6" />
+    </marker>
+    <marker id="arrowC" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#3b82f6" />
+    </marker>
+    <marker id="arrowE" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#3b82f6" />
+    </marker>
+    <marker id="arrowF" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#9ca3af" />
+    </marker>
+    <marker id="arrowG" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#9ca3af" />
+    </marker>
+    <marker id="arrowH" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto">
+      <polygon points="0 0, 8 3, 0 6" fill="#d1d5db" />
+    </marker>
+    <style>
+    text { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Helvetica Neue', Arial, 'PingFang SC', 'Noto Sans CJK SC', 'Microsoft YaHei', 'Microsoft JhengHei', 'SimHei', sans-serif; }
+    .title { font-size: 18px; font-weight: 700; fill: #111827; }
+    .subtitle { font-size: 13px; font-weight: 500; fill: #9ca3af; }
+    .section { font-size: 13px; font-weight: 700; fill: #6b7280; letter-spacing: 1.4px; }
+    .section-sub { font-size: 12px; font-weight: 500; fill: #6b7280; }
+    .node-title { font-weight: 700; fill: #111827; }
+    .node-sub { font-weight: 500; fill: #374151; }
+    .node-type { font-size: 11px; font-weight: 700; fill: #6b7280; letter-spacing: 0.08em; }
+    .arrow-label { font-size: 12px; font-weight: 600; fill: #6b7280; }
+    .legend { font-size: 12px; font-weight: 500; fill: #6b7280; }
+    .footnote { font-size: 12px; font-weight: 500; fill: #6b7280; }
+    .metric-label { font-size: 8.5px; font-weight: 700; fill: #6b7280; text-transform: uppercase; }
+    .metric-value { font-size: 9.5px; font-weight: 700; fill: #111827; }
+    </style>
+  </defs>
+  <rect data-graph-role="background" width="960.0" height="620.0" fill="#ffffff" />
+  <text x="48.0" y="48" text-anchor="start" class="title">Agent Memory Types</text>
+  <text x="48.0" y="72" text-anchor="start" class="subtitle">from active perception to durable knowledge and reusable procedures</text>
+  <line x1="48" y1="100" x2="912.0" y2="100" stroke="#e5e7eb" stroke-width="1" />
+  <g id="active-context" data-graph-role="container" data-container-id="active-context" data-semantic-role="boundary" data-graph-bounds="40,120,920,285">
+  <rect data-graph-role="container" x="40.0" y="120.0" width="880.0" height="165.0" rx="4.0" fill="none" stroke="#e5e7eb" stroke-width="1.4" />
+  <text x="58.0" y="144.0" class="section">ACTIVE CONTEXT</text>
+    <rect id="active-context-header" data-graph-role="reserved" data-reserved-kind="container-header" x="48" y="126" width="129.32" height="30" fill="none" stroke="none" />
+  </g>
+  <g id="long-term" data-graph-role="container" data-container-id="long-term" data-semantic-role="boundary" data-graph-bounds="40,335,920,520">
+  <rect data-graph-role="container" x="40.0" y="335.0" width="880.0" height="185.0" rx="4.0" fill="none" stroke="#e5e7eb" stroke-width="1.4" />
+  <text x="58.0" y="359.0" class="section">LONG-TERM MEMORY</text>
+    <rect id="long-term-header" data-graph-role="reserved" data-reserved-kind="container-header" x="48" y="341" width="157.14" height="30" fill="none" stroke="none" />
+  </g>
+  <path id="sample" data-graph-role="edge" data-edge-id="sample" data-source="sensory" data-target="working" data-edge-kind="flow" data-topic-id="" data-flow="read" data-motion-role="sample" data-motion-stage="1" data-motion-order="0" data-protocol="" data-via="" data-critical-path-id="" data-critical-hop="" data-critical-hops="" data-critical="false" data-bends="0" data-route-stretch="1.0" data-bridges="" d="M 220,210 L 270,210" fill="none" stroke="#3b82f6" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrowA)" />
+  <path id="attend" data-graph-role="edge" data-edge-id="attend" data-source="working" data-target="agent" data-edge-kind="flow" data-topic-id="" data-flow="control" data-motion-role="attend" data-motion-stage="2" data-motion-order="0" data-protocol="" data-via="" data-critical-path-id="" data-critical-hop="" data-critical-hops="" data-critical="false" data-bends="0" data-route-stretch="1.0" data-bridges="" d="M 430,210 L 490,210" fill="none" stroke="#3b82f6" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrowA)" />
+  <path id="invoke" data-graph-role="edge" data-edge-id="invoke" data-source="agent" data-target="procedural" data-edge-kind="flow" data-topic-id="" data-flow="control" data-motion-role="invoke" data-motion-stage="3" data-motion-order="0" data-protocol="" data-via="" data-critical-path-id="" data-critical-hop="" data-critical-hops="" data-critical="false" data-bends="0" data-route-stretch="1.0" data-bridges="" d="M 650,210 L 700,210" fill="none" stroke="#3b82f6" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrowA)" />
+  <path id="remember" data-graph-role="edge" data-edge-id="remember" data-source="working" data-target="episodic" data-edge-kind="flow" data-topic-id="" data-flow="write" data-motion-role="remember" data-motion-stage="4" data-motion-order="0" data-protocol="" data-via="" data-critical-path-id="" data-critical-hop="" data-critical-hops="" data-critical="false" data-bends="0" data-route-stretch="1.0" data-bridges="" d="M 350,255 L 350,400" fill="none" stroke="#3b82f6" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrowA)" />
+  <path id="recall" data-graph-role="edge" data-edge-id="recall" data-source="semantic" data-target="agent" data-edge-kind="flow" data-topic-id="" data-flow="read" data-motion-role="recall" data-motion-stage="6" data-motion-order="0" data-protocol="" data-via="" data-critical-path-id="" data-critical-hop="" data-critical-hops="" data-critical="false" data-bends="0" data-route-stretch="1.0" data-bridges="" d="M 570,400 L 570,255" fill="none" stroke="#3b82f6" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrowA)" />
+  <path id="consolidate" data-graph-role="edge" data-edge-id="consolidate" data-source="episodic" data-target="semantic" data-edge-kind="flow" data-topic-id="" data-flow="write" data-motion-role="consolidate" data-motion-stage="5" data-motion-order="0" data-protocol="" data-via="" data-critical-path-id="" data-critical-hop="" data-critical-hops="" data-critical="false" data-bends="0" data-route-stretch="1.0" data-bridges="" d="M 430,445 L 490,445" fill="none" stroke="#3b82f6" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrowA)" />
+  <g id="node-sensory" data-graph-role="node" data-node-id="sensory" data-semantic-role="rect" data-motion-role="" data-motion-stage="" data-motion-order="" data-parent="" data-deployment-id="" data-topic-id="" data-span-id="" data-station-order="" data-status="" data-start-ms="" data-duration-ms="" data-parent-span="" data-graph-bounds="60,165,220,255">
+  <rect x="60.0" y="165.0" width="160.0" height="90.0" rx="4.0" fill="#ffffff" stroke="#e5e7eb" stroke-width="1.8" />
+  <text x="140.0" y="183.0" text-anchor="middle" class="node-type">SENSORY MEMORY</text>
+  <text data-text-role="title" data-full-text="Raw Input" data-text-max-width="136.0" x="140.0" y="216.0" text-anchor="middle" class="node-title" font-size="18">Raw Input</text>
+  <rect x="78.0" y="235.0" width="122" height="16" rx="3" fill="#eff6ff" stroke="#bfdbfe" stroke-width="1" />
+  <text x="139.0" y="246.5" text-anchor="middle" font-size="11" font-weight="500" fill="#3b82f6">RAM / context</text>
+  </g>
+  <g id="node-working" data-graph-role="node" data-node-id="working" data-semantic-role="rect" data-motion-role="" data-motion-stage="" data-motion-order="" data-parent="" data-deployment-id="" data-topic-id="" data-span-id="" data-station-order="" data-status="" data-start-ms="" data-duration-ms="" data-parent-span="" data-graph-bounds="270,165,430,255">
+  <rect x="270.0" y="165.0" width="160.0" height="90.0" rx="4.0" fill="#ffffff" stroke="#e5e7eb" stroke-width="1.8" />
+  <text x="350.0" y="183.0" text-anchor="middle" class="node-type">WORKING MEMORY</text>
+  <text data-text-role="title" data-full-text="Active Context" data-text-max-width="136.0" x="350.0" y="216.0" text-anchor="middle" class="node-title" font-size="16.48">Active Context</text>
+  <rect x="288.0" y="235.0" width="130" height="16" rx="3" fill="#eff6ff" stroke="#bfdbfe" stroke-width="1" />
+  <text x="353.0" y="246.5" text-anchor="middle" font-size="11" font-weight="500" fill="#3b82f6">Context Window</text>
+  </g>
+  <g id="node-agent" data-graph-role="node" data-node-id="agent" data-semantic-role="hexagon" data-motion-role="" data-motion-stage="" data-motion-order="" data-parent="" data-deployment-id="" data-topic-id="" data-span-id="" data-station-order="" data-status="" data-start-ms="" data-duration-ms="" data-parent-span="" data-graph-bounds="490,165,650,255">
+  <path d="M 512.0 165.0 L 628.0 165.0 L 650.0 210.0 L 628.0 255.0 L 512.0 255.0 L 490.0 210.0 Z" fill="#ffffff" stroke="#3b82f6" stroke-width="1.6" />
+  <text x="570.0" y="183.0" text-anchor="middle" class="node-type">AGENT CORE</text>
+  <text data-text-role="title" data-full-text="LLM + Planner" data-text-max-width="108.0" x="570.0" y="216.0" text-anchor="middle" class="node-title" font-size="14.12">LLM + Planner</text>
+  <text data-text-role="subtitle" data-full-text="reason + decide" data-text-max-width="108.0" x="570.0" y="238.0" text-anchor="middle" class="node-sub" font-size="12">reason + decide</text>
+  </g>
+  <g id="node-procedural" data-graph-role="node" data-node-id="procedural" data-semantic-role="rect" data-motion-role="" data-motion-stage="" data-motion-order="" data-parent="" data-deployment-id="" data-topic-id="" data-span-id="" data-station-order="" data-status="" data-start-ms="" data-duration-ms="" data-parent-span="" data-graph-bounds="700,165,880,255">
+  <rect x="700.0" y="165.0" width="180.0" height="90.0" rx="4.0" fill="#ffffff" stroke="#e5e7eb" stroke-width="1.8" />
+  <text x="790.0" y="183.0" text-anchor="middle" class="node-type">PROCEDURAL MEMORY</text>
+  <text data-text-role="title" data-full-text="Skills + How-to" data-text-max-width="156.0" x="790.0" y="216.0" text-anchor="middle" class="node-title" font-size="18">Skills + How-to</text>
+  <rect x="718.0" y="235.0" width="122" height="16" rx="3" fill="#f5f3ff" stroke="#ddd6fe" stroke-width="1" />
+  <text x="779.0" y="246.5" text-anchor="middle" font-size="11" font-weight="500" fill="#7c3aed">Code / Skills</text>
+  </g>
+  <g id="node-episodic" data-graph-role="node" data-node-id="episodic" data-semantic-role="rect" data-motion-role="" data-motion-stage="" data-motion-order="" data-parent="" data-deployment-id="" data-topic-id="" data-span-id="" data-station-order="" data-status="" data-start-ms="" data-duration-ms="" data-parent-span="" data-graph-bounds="270,400,430,490">
+  <rect x="270.0" y="400.0" width="160.0" height="90.0" rx="4.0" fill="#ffffff" stroke="#e5e7eb" stroke-width="1.8" />
+  <text x="350.0" y="418.0" text-anchor="middle" class="node-type">EPISODIC MEMORY</text>
+  <text data-text-role="title" data-full-text="Past Interactions" data-text-max-width="136.0" x="350.0" y="451.0" text-anchor="middle" class="node-title" font-size="13.8">Past Interactions</text>
+  <rect x="288.0" y="470.0" width="146" height="16" rx="3" fill="#ecfdf5" stroke="#a7f3d0" stroke-width="1" />
+  <text x="361.0" y="481.5" text-anchor="middle" font-size="11" font-weight="500" fill="#059669">Vector DB + time</text>
+  </g>
+  <g id="node-semantic" data-graph-role="node" data-node-id="semantic" data-semantic-role="rect" data-motion-role="" data-motion-stage="" data-motion-order="" data-parent="" data-deployment-id="" data-topic-id="" data-span-id="" data-station-order="" data-status="" data-start-ms="" data-duration-ms="" data-parent-span="" data-graph-bounds="490,400,650,490">
+  <rect x="490.0" y="400.0" width="160.0" height="90.0" rx="4.0" fill="#ffffff" stroke="#e5e7eb" stroke-width="1.8" />
+  <text x="570.0" y="418.0" text-anchor="middle" class="node-type">SEMANTIC MEMORY</text>
+  <text data-text-role="title" data-full-text="Facts + Knowledge" data-text-max-width="136.0" x="570.0" y="451.0" text-anchor="middle" class="node-title" font-size="13.74">Facts + Knowledge</text>
+  <rect x="508.0" y="470.0" width="130" height="16" rx="3" fill="#fff7ed" stroke="#fed7aa" stroke-width="1" />
+  <text x="573.0" y="481.5" text-anchor="middle" font-size="11" font-weight="500" fill="#ea580c">Vector + Graph</text>
+  </g>
+  <g id="remember-label" data-graph-role="label" data-owner="remember" data-graph-bounds="277.32,313.5,347,333.5">
+  <rect x="277.32" y="313.5" width="69.67999999999999" height="20" rx="6" fill="#ffffff" opacity="0.96" />
+  <text x="312.16" y="327.5" text-anchor="middle" class="arrow-label">remember</text>
+  </g>
+  <g id="recall-label" data-graph-role="label" data-owner="recall" data-graph-bounds="517.48,313.5,567,333.5">
+  <rect x="517.48" y="313.5" width="49.519999999999996" height="20" rx="6" fill="#ffffff" opacity="0.96" />
+  <text x="542.24" y="327.5" text-anchor="middle" class="arrow-label">recall</text>
+  </g>
+  <g id="footer" data-graph-role="reserved" data-graph-bounds="48,578,454,594">
+  <text x="48.0" y="590.0" class="footnote">Style 4 · Notion Clean · five complementary memory systems</text>
+  </g>
+</svg></div>
+    <p class="sr-only">Keyboard shortcuts: plus and minus zoom, zero resets, T toggles theme, S exports.</p>
+  </main>
+  <script>
+  (() => {
+    'use strict';
+    const metadata = {"slug": "agent-memory-types-style4"};
+    const stage = document.getElementById('stage');
+    const canvas = document.getElementById('canvas');
+    const svg = canvas.querySelector('svg');
+    const status = document.getElementById('status');
+    const scaleSelect = document.getElementById('scale');
+    const formatSelect = document.getElementById('format');
+    let view = { x:0, y:0, scale:1 };
+    let drag = null;
+    const clamp = value => Math.max(.2, Math.min(8, value));
+    const render = () => {
+      canvas.style.transform = `translate(${view.x}px,${view.y}px) scale(${view.scale})`;
+      status.textContent = `${Math.round(view.scale * 100)}%`;
+    };
+    const zoom = (factor, originX=stage.clientWidth/2, originY=stage.clientHeight/2) => {
+      const next = clamp(view.scale * factor);
+      const ratio = next / view.scale;
+      view.x = originX - (originX - view.x) * ratio;
+      view.y = originY - (originY - view.y) * ratio;
+      view.scale = next; render();
+    };
+    const reset = () => { view = {x:0,y:0,scale:1}; render(); };
+    stage.addEventListener('wheel', event => { event.preventDefault(); const rect=stage.getBoundingClientRect(); zoom(event.deltaY < 0 ? 1.12 : .89, event.clientX-rect.left, event.clientY-rect.top); }, {passive:false});
+    stage.addEventListener('pointerdown', event => { drag={id:event.pointerId,x:event.clientX,y:event.clientY,vx:view.x,vy:view.y}; stage.setPointerCapture(event.pointerId); stage.classList.add('dragging'); });
+    stage.addEventListener('pointermove', event => { if(!drag||drag.id!==event.pointerId)return; view.x=drag.vx+event.clientX-drag.x; view.y=drag.vy+event.clientY-drag.y; render(); });
+    const endDrag = () => { drag=null; stage.classList.remove('dragging'); };
+    stage.addEventListener('pointerup', endDrag); stage.addEventListener('pointercancel', endDrag);
+    const source = () => new XMLSerializer().serializeToString(svg);
+    const saveBlob = (blob, extension) => { const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download=`${(metadata.slug||'fireworks-tech-graph')}.${extension}`; a.click(); setTimeout(()=>URL.revokeObjectURL(a.href),1000); };
+    const copySource = async () => {
+      const value=source();
+      try { await navigator.clipboard.writeText(value); status.textContent='Copied'; return; } catch {}
+      const area=document.createElement('textarea'); area.value=value; area.setAttribute('readonly',''); area.style.position='fixed'; area.style.opacity='0'; document.body.appendChild(area); area.select();
+      status.textContent=document.execCommand('copy')?'Copied':'Copy failed'; area.remove();
+    };
+    const exportDiagram = async () => {
+      const format = formatSelect.value.toLowerCase();
+      if(format==='svg') { saveBlob(new Blob([source()],{type:'image/svg+xml;charset=utf-8'}),'svg'); return; }
+      const scale = Math.max(1,Math.min(4,Number(scaleSelect.value)||2));
+      const box = svg.viewBox.baseVal; const width=box.width||svg.clientWidth; const height=box.height||svg.clientHeight;
+      const image = new Image(); const url=URL.createObjectURL(new Blob([source()],{type:'image/svg+xml'}));
+      await new Promise((resolve,reject)=>{ image.onload=resolve; image.onerror=reject; image.src=url; });
+      const raster=document.createElement('canvas'); raster.width=Math.round(width*scale); raster.height=Math.round(height*scale);
+      const ctx=raster.getContext('2d'); if(format==='jpeg'){ctx.fillStyle='#ffffff';ctx.fillRect(0,0,raster.width,raster.height);} ctx.drawImage(image,0,0,raster.width,raster.height); URL.revokeObjectURL(url);
+      const mime=format==='jpeg'?'image/jpeg':format==='webp'?'image/webp':'image/png';
+      const blob=await new Promise(resolve=>raster.toBlob(resolve,mime,.94)); if(blob) saveBlob(blob,format==='jpeg'?'jpg':format);
+    };
+    document.querySelector('.toolbar').addEventListener('click', async event => {
+      const action=event.target.closest('[data-action]')?.dataset.action; if(!action)return;
+      if(action==='zoom-in')zoom(1.2); else if(action==='zoom-out')zoom(.83); else if(action==='reset')reset();
+      else if(action==='theme')document.documentElement.dataset.theme=document.documentElement.dataset.theme==='dark'?'light':'dark';
+      else if(action==='download')await exportDiagram();
+      else if(action==='copy') await copySource();
+    });
+    document.addEventListener('keydown', event => {
+      if(event.target.matches('select'))return;
+      if(event.key==='+'||event.key==='=')zoom(1.2); else if(event.key==='-')zoom(.83); else if(event.key==='0'||event.key.toLowerCase()==='r')reset();
+      else if(event.key.toLowerCase()==='t')document.querySelector('[data-action=theme]').click(); else if(event.key.toLowerCase()==='s'){event.preventDefault();exportDiagram();}
+    });
+    render();
+  })();
+  </script>
+</body>
+</html>

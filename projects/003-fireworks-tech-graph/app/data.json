@@ -1,0 +1,202 @@
+{
+  "commit": "31fea364eda5f1852b1175f3d9e29ea31d22dcb4",
+  "packageVersion": "1.2.0",
+  "revision": "含未发布质量升级",
+  "date": "2026-09-15",
+  "gallery": [
+    {
+      "id": 1,
+      "key": "mem0-style1",
+      "title": "记忆架构",
+      "theme": "Flat Icon",
+      "summary": "提取、冲突处理、存储与检索分层展示。",
+      "generated": true,
+      "checks": true,
+      "gifOrigin": "上游 1.2.0 发布样片；本次未重新编码"
+    },
+    {
+      "id": 2,
+      "key": "tool-call-style2",
+      "title": "工具调用",
+      "theme": "Dark Terminal",
+      "summary": "用暗色终端表达工具执行、证据与回答生成。",
+      "generated": true,
+      "checks": true,
+      "gifOrigin": "上游 1.2.0 发布样片；本次未重新编码"
+    },
+    {
+      "id": 3,
+      "key": "microservices-style3",
+      "title": "微服务架构",
+      "theme": "Blueprint",
+      "summary": "工程网格、服务边界、存储与遥测。",
+      "generated": true,
+      "checks": true,
+      "gifOrigin": "上游 1.2.0 发布样片；本次未重新编码"
+    },
+    {
+      "id": 4,
+      "key": "agent-memory-types-style4",
+      "title": "记忆类型",
+      "theme": "Notion Clean",
+      "summary": "用简洁层级解释工作记忆与长期记忆。",
+      "generated": true,
+      "checks": true,
+      "gifOrigin": "上游 1.2.0 发布样片；本次未重新编码"
+    },
+    {
+      "id": 5,
+      "key": "multi-agent-style5",
+      "title": "多 Agent 协作",
+      "theme": "Glassmorphism",
+      "summary": "协调器、专家、共享状态和审查链路。",
+      "generated": true,
+      "checks": true,
+      "gifOrigin": "上游 1.2.0 发布样片；本次未重新编码"
+    },
+    {
+      "id": 6,
+      "key": "system-architecture-style6",
+      "title": "系统架构",
+      "theme": "Claude Official",
+      "summary": "入口、运行时、策略、工具与运维分层。",
+      "generated": true,
+      "checks": true,
+      "gifOrigin": "上游 1.2.0 发布样片；本次未重新编码"
+    },
+    {
+      "id": 7,
+      "key": "api-flow-style7",
+      "title": "API 集成",
+      "theme": "OpenAI",
+      "summary": "从 SDK、模型与工具，到输出和治理。",
+      "generated": true,
+      "checks": true,
+      "gifOrigin": "上游 1.2.0 发布样片；本次未重新编码"
+    },
+    {
+      "id": 8,
+      "key": "dark-luxury-style8",
+      "title": "Agent 运行时",
+      "theme": "Dark Luxury",
+      "summary": "上游 AI 编写的 SVG 样例，金色结构与语义色。",
+      "generated": false,
+      "checks": true,
+      "gifOrigin": "上游 1.2.0 发布样片；本次未重新编码"
+    },
+    {
+      "id": 9,
+      "key": "c4-review-canvas-style9",
+      "title": "C4 架构评审",
+      "theme": "C4 Review Canvas",
+      "summary": "显式表达抽象层级、职责、技术和关系协议。",
+      "generated": true,
+      "checks": true,
+      "gifOrigin": "上游 1.2.0 发布样片；本次未重新编码"
+    },
+    {
+      "id": 10,
+      "key": "cloud-fabric-style10",
+      "title": "多区域部署",
+      "theme": "Cloud Fabric",
+      "summary": "Region、VPC、工作负载归属与复制机制。",
+      "generated": true,
+      "checks": true,
+      "gifOrigin": "上游 1.2.0 发布样片；本次未重新编码"
+    },
+    {
+      "id": 11,
+      "key": "event-transit-style11",
+      "title": "事件处理链",
+      "theme": "Event Transit",
+      "summary": "主题轨道、处理站、消费组、死信与状态投影。",
+      "generated": true,
+      "checks": true,
+      "gifOrigin": "上游 1.2.0 发布样片；本次未重新编码"
+    },
+    {
+      "id": 12,
+      "key": "ops-pulse-style12",
+      "title": "可靠性观察",
+      "theme": "Ops Pulse",
+      "summary": "观察窗口、四类黄金信号、关键路径与追踪。",
+      "generated": true,
+      "checks": true,
+      "gifOrigin": "上游 1.2.0 发布样片；本次未重新编码"
+    }
+  ],
+  "custom": [
+    {
+      "id": 1,
+      "key": "chinese-style1",
+      "theme": "Flat Icon"
+    },
+    {
+      "id": 2,
+      "key": "chinese-style2",
+      "theme": "Dark Terminal"
+    },
+    {
+      "id": 3,
+      "key": "chinese-style3",
+      "theme": "Blueprint"
+    },
+    {
+      "id": 4,
+      "key": "chinese-style4",
+      "theme": "Notion Clean"
+    },
+    {
+      "id": 5,
+      "key": "chinese-style5",
+      "theme": "Glassmorphism"
+    },
+    {
+      "id": 6,
+      "key": "chinese-style6",
+      "theme": "Claude Official"
+    },
+    {
+      "id": 7,
+      "key": "chinese-style7",
+      "theme": "OpenAI"
+    }
+  ],
+  "negativeCases": [
+    {
+      "key": "dangling",
+      "label": "连接不存在的节点",
+      "result": {
+        "ok": false,
+        "error": "arrows[0].target references unknown node: missing-node"
+      }
+    },
+    {
+      "key": "truncation",
+      "label": "严格模式下文字放不下",
+      "result": {
+        "ok": false,
+        "error": "TEXT_FIT: text would be truncated; widen the card or split the view"
+      }
+    },
+    {
+      "key": "signals",
+      "label": "可靠性视图缺少错误指标",
+      "result": {
+        "ok": false,
+        "error": "OPS_GOLDEN_SIGNALS: edge-gateway must define exactly latency, traffic, errors, saturation"
+      }
+    }
+  ],
+  "visualReview": {
+    "scope": [
+      "chinese-style1.png",
+      "chinese-style3.png",
+      "chinese-style5.png"
+    ],
+    "result": "已查看实际 PNG：中文可读，无明显裁切；其余未逐图目视验收",
+    "siteBrowserQA": "未进行"
+  },
+  "newSvg": 18,
+  "staticSvg": 1
+}

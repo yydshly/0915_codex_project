@@ -1,0 +1,21 @@
+{
+  "policy": "Compare fixed versions from our prior research, not unverified latest upstream versions.",
+  "archify": {
+    "date": "2026-09-09", "version": "2.17.0-dev.1", "commit": "10722002bb8777ecb639d93c49586fae4adf3ae4",
+    "research": "https://yydshly.github.io/0909_codex_project/projects/003-archify/",
+    "localResearch": "0909_codex_project/projects/003-archify/README.md",
+    "image": "Prior research web/assets/self-architecture-preview.png; native Archify rendering, not regenerated here.",
+    "evidence": "Five diagram types, model delta, source references, native exports, browser receipts."
+  },
+  "graphify": {
+    "version": "0.9.57", "commit": "3f82bf7f837a07fb0f7668fbdbd5662801906942",
+    "research": "https://yydshly.github.io/0911_codex_project/009-graphify/",
+    "localResearch": "0911_codex_project/projects/009-graphify/README.md",
+    "image": "Prior research assets/native-fastapi.svg; native full graph, not regenerated here.",
+    "scope": "48 Python files in FastAPI fastapi/ core package at 50113da16fec53b66b80d75e80a89296de4fa5a5",
+    "nodes": 747, "edges": 1971,
+    "evidence": "Prior native/fastapi/receipt.json and integration records, not a new Graphify run."
+  },
+  "integration": "Graphify -> Agent -> Fireworks / Archify is proposed, not implemented.",
+  "licenses": ["LICENSE-Archify.txt", "LICENSE-Graphify.txt", "NOTICE-Graphify.txt"]
+}

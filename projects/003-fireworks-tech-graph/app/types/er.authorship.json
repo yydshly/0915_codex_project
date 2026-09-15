@@ -1,0 +1,7 @@
+{
+  "author": "本次 Agent",
+  "route": "Fireworks Skill 的 AI-authored SVG 路径",
+  "source": "diagram-layout-reference.md",
+  "purpose": "数据库有哪些实体、键与一对多关系？",
+  "limit": "ER 不属于 UML 图型；本例展示实体、主外键与基数，不生成数据库。"
+}

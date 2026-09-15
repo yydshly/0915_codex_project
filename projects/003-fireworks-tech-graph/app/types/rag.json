@@ -1,0 +1,123 @@
+{
+  "schema_version": 1,
+  "mode": "architecture",
+  "style": 1,
+  "width": 1200,
+  "height": 650,
+  "title": "RAG 检索增强图",
+  "subtitle": "回答怎样引用外部资料？",
+  "text_policy": "strict",
+  "quality_profile": "showcase",
+  "nodes": [
+    {
+      "id": "n0",
+      "label": "用户问题",
+      "sublabel": "需要资料的请求",
+      "x": 65,
+      "y": 170,
+      "width": 290,
+      "height": 85,
+      "kind": "rect"
+    },
+    {
+      "id": "n1",
+      "label": "查询向量化",
+      "sublabel": "生成查询表示",
+      "x": 455,
+      "y": 170,
+      "width": 290,
+      "height": 85,
+      "kind": "rect"
+    },
+    {
+      "id": "n2",
+      "label": "向量检索",
+      "sublabel": "找到相关片段",
+      "x": 845,
+      "y": 170,
+      "width": 290,
+      "height": 85,
+      "kind": "rect"
+    },
+    {
+      "id": "n3",
+      "label": "上下文拼接",
+      "sublabel": "组合问题与证据",
+      "x": 845,
+      "y": 430,
+      "width": 290,
+      "height": 85,
+      "kind": "rect"
+    },
+    {
+      "id": "n4",
+      "label": "LLM 模型",
+      "sublabel": "基于上下文回答",
+      "x": 455,
+      "y": 430,
+      "width": 290,
+      "height": 85,
+      "kind": "double_rect"
+    },
+    {
+      "id": "n5",
+      "label": "带来源回答",
+      "sublabel": "返回结果",
+      "x": 65,
+      "y": 430,
+      "width": 290,
+      "height": 85,
+      "kind": "rect"
+    }
+  ],
+  "arrows": [
+    {
+      "id": "e0",
+      "source": "n0",
+      "target": "n1",
+      "source_port": "right",
+      "target_port": "left",
+      "flow": "data",
+      "label": "问题文本"
+    },
+    {
+      "id": "e1",
+      "source": "n1",
+      "target": "n2",
+      "source_port": "right",
+      "target_port": "left",
+      "flow": "data",
+      "label": "查询向量"
+    },
+    {
+      "id": "e2",
+      "source": "n2",
+      "target": "n3",
+      "source_port": "bottom",
+      "target_port": "top",
+      "flow": "data",
+      "label": "相关片段"
+    },
+    {
+      "id": "e3",
+      "source": "n3",
+      "target": "n4",
+      "source_port": "left",
+      "target_port": "right",
+      "flow": "data",
+      "label": "问题与证据"
+    },
+    {
+      "id": "e4",
+      "source": "n4",
+      "target": "n5",
+      "source_port": "left",
+      "target_port": "right",
+      "flow": "data",
+      "label": "回答与来源"
+    }
+  ],
+  "footer": "教学设定 · 使用 Fireworks 通用节点 / 连线生成器 · 无运行指标",
+  "footer_x": 48,
+  "footer_y": 620
+}

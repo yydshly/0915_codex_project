@@ -1,0 +1,100 @@
+{
+  "renderer": "upstream scripts/svg2png.js / Puppeteer 25.3.0 / Chromium",
+  "images": {
+    "agent-memory-types-style4.png": {
+      "width": 1920,
+      "height": 1240,
+      "sha256": "f961dd7c56d1110864dc8764bb28ba8111ae23dc50064ec7b80236be713757a9"
+    },
+    "api-flow-style7.png": {
+      "width": 1920,
+      "height": 1400,
+      "sha256": "4f4004c3c423e82898df68d334743c8e8dc4e873c25fb7aee6e0cfdfc17dc6ee"
+    },
+    "c4-review-canvas-style9.png": {
+      "width": 2200,
+      "height": 1400,
+      "sha256": "a51420e8d32d33e110f76c558393adaffc06af3d978302b95a1fe15a8d95d563"
+    },
+    "chinese-style1.png": {
+      "width": 1920,
+      "height": 1200,
+      "sha256": "be1fc6f5825603d3bff62d0783ade6412e452fc2b93028bcfcbc341a776fd811"
+    },
+    "chinese-style2.png": {
+      "width": 1920,
+      "height": 1200,
+      "sha256": "748a4b2ed6e360b0bda42275ffcfb0f70564bfe94e1b08ff32fcceea1d0a36f4"
+    },
+    "chinese-style3.png": {
+      "width": 1920,
+      "height": 1200,
+      "sha256": "fadcb4c5a12e1d2331a89428d770da96c40b00d2d1bb34368449b1b45ec8b5a4"
+    },
+    "chinese-style4.png": {
+      "width": 1920,
+      "height": 1200,
+      "sha256": "d7fedc7c8a2a876677370878b884469e2b01e87cb1504c87eb44a6cdaf2added"
+    },
+    "chinese-style5.png": {
+      "width": 1920,
+      "height": 1200,
+      "sha256": "ef8c3b4f53f349cd29e2e9085f867a4eb3f8ea2678eff4bd9010e0e9bb5e57a8"
+    },
+    "chinese-style6.png": {
+      "width": 1920,
+      "height": 1200,
+      "sha256": "d17577e710aba3f80434a0fa7b9c8fd6cc6767bc78bc8fd31d46bd4ff4e2f83b"
+    },
+    "chinese-style7.png": {
+      "width": 1920,
+      "height": 1200,
+      "sha256": "f60f92eb07e78ccdf177856188f98886a29cb140f03b97a03bf2a5282c669634"
+    },
+    "cloud-fabric-style10.png": {
+      "width": 1920,
+      "height": 1520,
+      "sha256": "7e6f7e07c2fe81896ca56a77dba3cb48c7ec96adc4fd5ec7acfe872a7175a8af"
+    },
+    "dark-luxury-style8.png": {
+      "width": 1920,
+      "height": 1200,
+      "sha256": "9f93e707ae413991857d4703c20153addbba3e2df0d548cd1ac18457bb2a1803"
+    },
+    "event-transit-style11.png": {
+      "width": 2344,
+      "height": 1440,
+      "sha256": "ea42705775a72269d81e937b31e4e5966ef5dc72c052818fa1c700188a7db358"
+    },
+    "mem0-style1.png": {
+      "width": 1920,
+      "height": 1360,
+      "sha256": "d5d2c12fbed29b60bf7a1b462fed8e86535949ce3cec23eabe94640e952ddcd2"
+    },
+    "microservices-style3.png": {
+      "width": 1920,
+      "height": 1440,
+      "sha256": "42789f5035629582ee627e1045f63c332095c06cf0102e05a807133ef935c921"
+    },
+    "multi-agent-style5.png": {
+      "width": 1920,
+      "height": 1400,
+      "sha256": "16a75576ca312f8233a22c884a7a6f4eaa689ee8e664180a73f86053aa52dcfd"
+    },
+    "ops-pulse-style12.png": {
+      "width": 1920,
+      "height": 1720,
+      "sha256": "37d25dc78be8b97cb026e2732f0885b860a9badf50aecc3943929a2c6f83f30d"
+    },
+    "system-architecture-style6.png": {
+      "width": 1920,
+      "height": 1400,
+      "sha256": "6920ae9b051bdfa17c1eb3a1dad01a10b23a627700cb0a15e17b2ef7e97ce85d"
+    },
+    "tool-call-style2.png": {
+      "width": 1920,
+      "height": 1440,
+      "sha256": "45d3806e2a8da9fdd7a4989167fbf7ad921d4cb87de76a6312b96741d7986975"
+    }
+  }
+}

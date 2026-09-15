@@ -1,0 +1,7 @@
+{
+  "author": "本次 Agent",
+  "route": "Fireworks Skill 的 AI-authored SVG 路径",
+  "source": "diagram-layout-reference.md",
+  "purpose": "代码按哪些包组织？包之间依赖什么？",
+  "limit": "用架构分组适配包图；文件夹式页签区分包与普通服务节点。"
+}

@@ -1,0 +1,242 @@
+{
+  "canvas": {
+    "height": 760.0,
+    "width": 960.0
+  },
+  "composition": {
+    "limits": {
+      "max_bends_per_edge": 2,
+      "max_bridged_crossings": 0,
+      "max_route_stretch": 1.35,
+      "max_total_bends": 8,
+      "min_container_gutter": 20.0,
+      "min_label_clearance": 4.0,
+      "min_node_gap": 40.0,
+      "min_segment_length": 16.0,
+      "profile": "showcase"
+    },
+    "metrics": {
+      "bridged_crossings": 0,
+      "max_route_stretch": 1.0,
+      "minimum_container_gutter": 22.0,
+      "minimum_node_gap": 48.0,
+      "shortest_segment": 48.0,
+      "total_bends": 0
+    },
+    "ok": true,
+    "profile": "showcase",
+    "score": 100,
+    "violations": []
+  },
+  "edges": [
+    {
+      "bends": 0,
+      "bridges": [],
+      "crossings": [],
+      "id": "route-a",
+      "length": 152.0,
+      "route": [
+        [
+          270.0,
+          198.0
+        ],
+        [
+          270.0,
+          350.0
+        ]
+      ],
+      "route_stretch": 1.0,
+      "source": "edge-a",
+      "source_port": [
+        270.0,
+        198.0
+      ],
+      "target": "app-a",
+      "target_port": [
+        270.0,
+        350.0
+      ],
+      "waypoints": []
+    },
+    {
+      "bends": 0,
+      "bridges": [],
+      "crossings": [],
+      "id": "route-b",
+      "length": 152.0,
+      "route": [
+        [
+          750.0,
+          198.0
+        ],
+        [
+          750.0,
+          350.0
+        ]
+      ],
+      "route_stretch": 1.0,
+      "source": "edge-b",
+      "source_port": [
+        750.0,
+        198.0
+      ],
+      "target": "app-b",
+      "target_port": [
+        750.0,
+        350.0
+      ],
+      "waypoints": []
+    },
+    {
+      "bends": 0,
+      "bridges": [],
+      "crossings": [],
+      "id": "write-a",
+      "length": 48.0,
+      "route": [
+        [
+          270.0,
+          422.0
+        ],
+        [
+          270.0,
+          470.0
+        ]
+      ],
+      "route_stretch": 1.0,
+      "source": "app-a",
+      "source_port": [
+        270.0,
+        422.0
+      ],
+      "target": "db-a",
+      "target_port": [
+        270.0,
+        470.0
+      ],
+      "waypoints": []
+    },
+    {
+      "bends": 0,
+      "bridges": [],
+      "crossings": [],
+      "id": "write-b",
+      "length": 48.0,
+      "route": [
+        [
+          750.0,
+          422.0
+        ],
+        [
+          750.0,
+          470.0
+        ]
+      ],
+      "route_stretch": 1.0,
+      "source": "app-b",
+      "source_port": [
+        750.0,
+        422.0
+      ],
+      "target": "db-b",
+      "target_port": [
+        750.0,
+        470.0
+      ],
+      "waypoints": []
+    },
+    {
+      "bends": 0,
+      "bridges": [],
+      "crossings": [],
+      "id": "replicate-orders",
+      "length": 304.0,
+      "route": [
+        [
+          358.0,
+          506.0
+        ],
+        [
+          662.0,
+          506.0
+        ]
+      ],
+      "route_stretch": 1.0,
+      "source": "db-a",
+      "source_port": [
+        358.0,
+        506.0
+      ],
+      "target": "db-b",
+      "target_port": [
+        662.0,
+        506.0
+      ],
+      "waypoints": []
+    }
+  ],
+  "input_schema": "v1",
+  "issues": [],
+  "mode": "architecture",
+  "ok": true,
+  "palette": {
+    "below_target": [],
+    "minimum_target": 4.5,
+    "ratios": {
+      "section_sub_fill": 5.43,
+      "text_muted": 5.43,
+      "text_primary": 13.29,
+      "text_secondary": 5.52
+    },
+    "scope": "default opaque canvas text tokens; not a full rendered accessibility audit",
+    "unsupported_tokens": []
+  },
+  "placements": {
+    "legend": {
+      "actual": [
+        48.0,
+        660.0
+      ],
+      "bounds": [
+        38.0,
+        646.0,
+        566.8,
+        692.0
+      ],
+      "moved": false,
+      "requested": [
+        48.0,
+        660.0
+      ]
+    }
+  },
+  "schema_version": 1,
+  "semantics": {
+    "details": {
+      "boundaries": 5,
+      "manifest_version": "2026.07-neutral.1",
+      "max_depth": 2,
+      "platform": "aws"
+    },
+    "ok": true,
+    "profile": "cloud-fabric",
+    "style": 10,
+    "visual_theme": "Cloud Fabric"
+  },
+  "style": {
+    "id": 10,
+    "name": "Cloud Fabric"
+  },
+  "summary": {
+    "bridged_crossings": 0,
+    "edges": 5,
+    "nodes": 6
+  },
+  "text_metrics": "heuristic-v1",
+  "typography": {
+    "complete_text": true,
+    "hint": null,
+    "metrics": "heuristic widths; inspect the actual rendered font",
+    "truncated": []
+  }
+}

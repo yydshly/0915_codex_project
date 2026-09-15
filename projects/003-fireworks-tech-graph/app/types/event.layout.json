@@ -1,0 +1,269 @@
+{
+  "canvas": {
+    "height": 720.0,
+    "width": 1172.0
+  },
+  "composition": {
+    "limits": {
+      "max_bends_per_edge": 2,
+      "max_bridged_crossings": 0,
+      "max_route_stretch": 1.35,
+      "max_total_bends": 8,
+      "min_container_gutter": 20.0,
+      "min_label_clearance": 4.0,
+      "min_node_gap": 40.0,
+      "min_segment_length": 16.0,
+      "profile": "showcase"
+    },
+    "metrics": {
+      "bridged_crossings": 0,
+      "max_route_stretch": 1.0,
+      "minimum_container_gutter": 25.0,
+      "minimum_node_gap": 68.0,
+      "shortest_segment": 68.0,
+      "total_bends": 0
+    },
+    "ok": true,
+    "profile": "showcase",
+    "score": 100,
+    "violations": []
+  },
+  "edges": [
+    {
+      "bends": 0,
+      "bridges": [],
+      "crossings": [],
+      "id": "rail-01",
+      "length": 68.0,
+      "route": [
+        [
+          210.0,
+          297.0
+        ],
+        [
+          278.0,
+          297.0
+        ]
+      ],
+      "route_stretch": 1.0,
+      "source": "checkout-api",
+      "source_port": [
+        210.0,
+        297.0
+      ],
+      "target": "schema-gate",
+      "target_port": [
+        278.0,
+        297.0
+      ],
+      "waypoints": []
+    },
+    {
+      "bends": 0,
+      "bridges": [],
+      "crossings": [],
+      "id": "rail-12",
+      "length": 68.0,
+      "route": [
+        [
+          428.0,
+          297.0
+        ],
+        [
+          496.0,
+          297.0
+        ]
+      ],
+      "route_stretch": 1.0,
+      "source": "schema-gate",
+      "source_port": [
+        428.0,
+        297.0
+      ],
+      "target": "fraud-score",
+      "target_port": [
+        496.0,
+        297.0
+      ],
+      "waypoints": []
+    },
+    {
+      "bends": 0,
+      "bridges": [],
+      "crossings": [],
+      "id": "rail-23",
+      "length": 68.0,
+      "route": [
+        [
+          646.0,
+          297.0
+        ],
+        [
+          714.0,
+          297.0
+        ]
+      ],
+      "route_stretch": 1.0,
+      "source": "fraud-score",
+      "source_port": [
+        646.0,
+        297.0
+      ],
+      "target": "order-router",
+      "target_port": [
+        714.0,
+        297.0
+      ],
+      "waypoints": []
+    },
+    {
+      "bends": 0,
+      "bridges": [],
+      "crossings": [],
+      "id": "rail-34",
+      "length": 68.0,
+      "route": [
+        [
+          864.0,
+          297.0
+        ],
+        [
+          932.0,
+          297.0
+        ]
+      ],
+      "route_stretch": 1.0,
+      "source": "order-router",
+      "source_port": [
+        864.0,
+        297.0
+      ],
+      "target": "fulfilment",
+      "target_port": [
+        932.0,
+        297.0
+      ],
+      "waypoints": []
+    },
+    {
+      "bends": 0,
+      "bridges": [],
+      "crossings": [],
+      "id": "to-dlq",
+      "length": 94.0,
+      "route": [
+        [
+          571.0,
+          336.0
+        ],
+        [
+          571.0,
+          430.0
+        ]
+      ],
+      "route_stretch": 1.0,
+      "source": "fraud-score",
+      "source_port": [
+        571.0,
+        336.0
+      ],
+      "target": "checkout-dlq",
+      "target_port": [
+        571.0,
+        430.0
+      ],
+      "waypoints": []
+    },
+    {
+      "bends": 0,
+      "bridges": [],
+      "crossings": [],
+      "id": "materialize",
+      "length": 94.0,
+      "route": [
+        [
+          789.0,
+          336.0
+        ],
+        [
+          789.0,
+          430.0
+        ]
+      ],
+      "route_stretch": 1.0,
+      "source": "order-router",
+      "source_port": [
+        789.0,
+        336.0
+      ],
+      "target": "order-state",
+      "target_port": [
+        789.0,
+        430.0
+      ],
+      "waypoints": []
+    }
+  ],
+  "input_schema": "v1",
+  "issues": [],
+  "mode": "flow",
+  "ok": true,
+  "palette": {
+    "below_target": [],
+    "minimum_target": 4.5,
+    "ratios": {
+      "section_sub_fill": 5.3,
+      "text_muted": 5.3,
+      "text_primary": 14.89,
+      "text_secondary": 6.42
+    },
+    "scope": "default opaque canvas text tokens; not a full rendered accessibility audit",
+    "unsupported_tokens": []
+  },
+  "placements": {
+    "legend": {
+      "actual": [
+        48.0,
+        610.0
+      ],
+      "bounds": [
+        38.0,
+        596.0,
+        519.76,
+        642.0
+      ],
+      "moved": false,
+      "requested": [
+        48.0,
+        610.0
+      ]
+    }
+  },
+  "schema_version": 1,
+  "semantics": {
+    "details": {
+      "stations": 7,
+      "topics": 2
+    },
+    "ok": true,
+    "profile": "event-transit",
+    "style": 11,
+    "visual_theme": "Event Transit"
+  },
+  "style": {
+    "id": 11,
+    "name": "Event Transit"
+  },
+  "summary": {
+    "bridged_crossings": 0,
+    "edges": 6,
+    "nodes": 7
+  },
+  "text_metrics": "heuristic-v1",
+  "typography": {
+    "complete_text": true,
+    "hint": null,
+    "metrics": "heuristic widths; inspect the actual rendered font",
+    "truncated": []
+  }
+}

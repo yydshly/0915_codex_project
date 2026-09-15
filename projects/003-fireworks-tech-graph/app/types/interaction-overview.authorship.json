@@ -1,0 +1,7 @@
+{
+  "author": "本次 Agent",
+  "route": "Fireworks Skill 的 AI-authored SVG 路径",
+  "source": "diagram-layout-reference.md",
+  "purpose": "多个交互片段如何按条件组织？",
+  "limit": "以活动流程连接 ref 交互片段；上游由流程图组合适配，未提供独立执行语义。"
+}

@@ -1,0 +1,7 @@
+{
+  "author": "本次 Agent",
+  "route": "Fireworks Skill 的 AI-authored SVG 路径",
+  "source": "diagram-layout-reference.md",
+  "purpose": "哪些动作可以并行？在哪里汇合？",
+  "limit": "流程图适配 UML 活动记法；粗横条表示 fork/join，并非专用活动建模引擎。"
+}

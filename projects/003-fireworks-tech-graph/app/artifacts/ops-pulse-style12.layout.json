@@ -1,0 +1,213 @@
+{
+  "canvas": {
+    "height": 860.0,
+    "width": 960.0
+  },
+  "composition": {
+    "limits": {
+      "max_bends_per_edge": 2,
+      "max_bridged_crossings": 0,
+      "max_route_stretch": 1.35,
+      "max_total_bends": 8,
+      "min_container_gutter": 20.0,
+      "min_label_clearance": 4.0,
+      "min_node_gap": 40.0,
+      "min_segment_length": 16.0,
+      "profile": "showcase"
+    },
+    "metrics": {
+      "bridged_crossings": 0,
+      "max_route_stretch": 1.0,
+      "minimum_container_gutter": 20.0,
+      "minimum_node_gap": 40.0,
+      "shortest_segment": 50.0,
+      "total_bends": 0
+    },
+    "ok": true,
+    "profile": "showcase",
+    "score": 100,
+    "violations": []
+  },
+  "edges": [
+    {
+      "bends": 0,
+      "bridges": [],
+      "crossings": [],
+      "id": "edge-gateway-api",
+      "length": 50.0,
+      "route": [
+        [
+          220.0,
+          224.0
+        ],
+        [
+          270.0,
+          224.0
+        ]
+      ],
+      "route_stretch": 1.0,
+      "source": "edge-gateway",
+      "source_port": [
+        220.0,
+        224.0
+      ],
+      "target": "api-gateway",
+      "target_port": [
+        270.0,
+        224.0
+      ],
+      "waypoints": []
+    },
+    {
+      "bends": 0,
+      "bridges": [],
+      "crossings": [],
+      "id": "edge-api-checkout",
+      "length": 50.0,
+      "route": [
+        [
+          450.0,
+          224.0
+        ],
+        [
+          500.0,
+          224.0
+        ]
+      ],
+      "route_stretch": 1.0,
+      "source": "api-gateway",
+      "source_port": [
+        450.0,
+        224.0
+      ],
+      "target": "checkout-service",
+      "target_port": [
+        500.0,
+        224.0
+      ],
+      "waypoints": []
+    },
+    {
+      "bends": 0,
+      "bridges": [],
+      "crossings": [],
+      "id": "edge-checkout-payment",
+      "length": 50.0,
+      "route": [
+        [
+          680.0,
+          224.0
+        ],
+        [
+          730.0,
+          224.0
+        ]
+      ],
+      "route_stretch": 1.0,
+      "source": "checkout-service",
+      "source_port": [
+        680.0,
+        224.0
+      ],
+      "target": "payment-service",
+      "target_port": [
+        730.0,
+        224.0
+      ],
+      "waypoints": []
+    },
+    {
+      "bends": 0,
+      "bridges": [],
+      "crossings": [],
+      "id": "export-telemetry",
+      "length": 72.0,
+      "route": [
+        [
+          590.0,
+          278.0
+        ],
+        [
+          590.0,
+          350.0
+        ]
+      ],
+      "route_stretch": 1.0,
+      "source": "checkout-service",
+      "source_port": [
+        590.0,
+        278.0
+      ],
+      "target": "otel-collector",
+      "target_port": [
+        590.0,
+        350.0
+      ],
+      "waypoints": []
+    }
+  ],
+  "input_schema": "v1",
+  "issues": [],
+  "mode": "architecture",
+  "ok": true,
+  "palette": {
+    "below_target": [],
+    "minimum_target": 4.5,
+    "ratios": {
+      "section_sub_fill": 7.68,
+      "text_muted": 7.68,
+      "text_primary": 17.4,
+      "text_secondary": 8.8
+    },
+    "scope": "default opaque canvas text tokens; not a full rendered accessibility audit",
+    "unsupported_tokens": []
+  },
+  "placements": {
+    "legend": {
+      "actual": [
+        48.0,
+        798.0
+      ],
+      "bounds": [
+        38.0,
+        784.0,
+        407.92,
+        830.0
+      ],
+      "moved": false,
+      "requested": [
+        48.0,
+        798.0
+      ]
+    }
+  },
+  "schema_version": 1,
+  "semantics": {
+    "details": {
+      "critical_edges": 3,
+      "observation_window": "5m",
+      "services": 4,
+      "spans": 4
+    },
+    "ok": true,
+    "profile": "ops-pulse",
+    "style": 12,
+    "visual_theme": "Ops Pulse"
+  },
+  "style": {
+    "id": 12,
+    "name": "Ops Pulse"
+  },
+  "summary": {
+    "bridged_crossings": 0,
+    "edges": 4,
+    "nodes": 9
+  },
+  "text_metrics": "heuristic-v1",
+  "typography": {
+    "complete_text": true,
+    "hint": null,
+    "metrics": "heuristic widths; inspect the actual rendered font",
+    "truncated": []
+  }
+}

@@ -1,0 +1,107 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 650" width="1200" height="650" data-generator="fireworks-tech-graph" data-schema-version="1" data-text-metrics="heuristic-v1" data-style-id="1" data-visual-theme="Flat Icon" data-diagram-type="architecture" data-motion-scene="" data-semantic-profile="generic" data-semantic-valid="true" data-quality-profile="showcase" data-max-bends-per-edge="2" data-max-total-bends="8" data-max-route-stretch="1.35" data-max-bridged-crossings="0" data-min-node-gap="40.0" data-min-container-gutter="20.0" data-min-label-clearance="4.0" data-min-segment-length="16.0">
+  <defs>
+    <marker id="arrowA" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#7c3aed"/>
+    </marker>
+    <marker id="arrowB" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#10b981"/>
+    </marker>
+    <marker id="arrowC" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#2563eb"/>
+    </marker>
+    <marker id="arrowE" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#f97316"/>
+    </marker>
+    <marker id="arrowF" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#7c3aed"/>
+    </marker>
+    <marker id="arrowG" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#ef4444"/>
+    </marker>
+    <marker id="arrowH" markerWidth="10" markerHeight="7" refX="9" refY="3.5" orient="auto">
+      <polygon points="0 0, 10 3.5, 0 7" fill="#6b7280"/>
+    </marker>
+    <filter id="shadowSoft" x="-20%" y="-20%" width="140%" height="160%">
+      <feDropShadow dx="0" dy="3" stdDeviation="6" flood-color="#0f172a" flood-opacity="0.12"/>
+    </filter>
+    <filter id="shadowGlass" x="-20%" y="-20%" width="140%" height="160%">
+      <feDropShadow dx="0" dy="10" stdDeviation="16" flood-color="#020617" flood-opacity="0.28"/>
+    </filter>
+    <style>
+    text { font-family: 'Helvetica Neue', Helvetica, Arial, 'PingFang SC', 'Noto Sans CJK SC', 'Microsoft YaHei', 'Microsoft JhengHei', 'SimHei', sans-serif; }
+    .title { font-size: 30px; font-weight: 700; fill: #111827; }
+    .subtitle { font-size: 14px; font-weight: 500; fill: #6b7280; }
+    .section { font-size: 13px; font-weight: 700; fill: #2563eb; letter-spacing: 1.4px; }
+    .section-sub { font-size: 12px; font-weight: 500; fill: #64748b; }
+    .node-title { font-weight: 700; fill: #111827; }
+    .node-sub { font-weight: 500; fill: #6b7280; }
+    .node-type { font-size: 12px; font-weight: 700; fill: #64748b; letter-spacing: 0.08em; }
+    .arrow-label { font-size: 12px; font-weight: 600; fill: #6b7280; }
+    .legend { font-size: 12px; font-weight: 500; fill: #6b7280; }
+    .footnote { font-size: 12px; font-weight: 500; fill: #64748b; }
+    .metric-label { font-size: 8.5px; font-weight: 700; fill: #64748b; text-transform: uppercase; }
+    .metric-value { font-size: 9.5px; font-weight: 700; fill: #111827; }
+    </style>
+  </defs>
+  <rect data-graph-role="background" width="1200.0" height="650.0" fill="#ffffff"/>
+  <text x="600.0" y="56" text-anchor="middle" class="title">数据流图</text>
+  <text x="600.0" y="82" text-anchor="middle" class="subtitle">数据从哪里来，经过什么加工，保存到哪里？</text>
+  <path id="e0" data-graph-role="edge" data-edge-id="e0" data-source="n0" data-target="n1" data-edge-kind="flow" data-topic-id="" data-flow="data" data-motion-role="" data-motion-stage="" data-motion-order="" data-protocol="" data-via="" data-critical-path-id="" data-critical-hop="" data-critical-hops="" data-critical="false" data-bends="0" data-route-stretch="1.0" data-bridges="" d="M 355,212.5 L 455,212.5" fill="none" stroke="#f97316" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrowE)"/>
+  <path id="e1" data-graph-role="edge" data-edge-id="e1" data-source="n1" data-target="n2" data-edge-kind="flow" data-topic-id="" data-flow="data" data-motion-role="" data-motion-stage="" data-motion-order="" data-protocol="" data-via="" data-critical-path-id="" data-critical-hop="" data-critical-hops="" data-critical="false" data-bends="0" data-route-stretch="1.0" data-bridges="" d="M 745,212.5 L 845,212.5" fill="none" stroke="#f97316" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrowE)"/>
+  <path id="e2" data-graph-role="edge" data-edge-id="e2" data-source="n2" data-target="n3" data-edge-kind="flow" data-topic-id="" data-flow="data" data-motion-role="" data-motion-stage="" data-motion-order="" data-protocol="" data-via="" data-critical-path-id="" data-critical-hop="" data-critical-hops="" data-critical="false" data-bends="0" data-route-stretch="1.0" data-bridges="" d="M 990,255 L 990,430" fill="none" stroke="#f97316" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrowE)"/>
+  <path id="e3" data-graph-role="edge" data-edge-id="e3" data-source="n3" data-target="n4" data-edge-kind="flow" data-topic-id="" data-flow="data" data-motion-role="" data-motion-stage="" data-motion-order="" data-protocol="" data-via="" data-critical-path-id="" data-critical-hop="" data-critical-hops="" data-critical="false" data-bends="0" data-route-stretch="1.0" data-bridges="" d="M 845,472.5 L 745,472.5" fill="none" stroke="#f97316" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrowE)"/>
+  <path id="e4" data-graph-role="edge" data-edge-id="e4" data-source="n4" data-target="n5" data-edge-kind="flow" data-topic-id="" data-flow="data" data-motion-role="" data-motion-stage="" data-motion-order="" data-protocol="" data-via="" data-critical-path-id="" data-critical-hop="" data-critical-hops="" data-critical="false" data-bends="0" data-route-stretch="1.0" data-bridges="" d="M 455,472.5 L 355,472.5" fill="none" stroke="#f97316" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" marker-end="url(#arrowE)"/>
+  <g id="node-n0" data-graph-role="node" data-node-id="n0" data-semantic-role="rect" data-motion-role="" data-motion-stage="" data-motion-order="" data-parent="" data-deployment-id="" data-topic-id="" data-span-id="" data-station-order="" data-status="" data-start-ms="" data-duration-ms="" data-parent-span="" data-graph-bounds="65,170,355,255">
+  <rect x="65.0" y="170.0" width="290.0" height="85.0" rx="10.0" fill="#ffffff" stroke="#d1d5db" stroke-width="1.8" filter="url(#shadowSoft)"/>
+  <text data-text-role="title" data-full-text="订单事件" data-text-max-width="266.0" x="210.0" y="212.5" text-anchor="middle" class="node-title" font-size="18">订单事件</text>
+  <text data-text-role="subtitle" data-full-text="输入：订单编号与金额" data-text-max-width="266.0" x="210.0" y="234.5" text-anchor="middle" class="node-sub" font-size="12">输入：订单编号与金额</text>
+  </g>
+  <g id="node-n1" data-graph-role="node" data-node-id="n1" data-semantic-role="rect" data-motion-role="" data-motion-stage="" data-motion-order="" data-parent="" data-deployment-id="" data-topic-id="" data-span-id="" data-station-order="" data-status="" data-start-ms="" data-duration-ms="" data-parent-span="" data-graph-bounds="455,170,745,255">
+  <rect x="455.0" y="170.0" width="290.0" height="85.0" rx="10.0" fill="#ffffff" stroke="#d1d5db" stroke-width="1.8" filter="url(#shadowSoft)"/>
+  <text data-text-role="title" data-full-text="清洗与去重" data-text-max-width="266.0" x="600.0" y="212.5" text-anchor="middle" class="node-title" font-size="18">清洗与去重</text>
+  <text data-text-role="subtitle" data-full-text="输出：有效订单" data-text-max-width="266.0" x="600.0" y="234.5" text-anchor="middle" class="node-sub" font-size="12">输出：有效订单</text>
+  </g>
+  <g id="node-n2" data-graph-role="node" data-node-id="n2" data-semantic-role="rect" data-motion-role="" data-motion-stage="" data-motion-order="" data-parent="" data-deployment-id="" data-topic-id="" data-span-id="" data-station-order="" data-status="" data-start-ms="" data-duration-ms="" data-parent-span="" data-graph-bounds="845,170,1135,255">
+  <rect x="845.0" y="170.0" width="290.0" height="85.0" rx="10.0" fill="#ffffff" stroke="#d1d5db" stroke-width="1.8" filter="url(#shadowSoft)"/>
+  <text data-text-role="title" data-full-text="聚合计算" data-text-max-width="266.0" x="990.0" y="212.5" text-anchor="middle" class="node-title" font-size="18">聚合计算</text>
+  <text data-text-role="subtitle" data-full-text="输出：每日汇总" data-text-max-width="266.0" x="990.0" y="234.5" text-anchor="middle" class="node-sub" font-size="12">输出：每日汇总</text>
+  </g>
+  <g id="node-n3" data-graph-role="node" data-node-id="n3" data-semantic-role="rect" data-motion-role="" data-motion-stage="" data-motion-order="" data-parent="" data-deployment-id="" data-topic-id="" data-span-id="" data-station-order="" data-status="" data-start-ms="" data-duration-ms="" data-parent-span="" data-graph-bounds="845,430,1135,515">
+  <rect x="845.0" y="430.0" width="290.0" height="85.0" rx="10.0" fill="#ffffff" stroke="#d1d5db" stroke-width="1.8" filter="url(#shadowSoft)"/>
+  <text data-text-role="title" data-full-text="分析仓库" data-text-max-width="266.0" x="990.0" y="472.5" text-anchor="middle" class="node-title" font-size="18">分析仓库</text>
+  <text data-text-role="subtitle" data-full-text="保存汇总表" data-text-max-width="266.0" x="990.0" y="494.5" text-anchor="middle" class="node-sub" font-size="12">保存汇总表</text>
+  </g>
+  <g id="node-n4" data-graph-role="node" data-node-id="n4" data-semantic-role="rect" data-motion-role="" data-motion-stage="" data-motion-order="" data-parent="" data-deployment-id="" data-topic-id="" data-span-id="" data-station-order="" data-status="" data-start-ms="" data-duration-ms="" data-parent-span="" data-graph-bounds="455,430,745,515">
+  <rect x="455.0" y="430.0" width="290.0" height="85.0" rx="10.0" fill="#ffffff" stroke="#d1d5db" stroke-width="1.8" filter="url(#shadowSoft)"/>
+  <text data-text-role="title" data-full-text="报表接口" data-text-max-width="266.0" x="600.0" y="472.5" text-anchor="middle" class="node-title" font-size="18">报表接口</text>
+  <text data-text-role="subtitle" data-full-text="读取统计结果" data-text-max-width="266.0" x="600.0" y="494.5" text-anchor="middle" class="node-sub" font-size="12">读取统计结果</text>
+  </g>
+  <g id="node-n5" data-graph-role="node" data-node-id="n5" data-semantic-role="rect" data-motion-role="" data-motion-stage="" data-motion-order="" data-parent="" data-deployment-id="" data-topic-id="" data-span-id="" data-station-order="" data-status="" data-start-ms="" data-duration-ms="" data-parent-span="" data-graph-bounds="65,430,355,515">
+  <rect x="65.0" y="430.0" width="290.0" height="85.0" rx="10.0" fill="#ffffff" stroke="#d1d5db" stroke-width="1.8" filter="url(#shadowSoft)"/>
+  <text data-text-role="title" data-full-text="运营报表" data-text-max-width="266.0" x="210.0" y="472.5" text-anchor="middle" class="node-title" font-size="18">运营报表</text>
+  <text data-text-role="subtitle" data-full-text="展示数据" data-text-max-width="266.0" x="210.0" y="494.5" text-anchor="middle" class="node-sub" font-size="12">展示数据</text>
+  </g>
+  <g id="e0-label" data-graph-role="label" data-owner="e0" data-graph-bounds="374,181.5,436,201.5">
+  <rect x="374.0" y="181.5" width="62.0" height="20" rx="6" fill="#ffffff" opacity="0.94"/>
+  <text x="405.0" y="195.5" text-anchor="middle" class="arrow-label">原始订单</text>
+  </g>
+  <g id="e1-label" data-graph-role="label" data-owner="e1" data-graph-bounds="764,181.5,826,201.5">
+  <rect x="764.0" y="181.5" width="62.0" height="20" rx="6" fill="#ffffff" opacity="0.94"/>
+  <text x="795.0" y="195.5" text-anchor="middle" class="arrow-label">有效订单</text>
+  </g>
+  <g id="e2-label" data-graph-role="label" data-owner="e2" data-graph-bounds="925,328.5,987,348.5">
+  <rect x="925.0" y="328.5" width="62.0" height="20" rx="6" fill="#ffffff" opacity="0.94"/>
+  <text x="956.0" y="342.5" text-anchor="middle" class="arrow-label">每日汇总</text>
+  </g>
+  <g id="e3-label" data-graph-role="label" data-owner="e3" data-graph-bounds="764,441.5,826,461.5">
+  <rect x="764.0" y="441.5" width="62.0" height="20" rx="6" fill="#ffffff" opacity="0.94"/>
+  <text x="795.0" y="455.5" text-anchor="middle" class="arrow-label">统计数据</text>
+  </g>
+  <g id="e4-label" data-graph-role="label" data-owner="e4" data-graph-bounds="374,441.5,436,461.5">
+  <rect x="374.0" y="441.5" width="62.0" height="20" rx="6" fill="#ffffff" opacity="0.94"/>
+  <text x="405.0" y="455.5" text-anchor="middle" class="arrow-label">报表数据</text>
+  </g>
+  <g id="footer" data-graph-role="reserved" data-graph-bounds="48,608,328,624">
+  <text x="48.0" y="620.0" class="footnote">教学设定 · 使用 Fireworks 通用节点 / 连线生成器 · 无运行指标</text>
+  </g>
+</svg>

@@ -1,0 +1,7 @@
+{
+  "author": "本次 Agent",
+  "route": "Fireworks Skill 的 AI-authored SVG 路径",
+  "source": "diagram-layout-reference.md",
+  "purpose": "同一个订单有哪些状态？什么事件触发变化？",
+  "limit": "初始、终止、状态与触发事件；节点表示对象状态，不表示处理部门。"
+}

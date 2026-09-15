@@ -1,0 +1,9 @@
+{
+  "scope": [
+    "chinese-style1.png",
+    "chinese-style3.png",
+    "chinese-style5.png"
+  ],
+  "result": "已查看实际 PNG：中文可读，无明显裁切；其余未逐图目视验收",
+  "siteBrowserQA": "未进行"
+}

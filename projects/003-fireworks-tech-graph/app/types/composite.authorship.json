@@ -1,0 +1,7 @@
+{
+  "author": "本次 Agent",
+  "route": "Fireworks Skill 的 AI-authored SVG 路径",
+  "source": "diagram-layout-reference.md",
+  "purpose": "一个组件内部有哪些部件、端口和连接器？",
+  "limit": "嵌套架构表达；内部部件属于结构化分类器，不是外部部署节点。"
+}

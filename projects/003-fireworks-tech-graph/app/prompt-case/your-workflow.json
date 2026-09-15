@@ -1,0 +1,123 @@
+{
+  "schema_version": 1,
+  "mode": "architecture",
+  "style": 1,
+  "text_policy": "strict",
+  "quality_profile": "showcase",
+  "width": 1200,
+  "height": 720,
+  "title": "把参考资料变成自己的研究助手",
+  "subtitle": "本次分析提出的使用流程 · 尚未接入模型或执行服务",
+  "nodes": [
+    {
+      "id": "goal",
+      "label": "确定你的任务",
+      "sublabel": "例如：分析开源项目",
+      "x": 60,
+      "y": 175,
+      "width": 240,
+      "height": 90,
+      "kind": "rect"
+    },
+    {
+      "id": "read",
+      "label": "阅读相关样例",
+      "sublabel": "Cursor、Kiro、Manus",
+      "x": 480,
+      "y": 175,
+      "width": 240,
+      "height": 90,
+      "kind": "document"
+    },
+    {
+      "id": "principles",
+      "label": "提炼可用规则",
+      "sublabel": "检索、计划、执行与交付",
+      "x": 900,
+      "y": 175,
+      "width": 240,
+      "height": 90,
+      "kind": "rect"
+    },
+    {
+      "id": "adapt",
+      "label": "编写自己的指令",
+      "sublabel": "只描述实际存在的工具",
+      "x": 900,
+      "y": 465,
+      "width": 240,
+      "height": 90,
+      "kind": "document"
+    },
+    {
+      "id": "test",
+      "label": "用真实任务验证",
+      "sublabel": "检查结果、来源与失败",
+      "x": 480,
+      "y": 465,
+      "width": 240,
+      "height": 90,
+      "kind": "rect"
+    },
+    {
+      "id": "save",
+      "label": "保存可复用版本",
+      "sublabel": "沉淀提示词与测试案例",
+      "x": 60,
+      "y": 465,
+      "width": 240,
+      "height": 90,
+      "kind": "rect"
+    }
+  ],
+  "arrows": [
+    {
+      "id": "a",
+      "source": "goal",
+      "target": "read",
+      "label": "选择",
+      "source_port": "right",
+      "target_port": "left",
+      "flow": "data"
+    },
+    {
+      "id": "b",
+      "source": "read",
+      "target": "principles",
+      "label": "比较",
+      "source_port": "right",
+      "target_port": "left",
+      "flow": "data"
+    },
+    {
+      "id": "c",
+      "source": "principles",
+      "target": "adapt",
+      "label": "改写",
+      "source_port": "bottom",
+      "target_port": "top",
+      "flow": "data"
+    },
+    {
+      "id": "d",
+      "source": "adapt",
+      "target": "test",
+      "label": "试用",
+      "source_port": "left",
+      "target_port": "right",
+      "flow": "data"
+    },
+    {
+      "id": "e",
+      "source": "test",
+      "target": "save",
+      "label": "通过后",
+      "source_port": "left",
+      "target_port": "right",
+      "flow": "data"
+    }
+  ],
+  "footer": "借鉴工作方法，不把工具定义当工具实现。复制一份提示词不会同时获得模型、记忆、浏览器或执行环境。",
+  "footer_x": 48,
+  "footer_y": 685
+}

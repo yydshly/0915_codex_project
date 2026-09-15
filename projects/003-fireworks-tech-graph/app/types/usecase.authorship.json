@@ -1,0 +1,7 @@
+{
+  "author": "本次 Agent",
+  "route": "Fireworks Skill 的 AI-authored SVG 路径",
+  "source": "diagram-layout-reference.md",
+  "purpose": "谁可以使用系统的哪些功能？",
+  "limit": "角色在系统边界外，用例位于边界内，include 表示包含关系。"
+}

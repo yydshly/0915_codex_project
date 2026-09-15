@@ -1,0 +1,7 @@
+{
+  "author": "本次 Agent",
+  "route": "Fireworks Skill 的 AI-authored SVG 路径",
+  "source": "diagram-layout-reference.md",
+  "purpose": "某个时刻有哪些实例，实例间怎样关联？",
+  "limit": "由类图样式适配；带下划线的“实例名 : 类型”表示对象。"
+}

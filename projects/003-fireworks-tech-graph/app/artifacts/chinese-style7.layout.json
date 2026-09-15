@@ -1,0 +1,329 @@
+{
+  "canvas": {
+    "height": 600.0,
+    "width": 960.0
+  },
+  "composition": {
+    "limits": {
+      "max_bends_per_edge": 2,
+      "max_bridged_crossings": 0,
+      "max_route_stretch": 1.35,
+      "max_total_bends": 8,
+      "min_container_gutter": 20.0,
+      "min_label_clearance": 4.0,
+      "min_node_gap": 40.0,
+      "min_segment_length": 16.0,
+      "profile": "showcase"
+    },
+    "metrics": {
+      "bridged_crossings": 0,
+      "max_route_stretch": 1.0,
+      "minimum_container_gutter": 20.0,
+      "minimum_node_gap": 50.0,
+      "shortest_segment": 50.0,
+      "total_bends": 4
+    },
+    "ok": true,
+    "profile": "showcase",
+    "score": 100,
+    "violations": []
+  },
+  "edges": [
+    {
+      "bends": 0,
+      "bridges": [],
+      "crossings": [],
+      "id": "request",
+      "length": 80.0,
+      "route": [
+        [
+          220.0,
+          186.0
+        ],
+        [
+          300.0,
+          186.0
+        ]
+      ],
+      "route_stretch": 1.0,
+      "source": "client",
+      "source_port": [
+        220.0,
+        186.0
+      ],
+      "target": "gateway",
+      "target_port": [
+        300.0,
+        186.0
+      ],
+      "waypoints": []
+    },
+    {
+      "bends": 0,
+      "bridges": [],
+      "crossings": [],
+      "id": "dispatch",
+      "length": 80.0,
+      "route": [
+        [
+          480.0,
+          186.0
+        ],
+        [
+          560.0,
+          186.0
+        ]
+      ],
+      "route_stretch": 1.0,
+      "source": "gateway",
+      "source_port": [
+        480.0,
+        186.0
+      ],
+      "target": "agent",
+      "target_port": [
+        560.0,
+        186.0
+      ],
+      "waypoints": []
+    },
+    {
+      "bends": 2,
+      "bridges": [],
+      "crossings": [],
+      "id": "context",
+      "length": 370.0,
+      "route": [
+        [
+          632.0,
+          216.0
+        ],
+        [
+          632.0,
+          270.0
+        ],
+        [
+          390.0,
+          270.0
+        ],
+        [
+          390.0,
+          344.0
+        ]
+      ],
+      "route_stretch": 1.0,
+      "source": "agent",
+      "source_port": [
+        632.0,
+        216.0
+      ],
+      "target": "memory",
+      "target_port": [
+        390.0,
+        344.0
+      ],
+      "waypoints": [
+        [
+          632.0,
+          270.0
+        ],
+        [
+          390.0,
+          270.0
+        ]
+      ]
+    },
+    {
+      "bends": 0,
+      "bridges": [],
+      "crossings": [],
+      "id": "tool-call",
+      "length": 128.0,
+      "route": [
+        [
+          650.0,
+          216.0
+        ],
+        [
+          650.0,
+          344.0
+        ]
+      ],
+      "route_stretch": 1.0,
+      "source": "agent",
+      "source_port": [
+        650.0,
+        216.0
+      ],
+      "target": "tools",
+      "target_port": [
+        650.0,
+        344.0
+      ],
+      "waypoints": []
+    },
+    {
+      "bends": 0,
+      "bridges": [],
+      "crossings": [],
+      "id": "augment",
+      "length": 80.0,
+      "route": [
+        [
+          480.0,
+          374.0
+        ],
+        [
+          560.0,
+          374.0
+        ]
+      ],
+      "route_stretch": 1.0,
+      "source": "memory",
+      "source_port": [
+        480.0,
+        374.0
+      ],
+      "target": "tools",
+      "target_port": [
+        560.0,
+        374.0
+      ],
+      "waypoints": []
+    },
+    {
+      "bends": 0,
+      "bridges": [],
+      "crossings": [],
+      "id": "trace",
+      "length": 50.0,
+      "route": [
+        [
+          740.0,
+          374.0
+        ],
+        [
+          790.0,
+          374.0
+        ]
+      ],
+      "route_stretch": 1.0,
+      "source": "tools",
+      "source_port": [
+        740.0,
+        374.0
+      ],
+      "target": "eval",
+      "target_port": [
+        790.0,
+        374.0
+      ],
+      "waypoints": []
+    },
+    {
+      "bends": 2,
+      "bridges": [],
+      "crossings": [],
+      "id": "z-feedback",
+      "length": 305.0,
+      "route": [
+        [
+          845.0,
+          344.0
+        ],
+        [
+          845.0,
+          270.0
+        ],
+        [
+          668.0,
+          270.0
+        ],
+        [
+          668.0,
+          216.0
+        ]
+      ],
+      "route_stretch": 1.0,
+      "source": "eval",
+      "source_port": [
+        845.0,
+        344.0
+      ],
+      "target": "agent",
+      "target_port": [
+        668.0,
+        216.0
+      ],
+      "waypoints": [
+        [
+          845.0,
+          270.0
+        ],
+        [
+          668.0,
+          270.0
+        ]
+      ]
+    }
+  ],
+  "input_schema": "v1",
+  "issues": [],
+  "mode": "architecture",
+  "ok": true,
+  "palette": {
+    "below_target": [],
+    "minimum_target": 4.5,
+    "ratios": {
+      "section_sub_fill": 4.76,
+      "text_muted": 4.76,
+      "text_primary": 17.85,
+      "text_secondary": 7.58
+    },
+    "scope": "default opaque canvas text tokens; not a full rendered accessibility audit",
+    "unsupported_tokens": []
+  },
+  "placements": {
+    "legend": {
+      "actual": [
+        48.0,
+        510.0
+      ],
+      "bounds": [
+        38.0,
+        496.0,
+        328.0,
+        542.0
+      ],
+      "moved": false,
+      "requested": [
+        48.0,
+        510.0
+      ]
+    }
+  },
+  "schema_version": 1,
+  "semantics": {
+    "details": {},
+    "ok": true,
+    "profile": "generic",
+    "style": 7,
+    "visual_theme": "OpenAI"
+  },
+  "style": {
+    "id": 7,
+    "name": "OpenAI"
+  },
+  "summary": {
+    "bridged_crossings": 0,
+    "edges": 7,
+    "nodes": 6
+  },
+  "text_metrics": "heuristic-v1",
+  "typography": {
+    "complete_text": true,
+    "hint": null,
+    "metrics": "heuristic widths; inspect the actual rendered font",
+    "truncated": []
+  }
+}

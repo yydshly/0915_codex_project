@@ -1,0 +1,116 @@
+{
+  "schema_version": 1,
+  "mode": "architecture",
+  "style": 1,
+  "text_policy": "strict",
+  "quality_profile": "showcase",
+  "width": 1200,
+  "height": 720,
+  "title": "AI 工具提示词资料集",
+  "subtitle": "资料如何组织 · 基于固定版本的文件清单",
+  "nodes": [
+    {
+      "id": "archive",
+      "label": "资料仓库",
+      "sublabel": "111 个跟踪文件",
+      "x": 480,
+      "y": 135,
+      "width": 240,
+      "height": 90,
+      "kind": "double_rect"
+    },
+    {
+      "id": "groups",
+      "label": "按产品与来源归档",
+      "sublabel": "32 个一级资料目录",
+      "x": 480,
+      "y": 305,
+      "width": 240,
+      "height": 90,
+      "kind": "rect"
+    },
+    {
+      "id": "prompts",
+      "label": "提示词与工作规则",
+      "sublabel": "83 个 TXT 文本文件",
+      "x": 60,
+      "y": 505,
+      "width": 240,
+      "height": 90,
+      "kind": "document"
+    },
+    {
+      "id": "tools",
+      "label": "工具接口说明",
+      "sublabel": "17 个 JSON 后缀文件",
+      "x": 480,
+      "y": 505,
+      "width": 240,
+      "height": 90,
+      "kind": "document"
+    },
+    {
+      "id": "snapshots",
+      "label": "模型配置快照",
+      "sublabel": "Amp 目录的 2 个 YAML",
+      "x": 900,
+      "y": 505,
+      "width": 240,
+      "height": 90,
+      "kind": "document"
+    }
+  ],
+  "arrows": [
+    {
+      "id": "organize",
+      "source": "archive",
+      "target": "groups",
+      "label": "归档",
+      "source_port": "bottom",
+      "target_port": "top",
+      "flow": "data"
+    },
+    {
+      "id": "text",
+      "source": "groups",
+      "target": "prompts",
+      "label": "文本",
+      "source_port": "left",
+      "target_port": "top",
+      "flow": "data",
+      "route_points": [
+        [
+          180,
+          350
+        ]
+      ]
+    },
+    {
+      "id": "interfaces",
+      "source": "groups",
+      "target": "tools",
+      "label": "接口",
+      "source_port": "bottom",
+      "target_port": "top",
+      "flow": "data"
+    },
+    {
+      "id": "configs",
+      "source": "groups",
+      "target": "snapshots",
+      "label": "配置",
+      "source_port": "right",
+      "target_port": "top",
+      "flow": "data",
+      "route_points": [
+        [
+          1020,
+          350
+        ]
+      ]
+    }
+  ],
+  "footer": "目录统计排除 .github 与 assets；另有 9 个文件。文件后缀不等于内容真实性；未见模型权重或完整运行服务。",
+  "footer_x": 48,
+  "footer_y": 685
+}

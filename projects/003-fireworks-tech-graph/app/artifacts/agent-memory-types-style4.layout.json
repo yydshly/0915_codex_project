@@ -1,0 +1,250 @@
+{
+  "canvas": {
+    "height": 620.0,
+    "width": 960.0
+  },
+  "composition": {
+    "limits": {
+      "max_bends_per_edge": 2,
+      "max_bridged_crossings": 0,
+      "max_route_stretch": 1.35,
+      "max_total_bends": 8,
+      "min_container_gutter": 20.0,
+      "min_label_clearance": 4.0,
+      "min_node_gap": 40.0,
+      "min_segment_length": 16.0,
+      "profile": "showcase"
+    },
+    "metrics": {
+      "bridged_crossings": 0,
+      "max_route_stretch": 1.0,
+      "minimum_container_gutter": 20.0,
+      "minimum_node_gap": 50.0,
+      "shortest_segment": 50.0,
+      "total_bends": 0
+    },
+    "ok": true,
+    "profile": "showcase",
+    "score": 100,
+    "violations": []
+  },
+  "edges": [
+    {
+      "bends": 0,
+      "bridges": [],
+      "crossings": [],
+      "id": "sample",
+      "length": 50.0,
+      "route": [
+        [
+          220.0,
+          210.0
+        ],
+        [
+          270.0,
+          210.0
+        ]
+      ],
+      "route_stretch": 1.0,
+      "source": "sensory",
+      "source_port": [
+        220.0,
+        210.0
+      ],
+      "target": "working",
+      "target_port": [
+        270.0,
+        210.0
+      ],
+      "waypoints": []
+    },
+    {
+      "bends": 0,
+      "bridges": [],
+      "crossings": [],
+      "id": "attend",
+      "length": 60.0,
+      "route": [
+        [
+          430.0,
+          210.0
+        ],
+        [
+          490.0,
+          210.0
+        ]
+      ],
+      "route_stretch": 1.0,
+      "source": "working",
+      "source_port": [
+        430.0,
+        210.0
+      ],
+      "target": "agent",
+      "target_port": [
+        490.0,
+        210.0
+      ],
+      "waypoints": []
+    },
+    {
+      "bends": 0,
+      "bridges": [],
+      "crossings": [],
+      "id": "invoke",
+      "length": 50.0,
+      "route": [
+        [
+          650.0,
+          210.0
+        ],
+        [
+          700.0,
+          210.0
+        ]
+      ],
+      "route_stretch": 1.0,
+      "source": "agent",
+      "source_port": [
+        650.0,
+        210.0
+      ],
+      "target": "procedural",
+      "target_port": [
+        700.0,
+        210.0
+      ],
+      "waypoints": []
+    },
+    {
+      "bends": 0,
+      "bridges": [],
+      "crossings": [],
+      "id": "remember",
+      "length": 145.0,
+      "route": [
+        [
+          350.0,
+          255.0
+        ],
+        [
+          350.0,
+          400.0
+        ]
+      ],
+      "route_stretch": 1.0,
+      "source": "working",
+      "source_port": [
+        350.0,
+        255.0
+      ],
+      "target": "episodic",
+      "target_port": [
+        350.0,
+        400.0
+      ],
+      "waypoints": []
+    },
+    {
+      "bends": 0,
+      "bridges": [],
+      "crossings": [],
+      "id": "recall",
+      "length": 145.0,
+      "route": [
+        [
+          570.0,
+          400.0
+        ],
+        [
+          570.0,
+          255.0
+        ]
+      ],
+      "route_stretch": 1.0,
+      "source": "semantic",
+      "source_port": [
+        570.0,
+        400.0
+      ],
+      "target": "agent",
+      "target_port": [
+        570.0,
+        255.0
+      ],
+      "waypoints": []
+    },
+    {
+      "bends": 0,
+      "bridges": [],
+      "crossings": [],
+      "id": "consolidate",
+      "length": 60.0,
+      "route": [
+        [
+          430.0,
+          445.0
+        ],
+        [
+          490.0,
+          445.0
+        ]
+      ],
+      "route_stretch": 1.0,
+      "source": "episodic",
+      "source_port": [
+        430.0,
+        445.0
+      ],
+      "target": "semantic",
+      "target_port": [
+        490.0,
+        445.0
+      ],
+      "waypoints": []
+    }
+  ],
+  "input_schema": "v1",
+  "issues": [],
+  "mode": "memory",
+  "ok": true,
+  "palette": {
+    "below_target": [],
+    "minimum_target": 4.5,
+    "ratios": {
+      "section_sub_fill": 4.83,
+      "text_muted": 4.83,
+      "text_primary": 17.74,
+      "text_secondary": 10.31
+    },
+    "scope": "default opaque canvas text tokens; not a full rendered accessibility audit",
+    "unsupported_tokens": []
+  },
+  "placements": {
+    "legend": null
+  },
+  "schema_version": 1,
+  "semantics": {
+    "details": {},
+    "ok": true,
+    "profile": "generic",
+    "style": 4,
+    "visual_theme": "Notion Clean"
+  },
+  "style": {
+    "id": 4,
+    "name": "Notion Clean"
+  },
+  "summary": {
+    "bridged_crossings": 0,
+    "edges": 6,
+    "nodes": 6
+  },
+  "text_metrics": "heuristic-v1",
+  "typography": {
+    "complete_text": true,
+    "hint": null,
+    "metrics": "heuristic widths; inspect the actual rendered font",
+    "truncated": []
+  }
+}

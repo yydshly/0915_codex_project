@@ -1,0 +1,9 @@
+{
+  "reviewed": [
+    "overview.png",
+    "agent-loop.png",
+    "your-workflow.png"
+  ],
+  "result": "已实际查看三张 PNG；中文可读、箭头方向与标签清楚，未见明显裁切或遮挡",
+  "scope": "图像内容目视复核；不包含网页浏览器控件交互测试"
+}

@@ -1,0 +1,123 @@
+{
+  "schema_version": 1,
+  "mode": "architecture",
+  "style": 1,
+  "width": 1200,
+  "height": 650,
+  "title": "数据流图",
+  "subtitle": "数据从哪里来，经过什么加工，保存到哪里？",
+  "text_policy": "strict",
+  "quality_profile": "showcase",
+  "nodes": [
+    {
+      "id": "n0",
+      "label": "订单事件",
+      "sublabel": "输入：订单编号与金额",
+      "x": 65,
+      "y": 170,
+      "width": 290,
+      "height": 85,
+      "kind": "rect"
+    },
+    {
+      "id": "n1",
+      "label": "清洗与去重",
+      "sublabel": "输出：有效订单",
+      "x": 455,
+      "y": 170,
+      "width": 290,
+      "height": 85,
+      "kind": "rect"
+    },
+    {
+      "id": "n2",
+      "label": "聚合计算",
+      "sublabel": "输出：每日汇总",
+      "x": 845,
+      "y": 170,
+      "width": 290,
+      "height": 85,
+      "kind": "rect"
+    },
+    {
+      "id": "n3",
+      "label": "分析仓库",
+      "sublabel": "保存汇总表",
+      "x": 845,
+      "y": 430,
+      "width": 290,
+      "height": 85,
+      "kind": "rect"
+    },
+    {
+      "id": "n4",
+      "label": "报表接口",
+      "sublabel": "读取统计结果",
+      "x": 455,
+      "y": 430,
+      "width": 290,
+      "height": 85,
+      "kind": "rect"
+    },
+    {
+      "id": "n5",
+      "label": "运营报表",
+      "sublabel": "展示数据",
+      "x": 65,
+      "y": 430,
+      "width": 290,
+      "height": 85,
+      "kind": "rect"
+    }
+  ],
+  "arrows": [
+    {
+      "id": "e0",
+      "source": "n0",
+      "target": "n1",
+      "source_port": "right",
+      "target_port": "left",
+      "flow": "data",
+      "label": "原始订单"
+    },
+    {
+      "id": "e1",
+      "source": "n1",
+      "target": "n2",
+      "source_port": "right",
+      "target_port": "left",
+      "flow": "data",
+      "label": "有效订单"
+    },
+    {
+      "id": "e2",
+      "source": "n2",
+      "target": "n3",
+      "source_port": "bottom",
+      "target_port": "top",
+      "flow": "data",
+      "label": "每日汇总"
+    },
+    {
+      "id": "e3",
+      "source": "n3",
+      "target": "n4",
+      "source_port": "left",
+      "target_port": "right",
+      "flow": "data",
+      "label": "统计数据"
+    },
+    {
+      "id": "e4",
+      "source": "n4",
+      "target": "n5",
+      "source_port": "left",
+      "target_port": "right",
+      "flow": "data",
+      "label": "报表数据"
+    }
+  ],
+  "footer": "教学设定 · 使用 Fireworks 通用节点 / 连线生成器 · 无运行指标",
+  "footer_x": 48,
+  "footer_y": 620
+}

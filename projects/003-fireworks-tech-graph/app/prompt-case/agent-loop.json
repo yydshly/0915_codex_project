@@ -1,0 +1,143 @@
+{
+  "schema_version": 1,
+  "mode": "architecture",
+  "style": 1,
+  "text_policy": "strict",
+  "quality_profile": "showcase",
+  "width": 1200,
+  "height": 720,
+  "title": "Manus 提示词描述的工作循环",
+  "subtitle": "依据仓库 Agent loop.txt 的文字整理；没有在本次运行 Manus",
+  "nodes": [
+    {
+      "id": "events",
+      "label": "分析事件",
+      "sublabel": "用户消息与执行结果",
+      "x": 60,
+      "y": 175,
+      "width": 240,
+      "height": 90,
+      "kind": "rect"
+    },
+    {
+      "id": "choose",
+      "label": "选择工具",
+      "sublabel": "依据状态、计划与知识",
+      "x": 480,
+      "y": 175,
+      "width": 240,
+      "height": 90,
+      "kind": "double_rect"
+    },
+    {
+      "id": "execute",
+      "label": "执行动作",
+      "sublabel": "由外部沙箱或工具执行",
+      "x": 900,
+      "y": 175,
+      "width": 240,
+      "height": 90,
+      "kind": "rect"
+    },
+    {
+      "id": "observe",
+      "label": "接收观察",
+      "sublabel": "执行结果回到事件流",
+      "x": 900,
+      "y": 465,
+      "width": 240,
+      "height": 90,
+      "kind": "rect"
+    },
+    {
+      "id": "done",
+      "label": "判断是否完成",
+      "sublabel": "未完成则进入下一轮",
+      "x": 480,
+      "y": 465,
+      "width": 240,
+      "height": 90,
+      "kind": "rect"
+    },
+    {
+      "id": "deliver",
+      "label": "交付并待命",
+      "sublabel": "发送结果，等待新任务",
+      "x": 60,
+      "y": 465,
+      "width": 240,
+      "height": 90,
+      "kind": "rect"
+    }
+  ],
+  "arrows": [
+    {
+      "id": "select",
+      "source": "events",
+      "target": "choose",
+      "label": "决定",
+      "source_port": "right",
+      "target_port": "left",
+      "flow": "data"
+    },
+    {
+      "id": "call",
+      "source": "choose",
+      "target": "execute",
+      "label": "调用",
+      "source_port": "right",
+      "target_port": "left",
+      "flow": "data"
+    },
+    {
+      "id": "result",
+      "source": "execute",
+      "target": "observe",
+      "label": "返回",
+      "source_port": "bottom",
+      "target_port": "top",
+      "flow": "data"
+    },
+    {
+      "id": "evaluate",
+      "source": "observe",
+      "target": "done",
+      "label": "判断",
+      "source_port": "left",
+      "target_port": "right",
+      "flow": "data"
+    },
+    {
+      "id": "finish",
+      "source": "done",
+      "target": "deliver",
+      "label": "完成",
+      "source_port": "left",
+      "target_port": "right",
+      "flow": "data"
+    },
+    {
+      "id": "repeat",
+      "source": "done",
+      "target": "events",
+      "label": "未完成",
+      "source_port": "top",
+      "target_port": "bottom",
+      "flow": "data",
+      "route_points": [
+        [
+          600,
+          365
+        ],
+        [
+          180,
+          365
+        ]
+      ],
+      "dashed": true
+    }
+  ],
+  "footer": "来源：Manus Agent Tools & Prompt/Agent loop.txt，第 27–33 行。模型、沙箱和工具实现需要由实际产品提供。",
+  "footer_x": 48,
+  "footer_y": 685
+}

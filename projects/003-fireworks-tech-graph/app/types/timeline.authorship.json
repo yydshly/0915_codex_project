@@ -1,0 +1,7 @@
+{
+  "author": "本次 Agent",
+  "route": "Fireworks Skill 的 AI-authored SVG 路径",
+  "source": "diagram-layout-reference.md",
+  "purpose": "每项工作持续多久、何时开始、何时交付？",
+  "limit": "合并同义入口：甘特横条表达持续时间，时间轴节点表达里程碑；时间为示例。"
+}

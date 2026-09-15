@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'none'; style-src 'unsafe-inline'; script-src 'unsafe-inline'; img-src data: blob:">
+  <title>时序图</title>
+  <style>
+    :root { color-scheme: dark; --page:#0f0f1a; --panel:#0f172a; --border:#334155; --text:#e2e8f0; --muted:#94a3b8; --accent:#a855f7; }
+    html[data-theme="light"] { color-scheme:light; --page:#f8fafc; --panel:#fff; --border:#cbd5e1; --text:#0f172a; --muted:#475569; --accent:#7c3aed; }
+    * { box-sizing:border-box; }
+    html,body { width:100%; height:100%; margin:0; overflow:hidden; background:linear-gradient(135deg,var(--page),#1a1a2e); color:var(--text); font-family:'SF Mono','Fira Code',ui-monospace,monospace; }
+    body { display:grid; grid-template-rows:auto 1fr; }
+    .toolbar { display:flex; flex-wrap:wrap; align-items:center; gap:8px; padding:10px 14px; background:color-mix(in srgb,var(--panel) 92%,transparent); border-bottom:1px solid var(--border); z-index:2; }
+    .title { margin-right:auto; font-size:13px; font-weight:700; }
+    button,select { min-height:34px; padding:6px 10px; color:var(--text); background:var(--panel); border:1px solid var(--border); border-radius:8px; font:inherit; cursor:pointer; }
+    button:hover,button:focus-visible,select:focus-visible { border-color:var(--accent); outline:2px solid color-mix(in srgb,var(--accent) 35%,transparent); outline-offset:1px; }
+    #stage { position:relative; overflow:hidden; touch-action:none; cursor:grab; }
+    #stage.dragging { cursor:grabbing; }
+    #canvas { width:100%; height:100%; display:grid; place-items:center; transform-origin:0 0; will-change:transform; }
+    #canvas svg { max-width:calc(100vw - 40px); max-height:calc(100vh - 92px); width:auto; height:auto; filter:drop-shadow(0 22px 60px rgba(0,0,0,.28)); user-select:none; }
+    #status { min-width:76px; color:var(--muted); font-size:12px; text-align:center; }
+    .sr-only { position:absolute; width:1px; height:1px; padding:0; margin:-1px; overflow:hidden; clip:rect(0,0,0,0); white-space:nowrap; border:0; }
+    @media (prefers-reduced-motion:reduce) { * { scroll-behavior:auto!important; transition:none!important; } }
+  </style>
+<meta name="description" content="技术图类型效果示例及原生离线查看器。"></head>
+<body>
+  <header class="toolbar" aria-label="Diagram controls">
+    <span class="title">时序图</span>
+    <button type="button" data-action="zoom-out" aria-label="Zoom out">−</button>
+    <button type="button" data-action="reset" aria-label="Reset view">Reset</button>
+    <button type="button" data-action="zoom-in" aria-label="Zoom in">+</button>
+    <span id="status" aria-live="polite">100%</span>
+    <button type="button" data-action="theme" aria-label="Toggle theme">Theme</button>
+    <button type="button" data-action="copy" aria-label="Copy SVG source">Copy SVG</button>
+    <select id="scale" aria-label="Raster export scale"><option value="1">1×</option><option value="2" selected>2×</option><option value="3">3×</option><option value="4">4×</option></select>
+    <select id="format" aria-label="Export format"><option>SVG</option><option>PNG</option><option>JPEG</option><option>WebP</option></select>
+    <button type="button" data-action="download">Export</button>
+  </header>
+  <main id="stage" tabindex="0" aria-label="Interactive diagram. Drag to pan; use plus and minus to zoom.">
+    <div id="canvas"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1200 720" data-author="research-agent" data-diagram-type="sequence" role="img" focusable="false"><title>时序图</title><desc>一次请求里，谁先调用谁，谁返回什么？ 本次 AI 按 Fireworks 指导编写 SVG。</desc><defs>
+ <marker id="arrow" markerWidth="10" markerHeight="8" refX="9" refY="4" orient="auto"><path d="M0 0 L9 4 L0 8" fill="none" stroke="#2558b9" stroke-width="1.5" /></marker>
+ <marker id="triangle" markerWidth="13" markerHeight="12" refX="12" refY="6" orient="auto"><path d="M1 1 L12 6 L1 11 Z" fill="white" stroke="#2558b9" stroke-width="1.3" /></marker>
+ <marker id="many" markerWidth="12" markerHeight="14" refX="12" refY="7" orient="auto"><path d="M0 7 L12 1 M0 7 L12 7 M0 7 L12 13" fill="none" stroke="#2558b9" stroke-width="1.4" /></marker>
+ </defs><style>text{font-family:'Segoe UI','Microsoft YaHei',sans-serif} .instance{text-decoration:underline}</style><rect width="1200" height="720" fill="white" data-graph-role="background" />
+ <text x="600" y="54" text-anchor="middle" font-size="31" fill="#20334f" font-weight="700">时序图</text><text x="600" y="90" text-anchor="middle" font-size="18" fill="#526781" font-weight="400">一次请求里，谁先调用谁，谁返回什么？</text><rect x="85" y="140" width="190" height="58" rx="8" fill="#edf4ff" stroke="#b8c9e2" stroke-width="2" /><text x="180.0" y="176.0" text-anchor="middle" font-size="22" fill="#20334f" font-weight="600">用户</text><path d="M180 205 L180 622" fill="none" stroke="#a1b2cb" stroke-width="2.5" stroke-dasharray="7 5" /><rect x="475" y="140" width="190" height="58" rx="8" fill="#edf4ff" stroke="#b8c9e2" stroke-width="2" /><text x="570.0" y="176.0" text-anchor="middle" font-size="22" fill="#20334f" font-weight="600">订单服务</text><path d="M570 205 L570 622" fill="none" stroke="#a1b2cb" stroke-width="2.5" stroke-dasharray="7 5" /><rect x="925" y="140" width="190" height="58" rx="8" fill="#edf4ff" stroke="#b8c9e2" stroke-width="2" /><text x="1020.0" y="176.0" text-anchor="middle" font-size="22" fill="#20334f" font-weight="600">支付服务</text><path d="M1020 205 L1020 622" fill="none" stroke="#a1b2cb" stroke-width="2.5" stroke-dasharray="7 5" /><rect x="561" y="255" width="18" height="350" rx="0" fill="#dbe9ff" stroke="#b8c9e2" stroke-width="2" /><rect x="1011" y="330" width="18" height="210" rx="0" fill="#dbe9ff" stroke="#b8c9e2" stroke-width="2" /><path d="M180 250 L560 250" fill="none" stroke="#2558b9" stroke-width="2.5" marker-end="url(#arrow)" /><text x="370.0" y="235" text-anchor="middle" font-size="18" fill="#20334f" font-weight="400">1  提交订单</text><path d="M580 325 L1010 325" fill="none" stroke="#2558b9" stroke-width="2.5" marker-end="url(#arrow)" /><text x="795.0" y="310" text-anchor="middle" font-size="18" fill="#20334f" font-weight="400">2  创建支付</text><path d="M1010 430 L580 430" fill="none" stroke="#2558b9" stroke-width="2.5" stroke-dasharray="7 5" marker-end="url(#arrow)" /><text x="795.0" y="415" text-anchor="middle" font-size="18" fill="#20334f" font-weight="400">3a  支付成功</text><path d="M1010 525 L580 525" fill="none" stroke="#2558b9" stroke-width="2.5" stroke-dasharray="7 5" marker-end="url(#arrow)" /><text x="795.0" y="510" text-anchor="middle" font-size="18" fill="#20334f" font-weight="400">3b  支付失败</text><path d="M560 600 L180 600" fill="none" stroke="#2558b9" stroke-width="2.5" stroke-dasharray="7 5" marker-end="url(#arrow)" /><text x="370.0" y="585" text-anchor="middle" font-size="18" fill="#20334f" font-weight="400">4  返回订单状态</text><rect x="460" y="370" width="690" height="190" rx="0" fill="none" stroke="#b8c9e2" stroke-width="2" data-graph-role="container" /><text x="480" y="395" text-anchor="start" font-size="17" fill="#20334f" font-weight="400">alt  [成功]</text><path d="M460 465 L1150 465" fill="none" stroke="#a1b2cb" stroke-width="2.5" stroke-dasharray="7 5" /><text x="480" y="490" text-anchor="start" font-size="17" fill="#20334f" font-weight="400">[失败]</text><text x="48" y="687" text-anchor="start" font-size="15" fill="#526781" font-weight="400">教学示例 · AI 按库内规范编写 SVG · 非专用生成器或实际运行数据</text></svg></div>
+    <p class="sr-only">Keyboard shortcuts: plus and minus zoom, zero resets, T toggles theme, S exports.</p>
+  </main>
+  <script>
+  (() => {
+    'use strict';
+    const metadata = {"slug": "sequence"};
+    const stage = document.getElementById('stage');
+    const canvas = document.getElementById('canvas');
+    const svg = canvas.querySelector('svg');
+    const status = document.getElementById('status');
+    const scaleSelect = document.getElementById('scale');
+    const formatSelect = document.getElementById('format');
+    let view = { x:0, y:0, scale:1 };
+    let drag = null;
+    const clamp = value => Math.max(.2, Math.min(8, value));
+    const render = () => {
+      canvas.style.transform = `translate(${view.x}px,${view.y}px) scale(${view.scale})`;
+      status.textContent = `${Math.round(view.scale * 100)}%`;
+    };
+    const zoom = (factor, originX=stage.clientWidth/2, originY=stage.clientHeight/2) => {
+      const next = clamp(view.scale * factor);
+      const ratio = next / view.scale;
+      view.x = originX - (originX - view.x) * ratio;
+      view.y = originY - (originY - view.y) * ratio;
+      view.scale = next; render();
+    };
+    const reset = () => { view = {x:0,y:0,scale:1}; render(); };
+    stage.addEventListener('wheel', event => { event.preventDefault(); const rect=stage.getBoundingClientRect(); zoom(event.deltaY < 0 ? 1.12 : .89, event.clientX-rect.left, event.clientY-rect.top); }, {passive:false});
+    stage.addEventListener('pointerdown', event => { drag={id:event.pointerId,x:event.clientX,y:event.clientY,vx:view.x,vy:view.y}; stage.setPointerCapture(event.pointerId); stage.classList.add('dragging'); });
+    stage.addEventListener('pointermove', event => { if(!drag||drag.id!==event.pointerId)return; view.x=drag.vx+event.clientX-drag.x; view.y=drag.vy+event.clientY-drag.y; render(); });
+    const endDrag = () => { drag=null; stage.classList.remove('dragging'); };
+    stage.addEventListener('pointerup', endDrag); stage.addEventListener('pointercancel', endDrag);
+    const source = () => new XMLSerializer().serializeToString(svg);
+    const saveBlob = (blob, extension) => { const a=document.createElement('a'); a.href=URL.createObjectURL(blob); a.download=`${(metadata.slug||'fireworks-tech-graph')}.${extension}`; a.click(); setTimeout(()=>URL.revokeObjectURL(a.href),1000); };
+    const copySource = async () => {
+      const value=source();
+      try { await navigator.clipboard.writeText(value); status.textContent='Copied'; return; } catch {}
+      const area=document.createElement('textarea'); area.value=value; area.setAttribute('readonly',''); area.style.position='fixed'; area.style.opacity='0'; document.body.appendChild(area); area.select();
+      status.textContent=document.execCommand('copy')?'Copied':'Copy failed'; area.remove();
+    };
+    const exportDiagram = async () => {
+      const format = formatSelect.value.toLowerCase();
+      if(format==='svg') { saveBlob(new Blob([source()],{type:'image/svg+xml;charset=utf-8'}),'svg'); return; }
+      const scale = Math.max(1,Math.min(4,Number(scaleSelect.value)||2));
+      const box = svg.viewBox.baseVal; const width=box.width||svg.clientWidth; const height=box.height||svg.clientHeight;
+      const image = new Image(); const url=URL.createObjectURL(new Blob([source()],{type:'image/svg+xml'}));
+      await new Promise((resolve,reject)=>{ image.onload=resolve; image.onerror=reject; image.src=url; });
+      const raster=document.createElement('canvas'); raster.width=Math.round(width*scale); raster.height=Math.round(height*scale);
+      const ctx=raster.getContext('2d'); if(format==='jpeg'){ctx.fillStyle='#ffffff';ctx.fillRect(0,0,raster.width,raster.height);} ctx.drawImage(image,0,0,raster.width,raster.height); URL.revokeObjectURL(url);
+      const mime=format==='jpeg'?'image/jpeg':format==='webp'?'image/webp':'image/png';
+      const blob=await new Promise(resolve=>raster.toBlob(resolve,mime,.94)); if(blob) saveBlob(blob,format==='jpeg'?'jpg':format);
+    };
+    document.querySelector('.toolbar').addEventListener('click', async event => {
+      const action=event.target.closest('[data-action]')?.dataset.action; if(!action)return;
+      if(action==='zoom-in')zoom(1.2); else if(action==='zoom-out')zoom(.83); else if(action==='reset')reset();
+      else if(action==='theme')document.documentElement.dataset.theme=document.documentElement.dataset.theme==='dark'?'light':'dark';
+      else if(action==='download')await exportDiagram();
+      else if(action==='copy') await copySource();
+    });
+    document.addEventListener('keydown', event => {
+      if(event.target.matches('select'))return;
+      if(event.key==='+'||event.key==='=')zoom(1.2); else if(event.key==='-')zoom(.83); else if(event.key==='0'||event.key.toLowerCase()==='r')reset();
+      else if(event.key.toLowerCase()==='t')document.querySelector('[data-action=theme]').click(); else if(event.key.toLowerCase()==='s'){event.preventDefault();exportDiagram();}
+    });
+    render();
+  })();
+  </script>
+</body>
+</html>

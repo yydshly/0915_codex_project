@@ -1,0 +1,7 @@
+{
+  "author": "本次 Agent",
+  "route": "Fireworks Skill 的 AI-authored SVG 路径",
+  "source": "diagram-layout-reference.md",
+  "purpose": "一次请求里，谁先调用谁，谁返回什么？",
+  "limit": "生命线和消息时序由 AI 编排；模板只有占位结构，原库未提供完整时序自动布局器。"
+}

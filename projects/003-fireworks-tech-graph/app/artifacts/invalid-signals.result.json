@@ -1,0 +1,4 @@
+{
+  "ok": false,
+  "error": "OPS_GOLDEN_SIGNALS: edge-gateway must define exactly latency, traffic, errors, saturation"
+}

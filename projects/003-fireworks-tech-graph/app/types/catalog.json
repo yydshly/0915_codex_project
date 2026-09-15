@@ -1,0 +1,1262 @@
+{
+  "commit": "31fea364eda5f1852b1175f3d9e29ea31d22dcb4",
+  "date": "2026-09-15",
+  "count": 33,
+  "scope": "覆盖图型参考的14个主条目、UML映射的额外9个视图、4个工程视图和6个AI领域变体；同义名称合并。33为本展厅整理条目数，不是上游宣称的标准图型数量。",
+  "items": [
+    {
+      "key": "architecture",
+      "title": "系统架构图",
+      "question": "系统由哪些服务与存储组成？",
+      "category": "系统与工程",
+      "support": "原生 JSON",
+      "origin": "复用本项目已用固定版本原生生成器生成并检查的图例。",
+      "note": "领域图是架构/数据流的专用视图；示例不代表生产环境实测。",
+      "input": "json",
+      "source": "diagram-layout-reference.md",
+      "example": "既有固定样例",
+      "checks": {
+        "checks": {
+          "collisions": {
+            "details": [],
+            "ok": true
+          },
+          "composition": {
+            "details": [],
+            "ok": true
+          },
+          "geometry": {
+            "details": [],
+            "ok": true
+          },
+          "markers": {
+            "details": [],
+            "ok": true
+          },
+          "xml": {
+            "details": [],
+            "ok": true
+          }
+        },
+        "ok": true
+      },
+      "allChecksPassed": true
+    },
+    {
+      "key": "agent",
+      "title": "Agent 架构图",
+      "question": "规划、模型、记忆、工具与评估如何协作？",
+      "category": "AI 与领域模式",
+      "support": "原生 JSON",
+      "origin": "复用本项目已用固定版本原生生成器生成并检查的图例。",
+      "note": "领域图是架构/数据流的专用视图；示例不代表生产环境实测。",
+      "input": "json",
+      "source": "diagram-layout-reference.md",
+      "example": "既有固定样例",
+      "checks": {
+        "checks": {
+          "collisions": {
+            "details": [],
+            "ok": true
+          },
+          "composition": {
+            "details": [],
+            "ok": true
+          },
+          "geometry": {
+            "details": [],
+            "ok": true
+          },
+          "markers": {
+            "details": [],
+            "ok": true
+          },
+          "xml": {
+            "details": [],
+            "ok": true
+          }
+        },
+        "ok": true
+      },
+      "allChecksPassed": true
+    },
+    {
+      "key": "memory",
+      "title": "记忆架构图",
+      "question": "记忆如何写入、合并、存储和检索？",
+      "category": "AI 与领域模式",
+      "support": "原生 JSON",
+      "origin": "复用本项目已用固定版本原生生成器生成并检查的图例。",
+      "note": "领域图是架构/数据流的专用视图；示例不代表生产环境实测。",
+      "input": "json",
+      "source": "diagram-layout-reference.md",
+      "example": "既有固定样例",
+      "checks": {
+        "checks": {
+          "collisions": {
+            "details": [],
+            "ok": true
+          },
+          "composition": {
+            "details": [],
+            "ok": true
+          },
+          "geometry": {
+            "details": [],
+            "ok": true
+          },
+          "markers": {
+            "details": [],
+            "ok": true
+          },
+          "xml": {
+            "details": [],
+            "ok": true
+          }
+        },
+        "ok": true
+      },
+      "allChecksPassed": true
+    },
+    {
+      "key": "c4",
+      "title": "C4 评审视图",
+      "question": "在同一抽象层级上，职责和协议是否清楚？",
+      "category": "系统与工程",
+      "support": "原生 JSON",
+      "origin": "复用本项目已用固定版本原生生成器生成并检查的图例。",
+      "note": "领域图是架构/数据流的专用视图；示例不代表生产环境实测。",
+      "input": "json",
+      "source": "diagram-layout-reference.md",
+      "example": "既有固定样例",
+      "checks": {
+        "checks": {
+          "collisions": {
+            "details": [],
+            "ok": true
+          },
+          "composition": {
+            "details": [],
+            "ok": true
+          },
+          "geometry": {
+            "details": [],
+            "ok": true
+          },
+          "markers": {
+            "details": [],
+            "ok": true
+          },
+          "xml": {
+            "details": [],
+            "ok": true
+          }
+        },
+        "ok": true
+      },
+      "allChecksPassed": true
+    },
+    {
+      "key": "cloud",
+      "title": "云部署视图",
+      "question": "Region、VPC、工作负载与复制归属是什么？",
+      "category": "系统与工程",
+      "support": "原生 JSON",
+      "origin": "复用本项目已用固定版本原生生成器生成并检查的图例。",
+      "note": "领域图是架构/数据流的专用视图；示例不代表生产环境实测。",
+      "input": "json",
+      "source": "diagram-layout-reference.md",
+      "example": "既有固定样例",
+      "checks": {
+        "checks": {
+          "collisions": {
+            "details": [],
+            "ok": true
+          },
+          "composition": {
+            "details": [],
+            "ok": true
+          },
+          "geometry": {
+            "details": [],
+            "ok": true
+          },
+          "markers": {
+            "details": [],
+            "ok": true
+          },
+          "xml": {
+            "details": [],
+            "ok": true
+          }
+        },
+        "ok": true
+      },
+      "allChecksPassed": true
+    },
+    {
+      "key": "event",
+      "title": "事件流视图",
+      "question": "主题、处理器、消费组与异常出口怎样连接？",
+      "category": "系统与工程",
+      "support": "原生 JSON",
+      "origin": "复用本项目已用固定版本原生生成器生成并检查的图例。",
+      "note": "领域图是架构/数据流的专用视图；示例不代表生产环境实测。",
+      "input": "json",
+      "source": "diagram-layout-reference.md",
+      "example": "既有固定样例",
+      "checks": {
+        "checks": {
+          "collisions": {
+            "details": [],
+            "ok": true
+          },
+          "composition": {
+            "details": [],
+            "ok": true
+          },
+          "geometry": {
+            "details": [],
+            "ok": true
+          },
+          "markers": {
+            "details": [],
+            "ok": true
+          },
+          "xml": {
+            "details": [],
+            "ok": true
+          }
+        },
+        "ok": true
+      },
+      "allChecksPassed": true
+    },
+    {
+      "key": "observability",
+      "title": "可靠性 / 可观测性视图",
+      "question": "黄金信号、关键路径与追踪如何关联？",
+      "category": "系统与工程",
+      "support": "原生 JSON",
+      "origin": "复用本项目已用固定版本原生生成器生成并检查的图例。",
+      "note": "领域图是架构/数据流的专用视图；示例不代表生产环境实测。",
+      "input": "json",
+      "source": "diagram-layout-reference.md",
+      "example": "既有固定样例",
+      "checks": {
+        "checks": {
+          "collisions": {
+            "details": [],
+            "ok": true
+          },
+          "composition": {
+            "details": [],
+            "ok": true
+          },
+          "geometry": {
+            "details": [],
+            "ok": true
+          },
+          "markers": {
+            "details": [],
+            "ok": true
+          },
+          "xml": {
+            "details": [],
+            "ok": true
+          }
+        },
+        "ok": true
+      },
+      "allChecksPassed": true
+    },
+    {
+      "key": "multiagent",
+      "title": "多 Agent 协作图",
+      "question": "协调器如何分工、审查与汇总？",
+      "category": "AI 与领域模式",
+      "support": "原生 JSON",
+      "origin": "复用本项目已用固定版本原生生成器生成并检查的图例。",
+      "note": "领域图是架构/数据流的专用视图；示例不代表生产环境实测。",
+      "input": "json",
+      "source": "diagram-layout-reference.md",
+      "example": "既有固定样例",
+      "checks": {
+        "checks": {
+          "collisions": {
+            "details": [],
+            "ok": true
+          },
+          "composition": {
+            "details": [],
+            "ok": true
+          },
+          "geometry": {
+            "details": [],
+            "ok": true
+          },
+          "markers": {
+            "details": [],
+            "ok": true
+          },
+          "xml": {
+            "details": [],
+            "ok": true
+          }
+        },
+        "ok": true
+      },
+      "allChecksPassed": true
+    },
+    {
+      "key": "toolcall",
+      "title": "工具调用图",
+      "question": "模型如何选择工具、拿回结果并继续？",
+      "category": "AI 与领域模式",
+      "support": "原生 JSON",
+      "origin": "复用本项目已用固定版本原生生成器生成并检查的图例。",
+      "note": "领域图是架构/数据流的专用视图；示例不代表生产环境实测。",
+      "input": "json",
+      "source": "diagram-layout-reference.md",
+      "example": "既有固定样例",
+      "checks": {
+        "checks": {
+          "collisions": {
+            "details": [],
+            "ok": true
+          },
+          "composition": {
+            "details": [],
+            "ok": true
+          },
+          "geometry": {
+            "details": [],
+            "ok": true
+          },
+          "markers": {
+            "details": [],
+            "ok": true
+          },
+          "xml": {
+            "details": [],
+            "ok": true
+          }
+        },
+        "ok": true
+      },
+      "allChecksPassed": true
+    },
+    {
+      "key": "memorytypes",
+      "title": "Agent 记忆分类图",
+      "question": "工作、情景、语义等记忆有什么层次？",
+      "category": "AI 与领域模式",
+      "support": "原生 JSON",
+      "origin": "复用本项目已用固定版本原生生成器生成并检查的图例。",
+      "note": "领域图是架构/数据流的专用视图；示例不代表生产环境实测。",
+      "input": "json",
+      "source": "diagram-layout-reference.md",
+      "example": "既有固定样例",
+      "checks": {
+        "checks": {
+          "collisions": {
+            "details": [],
+            "ok": true
+          },
+          "composition": {
+            "details": [],
+            "ok": true
+          },
+          "geometry": {
+            "details": [],
+            "ok": true
+          },
+          "markers": {
+            "details": [],
+            "ok": true
+          },
+          "xml": {
+            "details": [],
+            "ok": true
+          }
+        },
+        "ok": true
+      },
+      "allChecksPassed": true
+    },
+    {
+      "key": "dataflow",
+      "title": "数据流图",
+      "question": "数据从哪里来，经过什么加工，保存到哪里？",
+      "category": "数据与结构",
+      "support": "原生 JSON",
+      "origin": "本次编写 JSON，调用上游通用生成器；不是独立领域自动布局引擎。",
+      "note": "领域流程示意，不代表模型或业务已实际运行。",
+      "input": "json",
+      "source": "diagram-layout-reference.md",
+      "example": "本次教学案例",
+      "checks": {
+        "checks": {
+          "collisions": {
+            "details": [],
+            "ok": true
+          },
+          "composition": {
+            "details": [],
+            "ok": true
+          },
+          "geometry": {
+            "details": [],
+            "ok": true
+          },
+          "markers": {
+            "details": [],
+            "ok": true
+          },
+          "xml": {
+            "details": [],
+            "ok": true
+          }
+        },
+        "ok": true
+      },
+      "allChecksPassed": true
+    },
+    {
+      "key": "network",
+      "title": "网络拓扑图",
+      "question": "网络设备如何连接、流量经过哪些边界？",
+      "category": "系统与工程",
+      "support": "原生 JSON",
+      "origin": "本次编写 JSON，调用上游通用生成器；不是独立领域自动布局引擎。",
+      "note": "逻辑网络与访问路径示意；不是自动发现的物理设备拓扑。",
+      "input": "json",
+      "source": "diagram-layout-reference.md",
+      "example": "本次教学案例",
+      "checks": {
+        "checks": {
+          "collisions": {
+            "details": [],
+            "ok": true
+          },
+          "composition": {
+            "details": [],
+            "ok": true
+          },
+          "geometry": {
+            "details": [],
+            "ok": true
+          },
+          "markers": {
+            "details": [],
+            "ok": true
+          },
+          "xml": {
+            "details": [],
+            "ok": true
+          }
+        },
+        "ok": true
+      },
+      "allChecksPassed": true
+    },
+    {
+      "key": "rag",
+      "title": "RAG 检索增强图",
+      "question": "回答怎样引用外部资料？",
+      "category": "AI 与领域模式",
+      "support": "原生 JSON",
+      "origin": "本次编写 JSON，调用上游通用生成器；不是独立领域自动布局引擎。",
+      "note": "领域流程示意，不代表模型或业务已实际运行。",
+      "input": "json",
+      "source": "diagram-layout-reference.md",
+      "example": "本次教学案例",
+      "checks": {
+        "checks": {
+          "collisions": {
+            "details": [],
+            "ok": true
+          },
+          "composition": {
+            "details": [],
+            "ok": true
+          },
+          "geometry": {
+            "details": [],
+            "ok": true
+          },
+          "markers": {
+            "details": [],
+            "ok": true
+          },
+          "xml": {
+            "details": [],
+            "ok": true
+          }
+        },
+        "ok": true
+      },
+      "allChecksPassed": true
+    },
+    {
+      "key": "agentic-rag",
+      "title": "Agentic RAG 图",
+      "question": "Agent 如何决定检索与补充资料？",
+      "category": "AI 与领域模式",
+      "support": "原生 JSON",
+      "origin": "本次编写 JSON，调用上游通用生成器；不是独立领域自动布局引擎。",
+      "note": "展示资料充足时的主路径；多轮重新规划与检索回路未展开，不代表完整 Agent 控制流程。",
+      "input": "json",
+      "source": "diagram-layout-reference.md",
+      "example": "本次教学案例",
+      "checks": {
+        "checks": {
+          "collisions": {
+            "details": [],
+            "ok": true
+          },
+          "composition": {
+            "details": [],
+            "ok": true
+          },
+          "geometry": {
+            "details": [],
+            "ok": true
+          },
+          "markers": {
+            "details": [],
+            "ok": true
+          },
+          "xml": {
+            "details": [],
+            "ok": true
+          }
+        },
+        "ok": true
+      },
+      "allChecksPassed": true
+    },
+    {
+      "key": "agentic-search",
+      "title": "Agentic Search 图",
+      "question": "多步搜索如何规划、执行与综合？",
+      "category": "AI 与领域模式",
+      "support": "原生 JSON",
+      "origin": "本次编写 JSON，调用上游通用生成器；不是独立领域自动布局引擎。",
+      "note": "展示资料充足时的主路径；多轮重新规划与检索回路未展开，不代表完整 Agent 控制流程。",
+      "input": "json",
+      "source": "diagram-layout-reference.md",
+      "example": "本次教学案例",
+      "checks": {
+        "checks": {
+          "collisions": {
+            "details": [],
+            "ok": true
+          },
+          "composition": {
+            "details": [],
+            "ok": true
+          },
+          "geometry": {
+            "details": [],
+            "ok": true
+          },
+          "markers": {
+            "details": [],
+            "ok": true
+          },
+          "xml": {
+            "details": [],
+            "ok": true
+          }
+        },
+        "ok": true
+      },
+      "allChecksPassed": true
+    },
+    {
+      "key": "sequence",
+      "title": "时序图",
+      "question": "一次请求里，谁先调用谁，谁返回什么？",
+      "category": "UML 与行为",
+      "support": "按规范绘制",
+      "origin": "AI 按 Fireworks 图型规范编写 SVG，再使用原库导出；不是上游专用图型渲染器。",
+      "note": "生命线和消息时序由 AI 编排；模板只有占位结构，原库未提供完整时序自动布局器。",
+      "input": "svg",
+      "source": "diagram-layout-reference.md",
+      "example": "在线订单系统（教学设定）",
+      "checks": {
+        "checks": {
+          "collisions": {
+            "details": [],
+            "ok": true
+          },
+          "composition": {
+            "details": [],
+            "ok": true
+          },
+          "geometry": {
+            "details": [],
+            "ok": true
+          },
+          "markers": {
+            "details": [],
+            "ok": true
+          },
+          "xml": {
+            "details": [],
+            "ok": true
+          }
+        },
+        "ok": true
+      },
+      "allChecksPassed": true
+    },
+    {
+      "key": "flowchart",
+      "title": "流程图",
+      "question": "步骤如何推进？遇到条件走哪条分支？",
+      "category": "通用表达",
+      "support": "按规范绘制",
+      "origin": "AI 按 Fireworks 图型规范编写 SVG，再使用原库导出；不是上游专用图型渲染器。",
+      "note": "使用开始/过程/判断与分支；不等于所有业务只有线性步骤。",
+      "input": "svg",
+      "source": "diagram-layout-reference.md",
+      "example": "在线订单系统（教学设定）",
+      "checks": {
+        "checks": {
+          "collisions": {
+            "details": [],
+            "ok": true
+          },
+          "composition": {
+            "details": [],
+            "ok": true
+          },
+          "geometry": {
+            "details": [],
+            "ok": true
+          },
+          "markers": {
+            "details": [],
+            "ok": true
+          },
+          "xml": {
+            "details": [],
+            "ok": true
+          }
+        },
+        "ok": true
+      },
+      "allChecksPassed": true
+    },
+    {
+      "key": "state",
+      "title": "状态机图",
+      "question": "同一个订单有哪些状态？什么事件触发变化？",
+      "category": "UML 与行为",
+      "support": "按规范绘制",
+      "origin": "AI 按 Fireworks 图型规范编写 SVG，再使用原库导出；不是上游专用图型渲染器。",
+      "note": "初始、终止、状态与触发事件；节点表示对象状态，不表示处理部门。",
+      "input": "svg",
+      "source": "diagram-layout-reference.md",
+      "example": "在线订单系统（教学设定）",
+      "checks": {
+        "checks": {
+          "collisions": {
+            "details": [],
+            "ok": true
+          },
+          "composition": {
+            "details": [],
+            "ok": true
+          },
+          "geometry": {
+            "details": [],
+            "ok": true
+          },
+          "markers": {
+            "details": [],
+            "ok": true
+          },
+          "xml": {
+            "details": [],
+            "ok": true
+          }
+        },
+        "ok": true
+      },
+      "allChecksPassed": true
+    },
+    {
+      "key": "class",
+      "title": "类图",
+      "question": "软件有哪些类、属性、方法与关系？",
+      "category": "UML 与行为",
+      "support": "按规范绘制",
+      "origin": "AI 按 Fireworks 图型规范编写 SVG，再使用原库导出；不是上游专用图型渲染器。",
+      "note": "分栏展示类名/属性/方法，空心三角表示接口实现。不是从源码自动提取。",
+      "input": "svg",
+      "source": "diagram-layout-reference.md",
+      "example": "在线订单系统（教学设定）",
+      "checks": {
+        "checks": {
+          "collisions": {
+            "details": [],
+            "ok": true
+          },
+          "composition": {
+            "details": [],
+            "ok": true
+          },
+          "geometry": {
+            "details": [],
+            "ok": true
+          },
+          "markers": {
+            "details": [],
+            "ok": true
+          },
+          "xml": {
+            "details": [],
+            "ok": true
+          }
+        },
+        "ok": true
+      },
+      "allChecksPassed": true
+    },
+    {
+      "key": "er",
+      "title": "ER 实体关系图",
+      "question": "数据库有哪些实体、键与一对多关系？",
+      "category": "数据与结构",
+      "support": "按规范绘制",
+      "origin": "AI 按 Fireworks 图型规范编写 SVG，再使用原库导出；不是上游专用图型渲染器。",
+      "note": "ER 不属于 UML 图型；本例展示实体、主外键与基数，不生成数据库。",
+      "input": "svg",
+      "source": "diagram-layout-reference.md",
+      "example": "在线订单系统（教学设定）",
+      "checks": {
+        "checks": {
+          "collisions": {
+            "details": [],
+            "ok": true
+          },
+          "composition": {
+            "details": [],
+            "ok": true
+          },
+          "geometry": {
+            "details": [],
+            "ok": true
+          },
+          "markers": {
+            "details": [],
+            "ok": true
+          },
+          "xml": {
+            "details": [],
+            "ok": true
+          }
+        },
+        "ok": true
+      },
+      "allChecksPassed": true
+    },
+    {
+      "key": "usecase",
+      "title": "用例图",
+      "question": "谁可以使用系统的哪些功能？",
+      "category": "UML 与行为",
+      "support": "按规范绘制",
+      "origin": "AI 按 Fireworks 图型规范编写 SVG，再使用原库导出；不是上游专用图型渲染器。",
+      "note": "角色在系统边界外，用例位于边界内，include 表示包含关系。",
+      "input": "svg",
+      "source": "diagram-layout-reference.md",
+      "example": "在线订单系统（教学设定）",
+      "checks": {
+        "checks": {
+          "collisions": {
+            "details": [],
+            "ok": true
+          },
+          "composition": {
+            "details": [],
+            "ok": true
+          },
+          "geometry": {
+            "details": [],
+            "ok": true
+          },
+          "markers": {
+            "details": [],
+            "ok": true
+          },
+          "xml": {
+            "details": [],
+            "ok": true
+          }
+        },
+        "ok": true
+      },
+      "allChecksPassed": true
+    },
+    {
+      "key": "activity",
+      "title": "活动图",
+      "question": "哪些动作可以并行？在哪里汇合？",
+      "category": "UML 与行为",
+      "support": "按规范绘制",
+      "origin": "AI 按 Fireworks 图型规范编写 SVG，再使用原库导出；不是上游专用图型渲染器。",
+      "note": "流程图适配 UML 活动记法；粗横条表示 fork/join，并非专用活动建模引擎。",
+      "input": "svg",
+      "source": "diagram-layout-reference.md",
+      "example": "在线订单系统（教学设定）",
+      "checks": {
+        "checks": {
+          "collisions": {
+            "details": [],
+            "ok": true
+          },
+          "composition": {
+            "details": [],
+            "ok": true
+          },
+          "geometry": {
+            "details": [],
+            "ok": true
+          },
+          "markers": {
+            "details": [],
+            "ok": true
+          },
+          "xml": {
+            "details": [],
+            "ok": true
+          }
+        },
+        "ok": true
+      },
+      "allChecksPassed": true
+    },
+    {
+      "key": "object",
+      "title": "对象图",
+      "question": "某个时刻有哪些实例，实例间怎样关联？",
+      "category": "数据与结构",
+      "support": "按规范绘制",
+      "origin": "AI 按 Fireworks 图型规范编写 SVG，再使用原库导出；不是上游专用图型渲染器。",
+      "note": "由类图样式适配；带下划线的“实例名 : 类型”表示对象。",
+      "input": "svg",
+      "source": "diagram-layout-reference.md",
+      "example": "在线订单系统（教学设定）",
+      "checks": {
+        "checks": {
+          "collisions": {
+            "details": [],
+            "ok": true
+          },
+          "composition": {
+            "details": [],
+            "ok": true
+          },
+          "geometry": {
+            "details": [],
+            "ok": true
+          },
+          "markers": {
+            "details": [],
+            "ok": true
+          },
+          "xml": {
+            "details": [],
+            "ok": true
+          }
+        },
+        "ok": true
+      },
+      "allChecksPassed": true
+    },
+    {
+      "key": "component",
+      "title": "组件图",
+      "question": "组件的职责、端口和依赖是什么？",
+      "category": "数据与结构",
+      "support": "按规范绘制",
+      "origin": "AI 按 Fireworks 图型规范编写 SVG，再使用原库导出；不是上游专用图型渲染器。",
+      "note": "仓库映射到架构图表达；这里补充 component 标记与端口，不验证完整接口兼容性。",
+      "input": "svg",
+      "source": "diagram-layout-reference.md",
+      "example": "在线订单系统（教学设定）",
+      "checks": {
+        "checks": {
+          "collisions": {
+            "details": [],
+            "ok": true
+          },
+          "composition": {
+            "details": [],
+            "ok": true
+          },
+          "geometry": {
+            "details": [],
+            "ok": true
+          },
+          "markers": {
+            "details": [],
+            "ok": true
+          },
+          "xml": {
+            "details": [],
+            "ok": true
+          }
+        },
+        "ok": true
+      },
+      "allChecksPassed": true
+    },
+    {
+      "key": "deployment",
+      "title": "UML 部署图",
+      "question": "软件制品部署到哪些运行节点？",
+      "category": "系统与工程",
+      "support": "按规范绘制",
+      "origin": "AI 按 Fireworks 图型规范编写 SVG，再使用原库导出；不是上游专用图型渲染器。",
+      "note": "架构图的节点/实例适配；与带 Region/VPC 领域检查的 Cloud Fabric 分开展示。",
+      "input": "svg",
+      "source": "diagram-layout-reference.md",
+      "example": "在线订单系统（教学设定）",
+      "checks": {
+        "checks": {
+          "collisions": {
+            "details": [],
+            "ok": true
+          },
+          "composition": {
+            "details": [],
+            "ok": true
+          },
+          "geometry": {
+            "details": [],
+            "ok": true
+          },
+          "markers": {
+            "details": [],
+            "ok": true
+          },
+          "xml": {
+            "details": [],
+            "ok": true
+          }
+        },
+        "ok": true
+      },
+      "allChecksPassed": true
+    },
+    {
+      "key": "package",
+      "title": "包图",
+      "question": "代码按哪些包组织？包之间依赖什么？",
+      "category": "数据与结构",
+      "support": "按规范绘制",
+      "origin": "AI 按 Fireworks 图型规范编写 SVG，再使用原库导出；不是上游专用图型渲染器。",
+      "note": "用架构分组适配包图；文件夹式页签区分包与普通服务节点。",
+      "input": "svg",
+      "source": "diagram-layout-reference.md",
+      "example": "在线订单系统（教学设定）",
+      "checks": {
+        "checks": {
+          "collisions": {
+            "details": [],
+            "ok": true
+          },
+          "composition": {
+            "details": [],
+            "ok": true
+          },
+          "geometry": {
+            "details": [],
+            "ok": true
+          },
+          "markers": {
+            "details": [],
+            "ok": true
+          },
+          "xml": {
+            "details": [],
+            "ok": true
+          }
+        },
+        "ok": true
+      },
+      "allChecksPassed": true
+    },
+    {
+      "key": "composite",
+      "title": "组合结构图",
+      "question": "一个组件内部有哪些部件、端口和连接器？",
+      "category": "数据与结构",
+      "support": "按规范绘制",
+      "origin": "AI 按 Fireworks 图型规范编写 SVG，再使用原库导出；不是上游专用图型渲染器。",
+      "note": "嵌套架构表达；内部部件属于结构化分类器，不是外部部署节点。",
+      "input": "svg",
+      "source": "diagram-layout-reference.md",
+      "example": "在线订单系统（教学设定）",
+      "checks": {
+        "checks": {
+          "collisions": {
+            "details": [],
+            "ok": true
+          },
+          "composition": {
+            "details": [],
+            "ok": true
+          },
+          "geometry": {
+            "details": [],
+            "ok": true
+          },
+          "markers": {
+            "details": [],
+            "ok": true
+          },
+          "xml": {
+            "details": [],
+            "ok": true
+          }
+        },
+        "ok": true
+      },
+      "allChecksPassed": true
+    },
+    {
+      "key": "communication",
+      "title": "通信图",
+      "question": "对象怎样互相发消息？编号顺序是什么？",
+      "category": "UML 与行为",
+      "support": "近似适配",
+      "origin": "AI 按 Fireworks 图型规范编写 SVG，再使用原库导出；不是上游专用图型渲染器。",
+      "note": "上游明确标为近似支持；此处采用对象连线与消息编号说明，非专用通信图引擎。",
+      "input": "svg",
+      "source": "diagram-layout-reference.md",
+      "example": "在线订单系统（教学设定）",
+      "checks": {
+        "checks": {
+          "collisions": {
+            "details": [],
+            "ok": true
+          },
+          "composition": {
+            "details": [],
+            "ok": true
+          },
+          "geometry": {
+            "details": [],
+            "ok": true
+          },
+          "markers": {
+            "details": [],
+            "ok": true
+          },
+          "xml": {
+            "details": [],
+            "ok": true
+          }
+        },
+        "ok": true
+      },
+      "allChecksPassed": true
+    },
+    {
+      "key": "timing",
+      "title": "时序波形图（Timing）",
+      "question": "对象状态随时间如何变化？",
+      "category": "UML 与行为",
+      "support": "近似适配",
+      "origin": "AI 按 Fireworks 图型规范编写 SVG，再使用原库导出；不是上游专用图型渲染器。",
+      "note": "由时间轴适配，纵轴为状态、横轴为时间；与消息时序图不同。时间为教学设定。",
+      "input": "svg",
+      "source": "diagram-layout-reference.md",
+      "example": "在线订单系统（教学设定）",
+      "checks": {
+        "checks": {
+          "collisions": {
+            "details": [],
+            "ok": true
+          },
+          "composition": {
+            "details": [],
+            "ok": true
+          },
+          "geometry": {
+            "details": [],
+            "ok": true
+          },
+          "markers": {
+            "details": [],
+            "ok": true
+          },
+          "xml": {
+            "details": [],
+            "ok": true
+          }
+        },
+        "ok": true
+      },
+      "allChecksPassed": true
+    },
+    {
+      "key": "interaction-overview",
+      "title": "交互概览图",
+      "question": "多个交互片段如何按条件组织？",
+      "category": "UML 与行为",
+      "support": "近似适配",
+      "origin": "AI 按 Fireworks 图型规范编写 SVG，再使用原库导出；不是上游专用图型渲染器。",
+      "note": "以活动流程连接 ref 交互片段；上游由流程图组合适配，未提供独立执行语义。",
+      "input": "svg",
+      "source": "diagram-layout-reference.md",
+      "example": "在线订单系统（教学设定）",
+      "checks": {
+        "checks": {
+          "collisions": {
+            "details": [],
+            "ok": true
+          },
+          "composition": {
+            "details": [],
+            "ok": true
+          },
+          "geometry": {
+            "details": [],
+            "ok": true
+          },
+          "markers": {
+            "details": [],
+            "ok": true
+          },
+          "xml": {
+            "details": [],
+            "ok": true
+          }
+        },
+        "ok": true
+      },
+      "allChecksPassed": true
+    },
+    {
+      "key": "comparison",
+      "title": "比较矩阵",
+      "question": "多个方案在哪些维度上不同？",
+      "category": "通用表达",
+      "support": "按规范绘制",
+      "origin": "AI 按 Fireworks 图型规范编写 SVG，再使用原库导出；不是上游专用图型渲染器。",
+      "note": "表格型可视化，不是流程。示例功能为教学设定，不是实际产品能力评测。",
+      "input": "svg",
+      "source": "diagram-layout-reference.md",
+      "example": "在线订单系统（教学设定）",
+      "checks": {
+        "checks": {
+          "collisions": {
+            "details": [],
+            "ok": true
+          },
+          "composition": {
+            "details": [],
+            "ok": true
+          },
+          "geometry": {
+            "details": [],
+            "ok": true
+          },
+          "markers": {
+            "details": [],
+            "ok": true
+          },
+          "xml": {
+            "details": [],
+            "ok": true
+          }
+        },
+        "ok": true
+      },
+      "allChecksPassed": true
+    },
+    {
+      "key": "timeline",
+      "title": "时间轴 / 甘特图",
+      "question": "每项工作持续多久、何时开始、何时交付？",
+      "category": "通用表达",
+      "support": "按规范绘制",
+      "origin": "AI 按 Fireworks 图型规范编写 SVG，再使用原库导出；不是上游专用图型渲染器。",
+      "note": "合并同义入口：甘特横条表达持续时间，时间轴节点表达里程碑；时间为示例。",
+      "input": "svg",
+      "source": "diagram-layout-reference.md",
+      "example": "在线订单系统（教学设定）",
+      "checks": {
+        "checks": {
+          "collisions": {
+            "details": [],
+            "ok": true
+          },
+          "composition": {
+            "details": [],
+            "ok": true
+          },
+          "geometry": {
+            "details": [],
+            "ok": true
+          },
+          "markers": {
+            "details": [],
+            "ok": true
+          },
+          "xml": {
+            "details": [],
+            "ok": true
+          }
+        },
+        "ok": true
+      },
+      "allChecksPassed": true
+    },
+    {
+      "key": "mindmap",
+      "title": "思维导图 / 概念图",
+      "question": "一个主题有哪些分支与关联概念？",
+      "category": "通用表达",
+      "support": "按规范绘制",
+      "origin": "AI 按 Fireworks 图型规范编写 SVG，再使用原库导出；不是上游专用图型渲染器。",
+      "note": "合并同义入口；曲线分支用于概念展开，不表达时间顺序。",
+      "input": "svg",
+      "source": "diagram-layout-reference.md",
+      "example": "在线订单系统（教学设定）",
+      "checks": {
+        "checks": {
+          "collisions": {
+            "details": [],
+            "ok": true
+          },
+          "composition": {
+            "details": [],
+            "ok": true
+          },
+          "geometry": {
+            "details": [],
+            "ok": true
+          },
+          "markers": {
+            "details": [],
+            "ok": true
+          },
+          "xml": {
+            "details": [],
+            "ok": true
+          }
+        },
+        "ok": true
+      },
+      "allChecksPassed": true
+    }
+  ]
+}

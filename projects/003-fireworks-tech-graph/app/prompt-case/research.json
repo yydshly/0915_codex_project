@@ -1,0 +1,321 @@
+{
+  "target": "https://github.com/x1xhlol/system-prompts-and-models-of-ai-tools",
+  "commit": "1e4203a7d88873c1b37ab2d1c07074fea498c274",
+  "date": "2026-09-15",
+  "trackedFiles": 111,
+  "collectionDirectories": [
+    "Amp",
+    "Anthropic",
+    "Augment Code",
+    "Cluely",
+    "CodeBuddy Prompts",
+    "Comet Assistant",
+    "Cursor Prompts",
+    "Devin AI",
+    "Emergent",
+    "Google",
+    "Junie",
+    "Kiro",
+    "Leap.new",
+    "Lovable",
+    "Manus Agent Tools & Prompt",
+    "NotionAi",
+    "Open Source prompts",
+    "Orchids.app",
+    "Perplexity",
+    "Poke",
+    "Qoder",
+    "Replit",
+    "Same.dev",
+    "Trae",
+    "Traycer AI",
+    "VSCode Agent",
+    "Warp.dev",
+    "Windsurf",
+    "Xcode",
+    "Z.ai Code",
+    "dia",
+    "v0 Prompts and Tools"
+  ],
+  "directoryCount": 32,
+  "extensions": {
+    ".yml": 1,
+    ".md": 3,
+    ".yaml": 2,
+    ".png": 4,
+    ".txt": 83,
+    ".json": 17,
+    "(none)": 1
+  },
+  "jsonChecks": [
+    {
+      "file": "Anthropic/Claude Code/Tools.json",
+      "parsed": true,
+      "topType": "dict"
+    },
+    {
+      "file": "Anthropic/Claude for Chrome/Tools.json",
+      "parsed": true,
+      "topType": "list"
+    },
+    {
+      "file": "Augment Code/claude-4-sonnet-tools.json",
+      "parsed": true,
+      "topType": "dict"
+    },
+    {
+      "file": "Augment Code/gpt-5-tools.json",
+      "parsed": true,
+      "topType": "dict"
+    },
+    {
+      "file": "Comet Assistant/tools.json",
+      "parsed": false,
+      "line": 1,
+      "reason": "Expecting value"
+    },
+    {
+      "file": "Cursor Prompts/Agent Tools v1.0.json",
+      "parsed": true,
+      "topType": "list"
+    },
+    {
+      "file": "Emergent/Tools.json",
+      "parsed": false,
+      "line": 1,
+      "reason": "Expecting value"
+    },
+    {
+      "file": "Leap.new/tools.json",
+      "parsed": true,
+      "topType": "dict"
+    },
+    {
+      "file": "Lovable/Agent Tools.json",
+      "parsed": false,
+      "line": 436,
+      "reason": "Extra data"
+    },
+    {
+      "file": "Manus Agent Tools & Prompt/tools.json",
+      "parsed": true,
+      "topType": "list"
+    },
+    {
+      "file": "NotionAi/tools.json",
+      "parsed": true,
+      "topType": "list"
+    },
+    {
+      "file": "Replit/Tools.json",
+      "parsed": true,
+      "topType": "dict"
+    },
+    {
+      "file": "Same.dev/Tools.json",
+      "parsed": true,
+      "topType": "list"
+    },
+    {
+      "file": "Trae/Builder Tools.json",
+      "parsed": true,
+      "topType": "dict"
+    },
+    {
+      "file": "Traycer AI/phase_mode_tools.json",
+      "parsed": false,
+      "line": 295,
+      "reason": "Expecting ',' delimiter"
+    },
+    {
+      "file": "Traycer AI/plan_mode_tools.json",
+      "parsed": true,
+      "topType": "dict"
+    },
+    {
+      "file": "v0 Prompts and Tools/Tools.json",
+      "parsed": true,
+      "topType": "dict"
+    }
+  ],
+  "evidence": [
+    {
+      "file": "Manus Agent Tools & Prompt/Agent loop.txt",
+      "start": 27,
+      "end": 33,
+      "meaning": "事件、工具、执行、迭代、交付、待命",
+      "sha256": "7b8837ff66633cd54ba3609dd5d9f4c925a02e7faf0ffb82c38448e1ae514abb",
+      "url": "https://github.com/x1xhlol/system-prompts-and-models-of-ai-tools/blob/1e4203a7d88873c1b37ab2d1c07074fea498c274/Manus%20Agent%20Tools%20%26%20Prompt/Agent%20loop.txt#L27-L33"
+    },
+    {
+      "file": "Manus Agent Tools & Prompt/tools.json",
+      "start": 1,
+      "end": null,
+      "meaning": "29 个工具定义；仅接口说明",
+      "sha256": "550794f3ba5f49fff7c794087edbcfeb1d5214e8db9e8c297a2c8b979b18bc7d",
+      "url": "https://github.com/x1xhlol/system-prompts-and-models-of-ai-tools/blob/1e4203a7d88873c1b37ab2d1c07074fea498c274/Manus%20Agent%20Tools%20%26%20Prompt/tools.json#L1"
+    },
+    {
+      "file": "Cursor Prompts/Agent Prompt 2.0.txt",
+      "start": 12,
+      "end": 27,
+      "meaning": "语义检索与精确查找的选择条件",
+      "sha256": "2c3afef62ea980eda941062ae7e013244d5382f907f70b7545a7d8970ff43c58",
+      "url": "https://github.com/x1xhlol/system-prompts-and-models-of-ai-tools/blob/1e4203a7d88873c1b37ab2d1c07074fea498c274/Cursor%20Prompts/Agent%20Prompt%202.0.txt#L12-L27"
+    },
+    {
+      "file": "Cursor Prompts/Agent Tools v1.0.json",
+      "start": 1,
+      "end": null,
+      "meaning": "13 个工具定义",
+      "sha256": "59ef49a824af23576933929f60ece76904e855c79b54207dbc15b287c6a86b59",
+      "url": "https://github.com/x1xhlol/system-prompts-and-models-of-ai-tools/blob/1e4203a7d88873c1b37ab2d1c07074fea498c274/Cursor%20Prompts/Agent%20Tools%20v1.0.json#L1"
+    },
+    {
+      "file": "Kiro/Spec_Prompt.txt",
+      "start": 208,
+      "end": 210,
+      "meaning": "requirements.md",
+      "sha256": "a0eb7c526afc5a306225f830336dae19661de84c5eb422c4f85544dd5bc4a0ea",
+      "url": "https://github.com/x1xhlol/system-prompts-and-models-of-ai-tools/blob/1e4203a7d88873c1b37ab2d1c07074fea498c274/Kiro/Spec_Prompt.txt#L208-L210"
+    },
+    {
+      "file": "Kiro/Spec_Prompt.txt",
+      "start": 265,
+      "end": 271,
+      "meaning": "design.md",
+      "sha256": "a0eb7c526afc5a306225f830336dae19661de84c5eb422c4f85544dd5bc4a0ea",
+      "url": "https://github.com/x1xhlol/system-prompts-and-models-of-ai-tools/blob/1e4203a7d88873c1b37ab2d1c07074fea498c274/Kiro/Spec_Prompt.txt#L265-L271"
+    },
+    {
+      "file": "Kiro/Spec_Prompt.txt",
+      "start": 303,
+      "end": 306,
+      "meaning": "tasks.md",
+      "sha256": "a0eb7c526afc5a306225f830336dae19661de84c5eb422c4f85544dd5bc4a0ea",
+      "url": "https://github.com/x1xhlol/system-prompts-and-models-of-ai-tools/blob/1e4203a7d88873c1b37ab2d1c07074fea498c274/Kiro/Spec_Prompt.txt#L303-L306"
+    },
+    {
+      "file": "Amp/gpt-5.yaml",
+      "start": 1,
+      "end": 10,
+      "meaning": "模型名称、角色与调试输入快照",
+      "sha256": "ffedbcfc1505c99621fc8f408ef4a1ea2d0c80adcb474043b5b51036397ace04",
+      "url": "https://github.com/x1xhlol/system-prompts-and-models-of-ai-tools/blob/1e4203a7d88873c1b37ab2d1c07074fea498c274/Amp/gpt-5.yaml#L1-L10"
+    }
+  ],
+  "files": [
+    ".github/FUNDING.yml",
+    "Amp/README.md",
+    "Amp/claude-4-sonnet.yaml",
+    "Amp/gpt-5.yaml",
+    "Amp/view-thread-yaml.png",
+    "Anthropic/Claude Code 2.0.txt",
+    "Anthropic/Claude Code/Prompt.txt",
+    "Anthropic/Claude Code/Tools.json",
+    "Anthropic/Claude Fable 5.txt",
+    "Anthropic/Claude Sonnet 4.6.txt",
+    "Anthropic/Claude Sonnet 5 Tools.txt",
+    "Anthropic/Claude Sonnet 5.txt",
+    "Anthropic/Claude for Chrome/Prompt.txt",
+    "Anthropic/Claude for Chrome/Tools.json",
+    "Anthropic/Sonnet 4.5 Prompt.txt",
+    "Augment Code/claude-4-sonnet-agent-prompts.txt",
+    "Augment Code/claude-4-sonnet-tools.json",
+    "Augment Code/gpt-5-agent-prompts.txt",
+    "Augment Code/gpt-5-tools.json",
+    "Cluely/Default Prompt.txt",
+    "Cluely/Enterprise Prompt.txt",
+    "CodeBuddy Prompts/Chat Prompt.txt",
+    "CodeBuddy Prompts/Craft Prompt.txt",
+    "Comet Assistant/System Prompt.txt",
+    "Comet Assistant/tools.json",
+    "Cursor Prompts/Agent CLI Prompt 2025-08-07.txt",
+    "Cursor Prompts/Agent Prompt 2.0.txt",
+    "Cursor Prompts/Agent Prompt 2025-09-03.txt",
+    "Cursor Prompts/Agent Prompt v1.0.txt",
+    "Cursor Prompts/Agent Prompt v1.2.txt",
+    "Cursor Prompts/Agent Tools v1.0.json",
+    "Cursor Prompts/Chat Prompt.txt",
+    "Devin AI/DeepWiki Prompt.txt",
+    "Devin AI/Prompt.txt",
+    "Emergent/Prompt.txt",
+    "Emergent/Tools.json",
+    "Google/Antigravity/Fast Prompt.txt",
+    "Google/Antigravity/planning-mode.txt",
+    "Google/Gemini/AI Studio vibe-coder.txt",
+    "Junie/Prompt.txt",
+    "Kiro/Mode_Clasifier_Prompt.txt",
+    "Kiro/Spec_Prompt.txt",
+    "Kiro/Vibe_Prompt.txt",
+    "LICENSE.md",
+    "Leap.new/Prompts.txt",
+    "Leap.new/tools.json",
+    "Lovable/Agent Prompt.txt",
+    "Lovable/Agent Tools.json",
+    "Manus Agent Tools & Prompt/Agent loop.txt",
+    "Manus Agent Tools & Prompt/Modules.txt",
+    "Manus Agent Tools & Prompt/Prompt.txt",
+    "Manus Agent Tools & Prompt/tools.json",
+    "NotionAi/Prompt.txt",
+    "NotionAi/tools.json",
+    "Open Source prompts/Bolt/Prompt.txt",
+    "Open Source prompts/Cline/Prompt.txt",
+    "Open Source prompts/Codex CLI/Prompt.txt",
+    "Open Source prompts/Codex CLI/openai-codex-cli-system-prompt-20250820.txt",
+    "Open Source prompts/Gemini CLI/google-gemini-cli-system-prompt.txt",
+    "Open Source prompts/Lumo/Prompt.txt",
+    "Open Source prompts/RooCode/Prompt.txt",
+    "Orchids.app/Decision-making prompt.txt",
+    "Orchids.app/System Prompt.txt",
+    "Perplexity/Prompt.txt",
+    "Poke/Poke agent.txt",
+    "Poke/Poke_p1.txt",
+    "Poke/Poke_p2.txt",
+    "Poke/Poke_p3.txt",
+    "Poke/Poke_p4.txt",
+    "Poke/Poke_p5.txt",
+    "Poke/Poke_p6.txt",
+    "Qoder/Quest Action.txt",
+    "Qoder/Quest Design.txt",
+    "Qoder/prompt.txt",
+    "README.md",
+    "Replit/Prompt.txt",
+    "Replit/Tools.json",
+    "Same.dev/Prompt.txt",
+    "Same.dev/Tools.json",
+    "Trae/Builder Prompt.txt",
+    "Trae/Builder Tools.json",
+    "Trae/Chat Prompt.txt",
+    "Traycer AI/phase_mode_prompts.txt",
+    "Traycer AI/phase_mode_tools.json",
+    "Traycer AI/plan_mode_prompts",
+    "Traycer AI/plan_mode_tools.json",
+    "VSCode Agent/Prompt.txt",
+    "VSCode Agent/chat-titles.txt",
+    "VSCode Agent/claude-sonnet-4.txt",
+    "VSCode Agent/gemini-2.5-pro.txt",
+    "VSCode Agent/gpt-4.1.txt",
+    "VSCode Agent/gpt-4o.txt",
+    "VSCode Agent/gpt-5-mini.txt",
+    "VSCode Agent/gpt-5.txt",
+    "VSCode Agent/nes-tab-completion.txt",
+    "Warp.dev/Prompt.txt",
+    "Windsurf/Prompt Wave 11.txt",
+    "Windsurf/Tools Wave 11.txt",
+    "Xcode/DocumentAction.txt",
+    "Xcode/ExplainAction.txt",
+    "Xcode/MessageAction.txt",
+    "Xcode/PlaygroundAction.txt",
+    "Xcode/PreviewAction.txt",
+    "Xcode/System.txt",
+    "Z.ai Code/prompt.txt",
+    "assets/latitude-dark.png",
+    "assets/tembo-dark.png",
+    "assets/tembo-light.png",
+    "dia/Prompt.txt",
+    "v0 Prompts and Tools/Prompt.txt",
+    "v0 Prompts and Tools/Tools.json"
+  ],
+  "limits": "目录数量不等于独立产品数量；文件内容是仓库收录的快照，真实性、完整性和现行性未逐项向厂商验证。未运行其中描述的 AI 产品。"
+}

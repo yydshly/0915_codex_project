@@ -1,0 +1,104 @@
+{
+  "schema_version": 1,
+  "mode": "architecture",
+  "style": 1,
+  "width": 1200,
+  "height": 650,
+  "title": "网络拓扑图",
+  "subtitle": "网络设备如何连接、流量经过哪些边界？",
+  "text_policy": "strict",
+  "quality_profile": "showcase",
+  "nodes": [
+    {
+      "id": "n0",
+      "label": "公网入口",
+      "sublabel": "外部 HTTPS 请求",
+      "x": 65,
+      "y": 170,
+      "width": 290,
+      "height": 85,
+      "kind": "rect"
+    },
+    {
+      "id": "n1",
+      "label": "防火墙",
+      "sublabel": "入口访问规则",
+      "x": 455,
+      "y": 170,
+      "width": 290,
+      "height": 85,
+      "kind": "rect"
+    },
+    {
+      "id": "n2",
+      "label": "负载均衡",
+      "sublabel": "分发到服务节点",
+      "x": 845,
+      "y": 170,
+      "width": 290,
+      "height": 85,
+      "kind": "rect"
+    },
+    {
+      "id": "n3",
+      "label": "应用子网",
+      "sublabel": "订单服务",
+      "x": 845,
+      "y": 430,
+      "width": 290,
+      "height": 85,
+      "kind": "rect"
+    },
+    {
+      "id": "n4",
+      "label": "数据子网",
+      "sublabel": "数据库访问边界",
+      "x": 455,
+      "y": 430,
+      "width": 290,
+      "height": 85,
+      "kind": "rect"
+    }
+  ],
+  "arrows": [
+    {
+      "id": "e0",
+      "source": "n0",
+      "target": "n1",
+      "source_port": "right",
+      "target_port": "left",
+      "flow": "data",
+      "label": "HTTPS"
+    },
+    {
+      "id": "e1",
+      "source": "n1",
+      "target": "n2",
+      "source_port": "right",
+      "target_port": "left",
+      "flow": "data",
+      "label": "放行流量"
+    },
+    {
+      "id": "e2",
+      "source": "n2",
+      "target": "n3",
+      "source_port": "bottom",
+      "target_port": "top",
+      "flow": "data",
+      "label": "业务请求"
+    },
+    {
+      "id": "e3",
+      "source": "n3",
+      "target": "n4",
+      "source_port": "left",
+      "target_port": "right",
+      "flow": "data",
+      "label": "数据库请求"
+    }
+  ],
+  "footer": "教学设定 · 使用 Fireworks 通用节点 / 连线生成器 · 无运行指标",
+  "footer_x": 48,
+  "footer_y": 620
+}

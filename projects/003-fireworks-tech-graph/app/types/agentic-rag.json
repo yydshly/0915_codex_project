@@ -1,0 +1,123 @@
+{
+  "schema_version": 1,
+  "mode": "architecture",
+  "style": 1,
+  "width": 1200,
+  "height": 650,
+  "title": "Agentic RAG 图",
+  "subtitle": "Agent 如何决定检索与补充资料？",
+  "text_policy": "strict",
+  "quality_profile": "showcase",
+  "nodes": [
+    {
+      "id": "n0",
+      "label": "用户问题",
+      "sublabel": "复杂研究请求",
+      "x": 65,
+      "y": 170,
+      "width": 290,
+      "height": 85,
+      "kind": "rect"
+    },
+    {
+      "id": "n1",
+      "label": "Agent 规划",
+      "sublabel": "判断资料缺口",
+      "x": 455,
+      "y": 170,
+      "width": 290,
+      "height": 85,
+      "kind": "double_rect"
+    },
+    {
+      "id": "n2",
+      "label": "选择检索工具",
+      "sublabel": "搜索 / 向量库",
+      "x": 845,
+      "y": 170,
+      "width": 290,
+      "height": 85,
+      "kind": "rect"
+    },
+    {
+      "id": "n3",
+      "label": "评估证据",
+      "sublabel": "不足则规划下一轮",
+      "x": 845,
+      "y": 430,
+      "width": 290,
+      "height": 85,
+      "kind": "rect"
+    },
+    {
+      "id": "n4",
+      "label": "LLM 模型",
+      "sublabel": "依据证据综合",
+      "x": 455,
+      "y": 430,
+      "width": 290,
+      "height": 85,
+      "kind": "double_rect"
+    },
+    {
+      "id": "n5",
+      "label": "输出回答",
+      "sublabel": "附来源与限制",
+      "x": 65,
+      "y": 430,
+      "width": 290,
+      "height": 85,
+      "kind": "rect"
+    }
+  ],
+  "arrows": [
+    {
+      "id": "e0",
+      "source": "n0",
+      "target": "n1",
+      "source_port": "right",
+      "target_port": "left",
+      "flow": "data",
+      "label": "研究问题"
+    },
+    {
+      "id": "e1",
+      "source": "n1",
+      "target": "n2",
+      "source_port": "right",
+      "target_port": "left",
+      "flow": "data",
+      "label": "检索计划"
+    },
+    {
+      "id": "e2",
+      "source": "n2",
+      "target": "n3",
+      "source_port": "bottom",
+      "target_port": "top",
+      "flow": "data",
+      "label": "候选资料"
+    },
+    {
+      "id": "e3",
+      "source": "n3",
+      "target": "n4",
+      "source_port": "left",
+      "target_port": "right",
+      "flow": "data",
+      "label": "充分证据"
+    },
+    {
+      "id": "e4",
+      "source": "n4",
+      "target": "n5",
+      "source_port": "left",
+      "target_port": "right",
+      "flow": "data",
+      "label": "综合回答"
+    }
+  ],
+  "footer": "教学设定 · 使用 Fireworks 通用节点 / 连线生成器 · 无运行指标",
+  "footer_x": 48,
+  "footer_y": 620
+}

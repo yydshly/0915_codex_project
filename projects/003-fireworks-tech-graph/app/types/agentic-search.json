@@ -1,0 +1,123 @@
+{
+  "schema_version": 1,
+  "mode": "architecture",
+  "style": 1,
+  "width": 1200,
+  "height": 650,
+  "title": "Agentic Search 图",
+  "subtitle": "多步搜索如何规划、执行与综合？",
+  "text_policy": "strict",
+  "quality_profile": "showcase",
+  "nodes": [
+    {
+      "id": "n0",
+      "label": "研究目标",
+      "sublabel": "明确问题与边界",
+      "x": 65,
+      "y": 170,
+      "width": 290,
+      "height": 85,
+      "kind": "rect"
+    },
+    {
+      "id": "n1",
+      "label": "搜索规划",
+      "sublabel": "拆解子问题",
+      "x": 455,
+      "y": 170,
+      "width": 290,
+      "height": 85,
+      "kind": "rect"
+    },
+    {
+      "id": "n2",
+      "label": "搜索与计算",
+      "sublabel": "使用可用工具",
+      "x": 845,
+      "y": 170,
+      "width": 290,
+      "height": 85,
+      "kind": "rect"
+    },
+    {
+      "id": "n3",
+      "label": "核对资料",
+      "sublabel": "交叉检查来源",
+      "x": 845,
+      "y": 430,
+      "width": 290,
+      "height": 85,
+      "kind": "rect"
+    },
+    {
+      "id": "n4",
+      "label": "综合分析",
+      "sublabel": "整理发现",
+      "x": 455,
+      "y": 430,
+      "width": 290,
+      "height": 85,
+      "kind": "rect"
+    },
+    {
+      "id": "n5",
+      "label": "研究报告",
+      "sublabel": "交付结论与证据",
+      "x": 65,
+      "y": 430,
+      "width": 290,
+      "height": 85,
+      "kind": "rect"
+    }
+  ],
+  "arrows": [
+    {
+      "id": "e0",
+      "source": "n0",
+      "target": "n1",
+      "source_port": "right",
+      "target_port": "left",
+      "flow": "data",
+      "label": "研究问题"
+    },
+    {
+      "id": "e1",
+      "source": "n1",
+      "target": "n2",
+      "source_port": "right",
+      "target_port": "left",
+      "flow": "data",
+      "label": "子问题"
+    },
+    {
+      "id": "e2",
+      "source": "n2",
+      "target": "n3",
+      "source_port": "bottom",
+      "target_port": "top",
+      "flow": "data",
+      "label": "搜索结果"
+    },
+    {
+      "id": "e3",
+      "source": "n3",
+      "target": "n4",
+      "source_port": "left",
+      "target_port": "right",
+      "flow": "data",
+      "label": "已核对资料"
+    },
+    {
+      "id": "e4",
+      "source": "n4",
+      "target": "n5",
+      "source_port": "left",
+      "target_port": "right",
+      "flow": "data",
+      "label": "研究发现"
+    }
+  ],
+  "footer": "教学设定 · 使用 Fireworks 通用节点 / 连线生成器 · 无运行指标",
+  "footer_x": 48,
+  "footer_y": 620
+}

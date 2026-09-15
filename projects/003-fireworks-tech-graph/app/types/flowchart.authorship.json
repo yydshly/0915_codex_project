@@ -1,0 +1,7 @@
+{
+  "author": "本次 Agent",
+  "route": "Fireworks Skill 的 AI-authored SVG 路径",
+  "source": "diagram-layout-reference.md",
+  "purpose": "步骤如何推进？遇到条件走哪条分支？",
+  "limit": "使用开始/过程/判断与分支；不等于所有业务只有线性步骤。"
+}

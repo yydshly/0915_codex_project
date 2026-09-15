@@ -1,0 +1,7 @@
+{
+  "author": "本次 Agent",
+  "route": "Fireworks Skill 的 AI-authored SVG 路径",
+  "source": "diagram-layout-reference.md",
+  "purpose": "一个主题有哪些分支与关联概念？",
+  "limit": "合并同义入口；曲线分支用于概念展开，不表达时间顺序。"
+}

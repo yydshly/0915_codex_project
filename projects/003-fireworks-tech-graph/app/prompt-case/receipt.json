@@ -1,0 +1,44 @@
+{
+  "targetCommit": "1e4203a7d88873c1b37ab2d1c07074fea498c274",
+  "fireworksCommit": "31fea364eda5f1852b1175f3d9e29ea31d22dcb4",
+  "renderer": "Fireworks CLI + upstream svg2png.js",
+  "authorship": "资料盘点由脚本执行；关系和中文解读由本次 Agent 编写；图形由 Fireworks 渲染",
+  "svgCount": 3,
+  "checks": 15,
+  "png": {
+    "agent-loop.png": {
+      "width": 2400,
+      "height": 1440
+    },
+    "overview.png": {
+      "width": 2400,
+      "height": 1440
+    },
+    "your-workflow.png": {
+      "width": 2400,
+      "height": 1440
+    }
+  },
+  "gif": "未生成；本次为自定义资料结构与流程图，不套用无关动效场景",
+  "hashes": {
+    "agent-loop.checks.json": "3e8686ae29e1dde30690ac9d0c1731e30ec039bdf78b618c88260b97b62e11b2",
+    "agent-loop.html": "13f66225d46417fa6bd296daf3ca66a599eb8b01fb7f6b99f2ee7172651d9ba9",
+    "agent-loop.json": "3d2c6feaee38599f3995939aaab36792dc243060addfe94e9d181e806c6dd24e",
+    "agent-loop.layout.json": "65c4dd1dd862c739e751f65a79167ec98038a4ea0cb6962d2757c86adf5b49b8",
+    "agent-loop.png": "2013ca27d97f25a8733db4d2227a2ef6cc0ab74b180871449238462c6d9b5940",
+    "agent-loop.svg": "f616335a98207ae6bec4b0c0bfad98479e6997a54d74a244bfc1e9b5df7002e0",
+    "overview.checks.json": "3e8686ae29e1dde30690ac9d0c1731e30ec039bdf78b618c88260b97b62e11b2",
+    "overview.html": "42a6c791e127e86e3eae3d71858ca9bdb09e3c57b1399ae4bccfd8c4dbbe6886",
+    "overview.json": "9d6686d1e8762c8957df72d446ba6c51f9e4adbc88d828b3bc2480a9869c21cf",
+    "overview.layout.json": "289a273cd2a6c6603c2fca9c7d8d3f9e0bf46f4df3691eb2bfe236be3be153cd",
+    "overview.png": "65fb0a8f0d05948b7f337954b509a9e5c8c8f019e357b3c55c68c4c50cc23c6e",
+    "overview.svg": "60d402de985e07bafa2cf182e2dd1777c93f2fae34e8e3aec991f8ce9c32e127",
+    "research.json": "e93150f12abb028ad37116ef94f9aecee6c7d537248ad5ade2c044ae19b656b4",
+    "your-workflow.checks.json": "3e8686ae29e1dde30690ac9d0c1731e30ec039bdf78b618c88260b97b62e11b2",
+    "your-workflow.html": "b4f43b87e780a9bdd6d3bfa89a6e9883fae5d48ec95d58b33e271f43862ea7e5",
+    "your-workflow.json": "a02359e72a781c3a7fafef82e4465e6d00b0d551fc7ca726b5e120c8a6d25693",
+    "your-workflow.layout.json": "5ec950f7d8a421afedd76afcfc03268a5186912472c954c2f95711f25ac09a7b",
+    "your-workflow.png": "fd14dd44e433a8a5cb75acdb84a7480785a4d531f73f644812ffdc6f02ab30a7",
+    "your-workflow.svg": "104be2fb9ec0b7f50ba144f90992180f0c3983f8cd1a00bd7fb115e553c30ba5"
+  }
+}

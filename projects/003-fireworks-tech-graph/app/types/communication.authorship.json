@@ -1,0 +1,7 @@
+{
+  "author": "本次 Agent",
+  "route": "Fireworks Skill 的 AI-authored SVG 路径",
+  "source": "diagram-layout-reference.md",
+  "purpose": "对象怎样互相发消息？编号顺序是什么？",
+  "limit": "上游明确标为近似支持；此处采用对象连线与消息编号说明，非专用通信图引擎。"
+}

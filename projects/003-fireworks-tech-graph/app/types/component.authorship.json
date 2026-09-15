@@ -1,0 +1,7 @@
+{
+  "author": "本次 Agent",
+  "route": "Fireworks Skill 的 AI-authored SVG 路径",
+  "source": "diagram-layout-reference.md",
+  "purpose": "组件的职责、端口和依赖是什么？",
+  "limit": "仓库映射到架构图表达；这里补充 component 标记与端口，不验证完整接口兼容性。"
+}

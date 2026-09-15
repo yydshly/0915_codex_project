@@ -1,0 +1,17 @@
+{
+  "id": "003",
+  "slug": "fireworks-tech-graph",
+  "title": "Fireworks：技术图生成库、输入与图型全览",
+  "summary": "技术图生成与导出库：接收用户或大模型整理的 JSON/SVG，绘制、检查并导出。盘点33个图型与领域条目、12种风格，明确输入要求、使用场景及能力边界。",
+  "upstream": "https://github.com/yizhiyanhua-ai/fireworks-tech-graph",
+  "status": "已总结",
+  "tags": [
+    "技术绘图",
+    "SVG",
+    "Agent Skill",
+    "Archify 对照",
+    "Graphify 对照"
+  ],
+  "cover": "app/capability-map/fireworks-capabilities.png",
+  "demo_url": "https://yydshly.github.io/0915_codex_project/003-fireworks-tech-graph/"
+}

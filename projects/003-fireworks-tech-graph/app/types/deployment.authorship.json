@@ -1,0 +1,7 @@
+{
+  "author": "本次 Agent",
+  "route": "Fireworks Skill 的 AI-authored SVG 路径",
+  "source": "diagram-layout-reference.md",
+  "purpose": "软件制品部署到哪些运行节点？",
+  "limit": "架构图的节点/实例适配；与带 Region/VPC 领域检查的 Cloud Fabric 分开展示。"
+}

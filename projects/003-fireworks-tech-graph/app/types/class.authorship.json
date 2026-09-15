@@ -1,0 +1,7 @@
+{
+  "author": "本次 Agent",
+  "route": "Fireworks Skill 的 AI-authored SVG 路径",
+  "source": "diagram-layout-reference.md",
+  "purpose": "软件有哪些类、属性、方法与关系？",
+  "limit": "分栏展示类名/属性/方法，空心三角表示接口实现。不是从源码自动提取。"
+}

@@ -1,0 +1,344 @@
+{
+  "canvas": {
+    "height": 720.0,
+    "width": 960.0
+  },
+  "composition": {
+    "limits": {
+      "max_bends_per_edge": 2,
+      "max_bridged_crossings": 0,
+      "max_route_stretch": 1.35,
+      "max_total_bends": 8,
+      "min_container_gutter": 20.0,
+      "min_label_clearance": 4.0,
+      "min_node_gap": 40.0,
+      "min_segment_length": 16.0,
+      "profile": "showcase"
+    },
+    "metrics": {
+      "bridged_crossings": 0,
+      "max_route_stretch": 1.0,
+      "minimum_container_gutter": 20.0,
+      "minimum_node_gap": 70.0,
+      "shortest_segment": 24.0,
+      "total_bends": 5
+    },
+    "ok": true,
+    "profile": "showcase",
+    "score": 100,
+    "violations": []
+  },
+  "edges": [
+    {
+      "bends": 0,
+      "bridges": [],
+      "crossings": [],
+      "id": "request",
+      "length": 80.0,
+      "route": [
+        [
+          200.0,
+          183.0
+        ],
+        [
+          280.0,
+          183.0
+        ]
+      ],
+      "route_stretch": 1.0,
+      "source": "query",
+      "source_port": [
+        200.0,
+        183.0
+      ],
+      "target": "retrieve",
+      "target_port": [
+        280.0,
+        183.0
+      ],
+      "waypoints": []
+    },
+    {
+      "bends": 0,
+      "bridges": [],
+      "crossings": [],
+      "id": "draft",
+      "length": 80.0,
+      "route": [
+        [
+          460.0,
+          183.0
+        ],
+        [
+          540.0,
+          183.0
+        ]
+      ],
+      "route_stretch": 1.0,
+      "source": "retrieve",
+      "source_port": [
+        460.0,
+        183.0
+      ],
+      "target": "generate",
+      "target_port": [
+        540.0,
+        183.0
+      ],
+      "waypoints": []
+    },
+    {
+      "bends": 0,
+      "bridges": [],
+      "crossings": [],
+      "id": "answer",
+      "length": 70.0,
+      "route": [
+        [
+          720.0,
+          183.0
+        ],
+        [
+          790.0,
+          183.0
+        ]
+      ],
+      "route_stretch": 1.0,
+      "source": "generate",
+      "source_port": [
+        720.0,
+        183.0
+      ],
+      "target": "grounded",
+      "target_port": [
+        790.0,
+        183.0
+      ],
+      "waypoints": []
+    },
+    {
+      "bends": 2,
+      "bridges": [],
+      "crossings": [],
+      "id": "delegate",
+      "length": 330.0,
+      "route": [
+        [
+          370.0,
+          210.0
+        ],
+        [
+          370.0,
+          234.0
+        ],
+        [
+          190.0,
+          234.0
+        ],
+        [
+          190.0,
+          360.0
+        ]
+      ],
+      "route_stretch": 1.0,
+      "source": "retrieve",
+      "source_port": [
+        370.0,
+        210.0
+      ],
+      "target": "agent",
+      "target_port": [
+        190.0,
+        360.0
+      ],
+      "waypoints": []
+    },
+    {
+      "bends": 0,
+      "bridges": [],
+      "crossings": [],
+      "id": "tool-call",
+      "length": 110.0,
+      "route": [
+        [
+          280.0,
+          390.0
+        ],
+        [
+          390.0,
+          390.0
+        ]
+      ],
+      "route_stretch": 1.0,
+      "source": "agent",
+      "source_port": [
+        280.0,
+        390.0
+      ],
+      "target": "terminal",
+      "target_port": [
+        390.0,
+        390.0
+      ],
+      "waypoints": []
+    },
+    {
+      "bends": 0,
+      "bridges": [],
+      "crossings": [],
+      "id": "inspect",
+      "length": 100.0,
+      "route": [
+        [
+          480.0,
+          420.0
+        ],
+        [
+          480.0,
+          520.0
+        ]
+      ],
+      "route_stretch": 1.0,
+      "source": "terminal",
+      "source_port": [
+        480.0,
+        420.0
+      ],
+      "target": "documents",
+      "target_port": [
+        480.0,
+        520.0
+      ],
+      "waypoints": []
+    },
+    {
+      "bends": 1,
+      "bridges": [],
+      "crossings": [],
+      "id": "index",
+      "length": 345.0,
+      "route": [
+        [
+          570.0,
+          545.0
+        ],
+        [
+          790.0,
+          545.0
+        ],
+        [
+          790.0,
+          420.0
+        ]
+      ],
+      "route_stretch": 1.0,
+      "source": "documents",
+      "source_port": [
+        570.0,
+        545.0
+      ],
+      "target": "knowledge",
+      "target_port": [
+        790.0,
+        420.0
+      ],
+      "waypoints": []
+    },
+    {
+      "bends": 2,
+      "bridges": [],
+      "crossings": [],
+      "id": "ground",
+      "length": 310.0,
+      "route": [
+        [
+          790.0,
+          360.0
+        ],
+        [
+          790.0,
+          234.0
+        ],
+        [
+          630.0,
+          234.0
+        ],
+        [
+          630.0,
+          210.0
+        ]
+      ],
+      "route_stretch": 1.0,
+      "source": "knowledge",
+      "source_port": [
+        790.0,
+        360.0
+      ],
+      "target": "generate",
+      "target_port": [
+        630.0,
+        210.0
+      ],
+      "waypoints": []
+    }
+  ],
+  "input_schema": "v1",
+  "issues": [],
+  "mode": "agent",
+  "ok": true,
+  "palette": {
+    "below_target": [],
+    "minimum_target": 4.5,
+    "ratios": {
+      "section_sub_fill": 6.96,
+      "text_muted": 6.96,
+      "text_primary": 14.48,
+      "text_secondary": 6.96
+    },
+    "scope": "default opaque canvas text tokens; not a full rendered accessibility audit",
+    "unsupported_tokens": []
+  },
+  "placements": {
+    "legend": {
+      "actual": [
+        48.0,
+        650.0
+      ],
+      "bounds": [
+        38.0,
+        636.0,
+        573.84,
+        682.0
+      ],
+      "moved": false,
+      "requested": [
+        48.0,
+        650.0
+      ]
+    }
+  },
+  "schema_version": 1,
+  "semantics": {
+    "details": {},
+    "ok": true,
+    "profile": "generic",
+    "style": 2,
+    "visual_theme": "Dark Terminal"
+  },
+  "style": {
+    "id": 2,
+    "name": "Dark Terminal"
+  },
+  "summary": {
+    "bridged_crossings": 0,
+    "edges": 8,
+    "nodes": 8
+  },
+  "text_metrics": "heuristic-v1",
+  "typography": {
+    "complete_text": true,
+    "hint": null,
+    "metrics": "heuristic widths; inspect the actual rendered font",
+    "truncated": []
+  }
+}

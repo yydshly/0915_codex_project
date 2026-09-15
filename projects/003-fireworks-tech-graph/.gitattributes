@@ -1,0 +1,5 @@
+# Generated evidence is hashed byte-for-byte; preserve its original line endings.
+app/artifacts/** -text
+app/types/** -text
+app/prompt-case/** -text
+app/comparison/** -text
