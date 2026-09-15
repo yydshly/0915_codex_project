@@ -1,0 +1,47 @@
+<!doctype html>
+<html lang="zh-CN">
+<head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><meta name="description" content="三种可点击、可重播的故事型主页开场：点亮工作台、拆开一封信、连接探索星图。比较物件、动作、记忆点与后续故事。"><title>有记忆的开场｜创意效果展台</title><link rel="stylesheet" href="openings.css"><script src="openings.js" defer></script></head>
+<body>
+<a class="skip-link" href="#experience">跳到开场体验</a>
+<header class="topbar"><a href="./" class="brand">R. <span>创意研究 / 011</span></a><a href="./">返回总结与规划 ↗</a></header>
+<main>
+  <div class="intro"><div><p class="eyebrow">THE FIRST MOMENT</p><h1>让开头，成为故事的第一步。</h1></div><p>一个物件，一次动作，一点关于你的发现。<br>先体验三种开场，再看它们怎样把故事接下去。</p></div>
+  <div class="selector" role="tablist" aria-label="选择开场效果">
+    <button id="tab-lamp" role="tab" aria-selected="true" aria-controls="experience" data-scene="lamp"><span class="number">01</span><span><strong>点亮工作台</strong><small>从黑暗到发现</small></span></button>
+    <button id="tab-letter" role="tab" aria-selected="false" aria-controls="experience" tabindex="-1" data-scene="letter"><span class="number">02</span><span><strong>拆开一封信</strong><small>从好奇到亲近</small></span></button>
+    <button id="tab-stars" role="tab" aria-selected="false" aria-controls="experience" tabindex="-1" data-scene="stars"><span class="number">03</span><span><strong>连接探索星图</strong><small>从片段到方向</small></span></button>
+  </div>
+
+  <section id="experience" class="stage theme-lamp" role="tabpanel" aria-labelledby="tab-lamp" data-state="idle">
+    <div class="scene-background" aria-hidden="true"><img id="scene-image" src="assets/opening-lamp.png" alt="原创故事开场场景：工作台、信件或探索星空" width="1536" height="1024"><div class="vignette"></div><div class="lamp-glow"></div></div>
+    <div class="stage-top"><span id="world-label">THE INVENTOR'S DESK</span><span>个人主页开场 · 示例</span></div>
+    <div class="scene-copy"><p id="chapter">一个还没完成的想法</p><h2 id="scene-title">这里的故事，<br>从一点好奇开始。</h2><p id="scene-description">灯还没亮。桌上的笔记，记录着我如何把问题一步步变成作品。</p><div class="scene-actions"><button id="play" class="primary">点亮台灯 <span>↗</span></button><a id="continue" href="#continuation" hidden>看看故事怎样继续 ↓</a></div></div>
+    <button id="object-trigger" class="object-trigger" aria-label="点亮台灯"><span class="trigger-dot"></span><span id="object-label">点击点亮</span></button>
+    <div class="letter-paper" aria-hidden="true"><span class="paper-meta">A LETTER FOR YOU</span><h3>致第一次来到这里的你</h3><p>如果你想了解我，<br>我想先讲一个问题。</p><p>它让我开始探索，<br>也让我走到了今天。</p><div class="paper-rule"></div><span class="paper-sign">故事，写在每一次选择里。</span></div>
+    <div class="constellation" aria-hidden="true"><svg viewBox="0 0 500 400" fill="none"><path class="route-ghost" d="M70 310 L175 190 L305 245 L415 90"/><path class="route" d="M70 310 L175 190 L305 245 L415 90" pathLength="1"/><g class="star star-a"><circle cx="70" cy="310" r="5"/><circle class="ring" cx="70" cy="310" r="14"/><text x="70" y="348">好奇</text></g><g class="star star-b"><circle cx="175" cy="190" r="5"/><circle class="ring" cx="175" cy="190" r="14"/><text x="175" y="163">拆解</text></g><g class="star star-c"><circle cx="305" cy="245" r="5"/><circle class="ring" cx="305" cy="245" r="14"/><text x="305" y="283">验证</text></g><g class="star star-d"><circle cx="415" cy="90" r="6"/><circle class="ring" cx="415" cy="90" r="18"/><text x="415" y="59">创造</text></g></svg></div>
+    <div class="stage-bottom"><span id="stage-hint">点亮台灯，揭示这间工作室的主人。</span><div><button id="skip-motion" class="text-button">直接看结果</button><button id="replay" class="text-button" hidden>↺ 重播开场</button><span id="state-label">等待你的第一步</span></div></div>
+    <div class="progress" aria-hidden="true"><span></span></div>
+  </section>
+  <p id="announcement" class="sr-only" aria-live="polite"></p>
+
+  <div class="effect-reading"><div><span>记住什么</span><strong id="memory">一个亮起来的工作台，和喜欢动手的主人。</strong></div><div><span>为什么想继续</span><strong id="curiosity">桌上还有什么？这个人做出了哪些东西？</strong></div><div><span>适合谁</span><strong id="audience">研究者、开发者、设计师、动手创作者。</strong></div></div>
+
+  <section id="continuation" class="continuation">
+    <div class="section-title"><p class="eyebrow">AFTER THE OPENING</p><h2>开场之后，故事要接得上。</h2><p id="bridge">灯光把你带到工作台前，接下来顺着桌上的物件认识这个人。</p></div>
+    <ol id="story-flow" class="story-flow"><li><span>01 / 人物</span><h3>灯下的身份卡</h3><p>先认识这里的主人与他关心的问题。</p></li><li><span>02 / 经历</span><h3>抽屉里的旧物</h3><p>每件物品，连接一个影响他的阶段。</p></li><li><span>03 / 文章</span><h3>摊开的实验手册</h3><p>阅读他的尝试、判断与反思。</p></li><li><span>04 / 产品</span><h3>可启动的作品</h3><p>亲眼看看，想法最后变成了什么。</p></li><li><span>05 / 联系</span><h3>下一张任务卡</h3><p>带着一个问题，开始新的合作。</p></li></ol>
+  </section>
+
+  <section class="opening-list" id="ideas"><div class="section-title"><p class="eyebrow">OPENING COLLECTION</p><h2>六种容易形成记忆的开头</h2><p>前三种可在上方体验。后三种保留为后续创意，尚未制作动态演示。</p></div>
+    <div class="idea-table" tabindex="0" role="region" aria-label="六种故事开场对照"><table><thead><tr><th>开场</th><th>第一下做什么</th><th>记忆来自哪里</th><th>故事怎样继续</th><th>演示</th></tr></thead><tbody>
+      <tr><th>点亮工作台</th><td>打开台灯</td><td>黑暗中出现一个属于你的世界</td><td>桌面物品串联经历、笔记与作品</td><td><button data-jump="lamp">体验 ↗</button></td></tr>
+      <tr><th>拆开一封信</th><td>打开封存的信</td><td>像收到一份只写给访客的邀请</td><td>从一段转折读到今天的你</td><td><button data-jump="letter">体验 ↗</button></td></tr>
+      <tr><th>连接探索星图</th><td>点亮起点</td><td>零散经历逐步连成一条路线</td><td>每个节点是一段探索与成果</td><td><button data-jump="stars">体验 ↗</button></td></tr>
+      <tr><th>翻开旧物箱</th><td>选一件留下来的物品</td><td>物品背后有一个尚未讲出的故事</td><td>由物及人，展示关键人生阶段</td><td><span>创意储备</span></td></tr>
+      <tr><th>启动一个作品</th><td>按下启动键</td><td>先看见能力带来的实际变化</td><td>倒叙解释问题、方法和创作过程</td><td><span>创意储备</span></td></tr>
+      <tr><th>印出第一期刊物</th><td>拉出一张刚印好的封面</td><td>姓名、观点和作品成为一期出版物</td><td>从目录进入经历、文章与产品</td><td><span>创意储备</span></td></tr>
+    </tbody></table></div>
+  </section>
+  <div class="closing-note"><strong>好的开场，同时完成三件事。</strong><p>让人愿意动一下，发现一点关于你的信息，并自然产生下一个问题。</p><span>这些场景和第一人称文案均为创意示例。正式定制时，再换成你的真实物件、经历和成果。</span></div>
+  <footer><a href="./">← 回到已有总结与下一步规划</a><span>原创场景图 + 浏览器动效 · 无自动播放声音</span></footer>
+</main>
+</body></html>

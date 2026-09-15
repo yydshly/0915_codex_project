@@ -20,6 +20,7 @@
 | 008 | [Defending Code：AI 漏洞研究流程与复用思路](projects/008-defending-code-harness/README.md) | 以 Claude 驱动源码分析、用例构造、隔离执行、独立复现与补丁验收，默认针对 C/C\+\+ 内存漏洞；检查方法较常规，价值主要在流程自动化与证据管理，保留为后续项目开发参考。 | 已总结 | [defending\-code\-reference\-harness](https://github.com/anthropics/defending-code-reference-harness) | [在线演示](https://yydshly.github.io/0915_codex_project/008-defending-code-harness/) |
 | 009 | [GSAP Skills：AI 动画开发指导与领域化应用](projects/009-gsap-skills/README.md) | 将 GSAP 的 API 用法、动画范例与性能实践整理为 AI 可按需读取的技能，指导实现选择、适配与资源清理；价值在经验复用和减少遗漏，可作为定制领域 Skill 的参考，优化收益仍需实测。 | 已总结 | [gsap\-skills](https://github.com/greensock/gsap-skills) | [在线演示](https://yydshly.github.io/0915_codex_project/009-gsap-skills/research.html) |
 | 010 | [Fonzi：通过 AI 对话提高求职沟通效率](projects/010-fonzi/README.md) | 通过 AI 追问把静态简历补充为具体、可判断和可匹配的人才信息，减少重复沟通；商业上仍依赖招聘客户与人才资源。保留产品思路，暂不深入研究。 | 已归档 | [talent\.fonzi\.ai](https://talent.fonzi.ai/) | 暂未部署 |
+| 011 | [Adrian\.Punk：个人主页的五类内容与物件故事](projects/011-adrian-punk/README.md) | 以人物介绍、经历介绍、文章介绍、产品介绍、联系方式构成个人主页；配合唱片、放映机、轨道星球、磁带与电视机、书信形成故事效果。核心是先根据真实材料构造自己的故事，再用物件关联、交互和统一风格引导阅读。 | 已总结 | [iamadrianpunk\.com](https://iamadrianpunk.com/) | 暂未部署 |
 <!-- PROJECT_INDEX:END -->
 
 ## 项目预览
@@ -120,6 +121,16 @@
 [研究笔记](projects/010-fonzi/README.md) · [talent\.fonzi\.ai](https://talent.fonzi.ai/) · 暂未部署
 
 状态：已归档 · 标签：产品思路 / AI 对话 / 信息具体化 / 招聘流程 / 暂不深入研究
+
+### 011 · Adrian\.Punk：个人主页的五类内容与物件故事
+
+以人物介绍、经历介绍、文章介绍、产品介绍、联系方式构成个人主页；配合唱片、放映机、轨道星球、磁带与电视机、书信形成故事效果。核心是先根据真实材料构造自己的故事，再用物件关联、交互和统一风格引导阅读。
+
+![Adrian\.Punk：个人主页的五类内容与物件故事预览](projects/011-adrian-punk/assets/overview.png)
+
+[研究笔记](projects/011-adrian-punk/README.md) · [iamadrianpunk\.com](https://iamadrianpunk.com/) · 暂未部署
+
+状态：已总结 · 标签：个人主页 / 五类内容 / 物件关联 / 故事设计 / 统一风格
 <!-- PROJECT_CARDS:END -->
 
 ## 新增研究项目
