@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="zh-CN">
+<head>
+  <meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Defending Code｜从代码假设到可验证的问题</title>
+  <meta name="description" content="以 Claude 驱动源码分析、用例构造、隔离执行、独立复现与补丁验收，默认针对 C/C++ 内存漏洞；检查方法较常规，价值主要在流程自动化与证据管理，保留为后续项目开发参考。">
+  <link rel="icon" href="favicon.svg" type="image/svg+xml"><link rel="stylesheet" href="style.css"><script src="app.js" defer></script>
+</head>
+<body>
+<a class="skip" href="#main">跳到正文</a>
+<header class="topbar"><a class="brand" href="../"><span class="mark">R.</span> 开源研究手记 <span class="brand-sub">/ 008</span></a><div><span class="top-tag">源码阅读 · 2026.09</span><a href="https://github.com/anthropics/defending-code-reference-harness" target="_blank" rel="noreferrer">上游仓库 ↗</a></div></header>
+<nav class="mobile-nav" aria-label="手机章节导航"><a href="#full-map">完整总图</a><a href="#overview">概览</a><a href="#discovery">发现问题</a><a href="#experiment">交互实验</a><a href="#verification">验证修复</a><a href="#customize">定制层次</a><a href="#blueprint">场景适配</a><a href="#first-run">落地步骤</a><a href="#sources">源码</a></nav>
+<div class="shell">
+<aside class="sidebar"><div class="side-label">DEFENDING CODE<br><span>机制与定制指南</span></div><nav aria-label="章节导航"><a href="#overview"><b>01</b> 理解它的分工</a><a href="#full-map"><b>图</b> 完整思路对照图</a><a href="#discovery"><b>02</b> 怎样发现问题</a><a href="#experiment"><b>03</b> 动手改变一个输入</a><a href="#verification"><b>04</b> 怎样验证与修复</a><a href="#customize"><b>05</b> 四种定制深度</a><a href="#blueprint"><b>06</b> 为你的场景做适配</a><a href="#first-run"><b>07</b> 第一次如何落地</a><a href="#sources"><b>08</b> 依据与能力边界</a></nav><div class="side-foot"><span class="status-dot"></span> 固定版本研究<br><code>d3bea6b</code><p>交互示例是教学演示。<br>本页不调用模型、不运行扫描。</p></div></aside>
+<main id="main">
+<section id="overview" class="hero"><div class="eyebrow">01 / DEFENDING CODE · 机制拆解</div><div class="hero-title"><h1>从“这里可能有问题”，<br>到<span>可以复核的证据。</span></h1><span class="hero-number" aria-hidden="true">008</span></div><p class="lead">大模型读代码、提出假设、构造输入。执行工具运行实验，独立验证者重新复现，最后再生成并检查修复。这是它组织安全研究的基本方式。</p><div class="hero-links"><a class="button primary" href="#full-map">看完整思路总图 <span>↓</span></a><a class="button plain" href="#customize">直接看定制方法 ↗</a></div>
+<div class="roles"><article><span class="role-icon">A</span><small>模型 / 推理</small><h3>提出值得测试的假设</h3><p>读代码、追踪输入、设计异常数据、解释结果、修改代码。</p></article><article><span class="role-icon">H</span><small>框架 / 调度</small><h3>让研究流程运转起来</h3><p>分配任务、创建环境、传递产物、保存记录、控制重试。</p></article><article><span class="role-icon">E</span><small>工具 / 实验</small><h3>产生可检查的观察结果</h3><p>运行目标、检查内存错误、构建补丁、执行现有测试。</p></article></div>
+<div class="definition"><strong>先划清能力范围</strong><p>现成调用层使用 <b>Claude Code</b>，自动流水线默认研究 <b>C/C++ 内存漏洞</b>。方法可以跨模型、跨场景复用，但要适配工具调用与判定标准。它生成的 PoC 是“触发问题的输入”，未必是已经进入 CI 的长期测试用例。</p><a href="#sources" data-source="README.md">定位依据 ↗</a></div><div class="definition"><strong>当前研究结论</strong><p>检查方法较常规；主要价值在于把源码分析、真实用例、独立复核、去重和修复验收自动串联，并留下可复核证据。当前保留为后续开发参考，按需要复用，不必照搬整套框架。</p></div></section>
+
+<section id="full-map"><div class="section-heading"><div><div class="eyebrow">THE COMPLETE MAP / 全部思路一图串联</div><h2>相比直接 AI 审查，<br>框架增加了什么？</h2></div><p>分工 → 执行闭环 → 工程支撑 → 定制 → 边界。<br>概念总图包含可选步骤与独立命令。</p></div><div class="map-actions"><a class="button primary" href="map.html">打开可缩放总图 ↗</a><a class="button" href="overview-map.svg" download="defending-code-overview.svg">下载 SVG 矢量图</a></div><figure class="full-map-figure"><a href="map.html" aria-label="打开完整思路总图并放大查看"><img src="overview-map.svg" width="1920" height="3160" loading="lazy" alt="完整对照总图：一次性代码审查与框架的差别；人、默认指令、模型和工具的分工；八阶段发现修复闭环；隔离、证据、恢复、校准；四种定制层次；证据边界与后续复用。"></a><figcaption>当前结论：检查方法较常规；主要参考价值在流程自动化、独立复核与证据管理。后续项目按需求引入，不必照搬整套框架。</figcaption></figure></section>
+
+<section id="discovery"><div class="section-heading"><div><div class="eyebrow">02 / HOW A FINDING EMERGES</div><h2>它怎样知道，<br>应该从哪里找问题？</h2></div><p>先理解输入能到哪里，再寻找“不该发生的状态”。<br>点击步骤，查看每一阶段的输入、动作与产物。</p></div>
+<div class="discovery-layout"><div class="step-list" role="group" aria-label="漏洞发现步骤"><button type="button" class="step active" data-step="0" aria-pressed="true"><span>01</span><div><b>确定攻击者能控制什么</b><small>上下文 · 信任边界</small></div><i>↗</i></button><button type="button" class="step" data-step="1" aria-pressed="false"><span>02</span><div><b>划分值得检查的模块</b><small>Recon · 分配搜索区域</small></div><i>↗</i></button><button type="button" class="step" data-step="2" aria-pressed="false"><span>03</span><div><b>追踪输入，提出假设</b><small>Find · 源码推理</small></div><i>↗</i></button><button type="button" class="step" data-step="3" aria-pressed="false"><span>04</span><div><b>构造输入，观察反馈</b><small>Find · 运行与迭代</small></div><i>↗</i></button><button type="button" class="step" data-step="4" aria-pressed="false"><span>05</span><div><b>缩小输入，提交证据</b><small>PoC · 可复现产物</small></div><i>↗</i></button></div><article id="step-detail" class="step-detail" aria-live="polite"></article></div>
+<div class="two-column discovery-notes"><article><span class="kicker">提示词规定研究方式</span><h3>规则告诉模型“怎么查”。</h3><p>关注边界长度、截断结构、分配与复制之间的不一致；优先寻找有内存破坏证据的问题。正常错误处理、单纯耗尽内存、测试脚本自身的问题，不能直接作为高质量发现。</p></article><article><span class="kicker">工具反馈改变下一步</span><h3>具体输入由模型探索。</h3><p>输入被拒绝，就回看前置检查；只触发断言，就继续分析邻近路径；出现有效证据，再缩小输入、重复运行。这不是把整个仓库一次塞进模型，也没有保证覆盖全部路径。</p></article></div><a class="source-link" href="#sources" data-source="harness/prompts/find_prompt.py">阅读 Find 提示词与提交要求 ↗</a></section>
+
+<section id="experiment"><div class="section-heading"><div><div class="eyebrow">03 / AN INTERACTIVE THOUGHT EXPERIMENT</div><h2>只改变一个数量，<br>观察假设怎样变得可检验。</h2></div><span class="pill">教学计算 · 非真实漏洞扫描</span></div><p class="section-intro">设想一个解析器：每项数据占 4 字节，却用只能保存 0–255 的长度值记录分配大小。拖动数量，看“实际需要”与“记录的长度”是否分离。真实程序还需确认类型转换、检查逻辑和可达路径。</p>
+<div class="lab"><div class="lab-controls"><div class="lab-label"><span>输入中的数量字段</span><output id="count-output" for="item-count">60 项</output></div><label class="sr-only" for="item-count">数据项数量，1 到 90</label><input id="item-count" type="range" min="1" max="90" value="60"><div class="range-labels"><span>1 项</span><span>64 项：长度开始回绕</span><span>90 项</span></div><div class="presets"><button type="button" data-count="60">正常值 60</button><button type="button" data-count="64">临界值 64</button><button type="button" data-count="65">越过边界 65</button></div><label class="switch-label"><input type="checkbox" id="guard"><span>加入示意修复：数量大于 63 时拒绝输入</span></label><p class="small muted">这里用 8 位长度放大现象。它不是生产级补丁建议，也未执行 C/C++ 程序。</p><pre class="code-panel"><code id="toy-code"></code></pre></div><div class="lab-result" aria-live="polite"><span class="kicker">计算得到的观察</span><div class="meters"><div><span>需要写入的字节</span><b id="needed-value">240</b></div><div class="meter"><i id="needed-bar"></i></div><div><span>回绕后记录的长度</span><b id="allocated-value">240</b></div><div class="meter allocated"><i id="allocated-bar"></i></div></div><div id="lab-verdict" class="lab-verdict"></div><div class="evidence-next"><b>真正的流水线还要做什么？</b><p>生成真实格式的文件 → 调用目标程序 → 获取检测器输出 → 确认错误位于项目代码 → 在新环境独立复现。</p></div></div></div>
+<h3 class="subheading">运行得到的结果，应该怎样解释？</h3><div class="outcome-grid"><article><span class="outcome neutral">正常拒绝</span><h4>返回格式错误</h4><p>程序正确处理异常输入。继续寻找其他路径。</p></article><article><span class="outcome neutral">环境或资源问题</span><h4>内存耗尽 / 启动失败</h4><p>先排查实验环境，不能据此认定内存破坏漏洞。</p></article><article><span class="outcome warning">候选证据</span><h4>项目代码触发 ASAN</h4><p>保存输入和堆栈，交给独立验证者复现。</p></article><article><span class="outcome success">复现成立</span><h4>新环境重复触发</h4><p>问题证据更强；真实攻击影响仍需单独分析。</p></article></div></section>
+
+<section id="verification"><div class="section-heading"><div><div class="eyebrow">04 / VERIFY THE EVIDENCE, THEN THE FIX</div><h2>发现者与验证者，<br>使用两个独立环境。</h2></div><p>避免“只在发现者修改过的程序里成立”。<br>环境独立，也不意味着模型结论永远正确。</p></div><div class="boundary"><article><small>容器 A / 发现者</small><h3>探索与实验</h3><p>读取源码、尝试输入、运行程序。</p><div class="artifact">产物：PoC + 复现信息</div></article><div class="transfer"><span>传递输入与必要元数据 →</span><small>不继承修改后的源码、程序<br>或完整推理过程</small></div><article><small>容器 B / 独立验证者</small><h3>从原始镜像重新开始</h3><p>运行 PoC，检查真实输出。</p><div class="artifact">产物：判断 + 执行证据</div></article></div><div class="verification-rules"><b>Grade 的五项要求</b><ol><li>输入真实存在且非空</li><li>三次运行至少两次崩溃</li><li>排除内存耗尽与超时</li><li>堆栈指向项目代码</li><li>检查崩溃类型一致性</li></ol><p>Find 要求提交前尽量达到 3/3；Grade 对部分可解释波动允许降分通过。综合结论由模型读取证据后生成，程序解析其判断。</p></div>
+<div class="review-flow"><article><small>JUDGE / 去重</small><h3>这真是一个新问题吗？</h3><p>流式模式下，模型串行对比已报告问题，判断新增、替换为更好样例或跳过重复；另有按 ASAN 签名聚类的命令。</p></article><article><small>REPORT / 影响</small><h3>能触发，实际影响多大？</h3><p>结合入口、攻击者控制程度和限制写报告，再独立评分证据。崩溃不自动等于远程代码执行。</p></article><article><small>TRIAGE / 优先级</small><h3>多轮结果先处理哪个？</h3><p>交互式分诊跨轮次合并同根因发现，根据环境前提调整严重性，标注组件归属。</p></article></div>
+<h3 class="subheading">补丁需要逐层通过验收</h3><div class="table-wrap" tabindex="0" role="region" aria-label="补丁验证层级"><table><thead><tr><th>层级</th><th>谁来判断</th><th>实际检查</th><th>仍然不能证明什么</th></tr></thead><tbody><tr><th>T0 · 构建</th><td><span class="tag">程序检查</span></td><td>补丁可应用，构建退出成功</td><td>业务逻辑一定正确</td></tr><tr><th>T1 · 原输入</th><td><span class="tag">程序检查</span></td><td>退出码 0，输出没有 ASAN 标记</td><td>其他输入也不会出错</td></tr><tr><th>T2 · 回归</th><td><span class="tag">程序检查</span></td><td>现有测试通过；未配置则跳过</td><td>未覆盖的行为没有回归</td></tr><tr><th>再次攻击</th><td><span class="tag orange">模型探索</span></td><td>新智能体尝试变体，默认 50 轮</td><td>根因已彻底消失</td></tr><tr><th>T3 · 风格</th><td><span class="tag orange">模型建议</span></td><td>可选评分，不影响验收通过</td><td>维护者一定接受补丁</td></tr></tbody></table></div>
+<details><summary>一个容易忽略的实现边界：没有提交 PoC，不等于研究已充分完成</summary><p>所读版本的再次攻击流程在 <code>run_find</code> 没有返回崩溃产物时，将其记为 clean，并未在这里单独检查智能体错误状态。复核时还应查看执行记录，区分“搜索完成且未发现问题”和“任务中断、没有产物”。这也是不能把再次攻击通过当作安全证明的原因。</p><a href="#sources" data-source="harness/patch_grade.py">对应实现 ↗</a></details><p class="small muted">动态补丁阶段运行现有测试，不自动为每个漏洞添加永久回归测试。静态 /patch 在存在合适测试结构时会尝试生成测试，但仍需执行验证。</p></section>
+
+<section id="customize"><div class="section-heading"><div><div class="eyebrow">05 / FOUR DEPTHS OF CUSTOMIZATION</div><h2>先判断你要改变什么，<br>再决定改到哪一层。</h2></div><p>只想让它更懂你的项目，与让它检测一类新问题，<br>所需的改动量完全不同。</p></div>
+<div class="custom-levels"><article><div class="level-top"><span>01 / 审查口径</span><b>改指令</b></div><h3>关注新的模块或组织规则</h3><p>已有静态审查就够用，只需补充攻击入口、权限边界、重点类别与误报排除理由。</p><pre><code>/vuln-scan ./src --extra .claude/scan-extras.txt
+/triage ./VULN-FINDINGS.json --fp-rules .claude/fp-rules.txt</code></pre><small>适用于交互式技能。这些参数不是动态流水线的通用检测插件。</small></article>
+<article><div class="level-top"><span>02 / 同类新目标</span><b>配目标</b></div><h3>接入另一个 C/C++ 解析器</h3><p>保持“文件输入 + ASAN 检测”的约定，提供构建环境、配置和薄入口封装，通常无需修改调度代码。</p><div class="file-tree">targets/my-parser/<br>├─ Dockerfile <em>源码 + 带检测器的程序</em><br>├─ config.yaml <em>路径、构建、测试与范围</em><br>└─ entry.c <em>读取输入并调用真实解析入口</em></div><small>入口必须覆盖你实际关心的生产路径；未调用到的代码不会自动获得覆盖。</small></article>
+<article><div class="level-top"><span>03 / 新漏洞类别</span><b>换判定标准</b></div><h3>研究 Web 权限或业务状态问题</h3><p>重新定义输入形式、失败信号、复现步骤、去重依据和修复标准；提示词、结果结构与验收代码要一起调整。</p><div class="mini-chain">文件 + 崩溃 → 请求序列 + 权限断言</div><small>ASAN 无法判定越权，也不能把 HTTP 500 直接当作已证实的漏洞。</small></article>
+<article><div class="level-top"><span>04 / 更换模型</span><b>改运行层</b></div><h3>保留流程，对接另一套智能体</h3><p>适配模型调用、文件读写、命令执行、输出解析、会话恢复、凭据与网络配置。</p><div class="mini-chain">Claude Code CLI → 模型适配器 + 工具循环</div><small>不是只替换模型名称；兼容接口也不能保证等同的发现能力。</small></article></div>
+<div class="editorial-note"><span>定制的核心问题</span><blockquote>“出现什么可观察的结果，<br>才算真的发现了我要找的问题？”</blockquote><p>这个判定依据称为 <b>oracle</b>。它可以是内存检测报告，也可以是来自业务规范的断言。先把它定义清楚，模型才有可靠的实验反馈。</p></div>
+<h3 class="subheading">/customize 本身在做什么？</h3><ol class="horizontal-steps"><li><b>读现有实现</b><span>识别 C/C++ 与 ASAN 假设</span></li><li><b>澄清目标</b><span>输入、检测、环境、报告</span></li><li><b>列出改动</b><span>确认具体迁移计划</span></li><li><b>修改并校准</b><span>用已知问题的小目标验证</span></li></ol><p class="small muted">它是一份指导代码智能体修改框架的技能指令。运行 /customize 并不意味着所有语言和漏洞类别已经内置支持。</p><a class="source-link" href="#sources" data-source=".claude/skills/customize/SKILL.md">查看定制技能与文件改动映射 ↗</a></section>
+
+<section id="blueprint"><div class="section-heading"><div><div class="eyebrow">06 / TURN A GOAL INTO A VERIFIABLE CONTRACT</div><h2>选择一个场景，<br>看清需要定义的六件事。</h2></div><p>前一个场景沿用原框架约定。<br>后两个是迁移建议，尚未实现或验证。</p></div><div class="scenario-buttons" role="group" aria-label="定制场景"><button class="active" type="button" data-scenario="parser" aria-pressed="true"><span>默认机制</span> C/C++ 文件解析</button><button type="button" data-scenario="access" aria-pressed="false"><span>安全扩展示例</span> Web 资源越权</button><button type="button" data-scenario="coupon" aria-pressed="false"><span>业务测试迁移</span> 优惠券重复核销</button></div><div id="scenario-panel" aria-live="polite"></div>
+<details class="config-details"><summary>展开 C/C++ 目标配置骨架：每个字段控制什么</summary><p>字段来自当前 TargetConfig。仓库地址与提交需替换为真实值，构建和测试命令需匹配目标；这份骨架未经运行，不能单独完成接入。</p><pre><code>image_tag: vuln-pipeline-my-parser:latest
+github_url: https://github.com/OWNER/REPO
+commit: REPLACE_WITH_FULL_COMMIT_SHA
+source_root: /work
+binary_path: /work/entry
+
+# 补丁应用后如何重新编译；真正项目按自身构建系统填写
+build_command: gcc -O1 -g -fsanitize=address -fno-omit-frame-pointer -o /work/entry /work/entry.c
+# 需要真实存在的测试；缺失时 T2 被跳过
+test_command: cd /work &amp;&amp; make check
+
+focus_areas:
+  - "解析长度字段：分配大小与后续写入是否一致"
+known_bugs: []
+attack_surface: |
+  生产入口接收用户上传文件并调用解析函数。
+  请补充调用者权限、格式限制和部署约束。</code></pre><p><code>focus_areas</code> 引导搜索起点；<code>known_bugs</code> 提醒已有问题，最好记录函数和根因特征；<code>attack_surface</code> 帮助报告解释真实可达性。它们都是上下文，不是自动执行的安全断言。</p><a href="#sources" data-source="harness/config.py">字段定义 ↗</a></details>
+</section>
+
+<section id="first-run"><div class="section-heading"><div><div class="eyebrow">07 / START WITH A SMALL, KNOWN TARGET</div><h2>先证明检测链路有效，<br>再扩大搜索规模。</h2></div><p>如果探测器看不见错误，增加智能体数量<br>只会放大没有证据的搜索。</p></div><div class="runbook"><article><span>1</span><div><h3>准备一个可以重复启动的小目标</h3><p>固定版本、依赖与初始数据。至少准备一个已知错误和一个正常输入，确认检测器能区分它们。新领域可制作包含少量预埋问题的 canary 校准目标，答案不交给发现者。</p></div></article><article><span>2</span><div><h3>写清入口与判断标准</h3><p>输入如何进入生产路径？什么权限可到达？哪个断言失败才算问题？业务需求需有独立依据，不能让模型仅从当前代码推导正确行为。</p></div></article><article><span>3</span><div><h3>先跑一轮，检查完整产物</h3><p>查看实际输入、命令、检测输出和新环境复现。运行失败、未覆盖与确认无问题要分别记录。只有报告文字、没有执行证据，还不能完成动态验证。</p></div></article><article><span>4</span><div><h3>用结果校准，再考虑并行和修复</h3><p>统计已知问题是否找到、正常输入是否误报、重复发现数量、补丁回归、耗时与成本。调整搜索区域和验证器后再放大规模。</p></div></article></div>
+<details><summary>查看上游 C/C++ 运行入口与产物目录</summary><p>下面是已有目标的用法参考，不会在本网页执行。需提前准备支持 Docker / gVisor 的 Linux 环境、Python 3.11+ 和 Claude 访问凭据；在 Windows 上应另行准备兼容环境。命令中的模型名称和结果路径需自行替换。</p><pre><code># 一次性安装与沙箱准备：在上游仓库内
+python3 -m venv .venv
+.venv/bin/pip install -e .
+./scripts/setup_sandbox.sh
+
+# 已有 drlibs 目标的一轮发现、验证与流式报告
+bin/vp-sandboxed run drlibs --model MODEL_ID --runs 1 --stream --auto-focus
+
+# 单独生成并验证补丁
+bin/vp-sandboxed patch results/drlibs/TIMESTAMP/ --model MODEL_ID</code></pre><p>配置 Claude 认证后再执行。新目标完成适配后，用其目录名称替换 <code>drlibs</code>。</p><div class="file-tree">results/&lt;target&gt;/&lt;timestamp&gt;/<br>├─ 运行记录、PoC 与 result.json<br>└─ reports/bug_NN/<br>　 ├─ report.json <em>影响分析与评分</em><br>　 ├─ patch.diff <em>候选修复</em><br>　 └─ patch_result.json <em>分层验收结果</em></div><p>布局会随单轮或多轮模式变化；多轮通常带 <code>run_NNN/</code> 子目录。</p></details>
+<div class="takeaway"><small>可以带走的方法</small><h3>模型负责探索，证据约束结论。<br>定制的重点，是让“对或错”可被观察。</h3><p>这个框架对自动业务测试也有启发，但迁移时需要新的规范、断言和环境恢复机制。当前页面完成的是原理分析与教学展示。</p></div></section>
+
+<section id="sources"><div class="section-heading"><div><div class="eyebrow">08 / SOURCE NOTES</div><h2>每一层机制，<br>都能回到实现里核对。</h2></div><span class="pill">Apache-2.0 · d3bea6b</span></div><div class="source-meta"><p>研究提交：<code>d3bea6b5793b5f3d59a75ebe69a58efa88383145</code><br>阅读范围：官方说明、发现提示词、配置、调用层、独立验证与补丁验收。未运行漏洞扫描、未实测模型效果。</p><p>所读版本 README 声明不再维护且不接受贡献。本页面是独立研究说明；计算示例和 Web / 业务适配方案为教学设计，不是上游测试结果。</p></div><div id="source-grid" class="source-grid"></div></section>
+<footer><a href="../">← 返回研究索引</a><span>008 / DEFENDING CODE · 中文机制研究</span><a href="#overview">回到顶部 ↑</a></footer>
+</main></div><noscript><p class="noscript">主要说明可直接阅读。请启用 JavaScript 查看步骤详情、交互计算与场景定制说明。</p></noscript>
+</body></html>

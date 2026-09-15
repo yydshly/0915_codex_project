@@ -1,0 +1,216 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="1920" height="3160" viewBox="0 0 1920 3160" role="img" aria-labelledby="title desc">
+<title id="title">Defending Code 完整思路：相比直接让 AI 检测代码，多了什么</title>
+<desc id="desc">包含直接审查对照、人与模型的分工、八阶段执行闭环、工程支撑、四种定制深度、能力边界、后续复用与其他分支。所有内容为固定提交的源码研究归纳，未实测扫描。</desc>
+<rect width="1920" height="3160" fill="#f5f3ed"/>
+<text x="60" y="61" fill="#246953" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="23" font-weight="700">008 / DEFENDING CODE · 方法与工程能力总图</text>
+<text x="60" y="135" fill="#233530" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="53" font-weight="700">相比直接让 AI 检测代码，多了什么？</text>
+<text x="60" y="189" fill="#59675f" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="26" font-weight="400">核心增量：把常规安全研究方法，组织成可执行、可复核、可积累的自动流程。</text>
+<rect x="60" y="220" width="1800" height="250" rx="8" fill="#fffef9" stroke="#ced7c9" stroke-width="2"/>
+<text x="84" y="258" fill="#246953" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="20" font-weight="700">对照基线</text>
+<text x="84" y="307" fill="#233530" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="25" font-weight="700">一次性代码审查</text>
+<text x="400" y="306" fill="#233530" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="24" font-weight="400">代码 / 提问</text>
+<polyline points="585,302 655,302" fill="none" stroke="#59675f" stroke-width="3"/>
+<polygon points="655,302 645.3465918192059,307.2736809246462 645.3465918192059,296.7263190753538" fill="#59675f"/>
+<text x="690" y="306" fill="#233530" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="24" font-weight="400">模型阅读与推理</text>
+<polyline points="909,302 979,302" fill="none" stroke="#59675f" stroke-width="3"/>
+<polygon points="979,302 969.3465918192059,307.2736809246462 969.3465918192059,296.7263190753538" fill="#59675f"/>
+<text x="1010" y="306" fill="#233530" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="24" font-weight="400">候选问题与修改建议</text>
+<text x="1425" y="305" fill="#59675f" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="22" font-weight="400">执行和复核需另外安排</text>
+<text x="84" y="363" fill="#246953" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="25" font-weight="700">这个参考框架</text>
+<text x="400" y="363" fill="#246953" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="24" font-weight="400">上下文 + 可运行目标</text>
+<polyline points="685,358 745,358" fill="none" stroke="#246953" stroke-width="3"/>
+<polygon points="745,358 735.3465918192059,363.2736809246462 735.3465918192059,352.7263190753538" fill="#246953"/>
+<text x="775" y="363" fill="#246953" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="24" font-weight="400">分阶段探索 + 独立验证</text>
+<polyline points="1085,358 1145,358" fill="none" stroke="#246953" stroke-width="3"/>
+<polygon points="1145,358 1135.346591819206,363.2736809246462 1135.346591819206,352.7263190753538" fill="#246953"/>
+<text x="1175" y="362" fill="#246953" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="24" font-weight="400">复现证据 + 候选补丁 + 历史记录</text>
+<text x="84" y="427" fill="#59675f" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="22" font-weight="400">公平比较：能使用工具的 AI 也能完成这些步骤；框架把步骤、环境和验收固定下来，并不自动提高模型本身的分析能力。</text>
+<text x="60" y="526" fill="#246953" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="22" font-weight="700">01</text>
+<text x="120" y="530" fill="#233530" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="31" font-weight="700">谁决定关注什么？</text>
+<text x="120" y="568" fill="#59675f" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="21" font-weight="400">你定方向；默认提示词给常见检查方法；模型从具体代码中推导实际路径与测试值。</text>
+<rect x="60" y="598" width="420" height="215" rx="8" fill="#fffef9" stroke="#ced7c9" stroke-width="2"/>
+<text x="82" y="632" fill="#246953" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="19" font-weight="700">人 / 业务背景</text>
+<text x="82" y="674" fill="#233530" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="26" font-weight="700">定义真实范围</text>
+<text x="82" y="717" fill="#59675f" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="22" font-weight="400">入口、权限、资产、需求与限制。</text>
+<text x="82" y="752" fill="#59675f" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="22" font-weight="400">例如：外部用户可上传文件；</text>
+<text x="82" y="784" fill="#59675f" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="22" font-weight="400">重点检查长度与格式边界。</text>
+<rect x="520" y="598" width="420" height="215" rx="8" fill="#fffef9" stroke="#ced7c9" stroke-width="2"/>
+<text x="542" y="632" fill="#246953" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="19" font-weight="700">框架 / 默认指令</text>
+<text x="542" y="673" fill="#233530" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="26" font-weight="700">给出检查方向</text>
+<text x="542" y="718" fill="#59675f" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="22" font-weight="400">零值、极大值、截断、字段矛盾；</text>
+<text x="542" y="751" fill="#59675f" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="22" font-weight="400">关注内存越界、释放后使用等。</text>
+<text x="542" y="784" fill="#59675f" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="22" font-weight="400">规定证据要求与排除条件。</text>
+<rect x="980" y="598" width="420" height="215" rx="8" fill="#fffef9" stroke="#ced7c9" stroke-width="2"/>
+<text x="1002" y="632" fill="#246953" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="19" font-weight="700">模型 / 具体推理</text>
+<text x="1002" y="673" fill="#233530" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="26" font-weight="700">选择位置和用例</text>
+<text x="1002" y="718" fill="#59675f" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="22" font-weight="400">读到上限 1024 → 尝试</text>
+<text x="1002" y="749" fill="#59675f" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="22" font-weight="400">0、1、1023、1024、1025；</text>
+<text x="1002" y="784" fill="#59675f" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="22" font-weight="400">追踪分配、复制及前置校验。</text>
+<rect x="1440" y="598" width="420" height="215" rx="8" fill="#fffef9" stroke="#ced7c9" stroke-width="2"/>
+<text x="1462" y="632" fill="#246953" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="19" font-weight="700">工具 / 观察结果</text>
+<text x="1462" y="674" fill="#233530" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="26" font-weight="700">提供实际反馈</text>
+<text x="1462" y="718" fill="#59675f" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="22" font-weight="400">运行目标并记录诊断与状态。</text>
+<text x="1462" y="751" fill="#59675f" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="22" font-weight="400">模型据此修正假设；业务对错</text>
+<text x="1462" y="784" fill="#59675f" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="22" font-weight="400">需要有独立的规范和断言。</text>
+<text x="60" y="869" fill="#246953" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="22" font-weight="700">02</text>
+<text x="120" y="873" fill="#233530" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="31" font-weight="700">从入口到证据，再到修复与下一轮</text>
+<text x="120" y="911" fill="#59675f" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="21" font-weight="400">绿色箭头为主流程；橙色文字为反馈循环。编号中的“增加”对应相对一次性审查的工程增量。</text>
+<rect x="60" y="942" width="420" height="250" rx="8" fill="#e5ede0" stroke="#ced7c9" stroke-width="2"/>
+<text x="82" y="976" fill="#246953" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="19" font-weight="700">1 / 增加：明确范围</text>
+<text x="82" y="1017" fill="#233530" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="26" font-weight="700">威胁建模与检查口径</text>
+<text x="82" y="1061" fill="#59675f" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="22" font-weight="400">入口 → 可控输入 → 权限 / 限制</text>
+<text x="82" y="1095" fill="#59675f" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="22" font-weight="400">写清部署前提、优先级、排除项。</text>
+<text x="82" y="1128" fill="#59675f" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="22" font-weight="400">产物：威胁模型与范围说明。</text>
+<text x="82" y="1160" fill="#59675f" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="22" font-weight="400">减少无关或不可达路径误报。</text>
+<rect x="520" y="942" width="420" height="250" rx="8" fill="#e5ede0" stroke="#ced7c9" stroke-width="2"/>
+<text x="542" y="976" fill="#246953" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="19" font-weight="700">2 / 增加：任务分区</text>
+<text x="542" y="1017" fill="#233530" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="26" font-weight="700">可运行环境 + Recon</text>
+<text x="542" y="1062" fill="#59675f" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="22" font-weight="400">固定版本，构建检测器生效的目标。</text>
+<text x="542" y="1095" fill="#59675f" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="22" font-weight="400">按解析器 / 子系统分配搜索区域。</text>
+<text x="542" y="1127" fill="#59675f" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="22" font-weight="400">可手写 focus_areas；Recon 可选。</text>
+<text x="542" y="1161" fill="#59675f" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="22" font-weight="400">并行探索，不等于证明完整覆盖。</text>
+<rect x="980" y="942" width="420" height="250" rx="8" fill="#e5ede0" stroke="#ced7c9" stroke-width="2"/>
+<text x="1002" y="976" fill="#246953" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="19" font-weight="700">3 / 增加：实际证据</text>
+<text x="1002" y="1017" fill="#233530" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="26" font-weight="700">分析 → 构造 → 运行</text>
+<text x="1002" y="1062" fill="#59675f" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="22" font-weight="400">追踪危险路径，形成可检验假设。</text>
+<text x="1002" y="1095" fill="#59675f" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="22" font-weight="400">生成输入；看输出；最小化 PoC。</text>
+<text x="1002" y="1129" fill="#59675f" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="22" font-weight="400">提交文件、命令、诊断与去重说明。</text>
+<text x="1002" y="1160" fill="#59675f" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="22" font-weight="400">无证据 → 调整假设或输入继续试。</text>
+<rect x="1440" y="942" width="420" height="250" rx="8" fill="#e5ede0" stroke="#ced7c9" stroke-width="2"/>
+<text x="1462" y="976" fill="#246953" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="19" font-weight="700">4 / 增加：独立复核</text>
+<text x="1462" y="1017" fill="#233530" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="26" font-weight="700">Grade 在新环境复现</text>
+<text x="1462" y="1062" fill="#59675f" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="22" font-weight="400">同一原始镜像；不继承环境改动。</text>
+<text x="1462" y="1094" fill="#59675f" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="22" font-weight="400">传递 PoC 与必要复现元数据。</text>
+<text x="1462" y="1127" fill="#59675f" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="22" font-weight="400">查非空、重复崩溃、非 OOM / 超时、</text>
+<text x="1462" y="1161" fill="#59675f" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="22" font-weight="400">项目堆栈与一致性；模型综合判断。</text>
+<polyline points="480,1067 520,1067" fill="none" stroke="#246953" stroke-width="3"/>
+<polygon points="520,1067 510.3465918192059,1072.2736809246462 510.3465918192059,1061.7263190753538" fill="#246953"/>
+<polyline points="940,1067 980,1067" fill="none" stroke="#246953" stroke-width="3"/>
+<polygon points="980,1067 970.3465918192059,1072.2736809246462 970.3465918192059,1061.7263190753538" fill="#246953"/>
+<polyline points="1400,1067 1440,1067" fill="none" stroke="#246953" stroke-width="3"/>
+<polygon points="1440,1067 1430.346591819206,1072.2736809246462 1430.346591819206,1061.7263190753538" fill="#246953"/>
+<polyline points="1650,1192 1650,1252" fill="none" stroke="#246953" stroke-width="3"/>
+<polygon points="1650,1252 1644.7263190753538,1242.346591819206 1655.2736809246462,1242.346591819206" fill="#246953"/>
+<rect x="1440" y="1252" width="420" height="250" rx="8" fill="#e5ede0" stroke="#ced7c9" stroke-width="2"/>
+<text x="1462" y="1286" fill="#246953" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="19" font-weight="700">5 / 增加：去重与解释</text>
+<text x="1462" y="1326" fill="#233530" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="26" font-weight="700">Judge → Report</text>
+<text x="1462" y="1372" fill="#59675f" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="22" font-weight="400">判断新增、较好样例或重复问题。</text>
+<text x="1462" y="1405" fill="#59675f" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="22" font-weight="400">流式 Judge 串行，另有签名聚类。</text>
+<text x="1462" y="1438" fill="#59675f" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="22" font-weight="400">分析可达性、影响与前提，独立评分。</text>
+<text x="1462" y="1471" fill="#59675f" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="22" font-weight="400">多轮 Triage：重排优先级与归属。</text>
+<rect x="980" y="1252" width="420" height="250" rx="8" fill="#e5ede0" stroke="#ced7c9" stroke-width="2"/>
+<text x="1002" y="1286" fill="#246953" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="19" font-weight="700">6 / 增加：候选修复</text>
+<text x="1002" y="1327" fill="#233530" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="26" font-weight="700">Patch 单独启动</text>
+<text x="1002" y="1372" fill="#59675f" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="22" font-weight="400">结合 PoC、源码与诊断修改根因。</text>
+<text x="1002" y="1406" fill="#59675f" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="22" font-weight="400">检查同类调用位置，尽量缩小改动。</text>
+<text x="1002" y="1438" fill="#59675f" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="22" font-weight="400">产物：patch.diff 与迭代记录。</text>
+<text x="1002" y="1471" fill="#59675f" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="22" font-weight="400">失败证据反馈 → 继续修改。</text>
+<rect x="520" y="1252" width="420" height="250" rx="8" fill="#e5ede0" stroke="#ced7c9" stroke-width="2"/>
+<text x="542" y="1286" fill="#246953" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="19" font-weight="700">7 / 增加：修复验收</text>
+<text x="542" y="1327" fill="#233530" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="26" font-weight="700">执行检查 + 再次攻击</text>
+<text x="542" y="1371" fill="#59675f" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="22" font-weight="400">T0 能构建；T1 原输入不再触发。</text>
+<text x="542" y="1405" fill="#59675f" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="22" font-weight="400">T2 现有测试通过，缺失则跳过。</text>
+<text x="542" y="1438" fill="#59675f" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="22" font-weight="400">新智能体尝试绕过，默认 50 轮。</text>
+<text x="542" y="1471" fill="#59675f" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="22" font-weight="400">可选风格评分仅供参考；人工审查。</text>
+<rect x="60" y="1252" width="420" height="250" rx="8" fill="#e5ede0" stroke="#ced7c9" stroke-width="2"/>
+<text x="82" y="1286" fill="#246953" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="19" font-weight="700">8 / 增加：持续积累</text>
+<text x="82" y="1327" fill="#233530" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="26" font-weight="700">记录 → 校准 → 下一轮</text>
+<text x="82" y="1372" fill="#59675f" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="22" font-weight="400">保存已知问题、去重结果和修复。</text>
+<text x="82" y="1405" fill="#59675f" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="22" font-weight="400">更新关注范围，减少重复研究。</text>
+<text x="82" y="1438" fill="#59675f" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="22" font-weight="400">跨轮次分诊和按优先级修复。</text>
+<text x="82" y="1471" fill="#59675f" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="22" font-weight="400">记录耗时、成本和真实发现质量。</text>
+<polyline points="1440,1377 1400,1377" fill="none" stroke="#246953" stroke-width="3"/>
+<polygon points="1400,1377 1409.653408180794,1371.7263190753538 1409.653408180794,1382.2736809246462" fill="#246953"/>
+<polyline points="980,1377 940,1377" fill="none" stroke="#246953" stroke-width="3"/>
+<polygon points="940,1377 949.6534081807941,1371.7263190753538 949.6534081807941,1382.2736809246462" fill="#246953"/>
+<polyline points="520,1377 480,1377" fill="none" stroke="#246953" stroke-width="3"/>
+<polygon points="480,1377 489.6534081807941,1371.7263190753538 489.6534081807941,1382.2736809246462" fill="#246953"/>
+<polyline points="730,1504 730,1545 1190,1545 1190,1504" fill="none" stroke="#ac4b29" stroke-width="3" stroke-dasharray="8 7"/>
+<polygon points="1190,1504 1195.2736809246462,1513.653408180794 1184.7263190753538,1513.653408180794" fill="#ac4b29"/>
+<text x="797" y="1537" fill="#ac4b29" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="21" font-weight="700">验收失败 → 再修复</text>
+<polyline points="270,1504 270,1577 1650,1577" fill="none" stroke="#ac4b29" stroke-width="3" stroke-dasharray="8 7"/>
+<polygon points="1650,1577 1640.346591819206,1582.2736809246462 1640.346591819206,1571.7263190753538" fill="#ac4b29"/>
+<text x="365" y="1610" fill="#ac4b29" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="22" font-weight="400">外循环：已知问题 / 修复 / 人工反馈 → 更新范围与验证器 → 再跑一轮</text>
+<text x="60" y="1677" fill="#246953" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="22" font-weight="700">03</text>
+<text x="120" y="1683" fill="#233530" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="31" font-weight="700">让上述步骤可以稳定运行的工程支撑</text>
+<rect x="60" y="1720" width="420" height="214" rx="8" fill="#fffef9" stroke="#ced7c9" stroke-width="2"/>
+<text x="82" y="1755" fill="#246953" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="19" font-weight="700">支撑 / 1</text>
+<text x="82" y="1795" fill="#233530" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="26" font-weight="700">环境隔离</text>
+<text x="82" y="1838" fill="#59675f" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="21" font-weight="400">Docker / gVisor + 出口限制；</text>
+<text x="82" y="1872" fill="#59675f" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="21" font-weight="400">不同阶段使用独立容器，</text>
+<text x="82" y="1905" fill="#59675f" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="21" font-weight="400">约束自主操作和目标执行。</text>
+<rect x="520" y="1720" width="420" height="214" rx="8" fill="#fffef9" stroke="#ced7c9" stroke-width="2"/>
+<text x="542" y="1755" fill="#246953" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="19" font-weight="700">支撑 / 2</text>
+<text x="542" y="1795" fill="#233530" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="26" font-weight="700">产物与可追溯性</text>
+<text x="542" y="1838" fill="#59675f" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="21" font-weight="400">PoC、命令、诊断、JSON、</text>
+<text x="542" y="1872" fill="#59675f" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="21" font-weight="400">报告、补丁、交互记录落盘；</text>
+<text x="542" y="1905" fill="#59675f" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="21" font-weight="400">便于人工复核与后续接入。</text>
+<rect x="980" y="1720" width="420" height="214" rx="8" fill="#fffef9" stroke="#ced7c9" stroke-width="2"/>
+<text x="1002" y="1755" fill="#246953" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="19" font-weight="700">支撑 / 3</text>
+<text x="1002" y="1795" fill="#233530" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="26" font-weight="700">预算、重试与恢复</text>
+<text x="1002" y="1839" fill="#59675f" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="21" font-weight="400">控制并行数、轮数与重试；</text>
+<text x="1002" y="1872" fill="#59675f" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="21" font-weight="400">记录检查点与会话，支持</text>
+<text x="1002" y="1905" fill="#59675f" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="21" font-weight="400">中断恢复，保留已完成成果。</text>
+<rect x="1440" y="1720" width="420" height="214" rx="8" fill="#fffef9" stroke="#ced7c9" stroke-width="2"/>
+<text x="1462" y="1755" fill="#246953" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="19" font-weight="700">支撑 / 4</text>
+<text x="1462" y="1795" fill="#233530" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="26" font-weight="700">效果校准与人工反馈</text>
+<text x="1462" y="1838" fill="#59675f" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="21" font-weight="400">已知漏洞目标 + 正常对照；</text>
+<text x="1462" y="1872" fill="#59675f" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="21" font-weight="400">看误报、漏报、重复和成本，</text>
+<text x="1462" y="1904" fill="#59675f" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="21" font-weight="400">调整提示、范围与验收标准。</text>
+<text x="60" y="1967" fill="#246953" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="22" font-weight="700">04</text>
+<text x="120" y="1971" fill="#233530" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="31" font-weight="700">定制不是都要改代码：先判断变化发生在哪一层</text>
+<rect x="60" y="2010" width="420" height="214" rx="8" fill="#f5e6d7" stroke="#ced7c9" stroke-width="2"/>
+<text x="82" y="2044" fill="#ac4b29" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="19" font-weight="700">定制深度 / 1</text>
+<text x="82" y="2085" fill="#233530" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="26" font-weight="700">关注点变化</text>
+<text x="82" y="2128" fill="#59675f" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="21" font-weight="400">补充背景、--focus / --extra、</text>
+<text x="82" y="2161" fill="#59675f" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="21" font-weight="400">focus_areas 与误报规则。</text>
+<text x="82" y="2195" fill="#59675f" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="21" font-weight="400">模型仍自己分析具体位置和用例。</text>
+<rect x="520" y="2010" width="420" height="214" rx="8" fill="#f5e6d7" stroke="#ced7c9" stroke-width="2"/>
+<text x="542" y="2044" fill="#ac4b29" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="19" font-weight="700">定制深度 / 2</text>
+<text x="542" y="2085" fill="#233530" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="26" font-weight="700">同类目标变化</text>
+<text x="542" y="2129" fill="#59675f" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="21" font-weight="400">新增 Dockerfile、config.yaml</text>
+<text x="542" y="2163" fill="#59675f" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="21" font-weight="400">和入口封装；保持文件 + ASAN</text>
+<text x="542" y="2195" fill="#59675f" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="21" font-weight="400">约定时，通常无需改调度层。</text>
+<rect x="980" y="2010" width="420" height="214" rx="8" fill="#f5e6d7" stroke="#ced7c9" stroke-width="2"/>
+<text x="1002" y="2044" fill="#ac4b29" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="19" font-weight="700">定制深度 / 3</text>
+<text x="1002" y="2085" fill="#233530" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="26" font-weight="700">问题类型变化</text>
+<text x="1002" y="2129" fill="#59675f" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="21" font-weight="400">Web / 业务问题：重定义输入、</text>
+<text x="1002" y="2162" fill="#59675f" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="21" font-weight="400">失败信号、结果、去重与修复验收；</text>
+<text x="1002" y="2195" fill="#59675f" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="21" font-weight="400">提示词和检测代码需配套改。</text>
+<rect x="1440" y="2010" width="420" height="214" rx="8" fill="#f5e6d7" stroke="#ced7c9" stroke-width="2"/>
+<text x="1462" y="2044" fill="#ac4b29" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="19" font-weight="700">定制深度 / 4</text>
+<text x="1462" y="2085" fill="#233530" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="26" font-weight="700">模型或流程变化</text>
+<text x="1462" y="2128" fill="#59675f" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="21" font-weight="400">替换 Claude CLI、工具循环、</text>
+<text x="1462" y="2161" fill="#59675f" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="21" font-weight="400">输出 / 会话 / 认证适配；</text>
+<text x="1462" y="2195" fill="#59675f" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="21" font-weight="400">若调整阶段顺序，则改调度代码。</text>
+<text x="80" y="2248" fill="#ac4b29" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="23" font-weight="400">/customize 的作用：Claude 读改造指南 → 澄清需求 → 确认文件改动 → 修改框架 → 用预埋问题校准。</text>
+<text x="60" y="2309" fill="#246953" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="22" font-weight="700">05</text>
+<text x="120" y="2313" fill="#233530" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="31" font-weight="700">补齐边界：执行过、复现过、验证过，各自意味着什么？</text>
+<rect x="60" y="2355" width="880" height="310" rx="8" fill="#fffef9" stroke="#ced7c9" stroke-width="2"/>
+<text x="82" y="2389" fill="#246953" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="19" font-weight="700">已有实现的边界</text>
+<text x="82" y="2430" fill="#233530" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="26" font-weight="700">它提供证据链，不提供安全证明</text>
+<text x="82" y="2474" fill="#59675f" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="21" font-weight="400">• 默认针对 C/C++ 内存漏洞；现成调用层依赖 Claude Code。</text>
+<text x="82" y="2507" fill="#59675f" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="21" font-weight="400">• 静态审查 / 分诊不执行目标；崩溃不自动等于可利用漏洞。</text>
+<text x="82" y="2540" fill="#59675f" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="21" font-weight="400">• 独立会话可能使用同一模型，仍会共享认知偏差。</text>
+<text x="82" y="2573" fill="#59675f" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="21" font-weight="400">• 没有 PoC 可能是未发现或运行中断；需同时核对任务状态。</text>
+<text x="82" y="2606" fill="#59675f" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="21" font-weight="400">• 再次攻击有限；补丁过检不等于根因完全修好或能直接合并。</text>
+<rect x="980" y="2355" width="880" height="310" rx="8" fill="#f5e6d7" stroke="#ced7c9" stroke-width="2"/>
+<text x="1002" y="2389" fill="#ac4b29" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="19" font-weight="700">后续项目还需补齐</text>
+<text x="1002" y="2430" fill="#233530" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="26" font-weight="700">把参考流程变成适合自己的测试系统</text>
+<text x="1002" y="2474" fill="#59675f" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="21" font-weight="400">• 业务检测：需求来源、明确断言、初始数据与可重复状态。</text>
+<text x="1002" y="2507" fill="#59675f" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="21" font-weight="400">• 永久回归：动态补丁阶段不会自动为每个漏洞写长期测试。</text>
+<text x="1002" y="2540" fill="#59675f" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="21" font-weight="400">• 可观测性：区分正常拒绝、资源故障、未覆盖与真实问题。</text>
+<text x="1002" y="2573" fill="#59675f" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="21" font-weight="400">• 校准与成本：看漏报 / 误报 / 重复 / 耗时；不能只数报告。</text>
+<text x="1002" y="2606" fill="#59675f" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="21" font-weight="400">• 人工把关：影响、优先级、补丁语义、发布与责任归属。</text>
+<rect x="60" y="2695" width="1800" height="108" rx="8" fill="#fffef9" stroke="#ced7c9" stroke-width="2"/>
+<text x="82" y="2734" fill="#246953" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="22" font-weight="700">其他分支</text>
+<text x="250" y="2734" fill="#233530" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="22" font-weight="400">交互静态审查：威胁建模 → 扫描 → 分诊 → 候选补丁（缺少动态复现证据）</text>
+<text x="250" y="2775" fill="#233530" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="22" font-weight="400">日志检测与响应：查日志 → 分析事件与影响 → 提出响应方案；示例为合成场景，不自动执行处置。</text>
+<rect x="60" y="2830" width="1800" height="206" rx="8" fill="#233530" stroke="#233530" stroke-width="2"/>
+<text x="85" y="2873" fill="#c8dcbd" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="23" font-weight="700">我们的取舍 / 保留为后续开发参考</text>
+<text x="85" y="2927" fill="#fffef9" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="34" font-weight="700">优先复用：明确范围 → 构造真实用例 → 独立复核 → 修复验收</text>
+<text x="85" y="2973" fill="#d1ddca" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="24" font-weight="400">小项目先跑通一个场景；规模增大后再加并行、去重、恢复和持续扫描。</text>
+<text x="85" y="3015" fill="#d1ddca" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="22" font-weight="400">方法比较常规；当前新增研究价值有限。主要参考价值是流程自动化与证据管理，没有额外的模型智能保证。</text>
+<text x="60" y="3081" fill="#59675f" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="20" font-weight="400">依据：anthropics/defending-code-reference-harness · d3bea6b · README / pipeline / customize / grade / patch_grade</text>
+<text x="60" y="3121" fill="#59675f" font-family="Microsoft YaHei, PingFang SC, sans-serif" font-size="20" font-weight="400">2026-09-15 独立研究归纳 · 未运行漏洞扫描 · Web / 业务迁移为建议 · 已读版本声明不再维护 · 完整来源见研究网页</text>
+</svg>

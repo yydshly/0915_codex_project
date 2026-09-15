@@ -105,6 +105,14 @@ class ProjectTests(unittest.TestCase):
         self.assertIn(r"项目 \| \[链接\]", content)
         self.assertIn("&lt;script&gt; &amp;", content)
 
+    def test_upstream_links_use_original_repository_name(self):
+        self.create(upstream="https://github.com/anthropics/defending-code-reference-harness")
+        content = (self.root / "README.md").read_text(encoding="utf-8")
+        self.assertIn("[defending\\-code\\-reference\\-harness](https://github.com/anthropics/defending-code-reference-harness)", content)
+        self.assertNotIn("[GitHub]", content)
+        self.assertEqual(projects.upstream_label("https://github.com/owner/repo.git/tree/main"), "repo")
+        self.assertEqual(projects.upstream_label("https://awesomesites.ai/"), "awesomesites.ai")
+
     def test_broken_markers_block_creation(self):
         readme = self.root / "README.md"
         readme.write_text("无生成标记", encoding="utf-8")

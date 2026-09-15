@@ -8,7 +8,7 @@ from pathlib import Path
 import re
 import shutil
 import sys
-from urllib.parse import quote, urlsplit
+from urllib.parse import quote, unquote, urlsplit
 
 ROOT = Path(__file__).resolve().parents[1]
 STATUSES = {"待研究", "研究中", "已复现", "已总结", "已归档"}
@@ -86,6 +86,15 @@ def link(label, url):
     return f'[{plain(label)}]({quote(url, safe="/:#?=&%+@,;~-")})'
 
 
+def upstream_label(url):
+    """Use the original repository name; use the host for non-repository sources."""
+    parsed = urlsplit(url)
+    parts = [part for part in parsed.path.split('/') if part]
+    if parsed.hostname == "github.com" and len(parts) >= 2:
+        return unquote(parts[1]).removesuffix(".git")
+    return parsed.hostname or url
+
+
 def sections(items):
     if not items:
         return ("暂未收录项目。第一个研究项目将从 **001** 开始。",
@@ -96,7 +105,7 @@ def sections(items):
     for item in items:
         folder = f'projects/{item["id"]}-{item["slug"]}'
         research = link(item["title"], f"{folder}/README.md")
-        upstream = link("GitHub" if urlsplit(item["upstream"]).hostname == "github.com" else "网站", item["upstream"])
+        upstream = link(upstream_label(item["upstream"]), item["upstream"])
         demo = link("在线演示", item["demo_url"]) if item["demo_url"] else "暂未部署"
         rows.append(f'| {item["id"]} | {research} | {plain(item["summary"])} | '
                     f'{item["status"]} | {upstream} | {demo} |')
